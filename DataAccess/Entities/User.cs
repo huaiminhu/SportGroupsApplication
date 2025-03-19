@@ -14,9 +14,8 @@ namespace DataAccess.Entities
         public required string NickName { get; set; } = "";
         public required string UserName { get; set; }
         public required string Password { get; set; }
-        public required string Phone { get; set; }
         public required Role Role { get; set; } = 0;
-        public required ICollection<Club> Clubs { get; set; } = new List<Club>();
-        public required ICollection<ClubActivity> Activities { get; set; } = new List<ClubActivity>();
+        public required ICollection<ClubMember> Members { get; set; } = new List<ClubMember>();
+        public required ICollection<Enrollment> Enrollments { get; set; } = new List<Enrollment>();
     }
 }

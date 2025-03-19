@@ -11,8 +11,8 @@ namespace DataAccess.Repositories.Interfaces
     public interface IClubRepository
     {
         Task CreateClub(Club club);
-        List<Club> GetAllClubsOfUser(int userId);
-        List<Club> GetAllClubsBySport(Sport sport);
+        Task<List<Club>> GetAllClubsOfUser(int userId);
+        Task<List<Club>> GetAllClubsBySport(Sport sport);
         Task UpdateClub(Club club);
         Task DeleteClub(int clubId);
     }

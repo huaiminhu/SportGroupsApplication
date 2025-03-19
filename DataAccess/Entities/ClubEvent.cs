@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Entities
 {
-    public class ClubActivity   // 社團活動
+    public class ClubEvent   // 社團活動
     {
-        public int ActivityId { get; set; }
+        public int ClubEventId { get; set; }
         public required string Name { get; set; }
         public required string Description { get; set; } = "";
         public required string Address { get; set; }
@@ -17,6 +17,6 @@ namespace DataAccess.Entities
         public required DateTime Ending { get; set; }
         public int ClubId { get; set; }
         public required Club Club { get; set; }
-        public required ICollection<User> Members { get; set; } = new List<User>();
+        public required ICollection<Enrollment> Enrollments { get; set; } = new List<Enrollment>();
     }
 }

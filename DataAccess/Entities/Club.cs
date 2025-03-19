@@ -16,8 +16,8 @@ namespace DataAccess.Entities
         public required string Phone { get; set; }
         public required string Email { get; set; }
         public required string Description { get; set; } = "";
-        public required ICollection<User> Members { get; set; } = new List<User>();
-        public required ICollection<ClubActivity> Activities { get; set; } = new List<ClubActivity>();
+        public required ICollection<ClubMember> Members { get; set; } = new List<ClubMember>();
+        public required ICollection<ClubEvent> Events { get; set; } = new List<ClubEvent>();
         public required ICollection<Message> Messages { get; set; } = new List<Message>();
         public required ICollection<Article> Articles { get; set; } = new List<Article>();
     }

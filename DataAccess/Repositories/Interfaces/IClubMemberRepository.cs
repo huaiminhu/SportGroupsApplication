@@ -7,11 +7,8 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Repositories.Interfaces
 {
-    public interface IMediaRepository
+    public interface IClubMemberRepository
     {
-        Task AddMedia(Media media);
-        Task<Media> GetMedia(int mediaId);
-        Task UpdateMedia(Media media);
-        Task DeleteMedia(int mediaId);
+        Task AddMember(int userId, int clubId);
     }
 }

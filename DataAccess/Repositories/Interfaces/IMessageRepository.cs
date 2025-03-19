@@ -10,7 +10,7 @@ namespace DataAccess.Repositories.Interfaces
     public interface IMessageRepository
     {
         Task CreateMessage(Message message);
-        List<Message> GetAllMessageOfClub(string clubId);
+        Task<List<Message>> GetAllMessageOfClub(string clubId);
         Task UpdateMessage(Message message);
         Task DeleteMessage(int messageId);
     }

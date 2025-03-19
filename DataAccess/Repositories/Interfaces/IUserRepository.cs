@@ -10,7 +10,7 @@ namespace DataAccess.Repositories.Interfaces
     public interface IUserRepository
     {
         Task CreateUser(User user);
-        User GetUser(string username, string password);
+        Task<User> GetUser(string username, string password);
         Task UpdateUser(User user);
         Task DeleteUser(int userId);
     }
