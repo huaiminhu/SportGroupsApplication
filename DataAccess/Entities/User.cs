@@ -17,6 +17,6 @@ namespace DataAccess.Entities
         public required string Phone { get; set; }
         public required Role Role { get; set; } = 0;
         public required ICollection<Club> Clubs { get; set; } = new List<Club>();
-        public required ICollection<Activity> Activities { get; set; } = new List<Activity>();
+        public required ICollection<ClubActivity> Activities { get; set; } = new List<ClubActivity>();
     }
 }

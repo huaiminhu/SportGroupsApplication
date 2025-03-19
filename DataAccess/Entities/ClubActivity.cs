@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Entities
 {
-    public class Activity   // 社團活動
+    public class ClubActivity   // 社團活動
     {
         public int ActivityId { get; set; }
         public required string Name { get; set; }
