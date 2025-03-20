@@ -10,6 +10,8 @@ namespace DataAccess.Repositories.Interfaces
     public interface IArticleRepository
     {
         Task CreateArticle(Article article);
+
+        // 取得社團所有發布的文章
         Task<List<Article>> GetAllArticleOfClub(int clubId);
         Task UpdateArticle(Article article);
         Task DeleteArticle(int articleId);

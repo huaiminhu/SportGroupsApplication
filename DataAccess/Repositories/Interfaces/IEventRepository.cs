@@ -12,8 +12,8 @@ namespace DataAccess.Repositories.Interfaces
     public interface IEventRepository
     {
         Task CreateEvent(ClubEvent evt);
-        Task<List<ClubEvent>> GetAllEventsOfClub(int clubId);
-        Task<List<ClubEvent>> GetAllEventsOfUser(int userId);
+
+        // 取得指定運動項目類別的所有活動
         Task<List<ClubEvent>> GetAllEventsBySport(Sport sport);
         Task UpdateEvent(ClubEvent evt);
         Task DeleteEvent(int eventId);
