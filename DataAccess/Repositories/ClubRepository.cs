@@ -19,22 +19,22 @@ namespace DataAccess.Repositories
             _context = context;
         }
 
-        public Task CreateClub(Club club)
+        public Task CreateClubAsync(Club club)
         {
             throw new NotImplementedException();
         }
 
-        public Task DeleteClub(int clubId)
+        public Task DeleteClubAsync(int clubId)
         {
             throw new NotImplementedException();
         }
 
-        public Task<List<Club>> GetAllClubsBySport(Sport sport)
+        public Task<List<Club>> GetAllClubsBySportAsync(Sport sport)
         {
             throw new NotImplementedException();
         }
 
-        public Task UpdateClub(Club club)
+        public Task UpdateClubAsync(Club club)
         {
             throw new NotImplementedException();
         }

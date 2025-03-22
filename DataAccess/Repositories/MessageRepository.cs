@@ -18,22 +18,22 @@ namespace DataAccess.Repositories
             _context = context;
         }
 
-        public Task CreateMessage(Message message)
+        public Task CreateMessageAsync(Message message)
         {
             throw new NotImplementedException();
         }
 
-        public Task DeleteMessage(int messageId)
+        public Task DeleteMessageAsync(int messageId)
         {
             throw new NotImplementedException();
         }
 
-        public Task<List<Message>> GetAllMessageOfClub(string clubId)
+        public Task<List<Message>> GetAllMessageOfClubAsync(string clubId)
         {
             throw new NotImplementedException();
         }
 
-        public Task UpdateMessage(Message message)
+        public Task UpdateMessageAsync(Message message)
         {
             throw new NotImplementedException();
         }

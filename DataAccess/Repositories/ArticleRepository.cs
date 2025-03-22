@@ -18,22 +18,22 @@ namespace DataAccess.Repositories
             _context = context;
         }
 
-        public Task CreateArticle(Article article)
+        public Task CreateArticleAsync(Article article)
         {
             throw new NotImplementedException();
         }
 
-        public Task DeleteArticle(int articleId)
+        public Task DeleteArticleAsync(int articleId)
         {
             throw new NotImplementedException();
         }
 
-        public Task<List<Article>> GetAllArticleOfClub(int clubId)
+        public Task<List<Article>> GetAllArticleOfClubAsync(int clubId)
         {
             throw new NotImplementedException();
         }
 
-        public Task UpdateArticle(Article article)
+        public Task UpdateArticleAsync(Article article)
         {
             throw new NotImplementedException();
         }

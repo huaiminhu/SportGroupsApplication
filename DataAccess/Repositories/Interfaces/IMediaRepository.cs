@@ -9,9 +9,9 @@ namespace DataAccess.Repositories.Interfaces
 {
     public interface IMediaRepository
     {
-        Task AddMedia(Media media);
-        Task<Media> GetMedia(int mediaId);
-        Task UpdateMedia(Media media);
-        Task DeleteMedia(int mediaId);
+        Task AddMediaAsync(Media media);
+        Task<Media> GetMediaAsync(int mediaId);
+        Task UpdateMediaAsync(Media media);
+        Task DeleteMediaAsync(int mediaId);
     }
 }

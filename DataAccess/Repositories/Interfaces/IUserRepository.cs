@@ -9,9 +9,10 @@ namespace DataAccess.Repositories.Interfaces
 {
     public interface IUserRepository
     {
-        Task CreateUser(User user);
-        Task<User> GetUser(string username, string password);
-        Task UpdateUser(User user);
-        Task DeleteUser(int userId);
+        Task<bool> CreateUserAsync(User user);
+        Task<User?> GetUserAsync(string username);
+        Task<bool> ChangeNickNameAsync(Guid userId, string newName);
+        Task<bool> ChangePasswordAsync(Guid userId, string newPassword);
+        Task<bool> DeleteUserAsync(Guid userId);
     }
 }

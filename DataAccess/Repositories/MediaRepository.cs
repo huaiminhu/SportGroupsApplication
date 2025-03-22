@@ -18,22 +18,22 @@ namespace DataAccess.Repositories
             _context = context;
         }
 
-        public Task AddMedia(Media media)
+        public Task AddMediaAsync(Media media)
         {
             throw new NotImplementedException();
         }
 
-        public Task DeleteMedia(int mediaId)
+        public Task DeleteMediaAsync(int mediaId)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Media> GetMedia(int mediaId)
+        public Task<Media> GetMediaAsync(int mediaId)
         {
             throw new NotImplementedException();
         }
 
-        public Task UpdateMedia(Media media)
+        public Task UpdateMediaAsync(Media media)
         {
             throw new NotImplementedException();
         }

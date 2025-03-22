@@ -10,11 +10,11 @@ namespace DataAccess.Repositories.Interfaces
 {
     public interface IClubRepository
     {
-        Task CreateClub(Club club);
+        Task CreateClubAsync(Club club);
 
         // 取得指定運動項目類別的所有社團
-        Task<List<Club>> GetAllClubsBySport(Sport sport);
-        Task UpdateClub(Club club);
-        Task DeleteClub(int clubId);
+        Task<List<Club>> GetAllClubsBySportAsync(Sport sport);
+        Task UpdateClubAsync(Club club);
+        Task DeleteClubAsync(int clubId);
     }
 }

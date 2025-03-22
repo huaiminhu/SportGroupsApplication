@@ -1,6 +1,7 @@
 ﻿using DataAccess.Data;
 using DataAccess.Entities;
 using DataAccess.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,24 +19,50 @@ namespace DataAccess.Repositories
             _context = context;
         }
 
-        public Task CreateUser(User user)
+        public async Task<bool> CreateUserAsync(User user)
         {
-            throw new NotImplementedException();
+            await _context.Users.AddAsync(user);
+            return await _context.SaveChangesAsync() > 0;
         }
 
-        public Task DeleteUser(int userId)
+        public async Task<bool> DeleteUserAsync(Guid userId)
         {
-            throw new NotImplementedException();
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.UserId == userId);
+            if (user == null) 
+            {
+                return false;
+            }
+            _context.Users.Remove(user);
+            return await _context.SaveChangesAsync() > 0;
         }
 
-        public Task<User> GetUser(string username, string password)
+        public async Task<User?> GetUserAsync(string username)
         {
-            throw new NotImplementedException();
+            return await _context.Users.FirstOrDefaultAsync(u => u.UserName == username);
         }
 
-        public Task UpdateUser(User user)
+        public async Task<bool> ChangeNickNameAsync(Guid userId, string newName)
         {
-            throw new NotImplementedException();
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.UserId == userId);
+            if (user == null)
+            {
+                return false ;
+            }
+            user.NickName = newName;
+            _context.Entry(user).Property(u => u.NickName).IsModified = true;
+            return await _context.SaveChangesAsync() > 0;
+        }
+
+        public async Task<bool> ChangePasswordAsync(Guid userId, string newPassword)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.UserId == userId);
+            if (user == null)
+            {
+                return false;
+            }
+            user.Password = newPassword;
+            _context.Entry(user).Property(u => u.Password).IsModified = true;
+            return await _context.SaveChangesAsync() > 0;
         }
     }
 }

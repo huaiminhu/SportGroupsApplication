@@ -11,11 +11,11 @@ namespace DataAccess.Repositories.Interfaces
 {
     public interface IEventRepository
     {
-        Task CreateEvent(ClubEvent evt);
+        Task CreateEventAsync(ClubEvent evt);
 
         // 取得指定運動項目類別的所有活動
-        Task<List<ClubEvent>> GetAllEventsBySport(Sport sport);
-        Task UpdateEvent(ClubEvent evt);
-        Task DeleteEvent(int eventId);
+        Task<List<ClubEvent>> GetAllEventsBySportAsync(Sport sport);
+        Task UpdateEventAsync(ClubEvent evt);
+        Task DeleteEventAsync(int eventId);
     }
 }
