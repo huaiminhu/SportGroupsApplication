@@ -13,5 +13,6 @@ namespace DataAccess.Entities
         public int ClubEventId { get; set; }
         public required ClubEvent Event { get; set; }
         public required string Phone { get; set; }
+        public required DateTime EnrollDate { get; set; } = DateTime.Now;
     }
 }

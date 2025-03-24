@@ -27,12 +27,12 @@ namespace DataAccess.Repositories
 
         public async Task<bool> DeleteUserAsync(Guid userId)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.UserId == userId);
-            if (user == null) 
+            var existing = await _context.Users.FirstOrDefaultAsync(u => u.UserId == userId);
+            if (existing == null) 
             {
                 return false;
             }
-            _context.Users.Remove(user);
+            _context.Users.Remove(existing);
             return await _context.SaveChangesAsync() > 0;
         }
 
@@ -41,27 +41,27 @@ namespace DataAccess.Repositories
             return await _context.Users.FirstOrDefaultAsync(u => u.UserName == username);
         }
 
-        public async Task<bool> ChangeNickNameAsync(Guid userId, string newName)
+        public async Task<bool> UpdateNickNameAsync(Guid userId, string newName)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.UserId == userId);
-            if (user == null)
+            var existing = await _context.Users.FirstOrDefaultAsync(u => u.UserId == userId);
+            if (existing == null)
             {
                 return false ;
             }
-            user.NickName = newName;
-            _context.Entry(user).Property(u => u.NickName).IsModified = true;
+            existing.NickName = newName;
+            _context.Entry(existing).Property(u => u.NickName).IsModified = true;
             return await _context.SaveChangesAsync() > 0;
         }
 
-        public async Task<bool> ChangePasswordAsync(Guid userId, string newPassword)
+        public async Task<bool> UpdatePasswordAsync(Guid userId, string newPassword)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.UserId == userId);
-            if (user == null)
+            var existing = await _context.Users.FirstOrDefaultAsync(u => u.UserId == userId);
+            if (existing == null)
             {
                 return false;
             }
-            user.Password = newPassword;
-            _context.Entry(user).Property(u => u.Password).IsModified = true;
+            existing.Password = newPassword;
+            _context.Entry(existing).Property(u => u.Password).IsModified = true;
             return await _context.SaveChangesAsync() > 0;
         }
     }

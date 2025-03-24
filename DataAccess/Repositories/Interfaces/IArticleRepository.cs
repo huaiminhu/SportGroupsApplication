@@ -9,11 +9,13 @@ namespace DataAccess.Repositories.Interfaces
 {
     public interface IArticleRepository
     {
-        Task CreateArticleAsync(Article article);
+        Task<bool> CreateArticleAsync(Article article);
 
         // 取得社團所有發布的文章
         Task<List<Article>> GetAllArticleOfClubAsync(int clubId);
-        Task UpdateArticleAsync(Article article);
-        Task DeleteArticleAsync(int articleId);
+        Task<bool> UpdateTitleAsync(int articleId, string newTitle);
+        Task<bool> UpdateContentAsync(int articleId, string newContent);
+        Task<bool> UpdateDateAsync(int articleId, DateTime latestEdit);
+        Task<bool> DeleteArticleAsync(int articleId);
     }
 }

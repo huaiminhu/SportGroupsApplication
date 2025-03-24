@@ -9,9 +9,12 @@ namespace DataAccess.Repositories.Interfaces
 {
     public interface IMessageRepository
     {
-        Task CreateMessageAsync(Message message);
-        Task<List<Message>> GetAllMessageOfClubAsync(string clubId);
-        Task UpdateMessageAsync(Message message);
-        Task DeleteMessageAsync(int messageId);
+        Task<bool> CreateMessageAsync(Message message);
+
+        // 取得指定社團所有公告訊息
+        Task<List<Message>> GetAllMessageOfClubAsync(int clubId);
+        Task<bool> UpdateTitleAsync(int messageId, string newTitle);
+        Task<bool> UpdateContentAsync(int messageId, string newContent);
+        Task<bool> DeleteMessageAsync(int messageId);
     }
 }

@@ -18,12 +18,12 @@ namespace DataAccess.Repositories
             _context = context;
         }
 
-        public Task CreateArticleAsync(Article article)
+        public Task<bool> CreateArticleAsync(Article article)
         {
             throw new NotImplementedException();
         }
 
-        public Task DeleteArticleAsync(int articleId)
+        public Task<bool> DeleteArticleAsync(int articleId)
         {
             throw new NotImplementedException();
         }
@@ -33,7 +33,17 @@ namespace DataAccess.Repositories
             throw new NotImplementedException();
         }
 
-        public Task UpdateArticleAsync(Article article)
+        public Task<bool> UpdateTitleAsync(int articleId, string newTitle)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> UpdateContentAsync(int articleId, string newContent)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> UpdateDateAsync(int articleId, DateTime latestEdit)
         {
             throw new NotImplementedException();
         }

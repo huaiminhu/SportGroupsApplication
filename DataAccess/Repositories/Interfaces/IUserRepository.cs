@@ -11,8 +11,10 @@ namespace DataAccess.Repositories.Interfaces
     {
         Task<bool> CreateUserAsync(User user);
         Task<User?> GetUserAsync(string username);
-        Task<bool> ChangeNickNameAsync(Guid userId, string newName);
-        Task<bool> ChangePasswordAsync(Guid userId, string newPassword);
+        Task<bool> UpdateNickNameAsync(Guid userId, string newName);
+        
+        // 更改密碼
+        Task<bool> UpdatePasswordAsync(Guid userId, string newPassword);
         Task<bool> DeleteUserAsync(Guid userId);
     }
 }

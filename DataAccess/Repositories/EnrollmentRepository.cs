@@ -22,15 +22,5 @@ namespace DataAccess.Repositories
         {
             throw new NotImplementedException();
         }
-
-        public Task<List<ClubEvent>> GetAllEventsOfClubAsync(int clubId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<List<ClubEvent>> GetAllEventsOfUserAsync(int userId)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

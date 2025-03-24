@@ -18,12 +18,12 @@ namespace DataAccess.Repositories
             _context = context;
         }
 
-        public Task AddMediaAsync(Media media)
+        public Task<bool> AddMediaAsync(Media media)
         {
             throw new NotImplementedException();
         }
 
-        public Task DeleteMediaAsync(int mediaId)
+        public Task<bool> DeleteMediaAsync(int mediaId)
         {
             throw new NotImplementedException();
         }
@@ -33,7 +33,7 @@ namespace DataAccess.Repositories
             throw new NotImplementedException();
         }
 
-        public Task UpdateMediaAsync(Media media)
+        public Task<bool> UpdateUrlAsync(int mediaId, string newUrl)
         {
             throw new NotImplementedException();
         }

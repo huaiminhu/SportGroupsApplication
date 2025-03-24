@@ -11,7 +11,8 @@ namespace DataAccess.Entities
     public class Media   // 文章媒體
     {
         public int ArticleMediaId { get; set; }
-        public required string Url { get; set; } 
+        public required string Url { get; set; }
+        public required DateTime AddedDate { get; set; } = DateTime.Now;
         public int ArticleId { get; set; }
         public required Article Article { get; set; }
     }

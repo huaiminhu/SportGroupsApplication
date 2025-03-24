@@ -2,6 +2,7 @@
 using DataAccess.Entities;
 using DataAccess.Enums;
 using DataAccess.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,24 +20,74 @@ namespace DataAccess.Repositories
             _context = context;
         }
 
-        public Task CreateEventAsync(ClubEvent evt)
+        public async Task<bool> CreateEventAsync(ClubEvent evt)
         {
+            await _context.ClubEvents.AddAsync(evt);
+            return await _context.SaveChangesAsync() > 0;
+        }
+
+        public async Task<bool> DeleteEventAsync(int eventId)
+        {
+            var existing = await _context.ClubEvents.FirstOrDefaultAsync(e => e.ClubEventId == eventId);
+            if (existing == null)
+            {
+                return false;
+            }
+            _context.ClubEvents.Remove(existing);
+            return await _context.SaveChangesAsync() > 0;
+        }
+
+        public async Task<List<ClubEvent>> GetAllEventsBySportAsync(Sport sport)
+        {
+            // stored procedures
             throw new NotImplementedException();
         }
 
-        public Task DeleteEventAsync(int eventId)
+        public async Task<List<ClubEvent>> GetAllEventsOfClubAsync(int clubId)
         {
+            return await _context.ClubEvents.Include(e => e.ClubId == clubId).ToListAsync();
+        }
+
+        public async Task<List<ClubEvent>> GetAllEventsOfUserAsync(int userId)
+        {
+            // stored procedures
             throw new NotImplementedException();
         }
 
-        public Task<List<ClubEvent>> GetAllEventsBySportAsync(Sport sport)
+        public async Task<bool> UpdateNameAsync(int eventId, string newName)
         {
-            throw new NotImplementedException();
+            var existing = await _context.ClubEvents.FirstOrDefaultAsync(e => e.ClubEventId == eventId);
+            if (existing == null)
+            {
+                return false;
+            }
+            existing.Name = newName;
+            _context.Entry(existing).Property(e => e.Name).IsModified = true;
+            return await _context.SaveChangesAsync() > 0;
         }
 
-        public Task UpdateEventAsync(ClubEvent evt)
+        public async Task<bool> UpdateDescriptionAsync(int eventId, string newDescription)
         {
-            throw new NotImplementedException();
+            var existing = await _context.ClubEvents.FirstOrDefaultAsync(e => e.ClubEventId == eventId);
+            if (existing == null)
+            {
+                return false;
+            }
+            existing.Name = newDescription;
+            _context.Entry(existing).Property(e => e.Description).IsModified = true;
+            return await _context.SaveChangesAsync() > 0;
+        }
+
+        public async Task<bool> UpdateAddressAsync(int eventId, string newAddress)
+        {
+            var existing = await _context.ClubEvents.FirstOrDefaultAsync(e => e.ClubEventId == eventId);
+            if (existing == null)
+            {
+                return false;
+            }
+            existing.Name = newAddress;
+            _context.Entry(existing).Property(e => e.Address).IsModified = true;
+            return await _context.SaveChangesAsync() > 0;
         }
     }
 }

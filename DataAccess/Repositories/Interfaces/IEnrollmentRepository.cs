@@ -11,11 +11,5 @@ namespace DataAccess.Repositories.Interfaces
     {
         // 參加活動
         Task AttendEventAsync(int userId, int eventId);
-
-        // 取得指定社團所有活動
-        Task<List<ClubEvent>> GetAllEventsOfClubAsync(int clubId);
-        
-        // 取得使用者參與的所有活動
-        Task<List<ClubEvent>> GetAllEventsOfUserAsync(int userId);
     }
 }
