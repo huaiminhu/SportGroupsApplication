@@ -10,6 +10,7 @@ namespace DataAccess.Repositories.Interfaces
     public interface IEnrollmentRepository
     {
         // 參加活動
-        Task AttendEventAsync(int userId, int eventId);
+        Task<bool> AttendEventAsync(int userId, int eventId);
+        Task<Enrollment?> GetEnrollment(int userId, int eventId);
     }
 }

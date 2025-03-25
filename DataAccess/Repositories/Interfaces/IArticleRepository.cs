@@ -10,6 +10,7 @@ namespace DataAccess.Repositories.Interfaces
     public interface IArticleRepository
     {
         Task<bool> CreateArticleAsync(Article article);
+        Task<Article?> GetArticleById(int articleId);
 
         // 取得社團所有發布的文章
         Task<List<Article>> GetAllArticleOfClubAsync(int clubId);

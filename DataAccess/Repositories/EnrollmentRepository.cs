@@ -18,8 +18,15 @@ namespace DataAccess.Repositories
             _context = context;
         }
 
-        public Task AttendEventAsync(int userId, int eventId)
+        public Task<bool> AttendEventAsync(int userId, int eventId)
         {
+            // stored procedures
+            throw new NotImplementedException();
+        }
+
+        public Task<Enrollment?> GetEnrollment(int userId, int eventId)
+        {
+            // stored procedures
             throw new NotImplementedException();
         }
     }

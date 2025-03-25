@@ -10,6 +10,7 @@ namespace DataAccess.Repositories.Interfaces
     public interface IMessageRepository
     {
         Task<bool> CreateMessageAsync(Message message);
+        Task<Message?> GetMessageById(int messageId);
 
         // 取得指定社團所有公告訊息
         Task<List<Message>> GetAllMessageOfClubAsync(int clubId);

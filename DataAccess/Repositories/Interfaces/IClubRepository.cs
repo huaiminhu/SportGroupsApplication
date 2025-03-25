@@ -11,6 +11,7 @@ namespace DataAccess.Repositories.Interfaces
     public interface IClubRepository
     {
         Task<bool> CreateClubAsync(Club club);
+        Task<Club?> GetClubById(int clubId);
 
         // 取得指定運動項目類別的所有社團
         Task<List<Club>> GetAllClubsBySportAsync(Sport sport);

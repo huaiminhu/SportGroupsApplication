@@ -18,13 +18,15 @@ namespace DataAccess.Repositories
             _context = context;
         }
 
-        public Task AddMemberAsync(int userId, int clubId)
+        public Task<bool> AddMemberAsync(int userId, int clubId)
         {
+            // stored procedures
             throw new NotImplementedException();
         }
 
         public Task<List<Club>> GetAllClubsOfUserAsync(int userId)
         {
+            // stored procedures
             throw new NotImplementedException();
         }
     }

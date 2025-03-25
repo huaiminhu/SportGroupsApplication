@@ -25,6 +25,11 @@ namespace DataAccess.Repositories
             return await _context.SaveChangesAsync() > 0;
         }
 
+        public async Task<Message?> GetMessageById(int messageId)
+        {
+            return await _context.Messages.FirstOrDefaultAsync(m => m.MessageId == messageId);
+        }
+
         public async Task<bool> DeleteMessageAsync(int messageId)
         {
             var existing = await _context.Messages.FirstOrDefaultAsync(m => m.MessageId == messageId);

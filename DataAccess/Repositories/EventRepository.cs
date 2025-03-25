@@ -26,6 +26,11 @@ namespace DataAccess.Repositories
             return await _context.SaveChangesAsync() > 0;
         }
 
+        public async Task<ClubEvent?> GetEventById(int eventId)
+        {
+            return await _context.ClubEvents.FirstOrDefaultAsync(e => e.ClubEventId == eventId);
+        }
+
         public async Task<bool> DeleteEventAsync(int eventId)
         {
             var existing = await _context.ClubEvents.FirstOrDefaultAsync(e => e.ClubEventId == eventId);
@@ -37,7 +42,7 @@ namespace DataAccess.Repositories
             return await _context.SaveChangesAsync() > 0;
         }
 
-        public async Task<List<ClubEvent>> GetAllEventsBySportAsync(Sport sport)
+        public Task<List<ClubEvent>> GetAllEventsBySportAsync(Sport sport)
         {
             // stored procedures
             throw new NotImplementedException();
@@ -48,7 +53,7 @@ namespace DataAccess.Repositories
             return await _context.ClubEvents.Include(e => e.ClubId == clubId).ToListAsync();
         }
 
-        public async Task<List<ClubEvent>> GetAllEventsOfUserAsync(int userId)
+        public Task<List<ClubEvent>> GetAllEventsOfUserAsync(int userId)
         {
             // stored procedures
             throw new NotImplementedException();

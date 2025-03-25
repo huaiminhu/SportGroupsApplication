@@ -1,6 +1,7 @@
 ﻿using DataAccess.Data;
 using DataAccess.Entities;
 using DataAccess.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,24 +19,38 @@ namespace DataAccess.Repositories
             _context = context;
         }
 
-        public Task<bool> AddMediaAsync(Media media)
+        public async Task<bool> AddMediaAsync(Media media)
         {
-            throw new NotImplementedException();
+            await _context.Medias.AddAsync(media);
+            return await _context.SaveChangesAsync() > 0;
         }
 
-        public Task<bool> DeleteMediaAsync(int mediaId)
+        public async Task<bool> DeleteMediaAsync(int mediaId)
         {
-            throw new NotImplementedException();
+            var existing = await _context.Medias.FirstOrDefaultAsync(m => m.ArticleMediaId == mediaId);
+            if (existing == null)
+            {
+                return false;
+            }
+            _context.Medias.Remove(existing);
+            return await _context.SaveChangesAsync() > 0;
         }
 
-        public Task<Media> GetMediaAsync(int mediaId)
+        public async Task<Media?> GetMediaAsync(int mediaId)
         {
-            throw new NotImplementedException();
+            return await _context.Medias.FirstOrDefaultAsync(m => m.ArticleMediaId == mediaId);
         }
 
-        public Task<bool> UpdateUrlAsync(int mediaId, string newUrl)
+        public async Task<bool> UpdateUrlAsync(int mediaId, string newUrl)
         {
-            throw new NotImplementedException();
+            var existing = await _context.Medias.FirstOrDefaultAsync(m => m.ArticleMediaId == mediaId);
+            if(existing == null)
+            {
+                return false;
+            }
+            existing.Url = newUrl;
+            _context.Entry(existing).Property(m => m.Url).IsModified = true;
+            return await _context.SaveChangesAsync() > 0;
         }
     }
 }

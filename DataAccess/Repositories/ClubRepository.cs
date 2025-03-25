@@ -26,6 +26,11 @@ namespace DataAccess.Repositories
             return await _context.SaveChangesAsync() > 0;
         }
 
+        public async Task<Club?> GetClubById(int clubId)
+        {
+            return await _context.Clubs.FirstOrDefaultAsync(c => c.ClubId == clubId);
+        }
+
         public async Task<bool> DeleteClubAsync(int clubId)
         {
             var existing = await _context.Clubs.FirstOrDefaultAsync(c => c.ClubId == clubId);
