@@ -15,4 +15,12 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="SQL\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Shared\SportGroups.Shared.csproj" />
+  </ItemGroup>
+
 </Project>

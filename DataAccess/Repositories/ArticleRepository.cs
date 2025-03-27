@@ -1,14 +1,15 @@
-﻿using DataAccess.Data;
-using DataAccess.Entities;
-using DataAccess.Repositories.Interfaces;
+﻿using SportGroups.Data.Data;
+using SportGroups.Data.Entities;
+using SportGroups.Data.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using SportGroups.Shared.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccess.Repositories
+namespace SportGroups.Data.Repositories
 {
     public class ArticleRepository : IArticleRepository
     {
@@ -44,6 +45,12 @@ namespace DataAccess.Repositories
         public async Task<List<Article>> GetAllArticleOfClubAsync(int clubId)
         {
             return await _context.Articles.Include(a => a.ClubId == clubId).ToListAsync();
+        }
+
+        public async Task<List<Article>> GetAllArticleBySport(Sport sport)
+        {
+            // stored procedures
+            throw new NotImplementedException();
         }
 
         public async Task<bool> UpdateTitleAsync(int articleId, string newTitle)

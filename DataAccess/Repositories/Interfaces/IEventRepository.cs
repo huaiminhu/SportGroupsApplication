@@ -1,5 +1,5 @@
-﻿using DataAccess.Entities;
-using DataAccess.Enums;
+﻿using SportGroups.Data.Entities;
+using SportGroups.Shared.Enums;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccess.Repositories.Interfaces
+namespace SportGroups.Data.Repositories.Interfaces
 {
     public interface IEventRepository
     {
@@ -19,8 +19,8 @@ namespace DataAccess.Repositories.Interfaces
 
         // 取得指定社團所有活動
         Task<List<ClubEvent>> GetAllEventsOfClubAsync(int clubId);
-
-        // 取得使用者參與的所有活動
+        
+        // 取得使用者報名的所有活動
         Task<List<ClubEvent>> GetAllEventsOfUserAsync(int userId);
         Task<bool> UpdateNameAsync(int eventId, string newName);
         Task<bool> UpdateDescriptionAsync(int eventId, string newDescription);

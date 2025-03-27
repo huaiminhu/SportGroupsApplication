@@ -1,12 +1,12 @@
-﻿using DataAccess.Entities;
-using DataAccess.Enums;
+﻿using SportGroups.Data.Entities;
+using SportGroups.Shared.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccess.Repositories.Interfaces
+namespace SportGroups.Data.Repositories.Interfaces
 {
     public interface IClubRepository
     {

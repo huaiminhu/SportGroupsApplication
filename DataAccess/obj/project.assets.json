@@ -1494,6 +1494,16 @@
             "rid": "win"
           }
         }
+      },
+      "SportGroups.Shared/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/SportGroups.Shared.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/SportGroups.Shared.dll": {}
+        }
       }
     }
   },
@@ -3996,13 +4006,19 @@
         "system.windows.extensions.nuspec",
         "useSharedDesignerContext.txt"
       ]
+    },
+    "SportGroups.Shared/1.0.0": {
+      "type": "project",
+      "path": "../Shared/SportGroups.Shared.csproj",
+      "msbuildProject": "../Shared/SportGroups.Shared.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
       "Microsoft.EntityFrameworkCore >= 8.0.13",
       "Microsoft.EntityFrameworkCore.SqlServer >= 8.0.13",
-      "Microsoft.EntityFrameworkCore.Tools >= 8.0.13"
+      "Microsoft.EntityFrameworkCore.Tools >= 8.0.13",
+      "SportGroups.Shared >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -4011,9 +4027,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\hankh\\Desktop\\SportGroupsApplication\\DataAccess\\DataAccess.csproj",
-      "projectName": "DataAccess",
-      "projectPath": "C:\\Users\\hankh\\Desktop\\SportGroupsApplication\\DataAccess\\DataAccess.csproj",
+      "projectUniqueName": "C:\\Users\\hankh\\Desktop\\SportGroupsApplication\\DataAccess\\SportGroups.Data.csproj",
+      "projectName": "SportGroups.Data",
+      "projectPath": "C:\\Users\\hankh\\Desktop\\SportGroupsApplication\\DataAccess\\SportGroups.Data.csproj",
       "packagesPath": "C:\\Users\\hankh\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\hankh\\Desktop\\SportGroupsApplication\\DataAccess\\obj\\",
       "projectStyle": "PackageReference",
@@ -4031,7 +4047,11 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\hankh\\Desktop\\SportGroupsApplication\\Shared\\SportGroups.Shared.csproj": {
+              "projectPath": "C:\\Users\\hankh\\Desktop\\SportGroupsApplication\\Shared\\SportGroups.Shared.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

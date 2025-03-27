@@ -1,19 +1,23 @@
-﻿using DataAccess.Entities;
+﻿using SportGroups.Data.Entities;
+using SportGroups.Shared.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccess.Repositories.Interfaces
+namespace SportGroups.Data.Repositories.Interfaces
 {
     public interface IArticleRepository
     {
         Task<bool> CreateArticleAsync(Article article);
         Task<Article?> GetArticleById(int articleId);
 
-        // 取得社團所有發布的文章
+        // 取得社團發布的所有文章
         Task<List<Article>> GetAllArticleOfClubAsync(int clubId);
+
+        // 取得指定運動項目的所有文章
+        Task<List<Article>> GetAllArticleBySport(Sport sport);
         Task<bool> UpdateTitleAsync(int articleId, string newTitle);
         Task<bool> UpdateContentAsync(int articleId, string newContent);
         Task<bool> UpdateDateAsync(int articleId, DateTime latestEdit);

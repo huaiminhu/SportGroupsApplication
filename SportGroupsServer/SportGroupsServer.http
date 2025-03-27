@@ -1,6 +1,6 @@
-@SportGroupsServer_HostAddress = http://localhost:5270
+@SportGroups.Api_HostAddress = http://localhost:5270
 
-GET {{SportGroupsServer_HostAddress}}/weatherforecast/
+GET {{SportGroups.Api_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###

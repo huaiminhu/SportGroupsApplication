@@ -1,7 +1,7 @@
-﻿using DataAccess.Data;
-using DataAccess.Entities;
-using DataAccess.Enums;
-using DataAccess.Repositories.Interfaces;
+﻿using SportGroups.Data.Data;
+using SportGroups.Data.Entities;
+using SportGroups.Shared.Enums;
+using SportGroups.Data.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccess.Repositories
+namespace SportGroups.Data.Repositories
 {
     public class ClubRepository : IClubRepository
     {

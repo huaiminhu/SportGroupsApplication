@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccess.Entities
+namespace SportGroups.Data.Entities
 {
     public class ClubMember   // 社團成員
     {

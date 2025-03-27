@@ -13,9 +13,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\hankh\\Desktop\\SportGroupsApplication\\SportGroupsClient\\SportGroupsClient.csproj",
-      "projectName": "SportGroupsClient",
-      "projectPath": "C:\\Users\\hankh\\Desktop\\SportGroupsApplication\\SportGroupsClient\\SportGroupsClient.csproj",
+      "projectUniqueName": "C:\\Users\\hankh\\Desktop\\SportGroupsApplication\\SportGroupsClient\\SportGroups.Client.csproj",
+      "projectName": "SportGroups.Client",
+      "projectPath": "C:\\Users\\hankh\\Desktop\\SportGroupsApplication\\SportGroupsClient\\SportGroups.Client.csproj",
       "packagesPath": "C:\\Users\\hankh\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\hankh\\Desktop\\SportGroupsApplication\\SportGroupsClient\\obj\\",
       "projectStyle": "PackageReference",

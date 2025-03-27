@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccess.Enums
+namespace SportGroups.Shared.Enums
 {
     public enum Role // 使用者身分
     {

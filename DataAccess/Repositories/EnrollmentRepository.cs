@@ -1,13 +1,13 @@
-﻿using DataAccess.Data;
-using DataAccess.Entities;
-using DataAccess.Repositories.Interfaces;
+﻿using SportGroups.Data.Data;
+using SportGroups.Data.Entities;
+using SportGroups.Data.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccess.Repositories
+namespace SportGroups.Data.Repositories
 {
     public class EnrollmentRepository : IEnrollmentRepository
     {
@@ -24,7 +24,7 @@ namespace DataAccess.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<Enrollment?> GetEnrollment(int userId, int eventId)
+        public Task<Enrollment?> GetEnrollmentInfo(int userId, int eventId)
         {
             // stored procedures
             throw new NotImplementedException();

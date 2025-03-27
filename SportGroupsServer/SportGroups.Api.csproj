@@ -11,8 +11,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DTOs\" />
     <Folder Include="Services\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BusinessLogic\SportGroups.Business.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "0hMFrC0G1RRpgXC8Mc18W0lHlnU1HYOj8rCCK8o8Iz+9yukhtEKcEj+dE4eKSaLr+xJnJixCKn6tPkwFWiL/TQ==",
+  "dgSpecHash": "Ns1kbsVptVbGSnvH5FOIPE4Pg6v8xRQPOlum5MRp0GMa9eJQGng34M4JiKodfPj0gc+8KZ+rHeK35i+cAb8sjA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\hankh\\Desktop\\SportGroupsApplication\\DataAccess\\DataAccess.csproj",
+  "projectFilePath": "C:\\Users\\hankh\\Desktop\\SportGroupsApplication\\DataAccess\\SportGroups.Data.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\hankh\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\hankh\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",

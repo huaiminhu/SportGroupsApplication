@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace SportGroupsServer.Controllers
+namespace SportGroups.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]

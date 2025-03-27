@@ -1,4 +1,4 @@
-namespace SportGroupsServer
+namespace SportGroups.Api
 {
     public class WeatherForecast
     {

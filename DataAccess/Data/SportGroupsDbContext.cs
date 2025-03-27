@@ -1,4 +1,4 @@
-﻿using DataAccess.Entities;
+﻿using SportGroups.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccess.Data
+namespace SportGroups.Data.Data
 {
     public class SportGroupsDbContext : DbContext
     {

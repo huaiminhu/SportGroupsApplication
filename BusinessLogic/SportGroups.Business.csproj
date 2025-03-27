@@ -7,7 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Services\" />
+    <ProjectReference Include="..\DataAccess\SportGroups.Data.csproj" />
+    <ProjectReference Include="..\Shared\SportGroups.Shared.csproj" />
   </ItemGroup>
 
 </Project>

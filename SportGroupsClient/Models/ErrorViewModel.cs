@@ -1,4 +1,4 @@
-namespace SportGroupsClient.Models
+namespace SportGroups.Client.Models
 {
     public class ErrorViewModel
     {
