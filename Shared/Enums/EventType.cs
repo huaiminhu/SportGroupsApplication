@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SportGroups.Shared.Enums
 {
-    public enum ActivityType // 社團活動類型
+    public enum EventType // 社團活動類型
     {
         Course, // 課程
         Game, // 比賽

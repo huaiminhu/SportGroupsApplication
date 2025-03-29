@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "/YyAHdowux8mdEmw4D4a+HJIN/puf+RFLYpj98CMA6QdZS5TXDXrfTFHmB7FR4wned9BJGp04AsqICKcu1NPZg==",
+  "dgSpecHash": "jpP2htL4hkd3/YlGbOgA+3VSg/yk+Fb1E5IWFZrslYjr/JtuSfcxI812VMcciqo2ksGTjULYW86QZLROeMhLNQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\hankh\\Desktop\\SportGroupsApplication\\SportGroupsServer\\SportGroups.Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\hankh\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\hankh\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",
+    "C:\\Users\\hankh\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\hankh\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\hankh\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\hankh\\.nuget\\packages\\microsoft.data.sqlclient\\5.1.6\\microsoft.data.sqlclient.5.1.6.nupkg.sha512",

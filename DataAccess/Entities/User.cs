@@ -13,7 +13,7 @@ namespace SportGroups.Data.Entities
         public Guid UserId { get; set; }
         public required string NickName { get; set; } = "";
         public required string UserName { get; set; }
-        public required string Password { get; set; }
+        public required string PasswordHash { get; set; }
         public required Role Role { get; set; } = 0;
         public required DateTime RegisterDate { get; set; } = DateTime.Now;
         public required ICollection<ClubMember> Clubs { get; set; } = new List<ClubMember>();

@@ -25,17 +25,6 @@ namespace SportGroups.Data.Repositories
             return await _context.SaveChangesAsync() > 0;
         }
 
-        public async Task<bool> DeleteUserAsync(Guid userId)
-        {
-            var existing = await _context.Users.FirstOrDefaultAsync(u => u.UserId == userId);
-            if (existing == null) 
-            {
-                return false;
-            }
-            _context.Users.Remove(existing);
-            return await _context.SaveChangesAsync() > 0;
-        }
-
         public async Task<User?> GetUserAsync(string username)
         {
             return await _context.Users.FirstOrDefaultAsync(u => u.UserName == username);
@@ -60,8 +49,8 @@ namespace SportGroups.Data.Repositories
             {
                 return false;
             }
-            existing.Password = newPassword;
-            _context.Entry(existing).Property(u => u.Password).IsModified = true;
+            existing.PasswordHash = newPassword;
+            _context.Entry(existing).Property(u => u.PasswordHash).IsModified = true;
             return await _context.SaveChangesAsync() > 0;
         }
     }
