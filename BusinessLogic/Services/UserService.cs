@@ -28,15 +28,17 @@ namespace SportGroups.Business.Services
             throw new NotImplementedException();
         }
 
-        public async Task<UserDto?> ValidateUserAsync(string username, string password)
+        public async Task<LogInResponse?> ValidateUserAsync(string username, string password)
         {
             var existing = await _userRepository.GetUserAsync(username);
             if(existing == null || !BCrypt.Net.BCrypt.Verify(password, existing.PasswordHash))
             {
                 return null;
             }
-            return new UserDto { 
-
+            return new LogInResponse
+            {
+                Token = "", 
+                Username = username
             };
         }
 

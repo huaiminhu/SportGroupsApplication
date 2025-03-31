@@ -42,10 +42,11 @@ namespace SportGroups.Data.Repositories
             return await _context.SaveChangesAsync() > 0;
         }
 
-        public Task<List<ClubEvent>> GetAllEventsBySportAsync(Sport sport)
+        public async Task<List<ClubEvent>> GetAllEventsBySportAsync(Sport sport)
         {
-            // stored procedures
-            throw new NotImplementedException();
+            return await _context.ClubEvents
+                .FromSqlRaw("EXEC usp_GetAllEventsBySport @p0", sport)
+                .ToListAsync();
         }
 
         public async Task<List<ClubEvent>> GetAllEventsOfClubAsync(int clubId)
@@ -53,10 +54,11 @@ namespace SportGroups.Data.Repositories
             return await _context.ClubEvents.Include(e => e.ClubId == clubId).ToListAsync();
         }
 
-        public Task<List<ClubEvent>> GetAllEventsOfUserAsync(int userId)
+        public async Task<List<ClubEvent>> GetAllEventsOfUserAsync(Guid userId)
         {
-            // stored procedures
-            throw new NotImplementedException();
+            return await _context.ClubEvents
+                .FromSqlRaw("EXEC usp_GetAllEventsOfUser @p0", userId)
+                .ToListAsync();
         }
 
         public async Task<bool> UpdateNameAsync(int eventId, string newName)
