@@ -9,8 +9,8 @@ namespace SportGroups.Data.Repositories.Interfaces
 {
     public interface IEnrollmentRepository
     {
-        // 參加活動
-        Task<bool> AttendEventAsync(int userId, int eventId);
-        Task<Enrollment?> GetEnrollmentInfo(int userId, int eventId);
+        // 新增活動報名
+        Task<bool> AddEnrollmentAsync(Guid userId, int eventId);
+        Task<Enrollment?> GetEnrollmentInfo(Guid userId, int eventId);
     }
 }

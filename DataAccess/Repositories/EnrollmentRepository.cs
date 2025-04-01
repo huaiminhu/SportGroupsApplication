@@ -18,13 +18,13 @@ namespace SportGroups.Data.Repositories
             _context = context;
         }
 
-        public Task<bool> AttendEventAsync(int userId, int eventId)
+        public Task<bool> AddEnrollmentAsync(Guid userId, int eventId)
         {
             // stored procedures
             throw new NotImplementedException();
         }
 
-        public Task<Enrollment?> GetEnrollmentInfo(int userId, int eventId)
+        public Task<Enrollment?> GetEnrollmentInfo(Guid userId, int eventId)
         {
             // stored procedures
             throw new NotImplementedException();

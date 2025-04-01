@@ -10,9 +10,8 @@ namespace SportGroups.Data.Repositories.Interfaces
     public interface IClubMemberRepository
     {
         // 新增社團成員
-        Task<bool> AddMemberAsync(int userId, int clubId);
-        
+        Task<bool> AddMemberAsync(Guid userId, int clubId, string email, DateTime joinTime);
         // 取得使用者參與的所有社團
-        Task<List<Club>> GetAllClubsOfUserAsync(int userId);
+        Task<List<Club>> GetAllClubsOfUserAsync(Guid userId);
     }
 }

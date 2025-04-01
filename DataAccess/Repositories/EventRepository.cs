@@ -45,7 +45,7 @@ namespace SportGroups.Data.Repositories
         public async Task<List<ClubEvent>> GetAllEventsBySportAsync(Sport sport)
         {
             return await _context.ClubEvents
-                .FromSqlRaw("EXEC usp_GetAllEventsBySport @p0", sport)
+                .FromSqlRaw("EXEC usp_GetAll_ClubEvents_BySport @p0", sport)
                 .ToListAsync();
         }
 
@@ -57,7 +57,7 @@ namespace SportGroups.Data.Repositories
         public async Task<List<ClubEvent>> GetAllEventsOfUserAsync(Guid userId)
         {
             return await _context.ClubEvents
-                .FromSqlRaw("EXEC usp_GetAllEventsOfUser @p0", userId)
+                .FromSqlRaw("EXEC usp_GetAll_ClubEvents_OfUser @p0", userId)
                 .ToListAsync();
         }
 

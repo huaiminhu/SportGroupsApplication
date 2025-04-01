@@ -1,4 +1,5 @@
-﻿using SportGroups.Data.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using SportGroups.Data.Data;
 using SportGroups.Data.Entities;
 using SportGroups.Data.Repositories.Interfaces;
 using System;
@@ -18,16 +19,17 @@ namespace SportGroups.Data.Repositories
             _context = context;
         }
 
-        public Task<bool> AddMemberAsync(int userId, int clubId)
+        public async Task<bool> AddMemberAsync(Guid userId, int clubId, string email, DateTime joinTime)
         {
-            // stored procedures
-            throw new NotImplementedException();
+            await _context.Database.ExecuteSqlRawAsync("EXEC usp_Add_ClubMember @p0, @p1, @p2, @p3", userId, clubId, email, joinTime);
+            return true;
         }
 
-        public Task<List<Club>> GetAllClubsOfUserAsync(int userId)
+        public async Task<List<Club>> GetAllClubsOfUserAsync(Guid userId)
         {
-            // stored procedures
-            throw new NotImplementedException();
+            return await _context.Clubs
+                .FromSqlRaw("EXEC usp_GetAll_ClubsOfUser @p0", userId)
+                .ToListAsync();
         }
     }
 }

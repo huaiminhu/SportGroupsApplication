@@ -13,7 +13,7 @@ namespace SportGroups.Data.Repositories.Interfaces
         Task<bool> CreateArticleAsync(Article article);
         Task<Article?> GetArticleById(int articleId);
 
-        // 取得社團發布的所有文章
+        // 取得指定社團發布的所有文章
         Task<List<Article>> GetAllArticleOfClubAsync(int clubId);
 
         // 取得指定運動項目的所有文章

@@ -1,4 +1,4 @@
-CREATE PROCEDURE usp_GetAllEventsBySport
+CREATE PROCEDURE usp_GetAll_ClubEvents_BySport
 	@Sport INT 
 AS 
 BEGIN

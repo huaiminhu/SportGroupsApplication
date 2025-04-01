@@ -1,4 +1,4 @@
-CREATE PROCEDURE use_GetAllEventsOfUser
+CREATE PROCEDURE use_GetAll_ClubEvents_OfUser
 	@userId UNIQUEIDENTIFIER
 AS
 BEGIN
