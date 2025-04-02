@@ -1,4 +1,6 @@
-﻿using SportGroups.Data.Data;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
+using SportGroups.Data.Data;
 using SportGroups.Data.Entities;
 using SportGroups.Data.Repositories.Interfaces;
 using System;
@@ -18,16 +20,19 @@ namespace SportGroups.Data.Repositories
             _context = context;
         }
 
-        public Task<bool> AddEnrollmentAsync(Guid userId, int eventId)
+        public async Task<bool> AddEnrollmentAsync(Enrollment enrollment)
         {
-            // stored procedures
-            throw new NotImplementedException();
+            await _context.Enrollments.AddAsync(enrollment);
+            return await _context.SaveChangesAsync() > 0;
         }
 
-        public Task<Enrollment?> GetEnrollmentInfo(Guid userId, int eventId)
+        public async Task<Enrollment?> GetEnrollmentInfo(Guid userId, int eventId)
         {
-            // stored procedures
-            throw new NotImplementedException();
+            var uIdParam = new SqlParameter("@uId", userId);
+            var eIdParam = new SqlParameter("@eId", eventId);
+            return await _context.Enrollments
+                .FromSqlRaw("EXEC usp_Get_EnrollmentInfo @uId, @eId", uIdParam, eIdParam)
+                .FirstOrDefaultAsync();
         }
     }
 }

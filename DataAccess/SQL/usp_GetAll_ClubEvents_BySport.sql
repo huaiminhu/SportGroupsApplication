@@ -1,5 +1,5 @@
 CREATE PROCEDURE usp_GetAll_ClubEvents_BySport
-	@Sport INT 
+	@sport INT 
 AS 
 BEGIN
 	SELECT * FROM ClubEvents 

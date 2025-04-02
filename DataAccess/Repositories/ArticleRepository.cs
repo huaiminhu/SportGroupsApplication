@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Data.SqlClient;
 
 namespace SportGroups.Data.Repositories
 {
@@ -49,8 +50,10 @@ namespace SportGroups.Data.Repositories
 
         public async Task<List<Article>> GetAllArticleBySport(Sport sport)
         {
-            // stored procedures
-            throw new NotImplementedException();
+            var sportParam = new SqlParameter("@sport", sport);
+            return await _context.Articles
+                .FromSqlRaw("EXEC usp_GetAll_Article_BySport @sport", sportParam)
+                .ToListAsync();
         }
 
         public async Task<bool> UpdateTitleAsync(int articleId, string newTitle)

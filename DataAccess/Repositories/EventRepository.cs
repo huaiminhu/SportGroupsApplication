@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Data.SqlClient;
 
 namespace SportGroups.Data.Repositories
 {
@@ -44,8 +45,9 @@ namespace SportGroups.Data.Repositories
 
         public async Task<List<ClubEvent>> GetAllEventsBySportAsync(Sport sport)
         {
+            var sportParam = new SqlParameter("@sport", sport);
             return await _context.ClubEvents
-                .FromSqlRaw("EXEC usp_GetAll_ClubEvents_BySport @p0", sport)
+                .FromSqlRaw("EXEC usp_GetAll_ClubEvents_BySport @sport", sportParam)
                 .ToListAsync();
         }
 
@@ -56,8 +58,9 @@ namespace SportGroups.Data.Repositories
 
         public async Task<List<ClubEvent>> GetAllEventsOfUserAsync(Guid userId)
         {
+            var uIdParam = new SqlParameter("@userId", userId);
             return await _context.ClubEvents
-                .FromSqlRaw("EXEC usp_GetAll_ClubEvents_OfUser @p0", userId)
+                .FromSqlRaw("EXEC usp_GetAll_ClubEvents_OfUser @userId", uIdParam)
                 .ToListAsync();
         }
 
