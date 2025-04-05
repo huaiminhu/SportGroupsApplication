@@ -1,4 +1,4 @@
-CREATE PROCEDURE usp_GetAll_Article_BySport
+CREATE PROCEDURE usp_GetAll_Articles_BySport
 	@sport INT
 AS
 BEGIN 

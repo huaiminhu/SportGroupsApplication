@@ -27,7 +27,7 @@ namespace SportGroups.Data.Repositories
             return await _context.SaveChangesAsync() > 0;
         }
 
-        public async Task<Article?> GetArticleById(int articleId)
+        public async Task<Article?> GetArticleByIdAsync(int articleId)
         {
             return await _context.Articles.FirstOrDefaultAsync(a => a.ArticleId == articleId);
         }
@@ -48,11 +48,19 @@ namespace SportGroups.Data.Repositories
             return await _context.Articles.Include(a => a.ClubId == clubId).ToListAsync();
         }
 
-        public async Task<List<Article>> GetAllArticleBySport(Sport sport)
+        public async Task<List<Article>> GetAllArticleBySportAsync(Sport sport)
         {
             var sportParam = new SqlParameter("@sport", sport);
             return await _context.Articles
-                .FromSqlRaw("EXEC usp_GetAll_Article_BySport @sport", sportParam)
+                .FromSqlRaw("EXEC usp_GetAll_Articles_BySport @sport", sportParam)
+                .ToListAsync();
+        }
+
+        public async Task<List<Article>> GetArticlesByKeywordAsync(string keyword)
+        {
+            var keywordParam = new SqlParameter("@keyword", keyword);
+            return await _context.Articles
+                .FromSqlRaw("EXEC usp_GetAll_Articles_ByKeyword @keyword", keywordParam)
                 .ToListAsync();
         }
 

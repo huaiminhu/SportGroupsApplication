@@ -25,7 +25,7 @@ namespace SportGroups.Data.Repositories
             return await _context.SaveChangesAsync() > 0;
         }
 
-        public async Task<Message?> GetMessageById(int messageId)
+        public async Task<Message?> GetMessageByIdAsync(int messageId)
         {
             return await _context.Messages.FirstOrDefaultAsync(m => m.MessageId == messageId);
         }

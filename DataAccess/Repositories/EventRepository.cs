@@ -27,7 +27,7 @@ namespace SportGroups.Data.Repositories
             return await _context.SaveChangesAsync() > 0;
         }
 
-        public async Task<ClubEvent?> GetEventById(int eventId)
+        public async Task<ClubEvent?> GetEventByIdAsync(int eventId)
         {
             return await _context.ClubEvents.FirstOrDefaultAsync(e => e.ClubEventId == eventId);
         }

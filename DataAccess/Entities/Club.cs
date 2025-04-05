@@ -11,7 +11,7 @@ namespace SportGroups.Data.Entities
     public class Club   // 社團
     {
         public int ClubId { get; set; }
-        public required string Name { get; set; }
+        public required string ClubName { get; set; }
         public required Sport Sport { get; set; }
         public required string Phone { get; set; }
         public required string Email { get; set; }

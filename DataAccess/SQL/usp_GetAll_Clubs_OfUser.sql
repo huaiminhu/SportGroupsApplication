@@ -1,4 +1,4 @@
-CREATE PROCEDURE usp_GetAll_ClubsOfUser
+CREATE PROCEDURE usp_GetAll_Clubs_OfUser
 	@userId UNIQUEIDENTIFIER
 AS
 BEGIN

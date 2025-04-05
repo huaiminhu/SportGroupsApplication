@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SportGroups.Data.Entities;
+using SportGroups.Shared.DTOs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +10,9 @@ namespace SportGroups.Business.Services.IServices
 {
     public interface IMediaService
     {
+        Task<bool> AddMediaAsync(MediaDto media);
+        Task<MediaDto?> GetMediaAsync(int mediaId);
+        Task<bool> UpdateUrlAsync(int mediaId, string newUrl);
+        Task<bool> DeleteMediaAsync(int mediaId);
     }
 }

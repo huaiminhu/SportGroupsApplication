@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Data.SqlClient;
 
 namespace SportGroups.Data.Repositories
 {
@@ -26,7 +27,7 @@ namespace SportGroups.Data.Repositories
             return await _context.SaveChangesAsync() > 0;
         }
 
-        public async Task<Club?> GetClubById(int clubId)
+        public async Task<Club?> GetClubByIdAsync(int clubId)
         {
             return await _context.Clubs.FirstOrDefaultAsync(c => c.ClubId == clubId);
         }
@@ -47,6 +48,14 @@ namespace SportGroups.Data.Repositories
             return await _context.Clubs.Include(c => c.Sport == sport).ToListAsync();
         }
 
+        public async Task<List<Club>> GetAllClubsByKeywordAsync(string keyword)
+        {
+            var kwParam = new SqlParameter("@keyword", keyword);
+            return await _context.Clubs
+                .FromSqlRaw("EXEC usp_GetAll_Clubs_ByKeyword @keyword", kwParam)
+                .ToListAsync();
+        }
+
         public async Task<bool> UpdateNameAsync(int clubId, string newName)
         {
             var existing = await _context.Clubs.FirstOrDefaultAsync(c => c.ClubId == clubId);
@@ -54,8 +63,8 @@ namespace SportGroups.Data.Repositories
             {
                 return false;
             }
-            existing.Name = newName;
-            _context.Entry(existing).Property(c => c.Name).IsModified = true;
+            existing.ClubName = newName;
+            _context.Entry(existing).Property(c => c.ClubName).IsModified = true;
             return await _context.SaveChangesAsync() > 0;
         }
 
@@ -66,7 +75,7 @@ namespace SportGroups.Data.Repositories
             {
                 return false;
             }
-            existing.Name = newPhoneNum;
+            existing.Phone = newPhoneNum;
             _context.Entry(existing).Property(c => c.Phone).IsModified = true;
             return await _context.SaveChangesAsync() > 0;
         }
@@ -78,7 +87,7 @@ namespace SportGroups.Data.Repositories
             {
                 return false;
             }
-            existing.Name = newEmail;
+            existing.Email = newEmail;
             _context.Entry(existing).Property(c => c.Email).IsModified = true;
             return await _context.SaveChangesAsync() > 0;
         }
@@ -90,7 +99,7 @@ namespace SportGroups.Data.Repositories
             {
                 return false;
             }
-            existing.Name = newDescription;
+            existing.Description = newDescription;
             _context.Entry(existing).Property(c => c.Description).IsModified = true;
             return await _context.SaveChangesAsync() > 0;
         }

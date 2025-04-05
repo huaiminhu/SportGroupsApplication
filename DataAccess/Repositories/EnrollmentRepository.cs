@@ -20,18 +20,24 @@ namespace SportGroups.Data.Repositories
             _context = context;
         }
 
-        public async Task<bool> AddEnrollmentAsync(Enrollment enrollment)
+        public async Task<bool> AddEnrollmentAsync(Guid userId, int eventId, string phone, DateTime enrollDate)
         {
-            await _context.Enrollments.AddAsync(enrollment);
-            return await _context.SaveChangesAsync() > 0;
+            var uIdParam = new SqlParameter("@userId", userId);
+            var eIdParam = new SqlParameter("@eventId", eventId);
+            var phoneParam = new SqlParameter("@phone", phone);
+            var dateParam = new SqlParameter("@enrollDate", enrollDate);
+            return await _context.Database
+                .ExecuteSqlRawAsync(
+                "EXEC usp_Create_Enrollments_AddEnrollment @userId, @eventId, @phone, @enrollDate",
+                uIdParam, eIdParam, phoneParam, dateParam) > 0;
         }
 
-        public async Task<Enrollment?> GetEnrollmentInfo(Guid userId, int eventId)
+        public async Task<Enrollment?> GetEnrollmentByIdAsync(Guid userId, int eventId)
         {
-            var uIdParam = new SqlParameter("@uId", userId);
-            var eIdParam = new SqlParameter("@eId", eventId);
+            var uIdParam = new SqlParameter("@userId", userId);
+            var eIdParam = new SqlParameter("@eventId", eventId);
             return await _context.Enrollments
-                .FromSqlRaw("EXEC usp_Get_EnrollmentInfo @uId, @eId", uIdParam, eIdParam)
+                .FromSqlRaw("EXEC usp_Get_Enrollments_ById @userId, @eventId", uIdParam, eIdParam)
                 .FirstOrDefaultAsync();
         }
     }

@@ -12,7 +12,7 @@ namespace SportGroups.Data.Repositories.Interfaces
     public interface IEventRepository
     {
         Task<bool> CreateEventAsync(ClubEvent evt);
-        Task<ClubEvent?> GetEventById(int eventId);
+        Task<ClubEvent?> GetEventByIdAsync(int eventId);
 
         // 取得指定運動項目類別的所有活動
         Task<List<ClubEvent>> GetAllEventsBySportAsync(Sport sport);

@@ -1,4 +1,4 @@
-CREATE PROCEDURE usp_Get_EnrollmentInfo
+CREATE PROCEDURE usp_Get_Enrollments_ById
 	@userId  UNIQUEIDENTIFIER, 
 	@eventId INT
 AS 
