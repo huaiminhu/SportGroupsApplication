@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SportGroups.Shared.DTOs
 {
-    internal class ClubEventDto
+    public class ClubEventDto
     {
     }
 }

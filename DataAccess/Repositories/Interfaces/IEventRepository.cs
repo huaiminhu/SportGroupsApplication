@@ -22,6 +22,9 @@ namespace SportGroups.Data.Repositories.Interfaces
         
         // 取得使用者報名的所有活動
         Task<List<ClubEvent>> GetAllEventsOfUserAsync(Guid userId);
+
+        // 取得包含指定關鍵字的所有活動
+        Task<List<ClubEvent>> GetAllEventsByKeyword(string keyword);
         Task<bool> UpdateNameAsync(int eventId, string newName);
         Task<bool> UpdateDescriptionAsync(int eventId, string newDescription);
         Task<bool> UpdateAddressAsync(int eventId, string newAddress);

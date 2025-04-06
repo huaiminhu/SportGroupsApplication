@@ -64,6 +64,14 @@ namespace SportGroups.Data.Repositories
                 .ToListAsync();
         }
 
+        public async Task<List<ClubEvent>> GetAllEventsByKeyword(string keyword)
+        {
+            var keywordParam = new SqlParameter("@keyword", keyword);
+            return await _context.ClubEvents
+                .FromSqlRaw("EXEC usp_GetAll_ClubEvents_ByKeyword @keyword", keywordParam)
+                .ToListAsync();
+        }
+
         public async Task<bool> UpdateNameAsync(int eventId, string newName)
         {
             var existing = await _context.ClubEvents.FirstOrDefaultAsync(e => e.ClubEventId == eventId);
@@ -71,8 +79,8 @@ namespace SportGroups.Data.Repositories
             {
                 return false;
             }
-            existing.Name = newName;
-            _context.Entry(existing).Property(e => e.Name).IsModified = true;
+            existing.EventName = newName;
+            _context.Entry(existing).Property(e => e.EventName).IsModified = true;
             return await _context.SaveChangesAsync() > 0;
         }
 
@@ -83,7 +91,7 @@ namespace SportGroups.Data.Repositories
             {
                 return false;
             }
-            existing.Name = newDescription;
+            existing.Description = newDescription;
             _context.Entry(existing).Property(e => e.Description).IsModified = true;
             return await _context.SaveChangesAsync() > 0;
         }
@@ -95,7 +103,7 @@ namespace SportGroups.Data.Repositories
             {
                 return false;
             }
-            existing.Name = newAddress;
+            existing.Address = newAddress;
             _context.Entry(existing).Property(e => e.Address).IsModified = true;
             return await _context.SaveChangesAsync() > 0;
         }

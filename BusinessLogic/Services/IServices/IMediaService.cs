@@ -12,7 +12,7 @@ namespace SportGroups.Business.Services.IServices
     {
         Task<bool> AddMediaAsync(MediaDto media);
         Task<MediaDto?> GetMediaAsync(int mediaId);
-        Task<bool> UpdateUrlAsync(int mediaId, string newUrl);
+        Task<bool> ChangeUrlAsync(int mediaId, string newUrl);
         Task<bool> DeleteMediaAsync(int mediaId);
     }
 }

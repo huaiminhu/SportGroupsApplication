@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SportGroups.Shared.DTOs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,11 @@ namespace SportGroups.Business.Services.IServices
 {
     public interface IMessageService
     {
+        Task<bool> CreateMessageAsync(MessageDto messageDto);
+        Task<MessageDto?> GetMessageByIdAsync(int messageId);
+        Task<List<MessageDto>> GetAllMessageOfClubAsync(int clubId);
+        Task<bool> UpdateTitleAsync(int messageId, string newTitle);
+        Task<bool> UpdateContentAsync(int messageId, string newContent);
+        Task<bool> DeleteMessageAsync(int messageId);
     }
 }

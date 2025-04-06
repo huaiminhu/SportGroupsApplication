@@ -13,5 +13,11 @@ namespace SportGroups.Business.Services.IServices
     {
         Task<List<ArticleDto>> GetArticlesBySportAsync(Sport sport);
         Task<List<ArticleDto>> GetArticlesByKeywordAsync(string keyword);
+        Task<ArticleDto?> GetArticleByIdAsync(int articleId);
+        Task<bool> CreateArticleAsync(ArticleDto articleDto);
+        Task<bool> ChangeTitleAsync(int articleId, string newTitle);
+        Task<bool> ChangeContentAsync(int articleId, string newContent);
+        Task<bool> ChangeDateAsync(int articleId, DateTime latestEdit);
+        Task<bool> DeleteArticleAsync(int articleId);
     }
 }
