@@ -9,7 +9,6 @@ namespace SportGroups.Business.Services.IServices
 {
     public interface IAuthService
     {
-        Task<LogInResponse?> ValidateUserAsync(LogInRequest request);
-        Task<bool> RegisterAsync();
+        Task<UserDto?> AuthAsync(string username, string password);
     }
 }
