@@ -22,9 +22,9 @@ namespace SportGroups.Business.Services
             throw new NotImplementedException();
         }
 
-        public Task<bool> DeleteMessageAsync(int messageId)
+        public async Task<bool> DeleteMessageAsync(int messageId)
         {
-            throw new NotImplementedException();
+            return await _messageRepository.DeleteMessageAsync(messageId);
         }
 
         public Task<List<MessageDto>> GetAllMessageOfClubAsync(int clubId)
@@ -37,14 +37,14 @@ namespace SportGroups.Business.Services
             throw new NotImplementedException();
         }
 
-        public Task<bool> UpdateContentAsync(int messageId, string newContent)
+        public async Task<bool> UpdateContentAsync(int messageId, string newContent)
         {
-            throw new NotImplementedException();
+            return await _messageRepository.UpdateContentAsync(messageId, newContent);
         }
 
-        public Task<bool> UpdateTitleAsync(int messageId, string newTitle)
+        public async Task<bool> UpdateTitleAsync(int messageId, string newTitle)
         {
-            throw new NotImplementedException();
+            return await _messageRepository.UpdateTitleAsync(messageId, newTitle);
         }
     }
 }

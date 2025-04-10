@@ -11,6 +11,8 @@ namespace SportGroups.Business.Services.IServices
     {
         Task<bool> CreateMessageAsync(MessageDto messageDto);
         Task<MessageDto?> GetMessageByIdAsync(int messageId);
+        
+        // 取得指定社團所有訊息
         Task<List<MessageDto>> GetAllMessageOfClubAsync(int clubId);
         Task<bool> UpdateTitleAsync(int messageId, string newTitle);
         Task<bool> UpdateContentAsync(int messageId, string newContent);

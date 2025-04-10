@@ -22,14 +22,14 @@ namespace SportGroups.Business.Services
             throw new NotImplementedException();
         }
 
-        public Task<bool> ChangeUrlAsync(int mediaId, string newUrl)
+        public async Task<bool> ChangeUrlAsync(int mediaId, string newUrl)
         {
-            throw new NotImplementedException();
+            return await _mediaRepository.UpdateUrlAsync(mediaId, newUrl); 
         }
 
-        public Task<bool> DeleteMediaAsync(int mediaId)
+        public async Task<bool> DeleteMediaAsync(int mediaId)
         {
-            throw new NotImplementedException();
+            return await _mediaRepository.DeleteMediaAsync(mediaId);
         }
 
         public Task<MediaDto?> GetMediaAsync(int mediaId)

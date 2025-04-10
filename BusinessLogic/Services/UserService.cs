@@ -1,5 +1,4 @@
 ﻿using SportGroups.Business.Services.IServices;
-using SportGroups.Data.Entities;
 using SportGroups.Data.Repositories.Interfaces;
 using SportGroups.Shared.DTOs;
 using System;
@@ -18,28 +17,19 @@ namespace SportGroups.Business.Services
             _userRepository = userRepository;
         }
 
-        public Task<bool> ChangeNickNameAsync(Guid userId, string newName)
+        public async Task<bool> ChangeNickNameAsync(Guid userId, string newName)
         {
-            throw new NotImplementedException();
+            return await _userRepository.UpdateNickNameAsync(userId, newName);
         }
 
-        public Task<bool> ChangePasswordAsync(Guid userId, string newPassword)
+        public async Task<bool> ChangePasswordAsync(Guid userId, string newPassword)
         {
-            throw new NotImplementedException();
+            return await _userRepository.UpdatePasswordAsync(userId, newPassword);
         }
 
         public Task<UserDto> GetUserInfoAsync(Guid userId)
         {
             throw new NotImplementedException();
-        }
-
-        public async Task<bool> RegisterAsync(UserDto userDto)
-        {
-            var user = new User 
-            { 
-                NickName = userDto.NickName, 
-
-            }
         }
     }
 }

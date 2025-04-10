@@ -9,6 +9,7 @@ namespace SportGroups.Business.Services.IServices
 {
     public interface IEnrollmentService
     {
+        // 參加社團活動
         Task<bool> AttendEventAsync(EnrollmentDto enrollmentDto);
         Task<EnrollmentDto?> GetEnrollmentByIdAsync(Guid userId, int eventId);
     }

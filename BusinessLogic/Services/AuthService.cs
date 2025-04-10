@@ -17,6 +17,11 @@ namespace SportGroups.Business.Services
             _userRepository = userRepository;
         }
 
+        public Task<bool> RegisterAsync(UserDto userDto)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<UserDto?> AuthAsync(string username, string password)
         {
             throw new NotImplementedException();

@@ -18,24 +18,24 @@ namespace SportGroups.Business.Services
             _clubRepository = clubRepository;
         }
 
-        public Task<bool> ChangeDescrptionAsync(int clubId, string newDescription)
+        public async Task<bool> ChangeDescrptionAsync(int clubId, string newDescription)
         {
-            throw new NotImplementedException();
+            return await _clubRepository.UpdateDescrptionAsync(clubId, newDescription);
         }
 
-        public Task<bool> ChangeEmailAsync(int clubId, string newEmail)
+        public async Task<bool> ChangeEmailAsync(int clubId, string newEmail)
         {
-            throw new NotImplementedException();
+            return await _clubRepository.UpdateEmailAsync(clubId, newEmail);
         }
 
-        public Task<bool> ChangeNameAsync(int clubId, string newName)
+        public async Task<bool> ChangeNameAsync(int clubId, string newName)
         {
-            throw new NotImplementedException();
+            return await _clubRepository.UpdateNameAsync(clubId, newName);
         }
 
-        public Task<bool> ChangePhoneAsync(int clubId, string newPhoneNum)
+        public async Task<bool> ChangePhoneAsync(int clubId, string newPhoneNum)
         {
-            throw new NotImplementedException();
+            return await _clubRepository.UpdatePhoneAsync(clubId, newPhoneNum);
         }
 
         public Task<bool> CreateClubAsync(ClubDto clubDto)
@@ -43,9 +43,9 @@ namespace SportGroups.Business.Services
             throw new NotImplementedException();
         }
 
-        public Task<bool> DeleteClubAsync(int clubId)
+        public async Task<bool> DeleteClubAsync(int clubId)
         {
-            throw new NotImplementedException();
+            return await _clubRepository.DeleteClubAsync(clubId);
         }
 
         public Task<ClubDto?> GetClubInfoAsync(int clubId)

@@ -18,19 +18,19 @@ namespace SportGroups.Business.Services
             _eventRepository = eventRepository;
         }
 
-        public Task<bool> ChangeAddressAsync(int eventId, string newAddress)
+        public async Task<bool> ChangeAddressAsync(int eventId, string newAddress)
         {
-            throw new NotImplementedException();
+            return await _eventRepository.UpdateAddressAsync(eventId, newAddress);
         }
 
-        public Task<bool> ChangeDescriptionAsync(int eventId, string newDescription)
+        public async Task<bool> ChangeDescriptionAsync(int eventId, string newDescription)
         {
-            throw new NotImplementedException();
+            return await _eventRepository.UpdateDescriptionAsync(eventId, newDescription);
         }
 
-        public Task<bool> ChangeNameAsync(int eventId, string newName)
+        public async Task<bool> ChangeNameAsync(int eventId, string newName)
         {
-            throw new NotImplementedException();
+            return await _eventRepository.UpdateNameAsync(eventId, newName);
         }
 
         public Task<bool> CreateEventAsync(ClubEventDto clubEventDto)
@@ -38,9 +38,9 @@ namespace SportGroups.Business.Services
             throw new NotImplementedException();
         }
 
-        public Task<bool> DeleteEventAsync(int eventId)
+        public async Task<bool> DeleteEventAsync(int eventId)
         {
-            throw new NotImplementedException();
+            return await _eventRepository.DeleteEventAsync(eventId);
         }
 
         public Task<List<ClubEventDto>> GetAllEventByKeywordAsync(string keyword)

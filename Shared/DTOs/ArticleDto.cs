@@ -8,5 +8,6 @@ namespace SportGroups.Shared.DTOs
 {
     public class ArticleDto
     {
+        public string Title { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using SportGroups.Business.Services.IServices;
+using SportGroups.Data.Entities;
 using SportGroups.Data.Repositories.Interfaces;
 using SportGroups.Shared.DTOs;
 using SportGroups.Shared.Enums;
@@ -18,29 +19,33 @@ namespace SportGroups.Business.Services
             _articleRepository = articleRepository;
         }
 
-        public Task<bool> ChangeContentAsync(int articleId, string newContent)
+        public async Task<bool> ChangeContentAsync(int articleId, string newContent)
         {
-            throw new NotImplementedException();
+            return await _articleRepository.UpdateContentAsync(articleId, newContent);
         }
 
-        public Task<bool> ChangeDateAsync(int articleId, DateTime latestEdit)
+        public async Task<bool> ChangeDateAsync(int articleId, DateTime latestEdit)
         {
-            throw new NotImplementedException();
+            return await _articleRepository.UpdateDateAsync(articleId, latestEdit);
         }
 
-        public Task<bool> ChangeTitleAsync(int articleId, string newTitle)
+        public async Task<bool> ChangeTitleAsync(int articleId, string newTitle)
         {
-            throw new NotImplementedException();
+            return await _articleRepository.UpdateTitleAsync(articleId, newTitle);
         }
 
-        public Task<bool> CreateArticleAsync(ArticleDto articleDto)
+        public async Task<bool> CreateArticleAsync(ArticleDto articleDto)
         {
-            throw new NotImplementedException();
+            Article article = new Article
+            {
+                Title = articleDto
+            }
+            return await _articleRepository.CreateArticleAsync(article);
         }
 
-        public Task<bool> DeleteArticleAsync(int articleId)
+        public async Task<bool> DeleteArticleAsync(int articleId)
         {
-            throw new NotImplementedException();
+            return await _articleRepository.DeleteArticleAsync(articleId);
         }
 
         public Task<ArticleDto?> GetArticleByIdAsync(int articleId)
