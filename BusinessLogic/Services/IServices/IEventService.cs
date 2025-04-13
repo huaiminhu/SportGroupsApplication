@@ -1,5 +1,5 @@
 ﻿using SportGroups.Data.Entities;
-using SportGroups.Shared.DTOs;
+using SportGroups.Shared.DTOs.EventDTOs;
 using SportGroups.Shared.Enums;
 using System;
 using System.Collections.Generic;
@@ -11,17 +11,17 @@ namespace SportGroups.Business.Services.IServices
 {
     public interface IEventService
     {
-        Task<bool> CreateEventAsync(ClubEventDto clubEventDto);
-        Task<ClubEventDto> GetEventInfoAsync(int id);
+        Task<bool> CreateEventAsync(CreateEventDto createDto);
+        Task<EventInfoDto> GetEventInfoAsync(int id);
         
         // 取得使用指定運動項目所有活動
-        Task<List<ClubEventDto>> GetAllEventsBySportAsync(Sport sport);
+        Task<List<EventInfoDto>> GetAllEventsBySportAsync(Sport sport);
         
         // 取得指定社團所有活動
-        Task<List<ClubEventDto>> GetAllEventsOfClubAsync(int clubId);
+        Task<List<EventInfoDto>> GetAllEventsOfClubAsync(int clubId);
         
         // 取得指定關鍵字所有活動
-        Task<List<ClubEventDto>> GetAllEventByKeywordAsync(string keyword);
+        Task<List<EventInfoDto>> GetAllEventByKeywordAsync(string keyword);
         Task<bool> ChangeNameAsync(int eventId, string newName);
         Task<bool> ChangeDescriptionAsync(int eventId, string newDescription);
         Task<bool> ChangeAddressAsync(int eventId, string newAddress);

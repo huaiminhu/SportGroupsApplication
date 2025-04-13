@@ -1,5 +1,5 @@
 CREATE PROCEDURE usp_Create_Enrollments_AddEnrollment
-	@userId     UNIQUEIDENTIFIER, 
+	@userId     INT, 
 	@eventId    INT, 
 	@phone      NVARCHAR(12), 
 	@enrollDate DATETIME

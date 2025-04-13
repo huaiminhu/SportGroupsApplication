@@ -10,7 +10,7 @@ namespace SportGroups.Business.Services.IServices
     public interface IAuthService
     {
         // 註冊
-        Task<bool> RegisterAsync(UserDto userDto);
+        Task<bool> RegisterAsync(RegisterDto registerDto);
         
         // 驗證使用者
         Task<UserDto?> AuthAsync(string username, string password);

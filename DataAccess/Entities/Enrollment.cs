@@ -9,10 +9,10 @@ namespace SportGroups.Data.Entities
     public class Enrollment   // 活動報名
     {
         public int UserId { get; set; }
-        public required User User { get; set; }
+        public User User { get; set; } = null!;
         public int ClubEventId { get; set; }
-        public required ClubEvent Event { get; set; }
-        public required string Phone { get; set; }
-        public required DateTime EnrollDate { get; set; } = DateTime.Now;
+        public ClubEvent Event { get; set; } = null!;
+        public string Phone { get; set; } = string.Empty;
+        public DateTime EnrollDate { get; set; }
     }
 }

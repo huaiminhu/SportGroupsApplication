@@ -1,5 +1,5 @@
 CREATE PROCEDURE use_GetAll_ClubEvents_OfUser
-	@userId UNIQUEIDENTIFIER
+	@userId INT
 AS
 BEGIN
 	SELECT * FROM ClubEvents 

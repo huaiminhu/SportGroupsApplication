@@ -1,5 +1,5 @@
 CREATE PROCEDURE usp_Get_Enrollments_ById
-	@userId  UNIQUEIDENTIFIER, 
+	@userId  INT, 
 	@eventId INT
 AS 
 BEGIN

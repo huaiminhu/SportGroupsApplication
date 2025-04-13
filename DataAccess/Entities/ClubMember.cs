@@ -9,10 +9,10 @@ namespace SportGroups.Data.Entities
     public class ClubMember   // 社團成員
     {
         public int UserId { get; set; }
-        public required User User { get; set; }
+        public User User { get; set; } = null!;
         public int ClubId { get; set; }
-        public required Club Club { get; set; }
-        public required string Email { get; set; }
-        public required DateTime JoinTime { get; set; } = DateTime.Now;
+        public Club Club { get; set; } = null!;
+        public string Email { get; set; } = string.Empty;
+        public DateTime JoinTime { get; set; }
     }
 }

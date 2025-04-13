@@ -17,17 +17,17 @@ namespace SportGroups.Business.Services
             _userRepository = userRepository;
         }
 
-        public async Task<bool> ChangeNickNameAsync(Guid userId, string newName)
+        public async Task<bool> ChangeNickNameAsync(int userId, string newName)
         {
             return await _userRepository.UpdateNickNameAsync(userId, newName);
         }
 
-        public async Task<bool> ChangePasswordAsync(Guid userId, string newPassword)
+        public async Task<bool> ChangePasswordAsync(int userId, string newPassword)
         {
             return await _userRepository.UpdatePasswordAsync(userId, newPassword);
         }
 
-        public Task<UserDto> GetUserInfoAsync(Guid userId)
+        public Task<UserDto> GetUserInfoAsync(int userId)
         {
             throw new NotImplementedException();
         }

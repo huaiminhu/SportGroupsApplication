@@ -30,12 +30,12 @@ namespace SportGroups.Data.Repositories
             return await _context.Users.FirstOrDefaultAsync(u => u.UserName == username);
         }
 
-        public async Task<User?> GetUserByIdAsync(Guid userId)
+        public async Task<User?> GetUserByIdAsync(int userId)
         {
             return await _context.Users.FirstOrDefaultAsync(u => u.UserId == userId);
         }
 
-        public async Task<bool> UpdateNickNameAsync(Guid userId, string newName)
+        public async Task<bool> UpdateNickNameAsync(int userId, string newName)
         {
             var existing = await _context.Users.FirstOrDefaultAsync(u => u.UserId == userId);
             if (existing == null)
@@ -47,7 +47,7 @@ namespace SportGroups.Data.Repositories
             return await _context.SaveChangesAsync() > 0;
         }
 
-        public async Task<bool> UpdatePasswordAsync(Guid userId, string newPassword)
+        public async Task<bool> UpdatePasswordAsync(int userId, string newPassword)
         {
             var existing = await _context.Users.FirstOrDefaultAsync(u => u.UserId == userId);
             if (existing == null)

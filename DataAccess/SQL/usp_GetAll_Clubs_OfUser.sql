@@ -1,5 +1,5 @@
 CREATE PROCEDURE usp_GetAll_Clubs_OfUser
-	@userId UNIQUEIDENTIFIER
+	@userId INT
 AS
 BEGIN
 	SELECT Club FROM ClubMembers

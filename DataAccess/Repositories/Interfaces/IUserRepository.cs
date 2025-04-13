@@ -13,8 +13,8 @@ namespace SportGroups.Data.Repositories.Interfaces
         
         // 運用使用者名稱取得使用者實體
         Task<User?> GetUserByUsernameAsync(string username);
-        Task<User?> GetUserByIdAsync(Guid userId);
-        Task<bool> UpdateNickNameAsync(Guid userId, string newName);
-        Task<bool> UpdatePasswordAsync(Guid userId, string newPassword);
+        Task<User?> GetUserByIdAsync(int userId);
+        Task<bool> UpdateNickNameAsync(int userId, string newName);
+        Task<bool> UpdatePasswordAsync(int userId, string newPassword);
     }
 }

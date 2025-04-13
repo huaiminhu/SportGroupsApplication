@@ -1,5 +1,6 @@
 ﻿using SportGroups.Data.Entities;
 using SportGroups.Shared.DTOs;
+using SportGroups.Shared.DTOs.ClubDTOs;
 using SportGroups.Shared.Enums;
 using System;
 using System.Collections.Generic;
@@ -12,14 +13,14 @@ namespace SportGroups.Business.Services.IServices
     public interface IClubService
     {
         // 取得使用指定運動項目所有社團
-        Task<List<ClubDto>> GetClubsBySportAsync(Sport sport);
+        Task<List<ClubInfoDto>> GetClubsBySportAsync(Sport sport);
         
         // 取得使用指定關鍵字所有社團
-        Task<List<ClubDto>> GetClubsByKeywordAsync(string keyword);
+        Task<List<ClubInfoDto>> GetClubsByKeywordAsync(string keyword);
         
         // 取得社團資訊
-        Task<ClubDto?> GetClubInfoAsync(int clubId);
-        Task<bool> CreateClubAsync(ClubDto clubDto);
+        Task<ClubInfoDto?> GetClubInfoAsync(int clubId);
+        Task<bool> CreateClubAsync(CreateClubDto createDto);
         Task<bool> ChangeNameAsync(int clubId, string newName);
         Task<bool> ChangePhoneAsync(int clubId, string newPhoneNum);
         Task<bool> ChangeEmailAsync(int clubId, string newEmail);

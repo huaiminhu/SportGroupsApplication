@@ -11,9 +11,9 @@ namespace SportGroups.Data.Entities
     public class Media   // 文章媒體
     {
         public int ArticleMediaId { get; set; }
-        public required string Url { get; set; }
-        public required DateTime AddedDate { get; set; } = DateTime.Now;
+        public string Url { get; set; } = string.Empty;
+        public DateTime AddedDate { get; set; }
         public int ArticleId { get; set; }
-        public required Article Article { get; set; }
+        public Article Article { get; set; } = null!;
     }
 }

@@ -1,5 +1,5 @@
 CREATE PROCEDURE usp_Create_ClubMembers_AddMember
-	@userId UNIQUEIDENTIFIER, 
+	@userId INT, 
 	@clubId INT, 
 	@email NVARCHAR(50), 
 	@joinTime DATETIME
