@@ -1,7 +1,8 @@
-﻿using SportGroups.Business.Services.IServices;
+﻿using AutoMapper;
+using SportGroups.Business.Services.IServices;
 using SportGroups.Data.Entities;
 using SportGroups.Data.Repositories.Interfaces;
-using SportGroups.Shared.DTOs;
+using SportGroups.Shared.DTOs.ArticleDTOs;
 using SportGroups.Shared.Enums;
 using System;
 using System.Collections.Generic;
@@ -14,9 +15,11 @@ namespace SportGroups.Business.Services
     public class ArticleService : IArticleService
     {
         private readonly IArticleRepository _articleRepository;
-        public ArticleService(IArticleRepository articleRepository)
+        private readonly IMapper _mapper;
+        public ArticleService(IArticleRepository articleRepository, IMapper mapper)
         {
             _articleRepository = articleRepository;
+            _mapper = mapper;
         }
 
         public async Task<bool> ChangeContentAsync(int articleId, string newContent)
@@ -34,13 +37,10 @@ namespace SportGroups.Business.Services
             return await _articleRepository.UpdateTitleAsync(articleId, newTitle);
         }
 
-        public async Task<bool> CreateArticleAsync(ArticleDto articleDto)
+        public async Task<bool> CreateArticleAsync(NewArticleDto newArticleDto)
         {
-            Article article = new Article
-            {
-                Title = articleDto
-            }
-            return await _articleRepository.CreateArticleAsync(article);
+            var mappedData = _mapper.Map<Article>(newArticleDto);
+            return await _articleRepository.CreateArticleAsync(mappedData);
         }
 
         public async Task<bool> DeleteArticleAsync(int articleId)
@@ -48,17 +48,17 @@ namespace SportGroups.Business.Services
             return await _articleRepository.DeleteArticleAsync(articleId);
         }
 
-        public Task<ArticleDto?> GetArticleByIdAsync(int articleId)
+        public Task<ArticleInfoDto?> GetArticleByIdAsync(int articleId)
         {
             throw new NotImplementedException();
         }
 
-        public Task<List<ArticleDto>> GetArticlesByKeywordAsync(string keyword)
+        public Task<List<ArticleInfoDto>> GetArticlesByKeywordAsync(string keyword)
         {
             throw new NotImplementedException();
         }
 
-        public Task<List<ArticleDto>> GetArticlesBySportAsync(Sport sport)
+        public Task<List<ArticleInfoDto>> GetArticlesBySportAsync(Sport sport)
         {
             throw new NotImplementedException();
         }

@@ -1,4 +1,4 @@
-﻿using SportGroups.Shared.DTOs;
+﻿using SportGroups.Shared.DTOs.EnrollmentDTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;

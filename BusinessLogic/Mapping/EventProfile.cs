@@ -1,12 +1,13 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SportGroups.Shared.DTOs
+namespace SportGroups.Business.Mapping
 {
-    public class MessageDto
+    public class EventProfile : Profile
     {
     }
 }

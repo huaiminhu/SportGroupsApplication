@@ -11,9 +11,7 @@ namespace SportGroups.Shared.DTOs.UserDTOs
     public class UserInfoDto
     {
         public int UserId { get; set; }
-        [Required]
         public string NickName { get; set; } = string.Empty;
-        [Required]
         public string UserName { get; set; } = string.Empty;
     }
 }

@@ -4,14 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SportGroups.Shared.DTOs.ArticleDTOs
+namespace SportGroups.Shared.DTOs.MessageDTOs
 {
-    public class BlogArticleDto
+    public class MessageInfoDto
     {
-        public int ArticleId { get; set; }
+        public int MessageId { get; set; }
         public string Title { get; set; } = string.Empty;
-        public string ArticleContent { get; set; } = string.Empty;
+        public string MessageContent { get; set; } = string.Empty;
         public DateTime PostDate { get; set; }
-        public DateTime EditDate { get; set; }
     }
 }

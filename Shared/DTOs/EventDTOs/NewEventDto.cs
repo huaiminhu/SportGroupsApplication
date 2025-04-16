@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SportGroups.Shared.DTOs.EventDTOs
 {
-    public class CreateEventDto
+    public class NewEventDto
     {
         public EventType EventType { get; set; }
         public string EventName { get; set; } = string.Empty;

@@ -1,5 +1,4 @@
-﻿using SportGroups.Data.Entities;
-using SportGroups.Shared.DTOs;
+﻿using SportGroups.Shared.DTOs.MediaDTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +9,8 @@ namespace SportGroups.Business.Services.IServices
 {
     public interface IMediaService
     {
-        Task<bool> AddMediaAsync(MediaDto media);
-        Task<MediaDto?> GetMediaAsync(int mediaId);
+        Task<bool> AddMediaAsync(NewMediaDto media);
+        Task<MediaInfoDto?> GetMediaAsync(int mediaId);
         Task<bool> ChangeUrlAsync(int mediaId, string newUrl);
         Task<bool> DeleteMediaAsync(int mediaId);
     }

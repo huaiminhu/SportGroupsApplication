@@ -1,4 +1,5 @@
-﻿using SportGroups.Shared.DTOs;
+﻿using SportGroups.Shared.DTOs.ClubDTOs;
+using SportGroups.Shared.DTOs.ClubMemberDTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace SportGroups.Business.Services.IServices
 {
     public interface IClubMemberService
     {
-        Task<bool> JoinClubAsync(ClubMemberDto clubMemberDto);
-        Task<List<ClubDto>> GetAllClubsOfUserAsync(Guid userId);
+        Task<bool> JoinClubAsync(NewMemberDto newMemberDto);
+        Task<List<ClubInfoDto>> GetAllClubsOfUserAsync(Guid userId);
     }
 }

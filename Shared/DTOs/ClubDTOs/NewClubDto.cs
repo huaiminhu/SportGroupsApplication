@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SportGroups.Shared.DTOs.ClubDTOs
 {
-    public class CreateClubDto
+    public class NewClubDto
     {
         public string ClubName { get; set; } = string.Empty;
         public Sport Sport { get; set; }

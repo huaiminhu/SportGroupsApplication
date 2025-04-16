@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SportGroups.Shared")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+09ce02f18044eee33c854c9ae65dfb7a12b5bb1a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8f83d9c1f6ad4a3c438e9d685946d4201cf391bb")]
 [assembly: System.Reflection.AssemblyProductAttribute("SportGroups.Shared")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SportGroups.Shared")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

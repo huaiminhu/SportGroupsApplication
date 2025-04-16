@@ -11,7 +11,7 @@ namespace SportGroups.Business.Services.IServices
 {
     public interface IEventService
     {
-        Task<bool> CreateEventAsync(CreateEventDto createDto);
+        Task<bool> CreateEventAsync(NewEventDto createDto);
         Task<EventInfoDto> GetEventInfoAsync(int id);
         
         // 取得使用指定運動項目所有活動

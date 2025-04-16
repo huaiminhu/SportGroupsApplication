@@ -20,7 +20,7 @@ namespace SportGroups.Business.Services.IServices
         
         // 取得社團資訊
         Task<ClubInfoDto?> GetClubInfoAsync(int clubId);
-        Task<bool> CreateClubAsync(CreateClubDto createDto);
+        Task<bool> CreateClubAsync(NewClubDto createDto);
         Task<bool> ChangeNameAsync(int clubId, string newName);
         Task<bool> ChangePhoneAsync(int clubId, string newPhoneNum);
         Task<bool> ChangeEmailAsync(int clubId, string newEmail);
