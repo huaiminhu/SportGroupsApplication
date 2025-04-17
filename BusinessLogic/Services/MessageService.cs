@@ -27,7 +27,7 @@ namespace SportGroups.Business.Services
             return await _messageRepository.DeleteMessageAsync(messageId);
         }
 
-        public Task<List<MessageDto>> GetAllMessageOfClubAsync(int clubId)
+        public Task<List<MessageDto>> GetAllMessagesOfClubAsync(int clubId)
         {
             throw new NotImplementedException();
         }

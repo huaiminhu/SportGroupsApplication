@@ -11,10 +11,10 @@ namespace SportGroups.Business.Services.IServices
     public interface IArticleService
     {
         // 取得使用指定運動項目所有文章
-        Task<List<ArticleInfoDto>> GetArticlesBySportAsync(Sport sport);
+        Task<List<ArticleInfoDto>> GetAllArticlesBySportAsync(Sport sport);
         
         // 取得使用指定關鍵字所有文章
-        Task<List<ArticleInfoDto>> GetArticlesByKeywordAsync(string keyword);
+        Task<List<ArticleInfoDto>> GetAllArticlesByKeywordAsync(string keyword);
         Task<ArticleInfoDto?> GetArticleByIdAsync(int articleId);
         Task<bool> CreateArticleAsync(NewArticleDto createDto);
         Task<bool> ChangeTitleAsync(int articleId, string newTitle);

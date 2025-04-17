@@ -43,12 +43,12 @@ namespace SportGroups.Data.Repositories
             return await _context.SaveChangesAsync() > 0;
         }
 
-        public async Task<List<Article>> GetAllArticleOfClubAsync(int clubId)
+        public async Task<List<Article>> GetAllArticlesOfClubAsync(int clubId)
         {
             return await _context.Articles.Include(a => a.ClubId == clubId).ToListAsync();
         }
 
-        public async Task<List<Article>> GetAllArticleBySportAsync(Sport sport)
+        public async Task<List<Article>> GetAllArticlesBySportAsync(Sport sport)
         {
             var sportParam = new SqlParameter("@sport", sport);
             return await _context.Articles
@@ -56,7 +56,7 @@ namespace SportGroups.Data.Repositories
                 .ToListAsync();
         }
 
-        public async Task<List<Article>> GetArticlesByKeywordAsync(string keyword)
+        public async Task<List<Article>> GetAllArticlesByKeywordAsync(string keyword)
         {
             var keywordParam = new SqlParameter("@keyword", keyword);
             return await _context.Articles

@@ -16,6 +16,7 @@ namespace SportGroups.Business.Mapping
         {
             CreateMap<NewArticleDto, Article>().ReverseMap();
             CreateMap<Article, ArticleInfoDto>().ReverseMap();
+            CreateMap<List<Article>, List<ArticleInfoDto>>().ReverseMap();
         }
     }
 }

@@ -48,19 +48,22 @@ namespace SportGroups.Business.Services
             return await _articleRepository.DeleteArticleAsync(articleId);
         }
 
-        public Task<ArticleInfoDto?> GetArticleByIdAsync(int articleId)
+        public async Task<ArticleInfoDto?> GetArticleByIdAsync(int articleId)
         {
-            throw new NotImplementedException();
+            var article = await _articleRepository.GetArticleByIdAsync(articleId);
+            return _mapper.Map<ArticleInfoDto?>(article);
         }
 
-        public Task<List<ArticleInfoDto>> GetArticlesByKeywordAsync(string keyword)
+        public async Task<List<ArticleInfoDto>> GetAllArticlesByKeywordAsync(string keyword)
         {
-            throw new NotImplementedException();
+            var articles = await _articleRepository.GetAllArticlesByKeywordAsync(keyword);
+            return _mapper.Map<List<ArticleInfoDto>>(articles);
         }
 
-        public Task<List<ArticleInfoDto>> GetArticlesBySportAsync(Sport sport)
+        public async Task<List<ArticleInfoDto>> GetAllArticlesBySportAsync(Sport sport)
         {
-            throw new NotImplementedException();
+            var articles = await _articleRepository.GetAllArticlesBySportAsync(sport);
+            return _mapper.Map<List<ArticleInfoDto>>(articles);
         }
     }
 }

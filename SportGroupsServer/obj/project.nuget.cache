@@ -1,11 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "+JCFCt5XZGzdSfnShiNpfApclD0SQZfUBGd8IblJQtc7Mk+D4kGtMqjTta4/PLfoj26TW+7uO3HLnGylRAEq7Q==",
+  "dgSpecHash": "VLNZM8aTnpwDLuQB3VLY5c4f0bbbEMhmljoVCojG8Mvr8yrsWdDKs8WDSc4BzW2kG3bJ4wnRXPfsQzDssB1Vrg==",
   "success": true,
   "projectFilePath": "C:\\Users\\hankh\\Desktop\\SportGroupsApplication\\SportGroupsServer\\SportGroups.Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\hankh\\.nuget\\packages\\automapper\\14.0.0\\automapper.14.0.0.nupkg.sha512",
-    "C:\\Users\\hankh\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
     "C:\\Users\\hankh\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\hankh\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",
     "C:\\Users\\hankh\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
@@ -65,16 +64,5 @@
     "C:\\Users\\hankh\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512",
     "C:\\Users\\hankh\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1608",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "在相依性條件約束之外偵測到套件版本: AutoMapper.Extensions.Microsoft.DependencyInjection 12.0.1 需要 AutoMapper (= 12.0.1)，但解析出版本 AutoMapper 14.0.0。",
-      "libraryId": "AutoMapper",
-      "targetGraphs": [
-        "net8.0"
-      ]
-    }
-  ]
+  "logs": []
 }

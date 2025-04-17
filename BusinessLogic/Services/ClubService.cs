@@ -1,6 +1,9 @@
-﻿using SportGroups.Business.Services.IServices;
+﻿using AutoMapper;
+using SportGroups.Business.Services.IServices;
+using SportGroups.Data.Entities;
 using SportGroups.Data.Repositories.Interfaces;
 using SportGroups.Shared.DTOs;
+using SportGroups.Shared.DTOs.ClubDTOs;
 using SportGroups.Shared.Enums;
 using System;
 using System.Collections.Generic;
@@ -13,9 +16,11 @@ namespace SportGroups.Business.Services
     public class ClubService : IClubService
     {
         private readonly IClubRepository _clubRepository;
-        public ClubService(IClubRepository clubRepository)
+        private readonly IMapper _mapper;
+        public ClubService(IClubRepository clubRepository, IMapper mapper)
         {
             _clubRepository = clubRepository;
+            _mapper = mapper;
         }
 
         public async Task<bool> ChangeDescrptionAsync(int clubId, string newDescription)
@@ -38,9 +43,10 @@ namespace SportGroups.Business.Services
             return await _clubRepository.UpdatePhoneAsync(clubId, newPhoneNum);
         }
 
-        public Task<bool> CreateClubAsync(ClubDto clubDto)
+        public async Task<bool> CreateClubAsync(NewClubDto newClubDto)
         {
-            throw new NotImplementedException();
+            var newClub = _mapper.Map<Club>(newClubDto);
+            return await _clubRepository.CreateClubAsync(newClub);
         }
 
         public async Task<bool> DeleteClubAsync(int clubId)
@@ -48,19 +54,22 @@ namespace SportGroups.Business.Services
             return await _clubRepository.DeleteClubAsync(clubId);
         }
 
-        public Task<ClubDto?> GetClubInfoAsync(int clubId)
+        public async Task<ClubInfoDto?> GetClubInfoAsync(int clubId)
         {
-            throw new NotImplementedException();
+            var club = await _clubRepository.GetClubByIdAsync(clubId);
+            return _mapper.Map<ClubInfoDto>(club);
         }
 
-        public Task<List<ClubDto>> GetClubsByKeywordAsync(string keyword)
+        public async Task<List<ClubInfoDto>> GetClubsByKeywordAsync(string keyword)
         {
-            throw new NotImplementedException();
+            var clubs = await _clubRepository.GetAllClubsByKeywordAsync(keyword);
+            return _mapper.Map<List<ClubInfoDto>>(clubs);
         }
 
-        public Task<List<ClubDto>> GetClubsBySportAsync(Sport sport)
+        public async Task<List<ClubInfoDto>> GetClubsBySportAsync(Sport sport)
         {
-            throw new NotImplementedException();
+            var clubs = await _clubRepository.GetAllClubsBySportAsync(sport);
+            return _mapper.Map<List<ClubInfoDto>>(clubs);
         }
     }
 }

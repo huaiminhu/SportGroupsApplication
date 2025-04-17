@@ -41,7 +41,7 @@ namespace SportGroups.Data.Repositories
             return await _context.SaveChangesAsync() > 0;
         }
 
-        public async Task<List<Message>> GetAllMessageOfClubAsync(int clubId)
+        public async Task<List<Message>> GetAllMessagesOfClubAsync(int clubId)
         {
             return await _context.Messages.Include(m => m.ClubId == clubId).ToListAsync();
         }
