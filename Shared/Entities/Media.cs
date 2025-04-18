@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SportGroups.Shared.Enums;
 
-namespace SportGroups.Data.Entities
+namespace SportGroups.Shared.Entities
 {
     public class Media   // 文章媒體
     {

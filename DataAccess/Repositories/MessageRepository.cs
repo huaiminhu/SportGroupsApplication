@@ -1,5 +1,5 @@
 ﻿using SportGroups.Data.Data;
-using SportGroups.Data.Entities;
+using SportGroups.Shared.Entities;
 using SportGroups.Data.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;

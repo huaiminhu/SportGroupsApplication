@@ -1,6 +1,8 @@
-﻿using SportGroups.Business.Services.IServices;
+﻿using AutoMapper;
+using SportGroups.Business.Services.IServices;
+using SportGroups.Shared.Entities;
 using SportGroups.Data.Repositories.Interfaces;
-using SportGroups.Shared.DTOs;
+using SportGroups.Shared.DTOs.EnrollmentDTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,17 +14,20 @@ namespace SportGroups.Business.Services
     public class EnrollmentService : IEnrollmentService
     {
         private readonly IEnrollmentRepository _enrollmentRepository;
-        public EnrollmentService(IEnrollmentRepository enrollmentRepository)
+        private readonly IMapper _mapper;
+        public EnrollmentService(IEnrollmentRepository enrollmentRepository, IMapper mapper)
         {
             _enrollmentRepository = enrollmentRepository;
+            _mapper = mapper;
         }
 
-        public Task<bool> AttendEventAsync(EnrollmentDto enrollmentDto)
+        public async Task<bool> AttendEventAsync(EnrollmentDto enrollmentDto)
         {
-            throw new NotImplementedException();
+            var enrollment = _mapper.Map<Enrollment>(enrollmentDto);
+            return await _enrollmentRepository.AddEnrollmentAsync(enrollment);
         }
 
-        public Task<EnrollmentDto?> GetEnrollmentByIdAsync(Guid userId, int eventId)
+        public Task<EnrollmentDto?> GetEnrollmentByIdAsync(int userId, int eventId)
         {
             throw new NotImplementedException();
         }

@@ -1,4 +1,4 @@
-﻿using SportGroups.Data.Entities;
+﻿using SportGroups.Shared.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +10,7 @@ namespace SportGroups.Data.Repositories.Interfaces
     public interface IEnrollmentRepository
     {
         // 新增活動報名
-        Task<bool> AddEnrollmentAsync(Guid userId, int eventId, string phone, DateTime enrollDate);
-        Task<Enrollment?> GetEnrollmentByIdAsync(Guid userId, int eventId);
+        Task<bool> AddEnrollmentAsync(int userId, int eventId, string phone, DateTime enrollDate);
+        Task<Enrollment?> GetEnrollmentByIdAsync(int userId, int eventId);
     }
 }

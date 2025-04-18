@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SportGroups.Data.Entities
+namespace SportGroups.Shared.Entities
 {
     public class ClubEvent   // 社團活動
     {

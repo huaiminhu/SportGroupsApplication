@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using SportGroups.Business.Services.IServices;
-using SportGroups.Data.Entities;
+using SportGroups.Shared.Entities;
 using SportGroups.Data.Repositories.Interfaces;
 using SportGroups.Shared.DTOs.ArticleDTOs;
 using SportGroups.Shared.Enums;
@@ -39,7 +39,10 @@ namespace SportGroups.Business.Services
 
         public async Task<bool> CreateArticleAsync(NewArticleDto newArticleDto)
         {
+            var nowTime = DateTime.Now;
             var mappedData = _mapper.Map<Article>(newArticleDto);
+            mappedData.PostDate = nowTime;
+            mappedData.EditDate = nowTime;
             return await _articleRepository.CreateArticleAsync(mappedData);
         }
 

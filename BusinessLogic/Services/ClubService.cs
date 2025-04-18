@@ -1,8 +1,7 @@
 ﻿using AutoMapper;
 using SportGroups.Business.Services.IServices;
-using SportGroups.Data.Entities;
+using SportGroups.Shared.Entities;
 using SportGroups.Data.Repositories.Interfaces;
-using SportGroups.Shared.DTOs;
 using SportGroups.Shared.DTOs.ClubDTOs;
 using SportGroups.Shared.Enums;
 using System;
@@ -46,6 +45,7 @@ namespace SportGroups.Business.Services
         public async Task<bool> CreateClubAsync(NewClubDto newClubDto)
         {
             var newClub = _mapper.Map<Club>(newClubDto);
+            newClub.establishedDate = DateTime.Now;
             return await _clubRepository.CreateClubAsync(newClub);
         }
 

@@ -1,7 +1,7 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using SportGroups.Data.Data;
-using SportGroups.Data.Entities;
+using SportGroups.Shared.Entities;
 using SportGroups.Data.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -20,7 +20,7 @@ namespace SportGroups.Data.Repositories
             _context = context;
         }
 
-        public async Task<bool> AddEnrollmentAsync(Guid userId, int eventId, string phone, DateTime enrollDate)
+        public async Task<bool> AddEnrollmentAsync(int userId, int eventId, string phone, DateTime enrollDate)
         {
             var uIdParam = new SqlParameter("@userId", userId);
             var eIdParam = new SqlParameter("@eventId", eventId);
@@ -32,7 +32,7 @@ namespace SportGroups.Data.Repositories
                 uIdParam, eIdParam, phoneParam, dateParam) > 0;
         }
 
-        public async Task<Enrollment?> GetEnrollmentByIdAsync(Guid userId, int eventId)
+        public async Task<Enrollment?> GetEnrollmentByIdAsync(int userId, int eventId)
         {
             var uIdParam = new SqlParameter("@userId", userId);
             var eIdParam = new SqlParameter("@eventId", eventId);
