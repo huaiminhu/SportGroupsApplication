@@ -11,6 +11,6 @@ namespace SportGroups.Shared.DTOs.MediaDTOs
     {
         public MediaType MediaType { get; set; }
         public string Url { get; set; } = string.Empty;
-        public DateTime AddedDate { get; set; }
+        public int ArticleId { get; set; }
     }
 }

@@ -40,10 +40,10 @@ namespace SportGroups.Business.Services
         public async Task<bool> CreateArticleAsync(NewArticleDto newArticleDto)
         {
             var nowTime = DateTime.Now;
-            var mappedData = _mapper.Map<Article>(newArticleDto);
-            mappedData.PostDate = nowTime;
-            mappedData.EditDate = nowTime;
-            return await _articleRepository.CreateArticleAsync(mappedData);
+            var newArticle = _mapper.Map<Article>(newArticleDto);
+            newArticle.PostDate = nowTime;
+            newArticle.EditDate = nowTime;
+            return await _articleRepository.CreateArticleAsync(newArticle);
         }
 
         public async Task<bool> DeleteArticleAsync(int articleId)

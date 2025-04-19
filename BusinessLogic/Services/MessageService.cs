@@ -1,6 +1,8 @@
-﻿using SportGroups.Business.Services.IServices;
+﻿using AutoMapper;
+using SportGroups.Business.Services.IServices;
 using SportGroups.Data.Repositories.Interfaces;
-using SportGroups.Shared.DTOs;
+using SportGroups.Shared.DTOs.MessageDTOs;
+using SportGroups.Shared.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,14 +14,17 @@ namespace SportGroups.Business.Services
     public class MessageService : IMessageService
     {
         private readonly IMessageRepository _messageRepository;
-        public MessageService(IMessageRepository messageRepository)
+        private readonly IMapper _mapper;
+        public MessageService(IMessageRepository messageRepository, IMapper mapper)
         {
             _messageRepository = messageRepository;
+            _mapper = mapper;
         }
 
-        public Task<bool> CreateMessageAsync(MessageDto messageDto)
+        public async Task<bool> CreateMessageAsync(NewMessageDto newMessageDto)
         {
-            throw new NotImplementedException();
+            var newMessage = _mapper.Map<Message>(newMessageDto);
+            return await _messageRepository.CreateMessageAsync(newMessage);
         }
 
         public async Task<bool> DeleteMessageAsync(int messageId)
@@ -27,14 +32,16 @@ namespace SportGroups.Business.Services
             return await _messageRepository.DeleteMessageAsync(messageId);
         }
 
-        public Task<List<MessageDto>> GetAllMessagesOfClubAsync(int clubId)
+        public async Task<List<MessageInfoDto>> GetAllMessagesOfClubAsync(int clubId)
         {
-            throw new NotImplementedException();
+            var messages = await _messageRepository.GetAllMessagesOfClubAsync(clubId);
+            return _mapper.Map<List<MessageInfoDto>>(messages);
         }
 
-        public Task<MessageDto?> GetMessageByIdAsync(int messageId)
+        public async Task<MessageInfoDto?> GetMessageByIdAsync(int messageId)
         {
-            throw new NotImplementedException();
+            var message = await _messageRepository.GetMessageByIdAsync(messageId);
+            return _mapper.Map<MessageInfoDto>(message);
         }
 
         public async Task<bool> UpdateContentAsync(int messageId, string newContent)

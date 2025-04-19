@@ -1,4 +1,5 @@
-﻿using SportGroups.Shared.Enums;
+﻿using SportGroups.Shared.DTOs.EnrollmentDTOs;
+using SportGroups.Shared.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,5 +16,7 @@ namespace SportGroups.Shared.DTOs.EventDTOs
         public string Address { get; set; } = string.Empty;
         public DateTime Starting { get; set; }
         public DateTime Ending { get; set; }
+        public int ClubId { get; set; }
+        public ICollection<EnrollmentDto> Enrollments { get; set; } = new List<EnrollmentDto>();
     }
 }

@@ -1,6 +1,8 @@
-﻿using SportGroups.Business.Services.IServices;
+﻿using AutoMapper;
+using SportGroups.Business.Services.IServices;
 using SportGroups.Data.Repositories.Interfaces;
-using SportGroups.Shared.DTOs;
+using SportGroups.Shared.DTOs.MediaDTOs;
+using SportGroups.Shared.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,14 +14,18 @@ namespace SportGroups.Business.Services
     public class MediaService : IMediaService
     {
         private readonly IMediaRepository _mediaRepository;
-        public MediaService(IMediaRepository mediaRepository)
+        private readonly IMapper _mapper;
+        public MediaService(IMediaRepository mediaRepository, IMapper mapper)
         {
             _mediaRepository = mediaRepository;
+            _mapper = mapper;
         }
 
-        public Task<bool> AddMediaAsync(MediaDto media)
+        public async Task<bool> AddMediaAsync(NewMediaDto newMediaDto)
         {
-            throw new NotImplementedException();
+            var newMedia = _mapper.Map<Media>(newMediaDto);
+            newMedia.AddedDate = DateTime.Now;
+            return await _mediaRepository.AddMediaAsync(newMedia);
         }
 
         public async Task<bool> ChangeUrlAsync(int mediaId, string newUrl)
@@ -32,9 +38,10 @@ namespace SportGroups.Business.Services
             return await _mediaRepository.DeleteMediaAsync(mediaId);
         }
 
-        public Task<MediaDto?> GetMediaAsync(int mediaId)
+        public async Task<List<MediaInfoDto>> GetAllMediasOfArticleAsync(int articleId)
         {
-            throw new NotImplementedException();
+            var medias = await _mediaRepository.GetAllMediasOfArticleAsync(articleId);
+            return _mapper.Map<List<MediaInfoDto>>(medias);
         }
     }
 }

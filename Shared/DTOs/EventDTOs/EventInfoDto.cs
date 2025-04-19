@@ -9,7 +9,6 @@ namespace SportGroups.Shared.DTOs.EventDTOs
 {
     public class EventInfoDto
     {
-        public int ClubEventId { get; set; }
         public EventType EventType { get; set; }
         public string EventName { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;

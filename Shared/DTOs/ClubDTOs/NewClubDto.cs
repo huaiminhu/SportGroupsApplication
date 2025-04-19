@@ -18,7 +18,6 @@ namespace SportGroups.Shared.DTOs.ClubDTOs
         public string Phone { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
-        public DateTime establishedDate { get; set; }
         public ICollection<NewMemberDto> Members { get; set; } = new List<NewMemberDto>();
         public ICollection<NewEventDto> Events { get; set; } = new List<NewEventDto>();
         public ICollection<NewMessageDto> Messages { get; set; } = new List<NewMessageDto>();

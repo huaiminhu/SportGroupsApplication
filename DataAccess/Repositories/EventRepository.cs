@@ -64,7 +64,7 @@ namespace SportGroups.Data.Repositories
                 .ToListAsync();
         }
 
-        public async Task<List<ClubEvent>> GetAllEventsByKeyword(string keyword)
+        public async Task<List<ClubEvent>> GetAllEventsByKeywordAsync(string keyword)
         {
             var keywordParam = new SqlParameter("@keyword", keyword);
             return await _context.ClubEvents
