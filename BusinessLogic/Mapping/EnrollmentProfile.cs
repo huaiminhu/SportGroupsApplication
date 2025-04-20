@@ -13,8 +13,7 @@ namespace SportGroups.Business.Mapping
     {
         public EnrollmentProfile()
         {
-            CreateMap<EnrollmentDto, Enrollment>().ReverseMap();
-            CreateMap<Enrollment, EnrollmentDto>().ReverseMap();
+            CreateMap<Enrollment, EnrollmentInfoDto>().ReverseMap();
         }
     }
 }

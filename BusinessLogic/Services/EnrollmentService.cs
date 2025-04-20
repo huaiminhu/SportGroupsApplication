@@ -21,15 +21,19 @@ namespace SportGroups.Business.Services
             _mapper = mapper;
         }
 
-        public async Task<bool> AttendEventAsync(EnrollmentDto enrollmentDto)
+        public async Task<bool> AttendEventAsync(NewEnrollmentDto newEnrollmentDto)
         {
-            var enrollment = _mapper.Map<Enrollment>(enrollmentDto);
-            return await _enrollmentRepository.AddEnrollmentAsync(enrollment);
+            var uId = newEnrollmentDto.UserId;
+            var eId = newEnrollmentDto.ClubEventId;
+            var phone = newEnrollmentDto.Phone;
+            var enrollDate = DateTime.Now;
+            return await _enrollmentRepository.AddEnrollmentAsync(uId, eId, phone, enrollDate);
         }
 
-        public Task<EnrollmentDto?> GetEnrollmentByIdAsync(int userId, int eventId)
+        public async Task<EnrollmentInfoDto?> GetEnrollmentByIdAsync(int userId, int eventId)
         {
-            throw new NotImplementedException();
+            var enrollment = await _enrollmentRepository.GetEnrollmentByIdAsync(userId, eventId);
+            return _mapper.Map<EnrollmentInfoDto>(enrollment);
         }
     }
 }

@@ -17,6 +17,6 @@ namespace SportGroups.Shared.DTOs.EventDTOs
         public DateTime Starting { get; set; }
         public DateTime Ending { get; set; }
         public int ClubId { get; set; }
-        public ICollection<EnrollmentDto> Enrollments { get; set; } = new List<EnrollmentDto>();
+        public ICollection<NewEnrollmentDto> Enrollments { get; set; } = new List<NewEnrollmentDto>();
     }
 }

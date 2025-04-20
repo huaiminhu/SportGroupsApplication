@@ -1,6 +1,7 @@
-﻿using SportGroups.Business.Services.IServices;
+﻿using AutoMapper;
+using SportGroups.Business.Services.IServices;
 using SportGroups.Data.Repositories.Interfaces;
-using SportGroups.Shared.DTOs;
+using SportGroups.Shared.DTOs.UserDTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,9 +13,11 @@ namespace SportGroups.Business.Services
     public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
-        public UserService(IUserRepository userRepository)
+        private readonly IMapper _mapper;
+        public UserService(IUserRepository userRepository, IMapper mapper)
         {
             _userRepository = userRepository;
+            _mapper = mapper;
         }
 
         public async Task<bool> ChangeNickNameAsync(int userId, string newName)
@@ -27,9 +30,10 @@ namespace SportGroups.Business.Services
             return await _userRepository.UpdatePasswordAsync(userId, newPassword);
         }
 
-        public Task<UserDto> GetUserInfoAsync(int userId)
+        public async Task<UserInfoDto> GetUserInfoAsync(int userId)
         {
-            throw new NotImplementedException();
+            var user = await _userRepository.GetUserByIdAsync(userId);
+            return _mapper.Map<UserInfoDto>(user);
         }
     }
 }

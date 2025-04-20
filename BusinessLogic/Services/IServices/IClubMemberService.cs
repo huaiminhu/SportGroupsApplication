@@ -11,6 +11,6 @@ namespace SportGroups.Business.Services.IServices
     public interface IClubMemberService
     {
         Task<bool> JoinClubAsync(NewMemberDto newMemberDto);
-        Task<List<ClubInfoDto>> GetAllClubsOfUserAsync(Guid userId);
+        Task<List<ClubInfoDto>> GetAllClubsOfUserAsync(int userId);
     }
 }

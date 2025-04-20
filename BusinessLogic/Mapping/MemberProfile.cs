@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using SportGroups.Shared.DTOs.ClubMemberDTOs;
+using SportGroups.Shared.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +11,9 @@ namespace SportGroups.Business.Mapping
 {
     public class MemberProfile : Profile
     {
+        public MemberProfile()
+        {
+            CreateMap<NewMemberDto, ClubMember>().ReverseMap();
+        }
     }
 }

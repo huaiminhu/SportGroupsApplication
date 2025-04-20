@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace SportGroups.Shared.DTOs.EnrollmentDTOs
 {
-    public class EnrollmentDto
+    public class NewEnrollmentDto
     {
         public int UserId { get; set; }
         public int ClubEventId { get; set; }
         public string Phone { get; set; } = string.Empty;
-        public DateTime EnrollDate { get; set; }
     }
 }
