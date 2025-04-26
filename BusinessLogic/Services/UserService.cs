@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using SportGroups.Business.Services.IServices;
 using SportGroups.Data.Repositories.Interfaces;
+using SportGroups.Shared.DTOs.AuthDTOs;
 using SportGroups.Shared.DTOs.UserDTOs;
+using SportGroups.Shared.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,10 +32,24 @@ namespace SportGroups.Business.Services
             return await _userRepository.UpdatePasswordAsync(userId, newPassword);
         }
 
-        public async Task<UserInfoDto> GetUserInfoAsync(int userId)
+        public async Task<UserInfoDto> GetUserByUsernameAsync(string username)
+        {
+            var user = await _userRepository.GetUserByUsernameAsync(username);
+            return _mapper.Map<UserInfoDto>(user);
+        }
+
+        public async Task<UserInfoDto> GetUserByIdAsync(int userId)
         {
             var user = await _userRepository.GetUserByIdAsync(userId);
             return _mapper.Map<UserInfoDto>(user);
+        }
+
+        public async Task<bool> RegisterAsync(RegisterDto registerDto)
+        {
+            registerDto.Password = BCrypt.Net.BCrypt.HashPassword(registerDto.Password);
+            var newUser = _mapper.Map<User>(registerDto);
+            newUser.RegisterDate = DateTime.Now;
+            return await _userRepository.CreateUserAsync(newUser);
         }
     }
 }

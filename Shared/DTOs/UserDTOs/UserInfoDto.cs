@@ -15,5 +15,6 @@ namespace SportGroups.Shared.DTOs.UserDTOs
         public string UserName { get; set; } = string.Empty;
         public ICollection<ClubMember> Clubs { get; set; } = new List<ClubMember>();
         public ICollection<Enrollment> Enrollments { get; set; } = new List<Enrollment>();
+        public string Token { get; set; } = string.Empty;
     }
 }

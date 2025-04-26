@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using SportGroups.Shared.DTOs.AuthDTOs;
 using SportGroups.Shared.DTOs.UserDTOs;
 using SportGroups.Shared.Entities;
 using System;
@@ -14,6 +15,7 @@ namespace SportGroups.Business.Mapping
         public UserProfile()
         {
             CreateMap<User, UserInfoDto>().ReverseMap();
+            CreateMap<RegisterDto, User>().ReverseMap();
         }
     }
 }

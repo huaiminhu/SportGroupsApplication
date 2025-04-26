@@ -11,8 +11,7 @@ namespace SportGroups.Shared.DTOs.AuthDTOs
     {
         public string NickName { get; set; } = string.Empty;
         public string UserName { get; set; } = string.Empty;
-        public string PasswordHash { get; set; } = string.Empty;
+        public string Password { get; set; } = string.Empty;
         public Role Role { get; set; }
-        public DateTime RegisterDate { get; set; }
     }
 }
