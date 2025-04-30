@@ -18,21 +18,21 @@ namespace SportGroups.Business.Services
 {
     public class AuthService : IAuthService
     {
-        private readonly IUserRepository _userRepository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IConfiguration _config;
         private readonly IMapper _mapper;
-        public AuthService(IUserRepository userRepository, 
+        public AuthService(IUnitOfWork unitOfWork, 
             IConfiguration config, 
             IMapper mapper)
         {
-            _userRepository = userRepository;
+            _unitOfWork = unitOfWork;
             _config = config;
             _mapper = mapper;
         }
 
         public async Task<UserInfoDto?> AuthAsync(LoginDto loginDto)
         {
-            var user = await _userRepository.GetUserByUsernameAsync(loginDto.Username);
+            var user = await _unitOfWork.Users.GetUserByUsernameAsync(loginDto.Username);
             if (user == null || !BCrypt.Net.BCrypt.Verify(loginDto.Password, user.PasswordHash))
             {
                 return null;

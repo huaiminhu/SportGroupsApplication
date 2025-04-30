@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace SportGroups.Business.Mapping
 {
-    public class EventProfile : Profile
+    public class ClubEventProfile : Profile
     {
-        public EventProfile()
+        public ClubEventProfile()
         {
             CreateMap<NewEventDto, ClubEvent>().ReverseMap();
             CreateMap<ClubEvent, EventInfoDto>().ReverseMap();

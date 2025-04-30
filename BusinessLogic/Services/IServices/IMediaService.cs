@@ -9,8 +9,9 @@ namespace SportGroups.Business.Services.IServices
 {
     public interface IMediaService
     {
-        Task<bool> AddMediaAsync(NewMediaDto newMediaDto);
+        Task<bool> UploadMediaAsync(NewMediaDto newMediaDto);
         Task<List<MediaInfoDto>> GetAllMediasOfArticleAsync(int articleId);
+        Task<bool> ChangeNameAsync(int mediaId, string newName);
         Task<bool> ChangeUrlAsync(int mediaId, string newUrl);
         Task<bool> DeleteMediaAsync(int mediaId);
     }

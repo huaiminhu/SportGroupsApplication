@@ -9,8 +9,9 @@ namespace SportGroups.Shared.DTOs.MediaDTOs
 {
     public class MediaInfoDto
     {
+        public string FileName { get; set; } = string.Empty;
         public MediaType MediaType { get; set; }
-        public string Url { get; set; } = string.Empty;
+        public string FileUrl { get; set; } = string.Empty;
         public DateTime AddedDate { get; set; }
     }
 }

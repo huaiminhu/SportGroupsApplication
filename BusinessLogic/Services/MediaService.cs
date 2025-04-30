@@ -21,11 +21,16 @@ namespace SportGroups.Business.Services
             _mapper = mapper;
         }
 
-        public async Task<bool> AddMediaAsync(NewMediaDto newMediaDto)
+        public async Task<bool> UploadMediaAsync(NewMediaDto newMediaDto)
         {
             var newMedia = _mapper.Map<Media>(newMediaDto);
             newMedia.AddedDate = DateTime.Now;
             return await _mediaRepository.AddMediaAsync(newMedia);
+        }
+
+        public async Task<bool> ChangeNameAsync(int mediaId, string newName)
+        {
+            return await _mediaRepository.UpdateNameAsync(mediaId, newName);
         }
 
         public async Task<bool> ChangeUrlAsync(int mediaId, string newUrl)

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SportGroups.Data.Repositories.Interfaces
 {
-    public interface IEventRepository
+    public interface IClubEventRepository
     {
         Task<bool> CreateEventAsync(ClubEvent evt);
         Task<ClubEvent?> GetEventByIdAsync(int eventId);

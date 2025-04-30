@@ -1,5 +1,4 @@
-﻿using SportGroups.Shared.Entities;
-using SportGroups.Shared.DTOs.EventDTOs;
+﻿using SportGroups.Shared.DTOs.EventDTOs;
 using SportGroups.Shared.Enums;
 using System;
 using System.Collections.Generic;
@@ -9,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SportGroups.Business.Services.IServices
 {
-    public interface IEventService
+    public interface IClubEventService
     {
         Task<bool> CreateEventAsync(NewEventDto newEventDto);
         Task<EventInfoDto> GetEventInfoAsync(int eventId);

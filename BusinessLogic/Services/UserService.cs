@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using SportGroups.Business.Services.IServices;
+using SportGroups.Data.Repositories;
 using SportGroups.Data.Repositories.Interfaces;
 using SportGroups.Shared.DTOs.AuthDTOs;
 using SportGroups.Shared.DTOs.UserDTOs;
@@ -14,33 +15,33 @@ namespace SportGroups.Business.Services
 {
     public class UserService : IUserService
     {
-        private readonly IUserRepository _userRepository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        public UserService(IUserRepository userRepository, IMapper mapper)
+        public UserService(IUnitOfWork unitOfWork, IMapper mapper)
         {
-            _userRepository = userRepository;
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
 
         public async Task<bool> ChangeNickNameAsync(int userId, string newName)
         {
-            return await _userRepository.UpdateNickNameAsync(userId, newName);
+            return await _unitOfWork.Users.UpdateNickNameAsync(userId, newName);
         }
 
         public async Task<bool> ChangePasswordAsync(int userId, string newPassword)
         {
-            return await _userRepository.UpdatePasswordAsync(userId, newPassword);
+            return await _unitOfWork.Users.UpdatePasswordAsync(userId, newPassword);
         }
 
         public async Task<UserInfoDto> GetUserByUsernameAsync(string username)
         {
-            var user = await _userRepository.GetUserByUsernameAsync(username);
+            var user = await _unitOfWork.Users.GetUserByUsernameAsync(username);
             return _mapper.Map<UserInfoDto>(user);
         }
 
         public async Task<UserInfoDto> GetUserByIdAsync(int userId)
         {
-            var user = await _userRepository.GetUserByIdAsync(userId);
+            var user = await _unitOfWork.Users.GetUserByIdAsync(userId);
             return _mapper.Map<UserInfoDto>(user);
         }
 
@@ -49,7 +50,7 @@ namespace SportGroups.Business.Services
             registerDto.Password = BCrypt.Net.BCrypt.HashPassword(registerDto.Password);
             var newUser = _mapper.Map<User>(registerDto);
             newUser.RegisterDate = DateTime.Now;
-            return await _userRepository.CreateUserAsync(newUser);
+            return await _unitOfWork.Users.CreateUserAsync(newUser);
         }
     }
 }

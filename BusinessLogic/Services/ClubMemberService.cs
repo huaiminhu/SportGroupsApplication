@@ -3,7 +3,6 @@ using SportGroups.Business.Services.IServices;
 using SportGroups.Data.Repositories.Interfaces;
 using SportGroups.Shared.DTOs.ClubDTOs;
 using SportGroups.Shared.DTOs.ClubMemberDTOs;
-using SportGroups.Shared.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,17 +13,17 @@ namespace SportGroups.Business.Services
 {
     public class ClubMemberService : IClubMemberService
     {
-        private readonly IClubMemberRepository _clubMemberRepository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        public ClubMemberService(IClubMemberRepository clubMemberRepository, IMapper mapper)
+        public ClubMemberService(IUnitOfWork unitOfWork, IMapper mapper)
         {
-            _clubMemberRepository = clubMemberRepository;
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
 
         public async Task<List<ClubInfoDto>> GetAllClubsOfUserAsync(int userId)
         {
-            var clubs = await _clubMemberRepository.GetAllClubsOfUserAsync(userId);
+            var clubs = await _unitOfWork.ClubMembers.GetAllClubsOfUserAsync(userId);
             return _mapper.Map<List<ClubInfoDto>>(clubs);
         }
 
@@ -34,7 +33,7 @@ namespace SportGroups.Business.Services
             var cId = newMemberDto.ClubId;
             var email = newMemberDto.Email;
             var jd = DateTime.Now;
-            return await _clubMemberRepository.AddMemberAsync(uId, cId, email, jd);
+            return await _unitOfWork.ClubMembers.AddMemberAsync(uId, cId, email, jd);
         }
     }
 }

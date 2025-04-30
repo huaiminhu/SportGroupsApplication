@@ -48,8 +48,20 @@ namespace SportGroups.Data.Repositories
             {
                 return false;
             }
-            existing.Url = newUrl;
-            _context.Entry(existing).Property(m => m.Url).IsModified = true;
+            existing.FileUrl = newUrl;
+            _context.Entry(existing).Property(m => m.FileUrl).IsModified = true;
+            return await _context.SaveChangesAsync() > 0;
+        }
+
+        public async Task<bool> UpdateNameAsync(int mediaId, string newName)
+        {
+            var existing = await _context.Medias.FirstOrDefaultAsync(m => m.ArticleMediaId == mediaId);
+            if (existing == null)
+            {
+                return false;
+            }
+            existing.FileName = newName;
+            _context.Entry(existing).Property(m => m.FileName).IsModified = true;
             return await _context.SaveChangesAsync() > 0;
         }
     }

@@ -12,63 +12,63 @@ using System.Threading.Tasks;
 
 namespace SportGroups.Business.Services
 {
-    public class EventService : IEventService
+    public class ClubEventService : IClubEventService
     {
-        private readonly IEventRepository _eventRepository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        public EventService(IEventRepository eventRepository, IMapper mapper)
+        public ClubEventService(IUnitOfWork unitOfWork, IMapper mapper)
         {
-            _eventRepository = eventRepository;
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
 
         public async Task<bool> ChangeAddressAsync(int eventId, string newAddress)
         {
-            return await _eventRepository.UpdateAddressAsync(eventId, newAddress);
+            return await _unitOfWork.ClubEvents.UpdateAddressAsync(eventId, newAddress);
         }
 
         public async Task<bool> ChangeDescriptionAsync(int eventId, string newDescription)
         {
-            return await _eventRepository.UpdateDescriptionAsync(eventId, newDescription);
+            return await _unitOfWork.ClubEvents.UpdateDescriptionAsync(eventId, newDescription);
         }
 
         public async Task<bool> ChangeNameAsync(int eventId, string newName)
         {
-            return await _eventRepository.UpdateNameAsync(eventId, newName);
+            return await _unitOfWork.ClubEvents.UpdateNameAsync(eventId, newName);
         }
 
         public async Task<bool> CreateEventAsync(NewEventDto newEventDto)
         {
             var newEvent = _mapper.Map<ClubEvent>(newEventDto);
-            return await _eventRepository.CreateEventAsync(newEvent);
+            return await _unitOfWork.ClubEvents.CreateEventAsync(newEvent);
         }
 
         public async Task<bool> DeleteEventAsync(int eventId)
         {
-            return await _eventRepository.DeleteEventAsync(eventId);
+            return await _unitOfWork.ClubEvents.DeleteEventAsync(eventId);
         }
 
         public async Task<List<EventInfoDto>> GetAllEventByKeywordAsync(string keyword)
         {
-            var events = await _eventRepository.GetAllEventsByKeywordAsync(keyword);
+            var events = await _unitOfWork.ClubEvents.GetAllEventsByKeywordAsync(keyword);
             return _mapper.Map<List<EventInfoDto>>(events);
         }
 
         public async Task<List<EventInfoDto>> GetAllEventsBySportAsync(Sport sport)
         {
-            var events = await _eventRepository.GetAllEventsBySportAsync(sport);
+            var events = await _unitOfWork.ClubEvents.GetAllEventsBySportAsync(sport);
             return _mapper.Map<List<EventInfoDto>>(events);
         }
 
         public async Task<List<EventInfoDto>> GetAllEventsOfClubAsync(int clubId)
         {
-            var events = await _eventRepository.GetAllEventsOfClubAsync(clubId);
+            var events = await _unitOfWork.ClubEvents.GetAllEventsOfClubAsync(clubId);
             return _mapper.Map<List<EventInfoDto>>(events);
         }
 
         public async Task<EventInfoDto> GetEventInfoAsync(int eventId)
         {
-            var info = await _eventRepository.GetEventByIdAsync(eventId);
+            var info = await _unitOfWork.ClubEvents.GetEventByIdAsync(eventId);
             return _mapper.Map<EventInfoDto>(info);
         }
     }

@@ -12,11 +12,11 @@ using Microsoft.Data.SqlClient;
 
 namespace SportGroups.Data.Repositories
 {
-    public class EventRepository : IEventRepository
+    public class ClubEventRepository : IClubEventRepository
     {
 
         private readonly SportGroupsDbContext _context;
-        public EventRepository(SportGroupsDbContext context)
+        public ClubEventRepository(SportGroupsDbContext context)
         {
             _context = context;
         }
