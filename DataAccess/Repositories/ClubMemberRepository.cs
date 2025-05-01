@@ -1,7 +1,7 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using SportGroups.Data.Data;
-using SportGroups.Shared.Entities;
+using SportGroups.Data.Entities;
 using SportGroups.Data.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -20,7 +20,7 @@ namespace SportGroups.Data.Repositories
             _context = context;
         }
 
-        public async Task<bool> AddMemberAsync(Guid userId, int clubId, string email, DateTime joinDate)
+        public async Task<bool> AddMemberAsync(int userId, int clubId, string email, DateTime joinDate)
         {
             var uIdParam = new SqlParameter("@userId", userId);
             var cIdParam = new SqlParameter("@clubId", clubId);
@@ -32,7 +32,7 @@ namespace SportGroups.Data.Repositories
                 uIdParam, cIdParam, emailParam, dateParam) > 0;
         }
 
-        public async Task<List<Club>> GetAllClubsOfUserAsync(Guid userId)
+        public async Task<List<Club>> GetAllClubsOfUserAsync(int userId)
         {
             var uIdParam = new SqlParameter("@userId", userId);
             return await _context.Clubs

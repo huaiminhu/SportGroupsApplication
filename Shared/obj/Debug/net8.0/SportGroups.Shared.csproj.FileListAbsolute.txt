@@ -1,0 +1,12 @@
+C:\Users\hankh\Desktop\SportGroupsApplication\Shared\bin\Debug\net8.0\SportGroups.Shared.deps.json
+C:\Users\hankh\Desktop\SportGroupsApplication\Shared\bin\Debug\net8.0\SportGroups.Shared.dll
+C:\Users\hankh\Desktop\SportGroupsApplication\Shared\bin\Debug\net8.0\SportGroups.Shared.pdb
+C:\Users\hankh\Desktop\SportGroupsApplication\Shared\obj\Debug\net8.0\SportGroups.Shared.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\hankh\Desktop\SportGroupsApplication\Shared\obj\Debug\net8.0\SportGroups.Shared.AssemblyInfoInputs.cache
+C:\Users\hankh\Desktop\SportGroupsApplication\Shared\obj\Debug\net8.0\SportGroups.Shared.AssemblyInfo.cs
+C:\Users\hankh\Desktop\SportGroupsApplication\Shared\obj\Debug\net8.0\SportGroups.Shared.csproj.CoreCompileInputs.cache
+C:\Users\hankh\Desktop\SportGroupsApplication\Shared\obj\Debug\net8.0\SportGroups.Shared.sourcelink.json
+C:\Users\hankh\Desktop\SportGroupsApplication\Shared\obj\Debug\net8.0\SportGroups.Shared.dll
+C:\Users\hankh\Desktop\SportGroupsApplication\Shared\obj\Debug\net8.0\refint\SportGroups.Shared.dll
+C:\Users\hankh\Desktop\SportGroupsApplication\Shared\obj\Debug\net8.0\SportGroups.Shared.pdb
+C:\Users\hankh\Desktop\SportGroupsApplication\Shared\obj\Debug\net8.0\ref\SportGroups.Shared.dll

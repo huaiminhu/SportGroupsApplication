@@ -1,4 +1,4 @@
-﻿using SportGroups.Shared.Entities;
+﻿using SportGroups.Data.Entities;
 using SportGroups.Shared.DTOs;
 using SportGroups.Shared.DTOs.ClubDTOs;
 using SportGroups.Shared.Enums;

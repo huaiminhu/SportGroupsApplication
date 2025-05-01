@@ -1,4 +1,4 @@
-﻿using SportGroups.Shared.Entities;
+﻿using SportGroups.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

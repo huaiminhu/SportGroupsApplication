@@ -1,5 +1,9 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using SportGroups.Business.Mapping;
+using SportGroups.Data.Data;
+using SportGroups.Shared.Configurations;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,16 +14,28 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddDbContext<SportGroupsDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("SportGroupsDbContext")));
+
 builder.Services.AddAutoMapper(typeof(UserProfile));
-builder.Services.AddAuthentication("Bearer")
-    .AddJwtBearer("Bearer", options =>
+
+
+builder.Services.Configure<JwtSettings>(
+    builder.Configuration.GetSection("JwtSettings"));
+
+var jwtSettings = builder.Configuration
+    .GetSection("JwtSettings")
+    .Get<JwtSettings>() ?? throw new InvalidOperationException("JwtSettings is missing.");
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
     {
         options.TokenValidationParameters = new TokenValidationParameters
         {
-            ValidIssuer = builder.Configuration["JwtSettings:Issuer"],
-            ValidAudience = builder.Configuration["JwtSettings:Audience"],
-            IssuerSigningKey = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(builder.Configuration["JwtSettings:SecretKey"])),
+            ValidIssuer = jwtSettings.Issuer,
+            ValidAudience = jwtSettings.Audience,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.SecretKey)),
             ValidateIssuer = true,
             ValidateAudience = true,
             ValidateLifetime = true,

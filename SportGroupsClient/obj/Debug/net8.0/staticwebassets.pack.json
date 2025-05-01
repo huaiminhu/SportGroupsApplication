@@ -1,8 +1,8 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\hankh\\Desktop\\SportGroupsApplication\\SportGroupsClient\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\SportGroupsClient.bundle.scp.css",
-      "PackagePath": "staticwebassets\\SportGroupsClient.bundle.scp.css"
+      "Id": "C:\\Users\\hankh\\Desktop\\SportGroupsApplication\\SportGroupsClient\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\SportGroups.Client.bundle.scp.css",
+      "PackagePath": "staticwebassets\\SportGroups.Client.bundle.scp.css"
     },
     {
       "Id": "C:\\Users\\hankh\\Desktop\\SportGroupsApplication\\SportGroupsClient\\wwwroot\\css\\site.css",
@@ -245,20 +245,20 @@
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
     },
     {
-      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.SportGroupsClient.Microsoft.AspNetCore.StaticWebAssets.props",
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.SportGroups.Client.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },
     {
-      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.SportGroupsClient.props",
-      "PackagePath": "build\\SportGroupsClient.props"
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.SportGroups.Client.props",
+      "PackagePath": "build\\SportGroups.Client.props"
     },
     {
-      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.SportGroupsClient.props",
-      "PackagePath": "buildMultiTargeting\\SportGroupsClient.props"
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.SportGroups.Client.props",
+      "PackagePath": "buildMultiTargeting\\SportGroups.Client.props"
     },
     {
-      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.SportGroupsClient.props",
-      "PackagePath": "buildTransitive\\SportGroupsClient.props"
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.SportGroups.Client.props",
+      "PackagePath": "buildTransitive\\SportGroups.Client.props"
     }
   ],
   "ElementsToRemove": []

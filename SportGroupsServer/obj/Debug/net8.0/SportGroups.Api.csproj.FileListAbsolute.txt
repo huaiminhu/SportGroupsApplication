@@ -1,0 +1,7 @@
+C:\Users\hankh\Desktop\SportGroupsApplication\SportGroupsServer\obj\Debug\net8.0\SportGroups.Api.csproj.AssemblyReference.cache
+C:\Users\hankh\Desktop\SportGroupsApplication\SportGroupsServer\obj\Debug\net8.0\SportGroups.Api.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\hankh\Desktop\SportGroupsApplication\SportGroupsServer\obj\Debug\net8.0\SportGroups.Api.AssemblyInfoInputs.cache
+C:\Users\hankh\Desktop\SportGroupsApplication\SportGroupsServer\obj\Debug\net8.0\SportGroups.Api.AssemblyInfo.cs
+C:\Users\hankh\Desktop\SportGroupsApplication\SportGroupsServer\obj\Debug\net8.0\SportGroups.Api.csproj.CoreCompileInputs.cache
+C:\Users\hankh\Desktop\SportGroupsApplication\SportGroupsServer\obj\Debug\net8.0\SportGroups.Api.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\hankh\Desktop\SportGroupsApplication\SportGroupsServer\obj\Debug\net8.0\SportGroups.Api.sourcelink.json

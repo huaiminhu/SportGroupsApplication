@@ -1,5 +1,5 @@
 ﻿using SportGroups.Data.Data;
-using SportGroups.Shared.Entities;
+using SportGroups.Data.Entities;
 using SportGroups.Data.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using SportGroups.Shared.Enums;

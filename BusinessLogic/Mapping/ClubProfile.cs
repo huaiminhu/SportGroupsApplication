@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using SportGroups.Shared.Entities;
+using SportGroups.Data.Entities;
 using SportGroups.Shared.DTOs.ClubDTOs;
 using System;
 using System.Collections.Generic;

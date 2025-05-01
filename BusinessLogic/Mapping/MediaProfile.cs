@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using SportGroups.Shared.DTOs.MediaDTOs;
-using SportGroups.Shared.Entities;
+using SportGroups.Data.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

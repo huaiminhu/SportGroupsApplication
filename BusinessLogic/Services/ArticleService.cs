@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using SportGroups.Business.Services.IServices;
-using SportGroups.Shared.Entities;
+using SportGroups.Data.Entities;
 using SportGroups.Data.Repositories.Interfaces;
 using SportGroups.Shared.DTOs.ArticleDTOs;
 using SportGroups.Shared.Enums;

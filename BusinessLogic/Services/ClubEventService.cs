@@ -2,7 +2,7 @@
 using SportGroups.Business.Services.IServices;
 using SportGroups.Data.Repositories.Interfaces;
 using SportGroups.Shared.DTOs.EventDTOs;
-using SportGroups.Shared.Entities;
+using SportGroups.Data.Entities;
 using SportGroups.Shared.Enums;
 using System;
 using System.Collections.Generic;

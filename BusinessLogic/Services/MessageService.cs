@@ -3,7 +3,7 @@ using SportGroups.Business.Services.IServices;
 using SportGroups.Data.Repositories;
 using SportGroups.Data.Repositories.Interfaces;
 using SportGroups.Shared.DTOs.MessageDTOs;
-using SportGroups.Shared.Entities;
+using SportGroups.Data.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
