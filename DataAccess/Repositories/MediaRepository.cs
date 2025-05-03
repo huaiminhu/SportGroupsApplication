@@ -19,21 +19,14 @@ namespace SportGroups.Data.Repositories
             _context = context;
         }
 
-        public async Task<bool> AddMediaAsync(Media media)
+        public async Task AddMediaAsync(Media media)
         {
             await _context.Medias.AddAsync(media);
-            return await _context.SaveChangesAsync() > 0;
         }
 
-        public async Task<bool> DeleteMediaAsync(int mediaId)
+        public void DeleteMedia(Media media)
         {
-            var existing = await _context.Medias.FirstOrDefaultAsync(m => m.ArticleMediaId == mediaId);
-            if (existing == null)
-            {
-                return false;
-            }
-            _context.Medias.Remove(existing);
-            return await _context.SaveChangesAsync() > 0;
+            _context.Medias.Remove(media);
         }
 
         public async Task<List<Media>> GetAllMediasOfArticleAsync(int articleId)
@@ -41,28 +34,32 @@ namespace SportGroups.Data.Repositories
             return await _context.Medias.Include(m => m.ArticleId == articleId).ToListAsync();
         }
 
-        public async Task<bool> UpdateUrlAsync(int mediaId, string newUrl)
+        public void UpdateMedia(Media media)
         {
-            var existing = await _context.Medias.FirstOrDefaultAsync(m => m.ArticleMediaId == mediaId);
-            if(existing == null)
-            {
-                return false;
-            }
-            existing.FileUrl = newUrl;
-            _context.Entry(existing).Property(m => m.FileUrl).IsModified = true;
-            return await _context.SaveChangesAsync() > 0;
+            _context.Medias.Update(media);
         }
+        //public async Task<bool> UpdateUrlAsync(int mediaId, string newUrl)
+        //{
+        //    var existing = await _context.Medias.FirstOrDefaultAsync(m => m.ArticleMediaId == mediaId);
+        //    if(existing == null)
+        //    {
+        //        return false;
+        //    }
+        //    existing.FileUrl = newUrl;
+        //    _context.Entry(existing).Property(m => m.FileUrl).IsModified = true;
+        //    return await _context.SaveChangesAsync() > 0;
+        //}
 
-        public async Task<bool> UpdateNameAsync(int mediaId, string newName)
-        {
-            var existing = await _context.Medias.FirstOrDefaultAsync(m => m.ArticleMediaId == mediaId);
-            if (existing == null)
-            {
-                return false;
-            }
-            existing.FileName = newName;
-            _context.Entry(existing).Property(m => m.FileName).IsModified = true;
-            return await _context.SaveChangesAsync() > 0;
-        }
+        //public async Task<bool> UpdateNameAsync(int mediaId, string newName)
+        //{
+        //    var existing = await _context.Medias.FirstOrDefaultAsync(m => m.ArticleMediaId == mediaId);
+        //    if (existing == null)
+        //    {
+        //        return false;
+        //    }
+        //    existing.FileName = newName;
+        //    _context.Entry(existing).Property(m => m.FileName).IsModified = true;
+        //    return await _context.SaveChangesAsync() > 0;
+        //}
     }
 }

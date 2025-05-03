@@ -19,10 +19,9 @@ namespace SportGroups.Data.Repositories
             _context = context;
         }
 
-        public async Task<bool> CreateUserAsync(User user)
+        public async Task CreateUserAsync(User user)
         {
             await _context.Users.AddAsync(user);
-            return await _context.SaveChangesAsync() > 0;
         }
 
         public async Task<User?> GetUserByUsernameAsync(string username)
@@ -35,28 +34,32 @@ namespace SportGroups.Data.Repositories
             return await _context.Users.FirstOrDefaultAsync(u => u.UserId == userId);
         }
 
-        public async Task<bool> UpdateNickNameAsync(int userId, string newName)
+        public void UpdateUser(User user)
         {
-            var existing = await _context.Users.FirstOrDefaultAsync(u => u.UserId == userId);
-            if (existing == null)
-            {
-                return false ;
-            }
-            existing.NickName = newName;
-            _context.Entry(existing).Property(u => u.NickName).IsModified = true;
-            return await _context.SaveChangesAsync() > 0;
+            _context.Users.Update(user);
         }
+        //public async Task<bool> UpdateNickNameAsync(int userId, string newName)
+        //{
+        //    var existing = await _context.Users.FirstOrDefaultAsync(u => u.UserId == userId);
+        //    if (existing == null)
+        //    {
+        //        return false ;
+        //    }
+        //    existing.NickName = newName;
+        //    _context.Entry(existing).Property(u => u.NickName).IsModified = true;
+        //    return await _context.SaveChangesAsync() > 0;
+        //}
 
-        public async Task<bool> UpdatePasswordAsync(int userId, string newPassword)
-        {
-            var existing = await _context.Users.FirstOrDefaultAsync(u => u.UserId == userId);
-            if (existing == null)
-            {
-                return false;
-            }
-            existing.PasswordHash = newPassword;
-            _context.Entry(existing).Property(u => u.PasswordHash).IsModified = true;
-            return await _context.SaveChangesAsync() > 0;
-        }
+        //public async Task<bool> UpdatePasswordAsync(int userId, string newPassword)
+        //{
+        //    var existing = await _context.Users.FirstOrDefaultAsync(u => u.UserId == userId);
+        //    if (existing == null)
+        //    {
+        //        return false;
+        //    }
+        //    existing.PasswordHash = newPassword;
+        //    _context.Entry(existing).Property(u => u.PasswordHash).IsModified = true;
+        //    return await _context.SaveChangesAsync() > 0;
+        //}
     }
 }

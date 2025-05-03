@@ -23,15 +23,30 @@ namespace SportGroups.Business.Services
             _mapper = mapper;
         }
 
-        public async Task<bool> ChangeNickNameAsync(int userId, string newName)
+        public async Task<bool> UpdateUserAsync(UserUpdateDto userUpdateDto)
         {
-            return await _unitOfWork.Users.UpdateNickNameAsync(userId, newName);
+            var existing = await _unitOfWork.Users.GetUserByIdAsync(userUpdateDto.UserId);
+            if(existing == null)
+            {
+                return false;
+            }
+            if(!BCrypt.Net.BCrypt.Verify(userUpdateDto.Password, existing.PasswordHash))
+            {
+                userUpdateDto.Password = BCrypt.Net.BCrypt.HashPassword(userUpdateDto.Password);
+            }
+            _mapper.Map(userUpdateDto, existing);
+            _unitOfWork.Users.UpdateUser(existing);
+            return await _unitOfWork.SaveChangesAsync() > 0;
         }
+        //public async Task<bool> ChangeNickNameAsync(int userId, string newName)
+        //{
+        //    return await _unitOfWork.Users.UpdateNickNameAsync(userId, newName);
+        //}
 
-        public async Task<bool> ChangePasswordAsync(int userId, string newPassword)
-        {
-            return await _unitOfWork.Users.UpdatePasswordAsync(userId, newPassword);
-        }
+        //public async Task<bool> ChangePasswordAsync(int userId, string newPassword)
+        //{
+        //    return await _unitOfWork.Users.UpdatePasswordAsync(userId, newPassword);
+        //}
 
         public async Task<UserInfoDto> GetUserByUsernameAsync(string username)
         {
@@ -50,7 +65,8 @@ namespace SportGroups.Business.Services
             registerDto.Password = BCrypt.Net.BCrypt.HashPassword(registerDto.Password);
             var newUser = _mapper.Map<User>(registerDto);
             newUser.RegisterDate = DateTime.Now;
-            return await _unitOfWork.Users.CreateUserAsync(newUser);
+            await _unitOfWork.Users.CreateUserAsync(newUser);
+            return await _unitOfWork.SaveChangesAsync() > 0;
         }
     }
 }

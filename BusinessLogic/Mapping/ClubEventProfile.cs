@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SportGroups.Shared.DTOs.ClubEventDTOs;
 
 namespace SportGroups.Business.Mapping
 {
@@ -13,6 +14,8 @@ namespace SportGroups.Business.Mapping
     {
         public ClubEventProfile()
         {
+            CreateMap<EventUpdateDto, ClubEvent>()
+                .ForAllMembers(option => option.Condition((source, destination, sourceMember) => sourceMember != null));
             CreateMap<NewEventDto, ClubEvent>().ReverseMap();
             CreateMap<ClubEvent, EventInfoDto>().ReverseMap();
             CreateMap<List<ClubEvent>, List<EventInfoDto>>().ReverseMap();

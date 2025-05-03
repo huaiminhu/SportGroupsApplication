@@ -23,20 +23,33 @@ namespace SportGroups.Business.Services
             _mapper = mapper;
         }
 
-        public async Task<bool> ChangeContentAsync(int articleId, string newContent)
+        public async Task<bool> UpdateArticleAsync(ArticleUpdateDto articleUpdateDto)
         {
-            return await _unitOfWork.Articles.UpdateContentAsync(articleId, newContent);
-        }
+            var existing = await _unitOfWork.Articles.GetArticleByIdAsync(articleUpdateDto.ArticleId);
+            if (existing == null)
+            {
+                return false;
+            }
+            _mapper.Map(articleUpdateDto, existing);
+            existing.EditDate = DateTime.Now;
+            _unitOfWork.Articles.UpdateArticle(existing);
+            return await _unitOfWork.SaveChangesAsync() > 0;
 
-        public async Task<bool> ChangeDateAsync(int articleId, DateTime latestEdit)
-        {
-            return await _unitOfWork.Articles.UpdateDateAsync(articleId, latestEdit);
         }
+        //public async Task<bool> ChangeContentAsync(int articleId, string newContent)
+        //{
+        //    return await _unitOfWork.Articles.UpdateContentAsync(articleId, newContent);
+        //}
 
-        public async Task<bool> ChangeTitleAsync(int articleId, string newTitle)
-        {
-            return await _unitOfWork.Articles.UpdateTitleAsync(articleId, newTitle);
-        }
+        //public async Task<bool> ChangeDateAsync(int articleId, DateTime latestEdit)
+        //{
+        //    return await _unitOfWork.Articles.UpdateDateAsync(articleId, latestEdit);
+        //}
+
+        //public async Task<bool> ChangeTitleAsync(int articleId, string newTitle)
+        //{
+        //    return await _unitOfWork.Articles.UpdateTitleAsync(articleId, newTitle);
+        //}
 
         public async Task<bool> CreateArticleAsync(NewArticleDto newArticleDto)
         {
@@ -44,12 +57,19 @@ namespace SportGroups.Business.Services
             var newArticle = _mapper.Map<Article>(newArticleDto);
             newArticle.PostDate = nowTime;
             newArticle.EditDate = nowTime;
-            return await _unitOfWork.Articles.CreateArticleAsync(newArticle);
+            await _unitOfWork.Articles.CreateArticleAsync(newArticle);
+            return await _unitOfWork.SaveChangesAsync() > 0;
         }
 
         public async Task<bool> DeleteArticleAsync(int articleId)
         {
-            return await _unitOfWork.Articles.DeleteArticleAsync(articleId);
+            var existing = await _unitOfWork.Articles.GetArticleByIdAsync(articleId);
+            if (existing == null)
+            {
+                return false;
+            }
+            _unitOfWork.Articles.DeleteArticle(existing);
+            return await _unitOfWork.SaveChangesAsync() > 0;
         }
 
         public async Task<ArticleInfoDto?> GetArticleByIdAsync(int articleId)

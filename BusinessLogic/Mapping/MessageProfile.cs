@@ -13,6 +13,8 @@ namespace SportGroups.Business.Mapping
     {
         public MessageProfile()
         {
+            CreateMap<MessageUpdateDto, Message>()
+                .ForAllMembers(option => option.Condition((source, destination, sourceMember) => sourceMember != null));
             CreateMap<NewMessageDto, Message>().ReverseMap();
             CreateMap<Message, MessageInfoDto>().ReverseMap();
             CreateMap<List<Message>, List<MessageInfoDto>>().ReverseMap();

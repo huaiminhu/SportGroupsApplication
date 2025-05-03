@@ -9,10 +9,11 @@ namespace SportGroups.Data.Repositories.Interfaces
 {
     public interface IMediaRepository
     {
-        Task<bool> AddMediaAsync(Media media);
+        Task AddMediaAsync(Media media);
         Task<List<Media>> GetAllMediasOfArticleAsync(int articleId);
-        Task<bool> UpdateNameAsync(int mediaId, string newName);
-        Task<bool> UpdateUrlAsync(int mediaId, string newUrl);
-        Task<bool> DeleteMediaAsync(int mediaId);
+        void UpdateMedia(Media media);
+        //Task<bool> UpdateNameAsync(int mediaId, string newName);
+        //Task<bool> UpdateUrlAsync(int mediaId, string newUrl);
+        void DeleteMedia(Media media);
     }
 }

@@ -16,7 +16,8 @@ namespace SportGroups.Business.Services.IServices
         // 使用使用者名稱取得使用者資訊
         Task<UserInfoDto> GetUserByUsernameAsync(string username);
         Task<UserInfoDto> GetUserByIdAsync(int userId);
-        Task<bool> ChangeNickNameAsync(int userId, string newName);
-        Task<bool> ChangePasswordAsync(int userId, string newPassword);
+        Task<bool> UpdateUserAsync(UserUpdateDto userUpdateDto);
+        //Task<bool> ChangeNickNameAsync(int userId, string newName);
+        //Task<bool> ChangePasswordAsync(int userId, string newPassword);
     }
 }

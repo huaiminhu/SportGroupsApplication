@@ -9,12 +9,13 @@ namespace SportGroups.Data.Repositories.Interfaces
 {
     public interface IUserRepository
     {
-        Task<bool> CreateUserAsync(User user);
+        Task CreateUserAsync(User user);
         
         // 運用使用者名稱取得使用者實體
         Task<User?> GetUserByUsernameAsync(string username);
         Task<User?> GetUserByIdAsync(int userId);
-        Task<bool> UpdateNickNameAsync(int userId, string newName);
-        Task<bool> UpdatePasswordAsync(int userId, string newPassword);
+        void UpdateUser(User user);
+        //Task<bool> UpdateNickNameAsync(int userId, string newName);
+        //Task<bool> UpdatePasswordAsync(int userId, string newPassword);
     }
 }

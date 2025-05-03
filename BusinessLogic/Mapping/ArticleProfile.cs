@@ -14,6 +14,8 @@ namespace SportGroups.Business.Mapping
     {
         public ArticleProfile()
         {
+            CreateMap<ArticleUpdateDto, Article>()
+                .ForAllMembers(option => option.Condition((source, destination, sourceMember) => sourceMember != null));
             CreateMap<NewArticleDto, Article>().ReverseMap();
             CreateMap<Article, ArticleInfoDto>().ReverseMap();
             CreateMap<List<Article>, List<ArticleInfoDto>>().ReverseMap();

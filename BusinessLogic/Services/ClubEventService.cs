@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SportGroups.Shared.DTOs.ClubEventDTOs;
 
 namespace SportGroups.Business.Services
 {
@@ -22,30 +23,49 @@ namespace SportGroups.Business.Services
             _mapper = mapper;
         }
 
-        public async Task<bool> ChangeAddressAsync(int eventId, string newAddress)
-        {
-            return await _unitOfWork.ClubEvents.UpdateAddressAsync(eventId, newAddress);
-        }
 
-        public async Task<bool> ChangeDescriptionAsync(int eventId, string newDescription)
+        public async Task<bool> UpdateEventAsync(EventUpdateDto eventUpdateDto)
         {
-            return await _unitOfWork.ClubEvents.UpdateDescriptionAsync(eventId, newDescription);
+            var existing = await _unitOfWork.ClubEvents.GetEventByIdAsync(eventUpdateDto.ClubEventId);
+            if (existing == null)
+            {
+                return false;
+            }
+            _mapper.Map(eventUpdateDto, existing);
+            _unitOfWork.ClubEvents.UpdateEvent(existing);
+            return await _unitOfWork.SaveChangesAsync() > 0;
         }
+        //public async Task<bool> ChangeAddressAsync(int eventId, string newAddress)
+        //{
+        //    return await _unitOfWork.ClubEvents.UpdateAddressAsync(eventId, newAddress);
+        //}
 
-        public async Task<bool> ChangeNameAsync(int eventId, string newName)
-        {
-            return await _unitOfWork.ClubEvents.UpdateNameAsync(eventId, newName);
-        }
+        //public async Task<bool> ChangeDescriptionAsync(int eventId, string newDescription)
+        //{
+        //    return await _unitOfWork.ClubEvents.UpdateDescriptionAsync(eventId, newDescription);
+        //}
+
+        //public async Task<bool> ChangeNameAsync(int eventId, string newName)
+        //{
+        //    return await _unitOfWork.ClubEvents.UpdateNameAsync(eventId, newName);
+        //}
 
         public async Task<bool> CreateEventAsync(NewEventDto newEventDto)
         {
             var newEvent = _mapper.Map<ClubEvent>(newEventDto);
-            return await _unitOfWork.ClubEvents.CreateEventAsync(newEvent);
+            await _unitOfWork.ClubEvents.CreateEventAsync(newEvent);
+            return await _unitOfWork.SaveChangesAsync() > 0;
         }
 
         public async Task<bool> DeleteEventAsync(int eventId)
         {
-            return await _unitOfWork.ClubEvents.DeleteEventAsync(eventId);
+            var existing = await _unitOfWork.ClubEvents.GetEventByIdAsync(eventId);
+            if (existing == null)
+            {
+                return false;
+            }
+            _unitOfWork.ClubEvents.DeleteEvent(existing);
+            return await _unitOfWork.SaveChangesAsync() > 0;
         }
 
         public async Task<List<EventInfoDto>> GetAllEventByKeywordAsync(string keyword)

@@ -23,36 +23,54 @@ namespace SportGroups.Business.Services
             _mapper = mapper;
         }
 
-        public async Task<bool> ChangeDescrptionAsync(int clubId, string newDescription)
+        public async Task<bool> UpdateClubAsync(ClubUpdateDto clubUpdateDto)
         {
-            return await _unitOfWork.Clubs.UpdateDescrptionAsync(clubId, newDescription);
+            var existing = await _unitOfWork.Clubs.GetClubByIdAsync(clubUpdateDto.ClubId);
+            if(existing == null)
+            {
+                return false;
+            }
+            _mapper.Map(clubUpdateDto, existing);
+            _unitOfWork.Clubs.UpdateClub(existing);
+            return await _unitOfWork.SaveChangesAsync() > 0;
         }
+        //public async Task<bool> ChangeDescrptionAsync(int clubId, string newDescription)
+        //{
+        //    return await _unitOfWork.Clubs.UpdateDescrptionAsync(clubId, newDescription);
+        //}
 
-        public async Task<bool> ChangeEmailAsync(int clubId, string newEmail)
-        {
-            return await _unitOfWork.Clubs.UpdateEmailAsync(clubId, newEmail);
-        }
+        //public async Task<bool> ChangeEmailAsync(int clubId, string newEmail)
+        //{
+        //    return await _unitOfWork.Clubs.UpdateEmailAsync(clubId, newEmail);
+        //}
 
-        public async Task<bool> ChangeNameAsync(int clubId, string newName)
-        {
-            return await _unitOfWork.Clubs.UpdateNameAsync(clubId, newName);
-        }
+        //public async Task<bool> ChangeNameAsync(int clubId, string newName)
+        //{
+        //    return await _unitOfWork.Clubs.UpdateNameAsync(clubId, newName);
+        //}
 
-        public async Task<bool> ChangePhoneAsync(int clubId, string newPhoneNum)
-        {
-            return await _unitOfWork.Clubs.UpdatePhoneAsync(clubId, newPhoneNum);
-        }
+        //public async Task<bool> ChangePhoneAsync(int clubId, string newPhoneNum)
+        //{
+        //    return await _unitOfWork.Clubs.UpdatePhoneAsync(clubId, newPhoneNum);
+        //}
 
         public async Task<bool> CreateClubAsync(NewClubDto newClubDto)
         {
             var newClub = _mapper.Map<Club>(newClubDto);
             newClub.establishedDate = DateTime.Now;
-            return await _unitOfWork.Clubs.CreateClubAsync(newClub);
+            await _unitOfWork.Clubs.CreateClubAsync(newClub);
+            return await _unitOfWork.SaveChangesAsync() > 0;
         }
 
         public async Task<bool> DeleteClubAsync(int clubId)
         {
-            return await _unitOfWork.Clubs.DeleteClubAsync(clubId);
+            var existing = await _unitOfWork.Clubs.GetClubByIdAsync(clubId);
+            if(existing == null)
+            {
+                return false;
+            }
+            _unitOfWork.Clubs.DeleteClub(existing);
+            return await _unitOfWork.SaveChangesAsync() > 0;
         }
 
         public async Task<ClubInfoDto?> GetClubInfoAsync(int clubId)

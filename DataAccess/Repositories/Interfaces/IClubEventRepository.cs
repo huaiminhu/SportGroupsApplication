@@ -11,7 +11,7 @@ namespace SportGroups.Data.Repositories.Interfaces
 {
     public interface IClubEventRepository
     {
-        Task<bool> CreateEventAsync(ClubEvent evt);
+        Task CreateEventAsync(ClubEvent clubEvent);
         Task<ClubEvent?> GetEventByIdAsync(int eventId);
 
         // 取得指定運動項目類別的所有活動
@@ -25,9 +25,11 @@ namespace SportGroups.Data.Repositories.Interfaces
 
         // 取得包含指定關鍵字的所有活動
         Task<List<ClubEvent>> GetAllEventsByKeywordAsync(string keyword);
-        Task<bool> UpdateNameAsync(int eventId, string newName);
-        Task<bool> UpdateDescriptionAsync(int eventId, string newDescription);
-        Task<bool> UpdateAddressAsync(int eventId, string newAddress);
-        Task<bool> DeleteEventAsync(int eventId);
+        void UpdateEvent(ClubEvent clubEvent);
+        //Task<bool> UpdateNameAsync(int eventId, string newName);
+        //Task<bool> UpdateDescriptionAsync(int eventId, string newDescription);
+        //Task<bool> UpdateAddressAsync(int eventId, string newAddress);
+        void DeleteEvent(ClubEvent clubEvent);
+        //Task<bool> DeleteEventAsync(int eventId);
     }
 }

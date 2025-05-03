@@ -20,16 +20,16 @@ namespace SportGroups.Data.Repositories
             _context = context;
         }
 
-        public async Task<bool> AddEnrollmentAsync(int userId, int eventId, string phone, DateTime enrollDate)
+        public async Task AddEnrollmentAsync(int userId, int eventId, string phone, DateTime enrollDate)
         {
             var uIdParam = new SqlParameter("@userId", userId);
             var eIdParam = new SqlParameter("@eventId", eventId);
             var phoneParam = new SqlParameter("@phone", phone);
             var dateParam = new SqlParameter("@enrollDate", enrollDate);
-            return await _context.Database
+            await _context.Database
                 .ExecuteSqlRawAsync(
                 "EXEC usp_Create_Enrollments_AddEnrollment @userId, @eventId, @phone, @enrollDate",
-                uIdParam, eIdParam, phoneParam, dateParam) > 0;
+                uIdParam, eIdParam, phoneParam, dateParam);
         }
 
         public async Task<Enrollment?> GetEnrollmentByIdAsync(int userId, int eventId)

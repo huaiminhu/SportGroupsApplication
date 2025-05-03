@@ -19,10 +19,9 @@ namespace SportGroups.Data.Repositories
             _context = context;
         }
 
-        public async Task<bool> CreateMessageAsync(Message message)
+        public async Task CreateMessageAsync(Message message)
         {
             await _context.Messages.AddAsync(message);
-            return await _context.SaveChangesAsync() > 0;
         }
 
         public async Task<Message?> GetMessageByIdAsync(int messageId)
@@ -30,15 +29,9 @@ namespace SportGroups.Data.Repositories
             return await _context.Messages.FirstOrDefaultAsync(m => m.MessageId == messageId);
         }
 
-        public async Task<bool> DeleteMessageAsync(int messageId)
+        public void DeleteMessage(Message message)
         {
-            var existing = await _context.Messages.FirstOrDefaultAsync(m => m.MessageId == messageId);
-            if (existing == null)
-            {
-                return false;
-            }
-            _context.Messages.Remove(existing);
-            return await _context.SaveChangesAsync() > 0;
+            _context.Messages.Remove(message);
         }
 
         public async Task<List<Message>> GetAllMessagesOfClubAsync(int clubId)
@@ -46,28 +39,32 @@ namespace SportGroups.Data.Repositories
             return await _context.Messages.Include(m => m.ClubId == clubId).ToListAsync();
         }
 
-        public async Task<bool> UpdateTitleAsync(int messageId, string newTitle)
+        public void UpdateMessage(Message message)
         {
-            var existing = await _context.Messages.FirstOrDefaultAsync(m => m.MessageId == messageId);
-            if (existing == null)
-            {
-                return false;
-            }
-            existing.Title = newTitle;
-            _context.Entry(existing).Property(m => m.Title).IsModified = true;
-            return await _context.SaveChangesAsync() > 0;
+            _context.Messages.Update(message);
         }
+        //public async Task<bool> UpdateTitleAsync(int messageId, string newTitle)
+        //{
+        //    var existing = await _context.Messages.FirstOrDefaultAsync(m => m.MessageId == messageId);
+        //    if (existing == null)
+        //    {
+        //        return false;
+        //    }
+        //    existing.Title = newTitle;
+        //    _context.Entry(existing).Property(m => m.Title).IsModified = true;
+        //    return await _context.SaveChangesAsync() > 0;
+        //}
 
-        public async Task<bool> UpdateContentAsync(int messageId, string newContent)
-        {
-            var existing = await _context.Messages.FirstOrDefaultAsync(m => m.MessageId == messageId);
-            if (existing == null)
-            {
-                return false;
-            }
-            existing.MessageContent = newContent;
-            _context.Entry(existing).Property(m => m.MessageContent).IsModified = true;
-            return await _context.SaveChangesAsync() > 0;
-        }
+        //public async Task<bool> UpdateContentAsync(int messageId, string newContent)
+        //{
+        //    var existing = await _context.Messages.FirstOrDefaultAsync(m => m.MessageId == messageId);
+        //    if (existing == null)
+        //    {
+        //        return false;
+        //    }
+        //    existing.MessageContent = newContent;
+        //    _context.Entry(existing).Property(m => m.MessageContent).IsModified = true;
+        //    return await _context.SaveChangesAsync() > 0;
+        //}
     }
 }

@@ -25,12 +25,19 @@ namespace SportGroups.Business.Services
         public async Task<bool> CreateMessageAsync(NewMessageDto newMessageDto)
         {
             var newMessage = _mapper.Map<Message>(newMessageDto);
-            return await _unitOfWork.Messages.CreateMessageAsync(newMessage);
+            await _unitOfWork.Messages.CreateMessageAsync(newMessage);
+            return await _unitOfWork.SaveChangesAsync() > 0;
         }
 
         public async Task<bool> DeleteMessageAsync(int messageId)
         {
-            return await _unitOfWork.Messages.DeleteMessageAsync(messageId);
+            var existing = await _unitOfWork.Messages.GetMessageByIdAsync(messageId);
+            if(existing == null)
+            {
+                return false;
+            }
+            _unitOfWork.Messages.DeleteMessage(existing);
+            return await _unitOfWork.SaveChangesAsync() > 0;
         }
 
         public async Task<List<MessageInfoDto>> GetAllMessagesOfClubAsync(int clubId)
@@ -45,14 +52,25 @@ namespace SportGroups.Business.Services
             return _mapper.Map<MessageInfoDto>(message);
         }
 
-        public async Task<bool> UpdateContentAsync(int messageId, string newContent)
+        public async Task<bool> UpdateMessageAsync(MessageUpdateDto messageUpdateDto)
         {
-            return await _unitOfWork.Messages.UpdateContentAsync(messageId, newContent);
+            var existing = await _unitOfWork.Messages.GetMessageByIdAsync(messageUpdateDto.MessageId);
+            if(existing == null)
+            {
+                return false;
+            }
+            _mapper.Map(messageUpdateDto, existing);
+            _unitOfWork.Messages.UpdateMessage(existing);
+            return await _unitOfWork.SaveChangesAsync() > 0;
         }
+        //public async Task<bool> UpdateContentAsync(int messageId, string newContent)
+        //{
+        //    return await _unitOfWork.Messages.UpdateContentAsync(messageId, newContent);
+        //}
 
-        public async Task<bool> UpdateTitleAsync(int messageId, string newTitle)
-        {
-            return await _unitOfWork.Messages.UpdateTitleAsync(messageId, newTitle);
-        }
+        //public async Task<bool> UpdateTitleAsync(int messageId, string newTitle)
+        //{
+        //    return await _unitOfWork.Messages.UpdateTitleAsync(messageId, newTitle);
+        //}
     }
 }

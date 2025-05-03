@@ -20,16 +20,16 @@ namespace SportGroups.Data.Repositories
             _context = context;
         }
 
-        public async Task<bool> AddMemberAsync(int userId, int clubId, string email, DateTime joinDate)
+        public async Task AddMemberAsync(int userId, int clubId, string email, DateTime joinDate)
         {
             var uIdParam = new SqlParameter("@userId", userId);
             var cIdParam = new SqlParameter("@clubId", clubId);
             var emailParam = new SqlParameter("@email", email);
             var dateParam = new SqlParameter("@joinDate", joinDate);
-            return await _context.Database
+            await _context.Database
                 .ExecuteSqlRawAsync(
                 "EXEC usp_Create_ClubMembers_AddMember @userId, @clubId, @email, @joinDate", 
-                uIdParam, cIdParam, emailParam, dateParam) > 0;
+                uIdParam, cIdParam, emailParam, dateParam);
         }
 
         public async Task<List<Club>> GetAllClubsOfUserAsync(int userId)

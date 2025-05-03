@@ -10,7 +10,7 @@ namespace SportGroups.Data.Repositories.Interfaces
 {
     public interface IArticleRepository
     {
-        Task<bool> CreateArticleAsync(Article article);
+        Task CreateArticleAsync(Article article);
         Task<Article?> GetArticleByIdAsync(int articleId);
 
         // 取得指定社團發布的所有文章
@@ -21,9 +21,10 @@ namespace SportGroups.Data.Repositories.Interfaces
 
         // 取得包含指定關鍵字的所有文章
         Task<List<Article>> GetAllArticlesByKeywordAsync(string keyword);
-        Task<bool> UpdateTitleAsync(int articleId, string newTitle);
-        Task<bool> UpdateContentAsync(int articleId, string newContent);
-        Task<bool> UpdateDateAsync(int articleId, DateTime latestEdit);
-        Task<bool> DeleteArticleAsync(int articleId);
+        void UpdateArticle(Article article);
+        //Task<bool> UpdateTitleAsync(int articleId, string newTitle);
+        //Task<bool> UpdateContentAsync(int articleId, string newContent);
+        //Task<bool> UpdateDateAsync(int articleId, DateTime latestEdit);
+        void DeleteArticle(Article article);
     }
 }

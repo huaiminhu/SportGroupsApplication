@@ -21,10 +21,9 @@ namespace SportGroups.Data.Repositories
             _context = context;
         }
 
-        public async Task<bool> CreateClubAsync(Club club)
+        public async Task CreateClubAsync(Club club)
         {
             await _context.Clubs.AddAsync(club);
-            return await _context.SaveChangesAsync() > 0;
         }
 
         public async Task<Club?> GetClubByIdAsync(int clubId)
@@ -32,15 +31,9 @@ namespace SportGroups.Data.Repositories
             return await _context.Clubs.FirstOrDefaultAsync(c => c.ClubId == clubId);
         }
 
-        public async Task<bool> DeleteClubAsync(int clubId)
+        public void DeleteClub(Club club)
         {
-            var existing = await _context.Clubs.FirstOrDefaultAsync(c => c.ClubId == clubId);
-            if (existing == null)
-            {
-                return false;
-            }
-            _context.Clubs.Remove(existing);
-            return await _context.SaveChangesAsync() > 0;
+            _context.Clubs.Remove(club);
         }
 
         public async Task<List<Club>> GetAllClubsBySportAsync(Sport sport)
@@ -56,52 +49,56 @@ namespace SportGroups.Data.Repositories
                 .ToListAsync();
         }
 
-        public async Task<bool> UpdateNameAsync(int clubId, string newName)
+        public void UpdateClub(Club club)
         {
-            var existing = await _context.Clubs.FirstOrDefaultAsync(c => c.ClubId == clubId);
-            if (existing == null)
-            {
-                return false;
-            }
-            existing.ClubName = newName;
-            _context.Entry(existing).Property(c => c.ClubName).IsModified = true;
-            return await _context.SaveChangesAsync() > 0;
+            _context.Clubs.Update(club);
         }
+        //public async Task<bool> UpdateNameAsync(int clubId, string newName)
+        //{
+        //    var existing = await _context.Clubs.FirstOrDefaultAsync(c => c.ClubId == clubId);
+        //    if (existing == null)
+        //    {
+        //        return false;
+        //    }
+        //    existing.ClubName = newName;
+        //    _context.Entry(existing).Property(c => c.ClubName).IsModified = true;
+        //    return await _context.SaveChangesAsync() > 0;
+        //}
 
-        public async Task<bool> UpdatePhoneAsync(int clubId, string newPhoneNum)
-        {
-            var existing = await _context.Clubs.FirstOrDefaultAsync(c => c.ClubId == clubId);
-            if (existing == null)
-            {
-                return false;
-            }
-            existing.Phone = newPhoneNum;
-            _context.Entry(existing).Property(c => c.Phone).IsModified = true;
-            return await _context.SaveChangesAsync() > 0;
-        }
+        //public async Task<bool> UpdatePhoneAsync(int clubId, string newPhoneNum)
+        //{
+        //    var existing = await _context.Clubs.FirstOrDefaultAsync(c => c.ClubId == clubId);
+        //    if (existing == null)
+        //    {
+        //        return false;
+        //    }
+        //    existing.Phone = newPhoneNum;
+        //    _context.Entry(existing).Property(c => c.Phone).IsModified = true;
+        //    return await _context.SaveChangesAsync() > 0;
+        //}
 
-        public async Task<bool> UpdateEmailAsync(int clubId, string newEmail)
-        {
-            var existing = await _context.Clubs.FirstOrDefaultAsync(c => c.ClubId == clubId);
-            if (existing == null)
-            {
-                return false;
-            }
-            existing.Email = newEmail;
-            _context.Entry(existing).Property(c => c.Email).IsModified = true;
-            return await _context.SaveChangesAsync() > 0;
-        }
+        //public async Task<bool> UpdateEmailAsync(int clubId, string newEmail)
+        //{
+        //    var existing = await _context.Clubs.FirstOrDefaultAsync(c => c.ClubId == clubId);
+        //    if (existing == null)
+        //    {
+        //        return false;
+        //    }
+        //    existing.Email = newEmail;
+        //    _context.Entry(existing).Property(c => c.Email).IsModified = true;
+        //    return await _context.SaveChangesAsync() > 0;
+        //}
 
-        public async Task<bool> UpdateDescrptionAsync(int clubId, string newDescription)
-        {
-            var existing = await _context.Clubs.FirstOrDefaultAsync(c => c.ClubId == clubId);
-            if (existing == null)
-            {
-                return false;
-            }
-            existing.Description = newDescription;
-            _context.Entry(existing).Property(c => c.Description).IsModified = true;
-            return await _context.SaveChangesAsync() > 0;
-        }
+        //public async Task<bool> UpdateDescrptionAsync(int clubId, string newDescription)
+        //{
+        //    var existing = await _context.Clubs.FirstOrDefaultAsync(c => c.ClubId == clubId);
+        //    if (existing == null)
+        //    {
+        //        return false;
+        //    }
+        //    existing.Description = newDescription;
+        //    _context.Entry(existing).Property(c => c.Description).IsModified = true;
+        //    return await _context.SaveChangesAsync() > 0;
+        //}
     }
 }

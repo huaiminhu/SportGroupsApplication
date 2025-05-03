@@ -21,10 +21,9 @@ namespace SportGroups.Data.Repositories
             _context = context;
         }
 
-        public async Task<bool> CreateEventAsync(ClubEvent evt)
+        public async Task CreateEventAsync(ClubEvent clubEvent)
         {
-            await _context.ClubEvents.AddAsync(evt);
-            return await _context.SaveChangesAsync() > 0;
+            await _context.ClubEvents.AddAsync(clubEvent);
         }
 
         public async Task<ClubEvent?> GetEventByIdAsync(int eventId)
@@ -32,15 +31,9 @@ namespace SportGroups.Data.Repositories
             return await _context.ClubEvents.FirstOrDefaultAsync(e => e.ClubEventId == eventId);
         }
 
-        public async Task<bool> DeleteEventAsync(int eventId)
+        public void DeleteEvent(ClubEvent clubEvent)
         {
-            var existing = await _context.ClubEvents.FirstOrDefaultAsync(e => e.ClubEventId == eventId);
-            if (existing == null)
-            {
-                return false;
-            }
-            _context.ClubEvents.Remove(existing);
-            return await _context.SaveChangesAsync() > 0;
+            _context.ClubEvents.Remove(clubEvent);
         }
 
         public async Task<List<ClubEvent>> GetAllEventsBySportAsync(Sport sport)
@@ -72,40 +65,45 @@ namespace SportGroups.Data.Repositories
                 .ToListAsync();
         }
 
-        public async Task<bool> UpdateNameAsync(int eventId, string newName)
+        public void UpdateEvent(ClubEvent clubEvent)
         {
-            var existing = await _context.ClubEvents.FirstOrDefaultAsync(e => e.ClubEventId == eventId);
-            if (existing == null)
-            {
-                return false;
-            }
-            existing.EventName = newName;
-            _context.Entry(existing).Property(e => e.EventName).IsModified = true;
-            return await _context.SaveChangesAsync() > 0;
+            _context.ClubEvents.Update(clubEvent);
         }
 
-        public async Task<bool> UpdateDescriptionAsync(int eventId, string newDescription)
-        {
-            var existing = await _context.ClubEvents.FirstOrDefaultAsync(e => e.ClubEventId == eventId);
-            if (existing == null)
-            {
-                return false;
-            }
-            existing.Description = newDescription;
-            _context.Entry(existing).Property(e => e.Description).IsModified = true;
-            return await _context.SaveChangesAsync() > 0;
-        }
+        //public async Task<bool> UpdateNameAsync(int eventId, string newName)
+        //{
+        //    var existing = await _context.ClubEvents.FirstOrDefaultAsync(e => e.ClubEventId == eventId);
+        //    if (existing == null)
+        //    {
+        //        return false;
+        //    }
+        //    existing.EventName = newName;
+        //    _context.Entry(existing).Property(e => e.EventName).IsModified = true;
+        //    return await _context.SaveChangesAsync() > 0;
+        //}
 
-        public async Task<bool> UpdateAddressAsync(int eventId, string newAddress)
-        {
-            var existing = await _context.ClubEvents.FirstOrDefaultAsync(e => e.ClubEventId == eventId);
-            if (existing == null)
-            {
-                return false;
-            }
-            existing.Address = newAddress;
-            _context.Entry(existing).Property(e => e.Address).IsModified = true;
-            return await _context.SaveChangesAsync() > 0;
-        }
+        //public async Task<bool> UpdateDescriptionAsync(int eventId, string newDescription)
+        //{
+        //    var existing = await _context.ClubEvents.FirstOrDefaultAsync(e => e.ClubEventId == eventId);
+        //    if (existing == null)
+        //    {
+        //        return false;
+        //    }
+        //    existing.Description = newDescription;
+        //    _context.Entry(existing).Property(e => e.Description).IsModified = true;
+        //    return await _context.SaveChangesAsync() > 0;
+        //}
+
+        //public async Task<bool> UpdateAddressAsync(int eventId, string newAddress)
+        //{
+        //    var existing = await _context.ClubEvents.FirstOrDefaultAsync(e => e.ClubEventId == eventId);
+        //    if (existing == null)
+        //    {
+        //        return false;
+        //    }
+        //    existing.Address = newAddress;
+        //    _context.Entry(existing).Property(e => e.Address).IsModified = true;
+        //    return await _context.SaveChangesAsync() > 0;
+        //}
     }
 }

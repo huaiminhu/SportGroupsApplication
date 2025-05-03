@@ -21,10 +21,9 @@ namespace SportGroups.Data.Repositories
             _context = context;
         }
 
-        public async Task<bool> CreateArticleAsync(Article article)
+        public async Task CreateArticleAsync(Article article)
         {
             await _context.Articles.AddAsync(article);
-            return await _context.SaveChangesAsync() > 0;
         }
 
         public async Task<Article?> GetArticleByIdAsync(int articleId)
@@ -32,15 +31,9 @@ namespace SportGroups.Data.Repositories
             return await _context.Articles.FirstOrDefaultAsync(a => a.ArticleId == articleId);
         }
 
-        public async Task<bool> DeleteArticleAsync(int articleId)
+        public void DeleteArticle(Article article)
         {
-            var existing = await _context.Articles.FirstOrDefaultAsync(a => a.ArticleId == articleId);
-            if (existing == null)
-            {
-                return false;
-            }
-            _context.Articles.Remove(existing);
-            return await _context.SaveChangesAsync() > 0;
+            _context.Articles.Remove(article);
         }
 
         public async Task<List<Article>> GetAllArticlesOfClubAsync(int clubId)
@@ -64,40 +57,45 @@ namespace SportGroups.Data.Repositories
                 .ToListAsync();
         }
 
-        public async Task<bool> UpdateTitleAsync(int articleId, string newTitle)
+        public void UpdateArticle(Article article)
         {
-            var existing = await _context.Articles.FirstOrDefaultAsync(a => a.ArticleId == articleId);
-            if(existing == null)
-            {
-                return false;
-            }
-            existing.Title = newTitle;
-            _context.Entry(existing).Property(a => a.Title).IsModified = true;
-            return await _context.SaveChangesAsync() > 0;
+            _context.Articles.Update(article);
         }
 
-        public async Task<bool> UpdateContentAsync(int articleId, string newContent)
-        {
-            var existing = await _context.Articles.FirstOrDefaultAsync(a => a.ArticleId == articleId);
-            if (existing == null)
-            {
-                return false;
-            }
-            existing.ArticleContent = newContent;
-            _context.Entry(existing).Property(a => a.ArticleContent).IsModified = true;
-            return await _context.SaveChangesAsync() > 0;
-        }
+        //public async Task<bool> UpdateTitleAsync(int articleId, string newTitle)
+        //{
+        //    var existing = await _context.Articles.FirstOrDefaultAsync(a => a.ArticleId == articleId);
+        //    if(existing == null)
+        //    {
+        //        return false;
+        //    }
+        //    existing.Title = newTitle;
+        //    _context.Entry(existing).Property(a => a.Title).IsModified = true;
+        //    return await _context.SaveChangesAsync() > 0;
+        //}
 
-        public async Task<bool> UpdateDateAsync(int articleId, DateTime latestEdit)
-        {
-            var existing = await _context.Articles.FirstOrDefaultAsync(a => a.ArticleId == articleId);
-            if (existing == null)
-            {
-                return false;
-            }
-            existing.EditDate = latestEdit;
-            _context.Entry(existing).Property(a => a.EditDate).IsModified = true;
-            return await _context.SaveChangesAsync() > 0;
-        }
+        //public async Task<bool> UpdateContentAsync(int articleId, string newContent)
+        //{
+        //    var existing = await _context.Articles.FirstOrDefaultAsync(a => a.ArticleId == articleId);
+        //    if (existing == null)
+        //    {
+        //        return false;
+        //    }
+        //    existing.ArticleContent = newContent;
+        //    _context.Entry(existing).Property(a => a.ArticleContent).IsModified = true;
+        //    return await _context.SaveChangesAsync() > 0;
+        //}
+
+        //public async Task<bool> UpdateDateAsync(int articleId, DateTime latestEdit)
+        //{
+        //    var existing = await _context.Articles.FirstOrDefaultAsync(a => a.ArticleId == articleId);
+        //    if (existing == null)
+        //    {
+        //        return false;
+        //    }
+        //    existing.EditDate = latestEdit;
+        //    _context.Entry(existing).Property(a => a.EditDate).IsModified = true;
+        //    return await _context.SaveChangesAsync() > 0;
+        //}
     }
 }
