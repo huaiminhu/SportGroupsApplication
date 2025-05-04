@@ -6,12 +6,12 @@ namespace SportGroups.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ClubController : ControllerBase
+    public class ClubEventController : ControllerBase
     {
-        private readonly IClubService _clubService;
-        public ClubController(IClubService clubService)
+        private readonly IClubEventService _clubEventService;
+        public ClubEventController(IClubEventService clubEventService)
         {
-            _clubService = clubService;
+            _clubEventService = clubEventService;
         }
     }
 }

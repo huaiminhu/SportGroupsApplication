@@ -2,7 +2,6 @@
 using SportGroups.Business.Services.IServices;
 using SportGroups.Data.Repositories;
 using SportGroups.Data.Repositories.Interfaces;
-using SportGroups.Shared.DTOs.AuthDTOs;
 using SportGroups.Shared.DTOs.UserDTOs;
 using SportGroups.Data.Entities;
 using System;

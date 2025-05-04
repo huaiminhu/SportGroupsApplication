@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SportGroups.Business.Services.IServices;
 
 namespace SportGroups.Api.Controllers
 {
@@ -7,5 +8,10 @@ namespace SportGroups.Api.Controllers
     [ApiController]
     public class MessageController : ControllerBase
     {
+        private readonly IMessageService _messageService;
+        public MessageController(IMessageService messageService)
+        {
+            _messageService = messageService;
+        }
     }
 }

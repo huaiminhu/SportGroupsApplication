@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using SportGroups.Shared.DTOs.AuthDTOs;
 using SportGroups.Shared.DTOs.UserDTOs;
 using SportGroups.Data.Entities;
 using System;

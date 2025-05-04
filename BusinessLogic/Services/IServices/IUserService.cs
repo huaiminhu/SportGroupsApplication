@@ -1,5 +1,4 @@
-﻿using SportGroups.Shared.DTOs.AuthDTOs;
-using SportGroups.Shared.DTOs.UserDTOs;
+﻿using SportGroups.Shared.DTOs.UserDTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
