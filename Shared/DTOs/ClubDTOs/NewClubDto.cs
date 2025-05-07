@@ -18,9 +18,9 @@ namespace SportGroups.Shared.DTOs.ClubDTOs
         public string Phone { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
-        public ICollection<NewMemberDto> Members { get; set; } = new List<NewMemberDto>();
-        public ICollection<NewEventDto> Events { get; set; } = new List<NewEventDto>();
-        public ICollection<NewMessageDto> Messages { get; set; } = new List<NewMessageDto>();
-        public ICollection<NewArticleDto> Articles { get; set; } = new List<NewArticleDto>();
+        public IEnumerable<NewMemberDto> Members { get; set; } = new List<NewMemberDto>();
+        public IEnumerable<NewEventDto> Events { get; set; } = new List<NewEventDto>();
+        public IEnumerable<NewMessageDto> Messages { get; set; } = new List<NewMessageDto>();
+        public IEnumerable<NewArticleDto> Articles { get; set; } = new List<NewArticleDto>();
     }
 }

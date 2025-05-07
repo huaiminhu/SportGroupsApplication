@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34723.18
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SportGroups.Client", "SportGroupsClient\SportGroups.Client.csproj", "{E06B7DF5-0F0A-437F-8413-A9A9336AFC7F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SportGroups.Client", "Client\SportGroups.Client.csproj", "{E06B7DF5-0F0A-437F-8413-A9A9336AFC7F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SportGroups.Api", "SportGroupsServer\SportGroups.Api.csproj", "{B7C6256F-873C-4233-A52F-ABA0ACCF7484}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SportGroups.Api", "Api\SportGroups.Api.csproj", "{B7C6256F-873C-4233-A52F-ABA0ACCF7484}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SportGroups.Business", "BusinessLogic\SportGroups.Business.csproj", "{DD0D771F-007A-4BF1-9853-30717CC9ACA1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SportGroups.Business", "Business\SportGroups.Business.csproj", "{DD0D771F-007A-4BF1-9853-30717CC9ACA1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SportGroups.Data", "DataAccess\SportGroups.Data.csproj", "{BF8D361B-9040-4770-B59B-050667A15545}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SportGroups.Data", "Data\SportGroups.Data.csproj", "{BF8D361B-9040-4770-B59B-050667A15545}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SportGroups.Shared", "Shared\SportGroups.Shared.csproj", "{B9BEEA36-AAA1-47D6-9351-7C0F4C11279A}"
 EndProject
