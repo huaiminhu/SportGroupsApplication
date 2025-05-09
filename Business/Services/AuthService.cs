@@ -32,6 +32,15 @@ namespace SportGroups.Business.Services
             _jwtSettings = options.Value;
         }
 
+        public async Task<bool> RegisterAsync(RegisterDto registerDto)
+        {
+            registerDto.Password = BCrypt.Net.BCrypt.HashPassword(registerDto.Password);
+            var newUser = _mapper.Map<User>(registerDto);
+            newUser.RegisterDate = DateTime.Now;
+            await _unitOfWork.Users.CreateUserAsync(newUser);
+            return await _unitOfWork.SaveChangesAsync() > 0;
+        }
+
         public async Task<UserInfoDto?> AuthAsync(LoginDto loginDto)
         {
             var user = await _unitOfWork.Users.GetUserByUsernameAsync(loginDto.Username);

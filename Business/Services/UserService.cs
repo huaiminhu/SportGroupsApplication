@@ -47,25 +47,16 @@ namespace SportGroups.Business.Services
         //    return await _unitOfWork.Users.UpdatePasswordAsync(userId, newPassword);
         //}
 
-        public async Task<UserInfoDto> GetUserByUsernameAsync(string username)
-        {
-            var user = await _unitOfWork.Users.GetUserByUsernameAsync(username);
-            return _mapper.Map<UserInfoDto>(user);
-        }
+        //public async Task<UserInfoDto> GetUserByUsernameAsync(string username)
+        //{
+        //    var user = await _unitOfWork.Users.GetUserByUsernameAsync(username);
+        //    return _mapper.Map<UserInfoDto>(user);
+        //}
 
         public async Task<UserInfoDto> GetUserByIdAsync(int userId)
         {
             var user = await _unitOfWork.Users.GetUserByIdAsync(userId);
             return _mapper.Map<UserInfoDto>(user);
-        }
-
-        public async Task<bool> RegisterAsync(RegisterDto registerDto)
-        {
-            registerDto.Password = BCrypt.Net.BCrypt.HashPassword(registerDto.Password);
-            var newUser = _mapper.Map<User>(registerDto);
-            newUser.RegisterDate = DateTime.Now;
-            await _unitOfWork.Users.CreateUserAsync(newUser);
-            return await _unitOfWork.SaveChangesAsync() > 0;
         }
     }
 }

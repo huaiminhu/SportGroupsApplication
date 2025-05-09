@@ -1,11 +1,13 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SportGroups.Business.Services.IServices;
-using SportGroups.Shared.DTOs.AuthDTOs;
 using SportGroups.Shared.DTOs.UserDTOs;
+using System.Security.Claims;
 
 namespace SportGroups.Api.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
@@ -19,59 +21,33 @@ namespace SportGroups.Api.Controllers
             _userService = userService;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Login(LoginDto loginDto)
+        [HttpGet("myinfo")]
+        public async Task<ActionResult<UserInfoDto>> GetMyInfo()
         {
-            var result = await _authService.AuthAsync(loginDto);
-            if (result == null)
-            {
-                return NotFound();
-            }
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+            if(userIdClaim == null)return Unauthorized();
+            var result = await _userService.GetUserByIdAsync(int.Parse(userIdClaim.Value));
             return Ok(result);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Register(RegisterDto registerDto)
-        {
-            var result = await _userService.RegisterAsync(registerDto);
-            if(result == false)
-            {
-                return BadRequest();
-            }
-            return Ok(result);
-        }
+        //[HttpGet]
+        //public async Task<IActionResult> GetUserByUsername(string username)
+        //{
+        //    var result = await _userService.GetUserByUsernameAsync(username);
+        //    if (result == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return Ok(result);
+        //}
 
-        [HttpGet]
-        public async Task<IActionResult> GetUserById(int userId)
+        [HttpPut("update")]
+        public async Task<IActionResult> UpdateInfo(UserUpdateDto userUpdateDto)
         {
-            var result = await _userService.GetUserByIdAsync(userId);
-            if (result == null)
-            {
-                return NotFound();
-            }
-            return Ok(result);
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> GetUserByUsername(string username)
-        {
-            var result = await _userService.GetUserByUsernameAsync(username);
-            if (result == null)
-            {
-                return NotFound();
-            }
-            return Ok(result);
-        }
-
-        [HttpPut]
-        public async Task<IActionResult> EditInfo(UserUpdateDto userUpdateDto)
-        {
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+            if (userIdClaim == null) return Unauthorized();
             var result = await _userService.UpdateUserAsync(userUpdateDto);
-            if (result == false)
-            {
-                return BadRequest();
-            }
-            return Ok(result);
+            return result ? NoContent() : BadRequest();
         }
     }
 }

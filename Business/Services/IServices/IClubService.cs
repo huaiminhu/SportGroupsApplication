@@ -13,10 +13,10 @@ namespace SportGroups.Business.Services.IServices
     public interface IClubService
     {
         // 取得使用指定運動項目所有社團
-        Task<List<ClubInfoDto>> GetClubsBySportAsync(Sport sport);
+        Task<List<ClubInfoDto>> GetAllClubsBySportAsync(Sport sport);
         
         // 取得使用指定關鍵字所有社團
-        Task<List<ClubInfoDto>> GetClubsByKeywordAsync(string keyword);
+        Task<List<ClubInfoDto>> GetAllClubsByKeywordAsync(string keyword);
         
         // 取得社團資訊
         Task<ClubInfoDto?> GetClubInfoAsync(int clubId);

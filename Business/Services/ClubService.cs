@@ -79,13 +79,13 @@ namespace SportGroups.Business.Services
             return _mapper.Map<ClubInfoDto>(club);
         }
 
-        public async Task<List<ClubInfoDto>> GetClubsByKeywordAsync(string keyword)
+        public async Task<List<ClubInfoDto>> GetAllClubsByKeywordAsync(string keyword)
         {
             var clubs = await _unitOfWork.Clubs.GetAllClubsByKeywordAsync(keyword);
             return _mapper.Map<List<ClubInfoDto>>(clubs);
         }
 
-        public async Task<List<ClubInfoDto>> GetClubsBySportAsync(Sport sport)
+        public async Task<List<ClubInfoDto>> GetAllClubsBySportAsync(Sport sport)
         {
             var clubs = await _unitOfWork.Clubs.GetAllClubsBySportAsync(sport);
             return _mapper.Map<List<ClubInfoDto>>(clubs);

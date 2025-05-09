@@ -1,6 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SportGroups.Business.Services.IServices;
+using SportGroups.Shared.DTOs.ArticleDTOs;
+using SportGroups.Shared.Enums;
 
 namespace SportGroups.Api.Controllers
 {
@@ -12,6 +15,63 @@ namespace SportGroups.Api.Controllers
         public ArticleController(IArticleService articleService)
         {
             _articleService = articleService;
+        }
+
+        [HttpPost("getallarticlesbysport")]
+        public async Task<ActionResult<List<ArticleInfoDto>>> GetAllArticlesBySport([FromBody]Sport sport)
+        {
+            var articles = await _articleService.GetAllArticlesBySportAsync(sport);
+            if(articles == null)
+            {
+                return NotFound();
+            }
+            return Ok(articles);
+        }
+
+        [HttpPost("getallarticlesbykeyword")]
+        public async Task<ActionResult<List<ArticleInfoDto>>> GetAllArticlesByKeywordAsync([FromBody]string keyword)
+        {
+            var articles = await _articleService.GetAllArticlesByKeywordAsync(keyword);
+            if(articles == null)
+            {
+                return NotFound();
+            }
+            return Ok(articles);
+        }
+
+        [HttpPost("displayarticle")]
+        public async Task<ActionResult<ArticleInfoDto?>> GetArticle([FromBody]int articleId)
+        {
+            var article = await _articleService.GetArticleByIdAsync(articleId);
+            if(article == null)
+            {
+                return NotFound();
+            }
+            return Ok(article);
+        }
+
+        [Authorize]
+        [HttpPost("create")]
+        public async Task<IActionResult> CreateArticle(NewArticleDto newArticleDto)
+        {
+            var result = await _articleService.CreateArticleAsync(newArticleDto);
+            return result ? CreatedAtAction(nameof(ArticleController.GetArticle), "Article", new { }, result) : BadRequest();
+        }
+
+        [Authorize]
+        [HttpPut("update")]
+        public async Task<IActionResult> UpdateArticle(ArticleUpdateDto articleUpdateDto)
+        {
+            var result = await _articleService.UpdateArticleAsync(articleUpdateDto);
+            return result ? NoContent() : BadRequest();
+        }
+
+        [Authorize]
+        [HttpDelete("delete")]
+        public async Task<IActionResult> DeleteArticle([FromBody]int articleId)
+        {
+            var result = await _articleService.DeleteArticleAsync(articleId);
+            return result ? NoContent() : BadRequest();
         }
     }
 }

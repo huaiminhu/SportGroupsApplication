@@ -13,8 +13,8 @@ namespace SportGroups.Shared.DTOs.UserDTOs
     {
         public string NickName { get; set; } = string.Empty;
         public string UserName { get; set; } = string.Empty;
-        public IEnumerable<ClubInfoDto> Clubs { get; set; } = new List<ClubInfoDto>();
-        public IEnumerable<EnrollmentInfoDto> Enrollments { get; set; } = new List<EnrollmentInfoDto>();
+        public List<ClubInfoDto> Clubs { get; set; } = new List<ClubInfoDto>();
+        public List<EnrollmentInfoDto> Enrollments { get; set; } = new List<EnrollmentInfoDto>();
         public string Token { get; set; } = string.Empty;
     }
 }
