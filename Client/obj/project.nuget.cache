@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "RjyWoEeQDX+AbTFhrkO6uwM2yO64IdDd2o0NyPjpBcHOVmYLrv8KhV6P/HzPM3BkX9Fpw/0fu4Dp+wvAMTCQyg==",
+  "dgSpecHash": "lQMEXqKNpP7ZZYgiFToSioodFMhaiO9bdHzXGt091Te7bdemn9reWTXyZLABMlV7GeIYawUPYN87uxaFJ4mmTQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\hankh\\Desktop\\SportGroupsApplication\\Client\\SportGroups.Client.csproj",
+  "projectFilePath": "C:\\Users\\hankh\\Desktop\\SportGroups\\Client\\SportGroups.Client.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

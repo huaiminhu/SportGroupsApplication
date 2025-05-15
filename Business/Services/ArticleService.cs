@@ -10,6 +10,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SportGroups.Data.Repositories;
+using System.Reflection.Metadata;
+using Microsoft.AspNetCore.Http;
 
 namespace SportGroups.Business.Services
 {
@@ -17,10 +19,15 @@ namespace SportGroups.Business.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        public ArticleService(IUnitOfWork unitOfWork, IMapper mapper)
+        private readonly IMediaService _mediaService;
+        public ArticleService(IUnitOfWork unitOfWork, 
+            IMapper mapper,
+            IMediaService mediaService)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _mediaService = mediaService;
+
         }
 
         public async Task<bool> UpdateArticleAsync(ArticleUpdateDto articleUpdateDto)
@@ -51,12 +58,25 @@ namespace SportGroups.Business.Services
         //    return await _unitOfWork.Articles.UpdateTitleAsync(articleId, newTitle);
         //}
 
-        public async Task<bool> CreateArticleAsync(NewArticleDto newArticleDto)
+        public async Task<bool> CreateArticleAsync(NewArticleDto newArticleDto, List<IFormFile> medias)
         {
             var nowTime = DateTime.Now;
             var newArticle = _mapper.Map<Article>(newArticleDto);
             newArticle.PostDate = nowTime;
             newArticle.EditDate = nowTime;
+
+            foreach (var file in medias)
+            {
+                var filePath = await _mediaService.SaveMediaAsync(file);
+                newArticle.Medias.Add(new Media
+                {
+                    FileName = file.FileName,
+                    MediaType = file.ContentType.StartsWith("video") ? MediaType.Video : MediaType.Image, 
+                    FileUrl = filePath,
+                    AddedDate = nowTime
+                });
+            }
+
             await _unitOfWork.Articles.CreateArticleAsync(newArticle);
             return await _unitOfWork.SaveChangesAsync() > 0;
         }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SportGroups.Shared.DTOs.MediaDTOs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,5 +13,6 @@ namespace SportGroups.Shared.DTOs.ArticleDTOs
         public string? Title { get; set; }
         public string? ArticleContent { get; set; }
         public DateTime? EditDate { get; set; }
+        public List<NewMediaDto> Medias { get; set; } = new List<NewMediaDto>();
     }
 }

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\hankh\\Desktop\\SportGroupsApplication\\Client\\SportGroups.Client.csproj": {}
+    "C:\\Users\\hankh\\Desktop\\SportGroups\\Client\\SportGroups.Client.csproj": {}
   },
   "projects": {
-    "C:\\Users\\hankh\\Desktop\\SportGroupsApplication\\Client\\SportGroups.Client.csproj": {
+    "C:\\Users\\hankh\\Desktop\\SportGroups\\Client\\SportGroups.Client.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\hankh\\Desktop\\SportGroupsApplication\\Client\\SportGroups.Client.csproj",
+        "projectUniqueName": "C:\\Users\\hankh\\Desktop\\SportGroups\\Client\\SportGroups.Client.csproj",
         "projectName": "SportGroups.Client",
-        "projectPath": "C:\\Users\\hankh\\Desktop\\SportGroupsApplication\\Client\\SportGroups.Client.csproj",
+        "projectPath": "C:\\Users\\hankh\\Desktop\\SportGroups\\Client\\SportGroups.Client.csproj",
         "packagesPath": "C:\\Users\\hankh\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\hankh\\Desktop\\SportGroupsApplication\\Client\\obj\\",
+        "outputPath": "C:\\Users\\hankh\\Desktop\\SportGroups\\Client\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\hankh\\AppData\\Roaming\\NuGet\\NuGet.Config",

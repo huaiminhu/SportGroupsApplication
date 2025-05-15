@@ -7,11 +7,12 @@ using SportGroups.Business.Services.IServices;
 using SportGroups.Data.Data;
 using SportGroups.Data.Repositories;
 using SportGroups.Data.Repositories.Interfaces;
+using SportGroups.Infrastructure.Configuration;
 using SportGroups.Shared.Configurations;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
-
+var config = builder.Configuration;
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -34,6 +35,8 @@ builder.Services.AddScoped<IClubMemberService, ClubMemberService>();
 builder.Services.AddScoped<IEnrollmentRepository, EnrollmentRepository>();
 builder.Services.AddScoped<IEnrollmentService, EnrollmentService>();
 builder.Services.AddScoped<IMediaRepository, MediaRepository>();
+
+builder.Services.AddInfrastructure(config); // Infrastructure¼hª`¤J
 
 builder.Services.AddDbContext<SportGroupsDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("SportGroupsDbContext")));

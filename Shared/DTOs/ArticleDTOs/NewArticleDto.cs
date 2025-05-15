@@ -1,4 +1,4 @@
-﻿using SportGroups.Shared.DTOs.MediaDTOs;
+﻿using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +12,6 @@ namespace SportGroups.Shared.DTOs.ArticleDTOs
         public string Title { get; set; } = string.Empty;
         public string ArticleContent { get; set; } = string.Empty;
         public int ClubId { get; set; }
-        public List<NewMediaDto> Medias { get; set; } = new List<NewMediaDto>();
+        public List<IFormFile> Medias { get; set; } = new List<IFormFile>();
     }
 }

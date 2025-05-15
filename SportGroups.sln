@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SportGroups.Business", "Bus
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SportGroups.Data", "Data\SportGroups.Data.csproj", "{BF8D361B-9040-4770-B59B-050667A15545}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SportGroups.Shared", "Shared\SportGroups.Shared.csproj", "{B9BEEA36-AAA1-47D6-9351-7C0F4C11279A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SportGroups.Shared", "Shared\SportGroups.Shared.csproj", "{B9BEEA36-AAA1-47D6-9351-7C0F4C11279A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SportGroups.Infrastructure", "SportGroups.Infrastructure\SportGroups.Infrastructure.csproj", "{CD156EB1-9BEC-4C3F-A5CD-62024402B001}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{B9BEEA36-AAA1-47D6-9351-7C0F4C11279A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B9BEEA36-AAA1-47D6-9351-7C0F4C11279A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B9BEEA36-AAA1-47D6-9351-7C0F4C11279A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD156EB1-9BEC-4C3F-A5CD-62024402B001}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD156EB1-9BEC-4C3F-A5CD-62024402B001}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD156EB1-9BEC-4C3F-A5CD-62024402B001}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD156EB1-9BEC-4C3F-A5CD-62024402B001}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

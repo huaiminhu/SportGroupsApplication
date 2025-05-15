@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\hankh\\Desktop\\SportGroupsApplication\\Shared\\SportGroups.Shared.csproj": {}
+    "C:\\Users\\hankh\\Desktop\\SportGroups\\Shared\\SportGroups.Shared.csproj": {}
   },
   "projects": {
-    "C:\\Users\\hankh\\Desktop\\SportGroupsApplication\\Shared\\SportGroups.Shared.csproj": {
+    "C:\\Users\\hankh\\Desktop\\SportGroups\\Shared\\SportGroups.Shared.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\hankh\\Desktop\\SportGroupsApplication\\Shared\\SportGroups.Shared.csproj",
+        "projectUniqueName": "C:\\Users\\hankh\\Desktop\\SportGroups\\Shared\\SportGroups.Shared.csproj",
         "projectName": "SportGroups.Shared",
-        "projectPath": "C:\\Users\\hankh\\Desktop\\SportGroupsApplication\\Shared\\SportGroups.Shared.csproj",
+        "projectPath": "C:\\Users\\hankh\\Desktop\\SportGroups\\Shared\\SportGroups.Shared.csproj",
         "packagesPath": "C:\\Users\\hankh\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\hankh\\Desktop\\SportGroupsApplication\\Shared\\obj\\",
+        "outputPath": "C:\\Users\\hankh\\Desktop\\SportGroups\\Shared\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\hankh\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -44,6 +44,12 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Http.Abstractions": {
+              "target": "Package",
+              "version": "[2.3.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
