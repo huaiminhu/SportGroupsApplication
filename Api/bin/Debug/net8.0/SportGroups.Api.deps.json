@@ -10,6 +10,7 @@
         "dependencies": {
           "Microsoft.AspNetCore.Authentication.JwtBearer": "8.0.13",
           "SportGroups.Business": "1.0.0",
+          "SportGroups.Infrastructure": "1.0.0",
           "Swashbuckle.AspNetCore": "6.4.0"
         },
         "runtime": {
@@ -641,6 +642,14 @@
           "SportGroups.Data.dll": {}
         }
       },
+      "SportGroups.Infrastructure/1.0.0": {
+        "dependencies": {
+          "SportGroups.Business": "1.0.0"
+        },
+        "runtime": {
+          "SportGroups.Infrastructure.dll": {}
+        }
+      },
       "SportGroups.Shared/1.0.0": {
         "dependencies": {
           "Microsoft.AspNetCore.Http.Abstractions": "2.3.0"
@@ -1090,6 +1099,11 @@
       "sha512": ""
     },
     "SportGroups.Data/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "SportGroups.Infrastructure/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

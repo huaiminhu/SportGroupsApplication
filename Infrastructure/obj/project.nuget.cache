@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "6YqknYDUVwD7w2E1XokiDxwZdi3etDBhQE21UOk+dGTiQvfknGDc234FpVopZup2saIijt8aANwwecbg3iMPpg==",
+  "dgSpecHash": "TLY2jATZ7meyr4c42ZVuRRt+9QezFlnSavBVLxF5AEvMWvvA8QbDSK4KZk8zBkIBxyx9m3aLdU6wZcdR95yXWQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\hankh\\Desktop\\SportGroups\\SportGroups.Infrastructure\\SportGroups.Infrastructure.csproj",
+  "projectFilePath": "C:\\Users\\hankh\\Desktop\\SportGroups\\Infrastructure\\SportGroups.Infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\hankh\\.nuget\\packages\\automapper\\14.0.0\\automapper.14.0.0.nupkg.sha512",
     "C:\\Users\\hankh\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",

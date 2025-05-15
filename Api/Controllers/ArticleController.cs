@@ -52,9 +52,9 @@ namespace SportGroups.Api.Controllers
 
         [Authorize]
         [HttpPost("create")]
-        public async Task<IActionResult> CreateArticle(NewArticleDto newArticleDto)
+        public async Task<IActionResult> CreateArticle(NewArticleDto newArticleDto, List<IFormFile> medias)
         {
-            var result = await _articleService.CreateArticleAsync(newArticleDto);
+            var result = await _articleService.CreateArticleAsync(newArticleDto, medias);
             return result ? CreatedAtAction(nameof(ArticleController.GetArticle), "Article", new { }, result) : BadRequest();
         }
 

@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SportGroups.Data", "Data\Sp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SportGroups.Shared", "Shared\SportGroups.Shared.csproj", "{B9BEEA36-AAA1-47D6-9351-7C0F4C11279A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SportGroups.Infrastructure", "SportGroups.Infrastructure\SportGroups.Infrastructure.csproj", "{CD156EB1-9BEC-4C3F-A5CD-62024402B001}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SportGroups.Infrastructure", "Infrastructure\SportGroups.Infrastructure.csproj", "{CD156EB1-9BEC-4C3F-A5CD-62024402B001}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

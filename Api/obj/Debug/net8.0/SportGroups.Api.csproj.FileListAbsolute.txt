@@ -181,3 +181,5 @@ C:\Users\hankh\Desktop\SportGroups\Api\obj\Debug\net8.0\refint\SportGroups.Api.d
 C:\Users\hankh\Desktop\SportGroups\Api\obj\Debug\net8.0\SportGroups.Api.pdb
 C:\Users\hankh\Desktop\SportGroups\Api\obj\Debug\net8.0\SportGroups.Api.genruntimeconfig.cache
 C:\Users\hankh\Desktop\SportGroups\Api\obj\Debug\net8.0\ref\SportGroups.Api.dll
+C:\Users\hankh\Desktop\SportGroups\Api\bin\Debug\net8.0\SportGroups.Infrastructure.dll
+C:\Users\hankh\Desktop\SportGroups\Api\bin\Debug\net8.0\SportGroups.Infrastructure.pdb

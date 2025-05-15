@@ -2917,11 +2917,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\hankh\\Desktop\\SportGroups\\SportGroups.Infrastructure\\SportGroups.Infrastructure.csproj",
+      "projectUniqueName": "C:\\Users\\hankh\\Desktop\\SportGroups\\Infrastructure\\SportGroups.Infrastructure.csproj",
       "projectName": "SportGroups.Infrastructure",
-      "projectPath": "C:\\Users\\hankh\\Desktop\\SportGroups\\SportGroups.Infrastructure\\SportGroups.Infrastructure.csproj",
+      "projectPath": "C:\\Users\\hankh\\Desktop\\SportGroups\\Infrastructure\\SportGroups.Infrastructure.csproj",
       "packagesPath": "C:\\Users\\hankh\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\hankh\\Desktop\\SportGroups\\SportGroups.Infrastructure\\obj\\",
+      "outputPath": "C:\\Users\\hankh\\Desktop\\SportGroups\\Infrastructure\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\hankh\\AppData\\Roaming\\NuGet\\NuGet.Config",

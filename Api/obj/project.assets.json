@@ -3050,8 +3050,8 @@
     },
     "SportGroups.Infrastructure/1.0.0": {
       "type": "project",
-      "path": "../SportGroups.Infrastructure/SportGroups.Infrastructure.csproj",
-      "msbuildProject": "../SportGroups.Infrastructure/SportGroups.Infrastructure.csproj"
+      "path": "../Infrastructure/SportGroups.Infrastructure.csproj",
+      "msbuildProject": "../Infrastructure/SportGroups.Infrastructure.csproj"
     },
     "SportGroups.Shared/1.0.0": {
       "type": "project",
@@ -3097,8 +3097,8 @@
             "C:\\Users\\hankh\\Desktop\\SportGroups\\Business\\SportGroups.Business.csproj": {
               "projectPath": "C:\\Users\\hankh\\Desktop\\SportGroups\\Business\\SportGroups.Business.csproj"
             },
-            "C:\\Users\\hankh\\Desktop\\SportGroups\\SportGroups.Infrastructure\\SportGroups.Infrastructure.csproj": {
-              "projectPath": "C:\\Users\\hankh\\Desktop\\SportGroups\\SportGroups.Infrastructure\\SportGroups.Infrastructure.csproj"
+            "C:\\Users\\hankh\\Desktop\\SportGroups\\Infrastructure\\SportGroups.Infrastructure.csproj": {
+              "projectPath": "C:\\Users\\hankh\\Desktop\\SportGroups\\Infrastructure\\SportGroups.Infrastructure.csproj"
             }
           }
         }
