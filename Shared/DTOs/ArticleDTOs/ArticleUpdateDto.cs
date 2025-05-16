@@ -1,4 +1,5 @@
-﻿using SportGroups.Shared.DTOs.MediaDTOs;
+﻿using Microsoft.AspNetCore.Http;
+using SportGroups.Shared.DTOs.MediaDTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,7 @@ namespace SportGroups.Shared.DTOs.ArticleDTOs
         public string? Title { get; set; }
         public string? ArticleContent { get; set; }
         public DateTime? EditDate { get; set; }
-        public List<NewMediaDto> Medias { get; set; } = new List<NewMediaDto>();
+        public List<IFormFile>? Medias { get; set; }
+        public List<int>? StayMediaIds { get; set; } = null!;// 要保留的 media id
     }
 }

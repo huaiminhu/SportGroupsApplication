@@ -30,6 +30,19 @@ namespace SportGroups.Business.Services
 
         }
 
+        //public async Task<bool> UpdateArticleAsync(ArticleUpdateDto articleUpdateDto)
+        //{
+        //    var existing = await _unitOfWork.Articles.GetArticleByIdAsync(articleUpdateDto.ArticleId);
+        //    if (existing == null)
+        //    {
+        //        return false;
+        //    }
+        //    _mapper.Map(articleUpdateDto, existing);
+        //    existing.EditDate = DateTime.Now;
+        //    _unitOfWork.Articles.UpdateArticle(existing);
+        //    return await _unitOfWork.SaveChangesAsync() > 0;
+        //}
+
         public async Task<bool> UpdateArticleAsync(ArticleUpdateDto articleUpdateDto)
         {
             var existing = await _unitOfWork.Articles.GetArticleByIdAsync(articleUpdateDto.ArticleId);
@@ -37,12 +50,45 @@ namespace SportGroups.Business.Services
             {
                 return false;
             }
+
+            // 刪除未保留的媒體
+            if (articleUpdateDto.StayMediaIds != null)
+            {
+                var toRemove = existing.Medias
+                    .Where(m => !articleUpdateDto.StayMediaIds.Contains(m.ArticleMediaId))
+                    .ToList();
+
+                foreach (var media in toRemove)
+                {
+                    await _mediaService.DeleteMediaAsync(media.FileUrl);
+                    _unitOfWork.Medias.DeleteMedia(media);
+                }
+            }
+
+            var nowTime = DateTime.Now;
+
+            // 新增新的媒體檔案
+            if (articleUpdateDto.Medias != null)
+            {
+                foreach (var file in articleUpdateDto.Medias)
+                {
+                    var filePath = await _mediaService.SaveMediaAsync(file);
+                    existing.Medias.Add(new Media
+                    {
+                        FileName = file.FileName,
+                        MediaType = file.ContentType.StartsWith("video") ? MediaType.Video : MediaType.Image,
+                        FileUrl = filePath,
+                        AddedDate = nowTime
+                    });
+                }
+            }
+            existing.EditDate = nowTime;
             _mapper.Map(articleUpdateDto, existing);
-            existing.EditDate = DateTime.Now;
             _unitOfWork.Articles.UpdateArticle(existing);
             return await _unitOfWork.SaveChangesAsync() > 0;
-
         }
+
+
         //public async Task<bool> ChangeContentAsync(int articleId, string newContent)
         //{
         //    return await _unitOfWork.Articles.UpdateContentAsync(articleId, newContent);
