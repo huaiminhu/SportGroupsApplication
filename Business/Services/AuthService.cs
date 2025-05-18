@@ -15,6 +15,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SportGroups.Shared.Configurations;
 using Microsoft.Extensions.Options;
+using System.Security.Cryptography;
 
 namespace SportGroups.Business.Services
 {
@@ -48,8 +49,36 @@ namespace SportGroups.Business.Services
             {
                 return null;
             }
+
+            var token = NewToken(user);
+
+            user.RefreshToken = GenerateRefreshToken();
+            user.RefreshTokenExpiry = DateTime.UtcNow.AddDays(7);
+            _unitOfWork.Users.UpdateUser(user);
+
             var info = _mapper.Map<UserInfoDto>(user);
-            info.Token = NewToken(user);
+            info.Token = token;
+
+            return info;
+        }
+
+        public async Task<UserInfoDto?> RefreshTokenAsync(string refreshToken)
+        {
+            var user = await _unitOfWork.Users.GetByRefreshTokenAsync(refreshToken);
+            if (user == null)
+            {
+                return null;
+            }
+
+            var token = NewToken(user);
+
+            user.RefreshToken = GenerateRefreshToken();
+            user.RefreshTokenExpiry = DateTime.UtcNow.AddDays(7);
+            _unitOfWork.Users.UpdateUser(user);
+
+            var info = _mapper.Map<UserInfoDto>(user);
+            info.Token = token;
+
             return info;
         }
 
@@ -77,6 +106,11 @@ namespace SportGroups.Business.Services
             );
 
             return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+
+        public string GenerateRefreshToken()
+        {
+            return Convert.ToBase64String(RandomNumberGenerator.GetBytes(64));
         }
     }
 }

@@ -16,5 +16,6 @@ namespace SportGroups.Shared.DTOs.UserDTOs
         public List<ClubInfoDto> Clubs { get; set; } = new List<ClubInfoDto>();
         public List<EnrollmentInfoDto> Enrollments { get; set; } = new List<EnrollmentInfoDto>();
         public string Token { get; set; } = string.Empty;
+        public string RefreshToken { get; set; } = string.Empty;
     }
 }

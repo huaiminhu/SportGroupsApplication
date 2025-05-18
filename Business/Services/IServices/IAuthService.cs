@@ -14,5 +14,6 @@ namespace SportGroups.Business.Services.IServices
         Task<bool> RegisterAsync(RegisterDto registerDto);
         // 驗證使用者
         Task<UserInfoDto?> AuthAsync(LoginDto loginDto);
+        Task<UserInfoDto?> RefreshTokenAsync(string refreshToken);
     }
 }

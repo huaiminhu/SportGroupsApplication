@@ -38,6 +38,12 @@ namespace SportGroups.Data.Repositories
         {
             _context.Users.Update(user);
         }
+
+        public async Task<User?> GetByRefreshTokenAsync(string refreshToken)
+        {
+            return await _context.Users
+                .FirstOrDefaultAsync(u => u.RefreshToken == refreshToken);
+        }
         //public async Task<bool> UpdateNickNameAsync(int userId, string newName)
         //{
         //    var existing = await _context.Users.FirstOrDefaultAsync(u => u.UserId == userId);

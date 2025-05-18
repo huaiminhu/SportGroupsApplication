@@ -15,6 +15,7 @@ namespace SportGroups.Data.Repositories.Interfaces
         Task<User?> GetUserByUsernameAsync(string username);
         Task<User?> GetUserByIdAsync(int userId);
         void UpdateUser(User user);
+        Task<User?> GetByRefreshTokenAsync(string refreshToken);
         //Task<bool> UpdateNickNameAsync(int userId, string newName);
         //Task<bool> UpdatePasswordAsync(int userId, string newPassword);
     }
