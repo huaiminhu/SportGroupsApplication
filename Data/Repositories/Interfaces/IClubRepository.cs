@@ -1,4 +1,5 @@
 ﻿using SportGroups.Data.Entities;
+using SportGroups.Shared.DTOs.ClubDTOs;
 using SportGroups.Shared.Enums;
 using System;
 using System.Collections.Generic;
@@ -13,11 +14,14 @@ namespace SportGroups.Data.Repositories.Interfaces
         Task CreateClubAsync(Club club);
         Task<Club?> GetClubByIdAsync(int clubId);
 
-        // 取得指定運動項目類別的所有社團
-        Task<List<Club>> GetAllClubsBySportAsync(Sport sport);
+        // 依條件取得指定社團
+        Task<List<Club>> GetClubsByConditionAsync(ClubsQueryConditions condition);
 
-        // 取得包含指定關鍵字的所有社團
-        Task<List<Club>> GetAllClubsByKeywordAsync(string keyword);
+        //// 取得指定運動項目類別的所有社團
+        //Task<List<Club>> GetAllClubsBySportAsync(Sport sport);
+
+        //// 取得包含指定關鍵字的所有社團
+        //Task<List<Club>> GetAllClubsByKeywordAsync(string keyword);
         void UpdateClub(Club club);
         //Task<bool> UpdateNameAsync(int clubId, string newName);
         //Task<bool> UpdatePhoneAsync(int clubId, string newPhoneNum);

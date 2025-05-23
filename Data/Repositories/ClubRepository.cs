@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Data.SqlClient;
+using SportGroups.Shared.DTOs.ClubDTOs;
 
 namespace SportGroups.Data.Repositories
 {
@@ -36,18 +37,38 @@ namespace SportGroups.Data.Repositories
             _context.Clubs.Remove(club);
         }
 
-        public async Task<List<Club>> GetAllClubsBySportAsync(Sport sport)
+        public async Task<List<Club>> GetClubsByConditionAsync(ClubsQueryConditions condition)
         {
-            return await _context.Clubs.Include(c => c.Sport == sport).ToListAsync();
+            var clubs = new List<Club>();
+
+            if(condition.Sport.HasValue)
+            {
+                clubs = await _context.Clubs.Include(c => c.Sport == condition.Sport).ToListAsync();
+            }
+
+            if (!string.IsNullOrWhiteSpace(condition.Keyword))
+            {
+                var kwParam = new SqlParameter("@keyword", condition.Keyword);
+                clubs = await _context.Clubs
+                    .FromSqlRaw("EXEC usp_GetAll_Clubs_ByKeyword @keyword", kwParam)
+                    .ToListAsync();
+            }
+
+            return clubs;
         }
 
-        public async Task<List<Club>> GetAllClubsByKeywordAsync(string keyword)
-        {
-            var kwParam = new SqlParameter("@keyword", keyword);
-            return await _context.Clubs
-                .FromSqlRaw("EXEC usp_GetAll_Clubs_ByKeyword @keyword", kwParam)
-                .ToListAsync();
-        }
+        //public async Task<List<Club>> GetAllClubsBySportAsync(Sport sport)
+        //{
+        //    return await _context.Clubs.Include(c => c.Sport == sport).ToListAsync();
+        //}
+
+        //public async Task<List<Club>> GetAllClubsByKeywordAsync(string keyword)
+        //{
+        //    var kwParam = new SqlParameter("@keyword", keyword);
+        //    return await _context.Clubs
+        //        .FromSqlRaw("EXEC usp_GetAll_Clubs_ByKeyword @keyword", kwParam)
+        //        .ToListAsync();
+        //}
 
         public void UpdateClub(Club club)
         {

@@ -17,10 +17,10 @@ namespace SportGroups.Api.Controllers
             _articleService = articleService;
         }
 
-        [HttpPost("getallarticlesbysport")]
-        public async Task<ActionResult<List<ArticleInfoDto>>> GetAllArticlesBySport([FromBody]Sport sport)
+        [HttpGet("articles")]
+        public async Task<ActionResult<List<ArticleInfoDto>>> SearchArticles([FromQuery]ArticlesQueryConditions condition)
         {
-            var articles = await _articleService.GetAllArticlesBySportAsync(sport);
+            var articles = await _articleService.GetArticlesByConditionAsync(condition);
             if(articles == null)
             {
                 return NotFound();
@@ -28,18 +28,18 @@ namespace SportGroups.Api.Controllers
             return Ok(articles);
         }
 
-        [HttpPost("getallarticlesbykeyword")]
-        public async Task<ActionResult<List<ArticleInfoDto>>> GetAllArticlesByKeywordAsync([FromBody]string keyword)
-        {
-            var articles = await _articleService.GetAllArticlesByKeywordAsync(keyword);
-            if(articles == null)
-            {
-                return NotFound();
-            }
-            return Ok(articles);
-        }
+        //[HttpGet("articles/search")]
+        //public async Task<ActionResult<List<ArticleInfoDto>>> GetAllArticlesByKeywordAsync([FromBody]string keyword)
+        //{
+        //    var articles = await _articleService.GetAllArticlesByKeywordAsync(keyword);
+        //    if(articles == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return Ok(articles);
+        //}
 
-        [HttpPost("displayarticle")]
+        [HttpGet("article")]
         public async Task<ActionResult<ArticleInfoDto?>> GetArticle([FromBody]int articleId)
         {
             var article = await _articleService.GetArticleByIdAsync(articleId);

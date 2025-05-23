@@ -6,5 +6,5 @@ BEGIN
 	WHERE clubId = (
 		SELECT clubId FROM Clubs
 		WHERE Sport = @sport
-	);
+	)ORDER BY EditDate DESC;
 END;

@@ -1,4 +1,5 @@
 ﻿using SportGroups.Data.Entities;
+using SportGroups.Shared.DTOs.ArticleDTOs;
 using SportGroups.Shared.Enums;
 using System;
 using System.Collections.Generic;
@@ -13,14 +14,17 @@ namespace SportGroups.Data.Repositories.Interfaces
         Task CreateArticleAsync(Article article);
         Task<Article?> GetArticleByIdAsync(int articleId);
 
-        // 取得指定社團發布的所有文章
-        Task<List<Article>> GetAllArticlesOfClubAsync(int clubId);
+        // 依條件取得指定文章
+        Task<List<Article>> GetArticlesByConditionAsync(ArticlesQueryConditions condition);
 
-        // 取得指定運動項目的所有文章
-        Task<List<Article>> GetAllArticlesBySportAsync(Sport sport);
+        //// 取得指定社團發布的所有文章
+        //Task<List<Article>> GetAllArticlesOfClubAsync(int clubId);
 
-        // 取得包含指定關鍵字的所有文章
-        Task<List<Article>> GetAllArticlesByKeywordAsync(string keyword);
+        //// 取得指定運動項目的所有文章
+        //Task<List<Article>> GetAllArticlesBySportAsync(Sport sport);
+
+        //// 取得包含指定關鍵字的所有文章
+        //Task<List<Article>> GetAllArticlesByKeywordAsync(string keyword);
         void UpdateArticle(Article article);
         //Task<bool> UpdateTitleAsync(int articleId, string newTitle);
         //Task<bool> UpdateContentAsync(int articleId, string newContent);

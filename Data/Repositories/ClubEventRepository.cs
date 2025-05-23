@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Data.SqlClient;
+using SportGroups.Shared.DTOs.ClubEventDTOs;
 
 namespace SportGroups.Data.Repositories
 {
@@ -36,34 +37,62 @@ namespace SportGroups.Data.Repositories
             _context.ClubEvents.Remove(clubEvent);
         }
 
-        public async Task<List<ClubEvent>> GetAllEventsBySportAsync(Sport sport)
+        public async Task<List<ClubEvent>> GetEventsByConditionAsync(EventsQueryConditions condition)
         {
-            var sportParam = new SqlParameter("@sport", sport);
-            return await _context.ClubEvents
-                .FromSqlRaw("EXEC usp_GetAll_ClubEvents_BySport @sport", sportParam)
-                .ToListAsync();
+            var events = new List<ClubEvent>();
+
+            if (condition.ClubId.HasValue)
+            {
+                events = await _context.ClubEvents.Include(e => e.ClubId == condition.ClubId).ToListAsync();
+            }
+
+            if (condition.Sport.HasValue)
+            {
+                var sportParam = new SqlParameter("@sport", condition.Sport);
+                events = await _context.ClubEvents
+                    .FromSqlRaw("EXEC usp_GetAll_ClubEvents_BySport @sport", sportParam)
+                    .ToListAsync();
+            }
+
+            if (!string.IsNullOrWhiteSpace(condition.Keyword))
+            {
+                var keywordParam = new SqlParameter("@keyword", condition.Keyword);
+                events = await _context.ClubEvents
+                    .FromSqlRaw("EXEC usp_GetAll_ClubEvents_ByKeyword @keyword", keywordParam)
+                    .ToListAsync();
+            }
+
+            return events;
         }
 
-        public async Task<List<ClubEvent>> GetAllEventsOfClubAsync(int clubId)
-        {
-            return await _context.ClubEvents.Include(e => e.ClubId == clubId).ToListAsync();
-        }
+        //public async Task<List<ClubEvent>> GetAllEventsBySportAsync(Sport sport)
+        //{
+        //    var sportParam = new SqlParameter("@sport", sport);
+        //    return await _context.ClubEvents
+        //        .FromSqlRaw("EXEC usp_GetAll_ClubEvents_BySport @sport", sportParam)
+        //        .ToListAsync();
+        //}
 
-        public async Task<List<ClubEvent>> GetAllEventsOfUserAsync(Guid userId)
-        {
-            var uIdParam = new SqlParameter("@userId", userId);
-            return await _context.ClubEvents
-                .FromSqlRaw("EXEC usp_GetAll_ClubEvents_OfUser @userId", uIdParam)
-                .ToListAsync();
-        }
+        //public async Task<List<ClubEvent>> GetAllEventsOfClubAsync(int clubId)
+        //{
+        //    return await _context.ClubEvents.Include(e => e.ClubId == clubId).ToListAsync();
+        //}
 
-        public async Task<List<ClubEvent>> GetAllEventsByKeywordAsync(string keyword)
-        {
-            var keywordParam = new SqlParameter("@keyword", keyword);
-            return await _context.ClubEvents
-                .FromSqlRaw("EXEC usp_GetAll_ClubEvents_ByKeyword @keyword", keywordParam)
-                .ToListAsync();
-        }
+        //public async Task<List<ClubEvent>> GetAllEventsOfUserAsync(Guid userId)
+        //{
+        //    var uIdParam = new SqlParameter("@userId", userId);
+        //    return await _context.ClubEvents
+        //        .FromSqlRaw("EXEC usp_GetAll_ClubEvents_OfUser @userId", uIdParam)
+        //        .ToListAsync();
+        //}
+
+        //public async Task<List<ClubEvent>> GetAllEventsByKeywordAsync(string keyword)
+        //{
+        //    var keywordParam = new SqlParameter("@keyword", keyword);
+        //    return await _context.ClubEvents
+        //        .FromSqlRaw("EXEC usp_GetAll_ClubEvents_ByKeyword @keyword", keywordParam)
+        //        .ToListAsync();
+        //}
 
         public void UpdateEvent(ClubEvent clubEvent)
         {

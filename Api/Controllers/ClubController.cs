@@ -17,21 +17,32 @@ namespace SportGroups.Api.Controllers
             _clubService = clubService;
         }
 
-        [HttpPost("getallclubsbysport")]
-        public async Task<ActionResult<List<ClubInfoDto>>> GetAllClubsBySport(Sport sport)
-        {
-            var clubs = await _clubService.GetAllClubsBySportAsync(sport);
-            if (clubs == null)
-            {
-                return NotFound();
-            }
-            return Ok(clubs);
-        }
+        //[HttpPost("getallclubsbysport")]
+        //public async Task<ActionResult<List<ClubInfoDto>>> GetAllClubsBySport(Sport sport)
+        //{
+        //    var clubs = await _clubService.GetAllClubsBySportAsync(sport);
+        //    if (clubs == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return Ok(clubs);
+        //}
 
-        [HttpPost("getallclubsbykeyword")]
-        public async Task<ActionResult<List<ClubInfoDto>>> GetAllClubsByKeyword(string keyword)
+        //[HttpPost("getallclubsbykeyword")]
+        //public async Task<ActionResult<List<ClubInfoDto>>> GetAllClubsByKeyword(string keyword)
+        //{
+        //    var clubs = await _clubService.GetAllClubsByKeywordAsync(keyword);
+        //    if(clubs == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return Ok(clubs);
+        //}
+
+        [HttpGet("clubs")]
+        public async Task<ActionResult<List<ClubInfoDto>>> GetClubs(ClubsQueryConditions condition)
         {
-            var clubs = await _clubService.GetAllClubsByKeywordAsync(keyword);
+            var clubs = await _clubService.GetClubsByConditionAsync(condition);
             if(clubs == null)
             {
                 return NotFound();
@@ -39,7 +50,7 @@ namespace SportGroups.Api.Controllers
             return Ok(clubs);
         }
 
-        [HttpPost("clubinfo")]
+        [HttpGet("club")]
         public async Task<ActionResult<ClubInfoDto>> GetClubInfo([FromBody]int clubId)
         {
             var club = await _clubService.GetClubInfoAsync(clubId);

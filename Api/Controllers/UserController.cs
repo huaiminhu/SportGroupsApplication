@@ -25,7 +25,10 @@ namespace SportGroups.Api.Controllers
         public async Task<ActionResult<UserInfoDto>> GetMyInfo()
         {
             var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
-            if(userIdClaim == null)return Unauthorized();
+            if (userIdClaim == null) 
+            {
+                return Unauthorized();
+            }
             var result = await _userService.GetUserByIdAsync(int.Parse(userIdClaim.Value));
             return Ok(result);
         }
@@ -45,7 +48,10 @@ namespace SportGroups.Api.Controllers
         public async Task<IActionResult> UpdateInfo(UserUpdateDto userUpdateDto)
         {
             var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
-            if (userIdClaim == null) return Unauthorized();
+            if (userIdClaim == null)
+            {
+                return Unauthorized();
+            }
             var result = await _userService.UpdateUserAsync(userUpdateDto);
             return result ? NoContent() : BadRequest();
         }

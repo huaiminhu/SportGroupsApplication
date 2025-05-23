@@ -3,5 +3,6 @@ CREATE PROCEDURE usp_GetAll_Clubs_ByKeyword
 AS
 BEGIN
 	SELECT * FROM Clubs
-	WHERE ClubName LIKE "%@keyword%";
+	WHERE ClubName LIKE "%@keyword%"
+	ORDER BY establishedDate DESC;
 END;

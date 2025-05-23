@@ -36,5 +36,6 @@ namespace SportGroups.Api.Controllers
             var result = await _authService.RegisterAsync(registerDto);
             return result ? CreatedAtAction(nameof(UserController.GetMyInfo), "User", new { }, result) : BadRequest();
         }
+
     }
 }

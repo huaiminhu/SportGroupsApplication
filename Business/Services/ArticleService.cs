@@ -144,16 +144,22 @@ namespace SportGroups.Business.Services
             return _mapper.Map<ArticleInfoDto?>(article);
         }
 
-        public async Task<List<ArticleInfoDto>> GetAllArticlesByKeywordAsync(string keyword)
+        public async Task<List<ArticleInfoDto>> GetArticlesByConditionAsync(ArticlesQueryConditions condition)
         {
-            var articles = await _unitOfWork.Articles.GetAllArticlesByKeywordAsync(keyword);
+            var articles = await _unitOfWork.Articles.GetArticlesByConditionAsync(condition);
             return _mapper.Map<List<ArticleInfoDto>>(articles);
         }
 
-        public async Task<List<ArticleInfoDto>> GetAllArticlesBySportAsync(Sport sport)
-        {
-            var articles = await _unitOfWork.Articles.GetAllArticlesBySportAsync(sport);
-            return _mapper.Map<List<ArticleInfoDto>>(articles);
-        }
+        //public async Task<List<ArticleInfoDto>> GetAllArticlesByKeywordAsync(string keyword)
+        //{
+        //    var articles = await _unitOfWork.Articles.GetAllArticlesByKeywordAsync(keyword);
+        //    return _mapper.Map<List<ArticleInfoDto>>(articles);
+        //}
+
+        //public async Task<List<ArticleInfoDto>> GetAllArticlesBySportAsync(Sport sport)
+        //{
+        //    var articles = await _unitOfWork.Articles.GetAllArticlesBySportAsync(sport);
+        //    return _mapper.Map<List<ArticleInfoDto>>(articles);
+        //}
     }
 }

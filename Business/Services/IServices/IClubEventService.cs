@@ -13,15 +13,18 @@ namespace SportGroups.Business.Services.IServices
     {
         Task<bool> CreateEventAsync(NewEventDto newEventDto);
         Task<EventInfoDto> GetEventInfoAsync(int eventId);
+
+        // 依條件取得指定活動
+        Task<List<EventInfoDto>> GetEventsByConditionAsync(EventsQueryConditions condition);
         
-        // 取得使用指定運動項目所有活動
-        Task<List<EventInfoDto>> GetAllEventsBySportAsync(Sport sport);
+        //// 取得使用指定運動項目所有活動
+        //Task<List<EventInfoDto>> GetAllEventsBySportAsync(Sport sport);
         
-        // 取得指定社團所有活動
-        Task<List<EventInfoDto>> GetAllEventsOfClubAsync(int clubId);
+        //// 取得指定社團所有活動
+        //Task<List<EventInfoDto>> GetAllEventsOfClubAsync(int clubId);
         
-        // 取得指定關鍵字所有活動
-        Task<List<EventInfoDto>> GetAllEventByKeywordAsync(string keyword);
+        //// 取得指定關鍵字所有活動
+        //Task<List<EventInfoDto>> GetAllEventByKeywordAsync(string keyword);
         Task<bool> UpdateEventAsync(EventUpdateDto eventUpdateDto);
         //Task<bool> ChangeNameAsync(int eventId, string newName);
         //Task<bool> ChangeDescriptionAsync(int eventId, string newDescription);

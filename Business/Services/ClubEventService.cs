@@ -68,23 +68,29 @@ namespace SportGroups.Business.Services
             return await _unitOfWork.SaveChangesAsync() > 0;
         }
 
-        public async Task<List<EventInfoDto>> GetAllEventByKeywordAsync(string keyword)
+        public async Task<List<EventInfoDto>> GetEventsByConditionAsync(EventsQueryConditions condition)
         {
-            var events = await _unitOfWork.ClubEvents.GetAllEventsByKeywordAsync(keyword);
+            var events = await _unitOfWork.ClubEvents.GetEventsByConditionAsync(condition);
             return _mapper.Map<List<EventInfoDto>>(events);
         }
 
-        public async Task<List<EventInfoDto>> GetAllEventsBySportAsync(Sport sport)
-        {
-            var events = await _unitOfWork.ClubEvents.GetAllEventsBySportAsync(sport);
-            return _mapper.Map<List<EventInfoDto>>(events);
-        }
+        //public async Task<List<EventInfoDto>> GetAllEventByKeywordAsync(string keyword)
+        //{
+        //    var events = await _unitOfWork.ClubEvents.GetAllEventsByKeywordAsync(keyword);
+        //    return _mapper.Map<List<EventInfoDto>>(events);
+        //}
 
-        public async Task<List<EventInfoDto>> GetAllEventsOfClubAsync(int clubId)
-        {
-            var events = await _unitOfWork.ClubEvents.GetAllEventsOfClubAsync(clubId);
-            return _mapper.Map<List<EventInfoDto>>(events);
-        }
+        //public async Task<List<EventInfoDto>> GetAllEventsBySportAsync(Sport sport)
+        //{
+        //    var events = await _unitOfWork.ClubEvents.GetAllEventsBySportAsync(sport);
+        //    return _mapper.Map<List<EventInfoDto>>(events);
+        //}
+
+        //public async Task<List<EventInfoDto>> GetAllEventsOfClubAsync(int clubId)
+        //{
+        //    var events = await _unitOfWork.ClubEvents.GetAllEventsOfClubAsync(clubId);
+        //    return _mapper.Map<List<EventInfoDto>>(events);
+        //}
 
         public async Task<EventInfoDto> GetEventInfoAsync(int eventId)
         {

@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Data.SqlClient;
+using SportGroups.Shared.DTOs.ArticleDTOs;
 
 namespace SportGroups.Data.Repositories
 {
@@ -36,26 +37,54 @@ namespace SportGroups.Data.Repositories
             _context.Articles.Remove(article);
         }
 
-        public async Task<List<Article>> GetAllArticlesOfClubAsync(int clubId)
+        public async Task<List<Article>> GetArticlesByConditionAsync(ArticlesQueryConditions condition)
         {
-            return await _context.Articles.Include(a => a.ClubId == clubId).ToListAsync();
+            var articles = new List<Article>();
+
+            if (condition.ClubId.HasValue)
+            {
+                articles = await _context.Articles.Include(a => a.ClubId == condition.ClubId).ToListAsync();
+            }
+            
+            if (condition.Sport.HasValue)
+            {
+                var sportParam = new SqlParameter("@sport", condition.Sport);
+                articles = await _context.Articles
+                    .FromSqlRaw("EXEC usp_GetAll_Articles_BySport @sport", sportParam)
+                    .ToListAsync();
+            }
+            
+            if (!string.IsNullOrWhiteSpace(condition.Keyword))
+            {
+                var keywordParam = new SqlParameter("@keyword", condition.Keyword);
+                articles = await _context.Articles
+                    .FromSqlRaw("EXEC usp_GetAll_Articles_ByKeyword @keyword", keywordParam)
+                    .ToListAsync();
+            }
+
+            return articles;
         }
 
-        public async Task<List<Article>> GetAllArticlesBySportAsync(Sport sport)
-        {
-            var sportParam = new SqlParameter("@sport", sport);
-            return await _context.Articles
-                .FromSqlRaw("EXEC usp_GetAll_Articles_BySport @sport", sportParam)
-                .ToListAsync();
-        }
+        //public async Task<List<Article>> GetAllArticlesOfClubAsync(int clubId)
+        //{
+        //    return await _context.Articles.Include(a => a.ClubId == clubId).ToListAsync();
+        //}
 
-        public async Task<List<Article>> GetAllArticlesByKeywordAsync(string keyword)
-        {
-            var keywordParam = new SqlParameter("@keyword", keyword);
-            return await _context.Articles
-                .FromSqlRaw("EXEC usp_GetAll_Articles_ByKeyword @keyword", keywordParam)
-                .ToListAsync();
-        }
+        //public async Task<List<Article>> GetAllArticlesBySportAsync(Sport sport)
+        //{
+        //    var sportParam = new SqlParameter("@sport", sport);
+        //    return await _context.Articles
+        //        .FromSqlRaw("EXEC usp_GetAll_Articles_BySport @sport", sportParam)
+        //        .ToListAsync();
+        //}
+
+        //public async Task<List<Article>> GetAllArticlesByKeywordAsync(string keyword)
+        //{
+        //    var keywordParam = new SqlParameter("@keyword", keyword);
+        //    return await _context.Articles
+        //        .FromSqlRaw("EXEC usp_GetAll_Articles_ByKeyword @keyword", keywordParam)
+        //        .ToListAsync();
+        //}
 
         public void UpdateArticle(Article article)
         {

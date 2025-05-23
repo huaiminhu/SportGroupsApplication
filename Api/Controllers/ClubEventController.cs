@@ -26,7 +26,7 @@ namespace SportGroups.Api.Controllers
             return result ? CreatedAtAction(nameof(ClubEventController.GetEventInfo), "ClubEvent", new { }, result) : BadRequest();
         }
 
-        [HttpPost("eventinfo")]
+        [HttpGet("event")]
         public async Task<ActionResult<EventInfoDto>> GetEventInfo([FromBody]int eventId)
         {
             var info = await _clubEventService.GetEventInfoAsync(eventId);
@@ -37,10 +37,10 @@ namespace SportGroups.Api.Controllers
             return Ok(info);
         }
 
-        [HttpPost("getalleventsbysport")]
-        public async Task<ActionResult<List<EventInfoDto>>> GetAllEventsBySport(Sport sport)
+        [HttpGet("events")]
+        public async Task<ActionResult<List<EventInfoDto>>> GetEvents(EventsQueryConditions condition)
         {
-            var events = await _clubEventService.GetAllEventsBySportAsync(sport);
+            var events = await _clubEventService.GetEventsByConditionAsync(condition);
             if(events == null)
             {
                 return NotFound();
@@ -48,27 +48,27 @@ namespace SportGroups.Api.Controllers
             return Ok(events);
         }
 
-        [HttpPost("getalleventsofclub")]
-        public async Task<ActionResult<List<EventInfoDto>>> GettAllEventOfClub([FromBody]int clubId)
-        {
-            var clubs = await _clubEventService.GetAllEventsOfClubAsync(clubId);
-            if(clubs == null)
-            {
-                return NotFound();
-            }
-            return Ok(clubs);
-        }
+        //[HttpPost("getalleventsofclub")]
+        //public async Task<ActionResult<List<EventInfoDto>>> GettAllEventOfClub([FromBody]int clubId)
+        //{
+        //    var clubs = await _clubEventService.GetAllEventsOfClubAsync(clubId);
+        //    if(clubs == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return Ok(clubs);
+        //}
 
-        [HttpPost("getalleventsbykeyword")]
-        public async Task<ActionResult<List<EventInfoDto>>> GetAllEventsByKeyword([FromBody]string keyword)
-        {
-            var events = await _clubEventService.GetAllEventByKeywordAsync(keyword);
-            if(events == null)
-            {
-                return NotFound();
-            }
-            return Ok(events);
-        }
+        //[HttpPost("getalleventsbykeyword")]
+        //public async Task<ActionResult<List<EventInfoDto>>> GetAllEventsByKeyword([FromBody]string keyword)
+        //{
+        //    var events = await _clubEventService.GetAllEventByKeywordAsync(keyword);
+        //    if(events == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return Ok(events);
+        //}
 
         [Authorize]
         [HttpPut("update")]
