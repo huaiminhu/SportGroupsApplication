@@ -11,6 +11,7 @@ namespace SportGroups.Data.Repositories.Interfaces
     {
         Task AddMediaAsync(Media media);
         Task<List<Media>> GetAllMediasOfArticleAsync(int articleId);
+        Task<Media?> GetMediaByIdAsync(int mediaId);
         void UpdateMedia(Media media);
         //Task<bool> UpdateNameAsync(int mediaId, string newName);
         //Task<bool> UpdateUrlAsync(int mediaId, string newUrl);

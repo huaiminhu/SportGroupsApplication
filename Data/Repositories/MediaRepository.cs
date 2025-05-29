@@ -34,6 +34,11 @@ namespace SportGroups.Data.Repositories
             return await _context.Medias.Include(m => m.ArticleId == articleId).ToListAsync();
         }
 
+        public async Task<Media?> GetMediaByIdAsync(int mediaId)
+        {
+            return await _context.Medias.FirstOrDefaultAsync(m => m.ArticleMediaId == mediaId);
+        }
+
         public void UpdateMedia(Media media)
         {
             _context.Medias.Update(media);

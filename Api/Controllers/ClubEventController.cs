@@ -38,7 +38,7 @@ namespace SportGroups.Api.Controllers
         }
 
         [HttpGet("events")]
-        public async Task<ActionResult<List<EventInfoDto>>> GetEvents(EventsQueryConditions condition)
+        public async Task<ActionResult<List<EventInfoDto>>> GetEvents([FromQuery] EventsQueryConditions condition)
         {
             var events = await _clubEventService.GetEventsByConditionAsync(condition);
             if(events == null)

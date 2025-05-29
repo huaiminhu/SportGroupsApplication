@@ -40,7 +40,7 @@ namespace SportGroups.Api.Controllers
         //}
 
         [HttpGet("clubs")]
-        public async Task<ActionResult<List<ClubInfoDto>>> GetClubs(ClubsQueryConditions condition)
+        public async Task<ActionResult<List<ClubInfoDto>>> GetClubs([FromQuery] ClubsQueryConditions condition)
         {
             var clubs = await _clubService.GetClubsByConditionAsync(condition);
             if(clubs == null)

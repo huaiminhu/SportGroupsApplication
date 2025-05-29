@@ -24,7 +24,7 @@ namespace SportGroups.Api.Controllers
             return result ? CreatedAtAction(nameof(MessageController), "Message", new { }, result) : BadRequest();
         }
 
-        [HttpPost("displaymessage")]
+        [HttpGet("message")]
         public async Task<ActionResult<MessageInfoDto?>> GetMessage([FromBody]int messageId)
         {
             var message = await _messageService.GetMessageByIdAsync(messageId);
@@ -35,8 +35,8 @@ namespace SportGroups.Api.Controllers
             return Ok(message);
         }
 
-        [HttpPost("messagesofclub")]
-        public async Task<ActionResult<List<MessageInfoDto>>> GetAllMessagesOfClub([FromBody]int clubId)
+        [HttpGet("club/{clubId}/messages")]
+        public async Task<ActionResult<List<MessageInfoDto>>> GetAllMessagesOfClub([FromRoute]int clubId)
         {
             var messages = await _messageService.GetAllMessagesOfClubAsync(clubId);
             if(messages == null)

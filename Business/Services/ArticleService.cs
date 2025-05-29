@@ -60,7 +60,9 @@ namespace SportGroups.Business.Services
 
                 foreach (var media in toRemove)
                 {
-                    await _mediaService.DeleteMediaAsync(media.FileUrl);
+                    // 只有圖片或影片需要刪除實體檔案
+                    if (media.MediaType != MediaType.YouTube)
+                        await _mediaService.DeleteMediaAsync(media.FileUrl);
                     _unitOfWork.Medias.DeleteMedia(media);
                 }
             }
@@ -82,6 +84,26 @@ namespace SportGroups.Business.Services
                     });
                 }
             }
+
+            // 新增 YouTube 連結媒體
+            if (articleUpdateDto.YouTubeUrls != null)
+            {
+                foreach (var url in articleUpdateDto.YouTubeUrls)
+                {
+                    if (!string.IsNullOrWhiteSpace(url))
+                    {
+                        // 儲存為 MediaType = YouTube，不需處理實體檔案
+                        existing.Medias.Add(new Media
+                        {
+                            FileName = "YouTube影片", 
+                            MediaType = MediaType.YouTube,
+                            FileUrl = url, 
+                            AddedDate = nowTime
+                        });
+                    }
+                }
+            }
+
             existing.EditDate = nowTime;
             _mapper.Map(articleUpdateDto, existing);
             _unitOfWork.Articles.UpdateArticle(existing);
@@ -104,24 +126,59 @@ namespace SportGroups.Business.Services
         //    return await _unitOfWork.Articles.UpdateTitleAsync(articleId, newTitle);
         //}
 
-        public async Task<bool> CreateArticleAsync(NewArticleDto newArticleDto, List<IFormFile> medias)
+        public async Task<bool> CreateArticleAsync(NewArticleDto newArticleDto)
         {
             var nowTime = DateTime.Now;
             var newArticle = _mapper.Map<Article>(newArticleDto);
             newArticle.PostDate = nowTime;
             newArticle.EditDate = nowTime;
 
-            foreach (var file in medias)
+            // 新增新的媒體檔案
+            if (newArticleDto.Medias != null)
             {
-                var filePath = await _mediaService.SaveMediaAsync(file);
-                newArticle.Medias.Add(new Media
+                foreach (var file in newArticleDto.Medias)
                 {
-                    FileName = file.FileName,
-                    MediaType = file.ContentType.StartsWith("video") ? MediaType.Video : MediaType.Image, 
-                    FileUrl = filePath,
-                    AddedDate = nowTime
-                });
+                    var filePath = await _mediaService.SaveMediaAsync(file);
+                    newArticle.Medias.Add(new Media
+                    {
+                        FileName = file.FileName,
+                        MediaType = file.ContentType.StartsWith("video") ? MediaType.Video : MediaType.Image,
+                        FileUrl = filePath,
+                        AddedDate = nowTime
+                    });
+                }
             }
+
+            // 新增 YouTube 連結媒體
+            if (newArticleDto.YouTubeUrls != null)
+            {
+                foreach (var url in newArticleDto.YouTubeUrls)
+                {
+                    if (!string.IsNullOrWhiteSpace(url))
+                    {
+                        // 儲存為 MediaType = YouTube，不需處理實體檔案
+                        newArticle.Medias.Add(new Media
+                        {
+                            FileName = "YouTube影片",
+                            MediaType = MediaType.YouTube,
+                            FileUrl = url,
+                            AddedDate = nowTime
+                        });
+                    }
+                }
+            }
+
+            //foreach (var file in medias)
+            //{
+            //    var filePath = await _mediaService.SaveMediaAsync(file);
+            //    newArticle.Medias.Add(new Media
+            //    {
+            //        FileName = file.FileName,
+            //        MediaType = file.ContentType.StartsWith("video") ? MediaType.Video : MediaType.Image, 
+            //        FileUrl = filePath,
+            //        AddedDate = nowTime
+            //    });
+            //}
 
             await _unitOfWork.Articles.CreateArticleAsync(newArticle);
             return await _unitOfWork.SaveChangesAsync() > 0;

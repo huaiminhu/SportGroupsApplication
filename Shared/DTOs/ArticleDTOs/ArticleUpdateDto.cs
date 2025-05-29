@@ -16,5 +16,6 @@ namespace SportGroups.Shared.DTOs.ArticleDTOs
         public DateTime? EditDate { get; set; }
         public List<IFormFile>? Medias { get; set; }
         public List<int>? StayMediaIds { get; set; } = null!;// 要保留的 media id
+        public List<string>? YouTubeUrls { get; set; }
     }
 }
