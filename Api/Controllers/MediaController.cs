@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
@@ -27,6 +28,7 @@ namespace SportGroups.Api.Controllers
             _mapper = mapper;
         }
 
+        [Authorize(Roles = "ClubManager")]
         [HttpPost("upload")]
         public async Task<IActionResult> NewMedia([FromForm]IFormFile file)
         {
@@ -63,6 +65,7 @@ namespace SportGroups.Api.Controllers
             return Ok(transferedMedias);
         }
 
+        [Authorize(Roles = "ClubManager")]
         [HttpDelete("delete")]
         public async Task<IActionResult> DeleteMedia([FromBody] int MediaId)
         {

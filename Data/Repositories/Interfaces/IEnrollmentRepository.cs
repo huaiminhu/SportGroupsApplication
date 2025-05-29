@@ -12,5 +12,6 @@ namespace SportGroups.Data.Repositories.Interfaces
         // 新增活動報名
         Task AddEnrollmentAsync(int userId, int eventId, string phone, DateTime enrollDate);
         Task<Enrollment?> GetEnrollmentByIdAsync(int userId, int eventId);
+        Task<List<Enrollment>> GetAllEnrollmentOfUserAsync(int userId);
     }
 }

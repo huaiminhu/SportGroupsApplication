@@ -50,7 +50,7 @@ namespace SportGroups.Api.Controllers
             return Ok(article);
         }
 
-        [Authorize]
+        [Authorize(Roles = "ClubManager")]
         [HttpPost("create")]
         public async Task<IActionResult> CreateArticle(NewArticleDto newArticleDto)
         {
@@ -58,7 +58,7 @@ namespace SportGroups.Api.Controllers
             return result ? CreatedAtAction(nameof(ArticleController.GetArticle), "Article", new { }, result) : BadRequest();
         }
 
-        [Authorize]
+        [Authorize(Roles = "ClubManager")]
         [HttpPut("update")]
         public async Task<IActionResult> UpdateArticle(ArticleUpdateDto articleUpdateDto)
         {
@@ -66,7 +66,7 @@ namespace SportGroups.Api.Controllers
             return result ? NoContent() : BadRequest();
         }
 
-        [Authorize]
+        [Authorize(Roles = "ClubManager")]
         [HttpDelete("delete")]
         public async Task<IActionResult> DeleteArticle([FromBody]int articleId)
         {

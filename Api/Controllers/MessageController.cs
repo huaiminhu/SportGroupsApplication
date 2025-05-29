@@ -16,7 +16,7 @@ namespace SportGroups.Api.Controllers
             _messageService = messageService;
         }
 
-        [Authorize]
+        [Authorize(Roles = "ClubManager")]
         [HttpPost("create")]
         public async Task<IActionResult> CreateMessage(NewMessageDto newMessageDto)
         {
@@ -46,7 +46,7 @@ namespace SportGroups.Api.Controllers
             return Ok(messages);
         }
 
-        [Authorize]
+        [Authorize(Roles = "ClubManager")]
         [HttpPut("update")]
         public async Task<IActionResult> UpdateMessage(MessageUpdateDto messageUpdateDto)
         {
@@ -54,7 +54,7 @@ namespace SportGroups.Api.Controllers
             return result ? NoContent() : BadRequest();
         }
 
-        [Authorize]
+        [Authorize(Roles = "ClubManager")]
         [HttpDelete("delete")]
         public async Task<IActionResult> DeleteMessage([FromBody]int messageId)
         {

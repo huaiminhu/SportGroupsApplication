@@ -7,7 +7,7 @@ using System.Security.Claims;
 
 namespace SportGroups.Api.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "GeneralUser")]
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase

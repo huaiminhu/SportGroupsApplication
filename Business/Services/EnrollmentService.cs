@@ -36,5 +36,11 @@ namespace SportGroups.Business.Services
             var enrollment = await _unitOfWork.Enrollments.GetEnrollmentByIdAsync(userId, eventId);
             return _mapper.Map<EnrollmentInfoDto>(enrollment);
         }
+
+        public async Task<List<EnrollmentInfoDto>> GetAllEnrollmentsOfUserAsync(int userId)
+        {
+            var enrollment = await _unitOfWork.Enrollments.GetAllEnrollmentOfUserAsync(userId);
+            return _mapper.Map<List<EnrollmentInfoDto>>(enrollment);
+        }
     }
 }

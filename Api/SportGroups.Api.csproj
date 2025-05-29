@@ -12,10 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Business\SportGroups.Business.csproj" />
     <ProjectReference Include="..\Infrastructure\SportGroups.Infrastructure.csproj" />
   </ItemGroup>

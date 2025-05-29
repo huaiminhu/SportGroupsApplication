@@ -12,5 +12,6 @@ namespace SportGroups.Business.Services.IServices
         // 參加社團活動
         Task<bool> AttendEventAsync(NewEnrollmentDto newEnrollmentDto);
         Task<EnrollmentInfoDto?> GetEnrollmentByIdAsync(int userId, int eventId);
+        Task<List<EnrollmentInfoDto>> GetAllEnrollmentsOfUserAsync(int userId);
     }
 }

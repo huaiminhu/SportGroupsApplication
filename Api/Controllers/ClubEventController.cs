@@ -18,7 +18,7 @@ namespace SportGroups.Api.Controllers
             _clubEventService = clubEventService;
         }
 
-        [Authorize]
+        [Authorize(Roles = "ClubManager")]
         [HttpPost("create")]
         public async Task<IActionResult> CreateEvent(NewEventDto newEventDto)
         {
@@ -70,7 +70,7 @@ namespace SportGroups.Api.Controllers
         //    return Ok(events);
         //}
 
-        [Authorize]
+        [Authorize(Roles = "ClubManager")]
         [HttpPut("update")]
         public async Task<IActionResult> UpdateEvent(EventUpdateDto eventUpdateDto)
         {
@@ -78,7 +78,7 @@ namespace SportGroups.Api.Controllers
             return result ? NoContent() : BadRequest();
         }
 
-        [Authorize]
+        [Authorize(Roles = "ClubManager")]
         [HttpDelete("delete")]
         public async Task<IActionResult> DeleteEvent([FromBody]int eventId)
         {

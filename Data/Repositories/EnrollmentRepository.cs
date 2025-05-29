@@ -40,5 +40,13 @@ namespace SportGroups.Data.Repositories
                 .FromSqlRaw("EXEC usp_Get_Enrollments_ById @userId, @eventId", uIdParam, eIdParam)
                 .FirstOrDefaultAsync();
         }
+
+        public async Task<List<Enrollment>> GetAllEnrollmentOfUserAsync(int userId)
+        {
+            var uIdParam = new SqlParameter("userId", userId);
+            return await _context.Enrollments
+                .FromSqlRaw("EXEC usp_GetAll_Enrollment_OfUser @userId", uIdParam)
+                .ToListAsync();
+        }
     }
 }
