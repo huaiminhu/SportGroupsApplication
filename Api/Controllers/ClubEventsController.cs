@@ -10,24 +10,24 @@ namespace SportGroups.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ClubEventController : ControllerBase
+    public class ClubEventsController : ControllerBase
     {
         private readonly IClubEventService _clubEventService;
-        public ClubEventController(IClubEventService clubEventService)
+        public ClubEventsController(IClubEventService clubEventService)
         {
             _clubEventService = clubEventService;
         }
 
         [Authorize(Roles = "ClubManager")]
-        [HttpPost("create")]
-        public async Task<IActionResult> CreateEvent(NewEventDto newEventDto)
+        [HttpPost]
+        public async Task<IActionResult> CreateEvent([FromBody] NewEventDto newEventDto)
         {
             var result = await _clubEventService.CreateEventAsync(newEventDto);
-            return result ? CreatedAtAction(nameof(ClubEventController.GetEventInfo), "ClubEvent", new { }, result) : BadRequest();
+            return result ? CreatedAtAction(nameof(ClubEventsController.GetEventInfo), "ClubEvent", new { }, result) : BadRequest();
         }
 
-        [HttpGet("event")]
-        public async Task<ActionResult<EventInfoDto>> GetEventInfo([FromBody]int eventId)
+        [HttpGet("{eventId}")]
+        public async Task<ActionResult<EventInfoDto>> GetEventInfo(int eventId)
         {
             var info = await _clubEventService.GetEventInfoAsync(eventId);
             if(info == null)
@@ -37,7 +37,7 @@ namespace SportGroups.Api.Controllers
             return Ok(info);
         }
 
-        [HttpGet("events")]
+        [HttpGet]
         public async Task<ActionResult<List<EventInfoDto>>> GetEvents([FromQuery] EventsQueryConditions condition)
         {
             var events = await _clubEventService.GetEventsByConditionAsync(condition);
@@ -71,16 +71,16 @@ namespace SportGroups.Api.Controllers
         //}
 
         [Authorize(Roles = "ClubManager")]
-        [HttpPut("update")]
-        public async Task<IActionResult> UpdateEvent(EventUpdateDto eventUpdateDto)
+        [HttpPut("{eventId}")]
+        public async Task<IActionResult> UpdateEvent(int eventId, [FromBody] EventUpdateDto eventUpdateDto)
         {
-            var result = await _clubEventService.UpdateEventAsync(eventUpdateDto);
+            var result = await _clubEventService.UpdateEventAsync(eventId, eventUpdateDto);
             return result ? NoContent() : BadRequest();
         }
 
         [Authorize(Roles = "ClubManager")]
-        [HttpDelete("delete")]
-        public async Task<IActionResult> DeleteEvent([FromBody]int eventId)
+        [HttpDelete("{eventId}")]
+        public async Task<IActionResult> DeleteEvent(int eventId)
         {
             var result = await _clubEventService.DeleteEventAsync(eventId);
             return result ? NoContent() : BadRequest();

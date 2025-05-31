@@ -8,7 +8,6 @@ namespace SportGroups.Shared.DTOs.MessageDTOs
 {
     public class MessageUpdateDto
     {
-        public int MessageId { get; set; }
         public string? Title { get; set; }
         public string? MessageContent { get; set; }
     }

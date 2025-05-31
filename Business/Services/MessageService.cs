@@ -52,9 +52,9 @@ namespace SportGroups.Business.Services
             return _mapper.Map<MessageInfoDto>(message);
         }
 
-        public async Task<bool> UpdateMessageAsync(MessageUpdateDto messageUpdateDto)
+        public async Task<bool> UpdateMessageAsync(int messageId, MessageUpdateDto messageUpdateDto)
         {
-            var existing = await _unitOfWork.Messages.GetMessageByIdAsync(messageUpdateDto.MessageId);
+            var existing = await _unitOfWork.Messages.GetMessageByIdAsync(messageId);
             if(existing == null)
             {
                 return false;

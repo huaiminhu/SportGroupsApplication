@@ -23,9 +23,9 @@ namespace SportGroups.Business.Services
             _mapper = mapper;
         }
 
-        public async Task<bool> UpdateClubAsync(ClubUpdateDto clubUpdateDto)
+        public async Task<bool> UpdateClubAsync(int clubId, ClubUpdateDto clubUpdateDto)
         {
-            var existing = await _unitOfWork.Clubs.GetClubByIdAsync(clubUpdateDto.ClubId);
+            var existing = await _unitOfWork.Clubs.GetClubByIdAsync(clubId);
             if(existing == null)
             {
                 return false;

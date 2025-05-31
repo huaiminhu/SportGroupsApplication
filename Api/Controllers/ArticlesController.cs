@@ -9,16 +9,16 @@ namespace SportGroups.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ArticleController : ControllerBase
+    public class ArticlesController : ControllerBase
     {
         private readonly IArticleService _articleService;
-        public ArticleController(IArticleService articleService)
+        public ArticlesController(IArticleService articleService)
         {
             _articleService = articleService;
         }
 
-        [HttpGet("articles")]
-        public async Task<ActionResult<List<ArticleInfoDto>>> SearchArticles([FromQuery]ArticlesQueryConditions condition)
+        [HttpGet("search")]
+        public async Task<ActionResult<List<ArticleInfoDto>>> SearchArticles([FromQuery] ArticlesQueryConditions condition)
         {
             var articles = await _articleService.GetArticlesByConditionAsync(condition);
             if(articles == null)
@@ -39,8 +39,8 @@ namespace SportGroups.Api.Controllers
         //    return Ok(articles);
         //}
 
-        [HttpGet("article")]
-        public async Task<ActionResult<ArticleInfoDto?>> GetArticle([FromBody]int articleId)
+        [HttpGet("{articleId}")]
+        public async Task<ActionResult<ArticleInfoDto?>> GetArticle(int articleId)
         {
             var article = await _articleService.GetArticleByIdAsync(articleId);
             if(article == null)
@@ -51,24 +51,24 @@ namespace SportGroups.Api.Controllers
         }
 
         [Authorize(Roles = "ClubManager")]
-        [HttpPost("create")]
-        public async Task<IActionResult> CreateArticle(NewArticleDto newArticleDto)
+        [HttpPost]
+        public async Task<IActionResult> CreateArticle([FromBody] NewArticleDto newArticleDto)
         {
             var result = await _articleService.CreateArticleAsync(newArticleDto);
-            return result ? CreatedAtAction(nameof(ArticleController.GetArticle), "Article", new { }, result) : BadRequest();
+            return result ? CreatedAtAction(nameof(ArticlesController.GetArticle), "Article", new { }, result) : BadRequest();
         }
 
         [Authorize(Roles = "ClubManager")]
-        [HttpPut("update")]
-        public async Task<IActionResult> UpdateArticle(ArticleUpdateDto articleUpdateDto)
+        [HttpPut("{articleId}")]
+        public async Task<IActionResult> UpdateArticle(int articleId, [FromBody] ArticleUpdateDto articleUpdateDto)
         {
-            var result = await _articleService.UpdateArticleAsync(articleUpdateDto);
+            var result = await _articleService.UpdateArticleAsync(articleId, articleUpdateDto);
             return result ? NoContent() : BadRequest();
         }
 
         [Authorize(Roles = "ClubManager")]
-        [HttpDelete("delete")]
-        public async Task<IActionResult> DeleteArticle([FromBody]int articleId)
+        [HttpDelete("{articleId}")]
+        public async Task<IActionResult> DeleteArticle(int articleId)
         {
             var result = await _articleService.DeleteArticleAsync(articleId);
             return result ? NoContent() : BadRequest();

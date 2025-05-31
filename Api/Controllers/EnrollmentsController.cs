@@ -9,23 +9,23 @@ namespace SportGroups.Api.Controllers
     [Authorize(Roles = "GeneralUser")]
     [Route("api/[controller]")]
     [ApiController]
-    public class EnrollmentController : ControllerBase
+    public class EnrollmentsController : ControllerBase
     {
         private readonly IEnrollmentService _enrollmentService;
-        public EnrollmentController(IEnrollmentService enrollmentService)
+        public EnrollmentsController(IEnrollmentService enrollmentService)
         {
             _enrollmentService = enrollmentService;
         }
 
         [HttpPost("attend")]
-        public async Task<IActionResult> AttendEvent(NewEnrollmentDto newEnrollmentDto)
+        public async Task<IActionResult> AttendEvent([FromBody] NewEnrollmentDto newEnrollmentDto)
         {
             var result = await _enrollmentService.AttendEventAsync(newEnrollmentDto);
-            return result ? CreatedAtAction(nameof(EnrollmentController.GetEnrollment), "Enrollment", new { }, result) : BadRequest();
+            return result ? CreatedAtAction(nameof(EnrollmentsController.GetEnrollment), "Enrollment", new { }, result) : BadRequest();
         }
 
-        [HttpGet("clubevent/{eventId}/user/{userId}/enrollment")]
-        public async Task<ActionResult<EnrollmentInfoDto?>> GetEnrollment([FromQuery] int eventId, int userId)
+        [HttpGet("event/{eventId}/user/{userId}")]
+        public async Task<ActionResult<EnrollmentInfoDto?>> GetEnrollment(int eventId, int userId)
         {
             var enrollment = await _enrollmentService.GetEnrollmentByIdAsync(userId, eventId);
             if (enrollment == null)
@@ -35,8 +35,8 @@ namespace SportGroups.Api.Controllers
             return Ok(enrollment);
         }
 
-        [HttpGet("user/{userId}/Enrollments")]
-        public async Task<ActionResult<List<EnrollmentInfoDto>>> EnrollmentsOfUser([FromQuery] int userId)
+        [HttpGet("user/{userId}")]
+        public async Task<ActionResult<List<EnrollmentInfoDto>>> EnrollmentsOfUser(int userId)
         {
             var enrollments = await _enrollmentService.GetAllEnrollmentsOfUserAsync(userId);
             if (enrollments == null)

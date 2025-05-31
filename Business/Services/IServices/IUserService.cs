@@ -10,7 +10,7 @@ namespace SportGroups.Business.Services.IServices
     public interface IUserService
     {
         Task<UserInfoDto> GetUserByIdAsync(int userId);
-        Task<bool> UpdateUserAsync(UserUpdateDto userUpdateDto);
+        Task<bool> UpdateUserAsync(int userId, UserUpdateDto userUpdateDto);
         //Task<bool> ChangeNickNameAsync(int userId, string newName);
         //Task<bool> ChangePasswordAsync(int userId, string newPassword);
     }

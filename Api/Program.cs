@@ -35,6 +35,7 @@ builder.Services.AddScoped<IClubMemberService, ClubMemberService>();
 builder.Services.AddScoped<IEnrollmentRepository, EnrollmentRepository>();
 builder.Services.AddScoped<IEnrollmentService, EnrollmentService>();
 builder.Services.AddScoped<IMediaRepository, MediaRepository>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 builder.Services.AddInfrastructure(config); // Infrastructure¼hª`¤J
 

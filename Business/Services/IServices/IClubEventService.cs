@@ -25,7 +25,7 @@ namespace SportGroups.Business.Services.IServices
         
         //// 取得指定關鍵字所有活動
         //Task<List<EventInfoDto>> GetAllEventByKeywordAsync(string keyword);
-        Task<bool> UpdateEventAsync(EventUpdateDto eventUpdateDto);
+        Task<bool> UpdateEventAsync(int eventId, EventUpdateDto eventUpdateDto);
         //Task<bool> ChangeNameAsync(int eventId, string newName);
         //Task<bool> ChangeDescriptionAsync(int eventId, string newDescription);
         //Task<bool> ChangeAddressAsync(int eventId, string newAddress);

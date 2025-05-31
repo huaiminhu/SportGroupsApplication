@@ -43,9 +43,9 @@ namespace SportGroups.Business.Services
         //    return await _unitOfWork.SaveChangesAsync() > 0;
         //}
 
-        public async Task<bool> UpdateArticleAsync(ArticleUpdateDto articleUpdateDto)
+        public async Task<bool> UpdateArticleAsync(int articleId, ArticleUpdateDto articleUpdateDto)
         {
-            var existing = await _unitOfWork.Articles.GetArticleByIdAsync(articleUpdateDto.ArticleId);
+            var existing = await _unitOfWork.Articles.GetArticleByIdAsync(articleId);
             if (existing == null)
             {
                 return false;

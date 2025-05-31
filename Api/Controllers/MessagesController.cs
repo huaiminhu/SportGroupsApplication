@@ -8,24 +8,24 @@ namespace SportGroups.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class MessageController : ControllerBase
+    public class MessagesController : ControllerBase
     {
         private readonly IMessageService _messageService;
-        public MessageController(IMessageService messageService)
+        public MessagesController(IMessageService messageService)
         {
             _messageService = messageService;
         }
 
         [Authorize(Roles = "ClubManager")]
-        [HttpPost("create")]
-        public async Task<IActionResult> CreateMessage(NewMessageDto newMessageDto)
+        [HttpPost]
+        public async Task<IActionResult> CreateMessage([FromBody] NewMessageDto newMessageDto)
         {
             var result = await _messageService.CreateMessageAsync(newMessageDto);
-            return result ? CreatedAtAction(nameof(MessageController), "Message", new { }, result) : BadRequest();
+            return result ? CreatedAtAction(nameof(MessagesController), "Message", new { }, result) : BadRequest();
         }
 
-        [HttpGet("message")]
-        public async Task<ActionResult<MessageInfoDto?>> GetMessage([FromBody]int messageId)
+        [HttpGet("{messageId}")]
+        public async Task<ActionResult<MessageInfoDto?>> GetMessage(int messageId)
         {
             var message = await _messageService.GetMessageByIdAsync(messageId);
             if (message == null)
@@ -35,8 +35,8 @@ namespace SportGroups.Api.Controllers
             return Ok(message);
         }
 
-        [HttpGet("club/{clubId}/messages")]
-        public async Task<ActionResult<List<MessageInfoDto>>> GetAllMessagesOfClub([FromRoute]int clubId)
+        [HttpGet("club/{clubId}")]
+        public async Task<ActionResult<List<MessageInfoDto>>> GetAllMessagesOfClub(int clubId)
         {
             var messages = await _messageService.GetAllMessagesOfClubAsync(clubId);
             if(messages == null)
@@ -47,16 +47,16 @@ namespace SportGroups.Api.Controllers
         }
 
         [Authorize(Roles = "ClubManager")]
-        [HttpPut("update")]
-        public async Task<IActionResult> UpdateMessage(MessageUpdateDto messageUpdateDto)
+        [HttpPut("{messageId}")]
+        public async Task<IActionResult> UpdateMessage(int messageId, [FromBody] MessageUpdateDto messageUpdateDto)
         {
-            var result = await _messageService.UpdateMessageAsync(messageUpdateDto);
+            var result = await _messageService.UpdateMessageAsync(messageId, messageUpdateDto);
             return result ? NoContent() : BadRequest();
         }
 
         [Authorize(Roles = "ClubManager")]
-        [HttpDelete("delete")]
-        public async Task<IActionResult> DeleteMessage([FromBody]int messageId)
+        [HttpDelete("{meassageId}")]
+        public async Task<IActionResult> DeleteMessage(int messageId)
         {
             var result = await _messageService.DeleteMessageAsync(messageId);
             return result ? NoContent() : BadRequest();

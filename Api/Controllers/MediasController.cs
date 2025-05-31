@@ -14,12 +14,12 @@ namespace SportGroups.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class MediaController : ControllerBase
+    public class MediasController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMediaService _mediaService;
         private readonly IMapper _mapper;
-        public MediaController(IUnitOfWork unitOfWork, 
+        public MediasController(IUnitOfWork unitOfWork, 
             IMediaService mediaService, 
             IMapper mapper)
         {
@@ -30,7 +30,7 @@ namespace SportGroups.Api.Controllers
 
         [Authorize(Roles = "ClubManager")]
         [HttpPost("upload")]
-        public async Task<IActionResult> NewMedia([FromForm]IFormFile file)
+        public async Task<IActionResult> NewMedia([FromForm] IFormFile file)
         {
             var fileUrl = _mediaService.SaveMediaAsync(file).ToString();
             
@@ -53,8 +53,8 @@ namespace SportGroups.Api.Controllers
             return Created(string.Empty, media);
         }
 
-        [HttpGet("medias")]
-        public async Task<ActionResult<List<MediaInfoDto>>> GetMediasOfArticle([FromBody] int articleId)
+        [HttpGet("article/{articleId}")]
+        public async Task<ActionResult<List<MediaInfoDto>>> GetMediasOfArticle(int articleId)
         {
             var medias = await _unitOfWork.Medias.GetAllMediasOfArticleAsync(articleId);
             if(medias == null)
@@ -66,8 +66,8 @@ namespace SportGroups.Api.Controllers
         }
 
         [Authorize(Roles = "ClubManager")]
-        [HttpDelete("delete")]
-        public async Task<IActionResult> DeleteMedia([FromBody] int MediaId)
+        [HttpDelete("{mediaId}")]
+        public async Task<IActionResult> DeleteMedia(int MediaId)
         {
             var media = await _unitOfWork.Medias.GetMediaByIdAsync(MediaId);
             if(media == null)

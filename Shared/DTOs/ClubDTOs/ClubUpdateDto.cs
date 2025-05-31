@@ -9,7 +9,6 @@ namespace SportGroups.Shared.DTOs.ClubDTOs
 {
     public class ClubUpdateDto
     {
-        public int ClubId { get; set; }
         public string? ClubName { get; set; }
         public string? Phone { get; set; }
         public string? Email { get; set; }

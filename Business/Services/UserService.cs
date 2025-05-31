@@ -22,9 +22,9 @@ namespace SportGroups.Business.Services
             _mapper = mapper;
         }
 
-        public async Task<bool> UpdateUserAsync(UserUpdateDto userUpdateDto)
+        public async Task<bool> UpdateUserAsync(int userId, UserUpdateDto userUpdateDto)
         {
-            var existing = await _unitOfWork.Users.GetUserByIdAsync(userUpdateDto.UserId);
+            var existing = await _unitOfWork.Users.GetUserByIdAsync(userId);
             if(existing == null)
             {
                 return false;

@@ -24,9 +24,9 @@ namespace SportGroups.Business.Services
         }
 
 
-        public async Task<bool> UpdateEventAsync(EventUpdateDto eventUpdateDto)
+        public async Task<bool> UpdateEventAsync(int eventId, EventUpdateDto eventUpdateDto)
         {
-            var existing = await _unitOfWork.ClubEvents.GetEventByIdAsync(eventUpdateDto.ClubEventId);
+            var existing = await _unitOfWork.ClubEvents.GetEventByIdAsync(eventId);
             if (existing == null)
             {
                 return false;

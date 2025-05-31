@@ -10,11 +10,11 @@ namespace SportGroups.Api.Controllers
     [Authorize(Roles = "GeneralUser")]
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class UsersController : ControllerBase
     {
         private readonly IAuthService _authService;
         private readonly IUserService _userService;
-        public UserController(IAuthService authService,
+        public UsersController(IAuthService authService,
             IUserService userService)
         {
             _authService = authService;
@@ -44,15 +44,15 @@ namespace SportGroups.Api.Controllers
         //    return Ok(result);
         //}
 
-        [HttpPut("update")]
-        public async Task<IActionResult> UpdateInfo(UserUpdateDto userUpdateDto)
+        [HttpPut("{userId}")]
+        public async Task<IActionResult> UpdateInfo(int userId, [FromBody] UserUpdateDto userUpdateDto)
         {
             var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
             if (userIdClaim == null)
             {
                 return Unauthorized();
             }
-            var result = await _userService.UpdateUserAsync(userUpdateDto);
+            var result = await _userService.UpdateUserAsync(userId, userUpdateDto);
             return result ? NoContent() : BadRequest();
         }
     }

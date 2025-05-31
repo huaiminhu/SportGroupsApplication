@@ -9,10 +9,10 @@ namespace SportGroups.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ClubController : ControllerBase
+    public class ClubsController : ControllerBase
     {
         private readonly IClubService _clubService;
-        public ClubController(IClubService clubService)
+        public ClubsController(IClubService clubService)
         {
             _clubService = clubService;
         }
@@ -39,7 +39,7 @@ namespace SportGroups.Api.Controllers
         //    return Ok(clubs);
         //}
 
-        [HttpGet("clubs")]
+        [HttpGet]
         public async Task<ActionResult<List<ClubInfoDto>>> GetClubs([FromQuery] ClubsQueryConditions condition)
         {
             var clubs = await _clubService.GetClubsByConditionAsync(condition);
@@ -50,8 +50,8 @@ namespace SportGroups.Api.Controllers
             return Ok(clubs);
         }
 
-        [HttpGet("club")]
-        public async Task<ActionResult<ClubInfoDto>> GetClubInfo([FromBody]int clubId)
+        [HttpGet("{clubId}")]
+        public async Task<ActionResult<ClubInfoDto>> GetClubInfo(int clubId)
         {
             var club = await _clubService.GetClubInfoAsync(clubId);
             if(club == null)
@@ -62,24 +62,24 @@ namespace SportGroups.Api.Controllers
         }
 
         [Authorize(Roles = "ClubManager")]
-        [HttpPost("create")]
-        public async Task<IActionResult> CreateClub(NewClubDto newClubDto)
+        [HttpPost]
+        public async Task<IActionResult> CreateClub([FromBody] NewClubDto newClubDto)
         {
             var result = await _clubService.CreateClubAsync(newClubDto);
-            return result ? CreatedAtAction(nameof(ClubController.GetClubInfo), "Club", new {}, result) : BadRequest();
+            return result ? CreatedAtAction(nameof(ClubsController.GetClubInfo), "Club", new {}, result) : BadRequest();
         }
 
         [Authorize(Roles = "ClubManager")]
-        [HttpPut("update")]
-        public async Task<IActionResult> UpdateClub(ClubUpdateDto newClubUpdateDto)
+        [HttpPut("{clubId}")]
+        public async Task<IActionResult> UpdateClub(int clubId, [FromBody] ClubUpdateDto newClubUpdateDto)
         {
-            var result = await _clubService.UpdateClubAsync(newClubUpdateDto);
+            var result = await _clubService.UpdateClubAsync(clubId, newClubUpdateDto);
             return result ? NoContent() : BadRequest();
         }
 
         [Authorize(Roles = "ClubManager")]
-        [HttpDelete("delete")]
-        public async Task<IActionResult> DeleteClub([FromBody]int clubId)
+        [HttpDelete("{clubId}")]
+        public async Task<IActionResult> DeleteClub(int clubId)
         {
             var result = await _clubService.DeleteClubAsync(clubId);
             return result ? NoContent() : BadRequest();

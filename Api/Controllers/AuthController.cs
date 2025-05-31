@@ -20,7 +20,7 @@ namespace SportGroups.Api.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult<UserInfoDto>> Login(LoginDto loginDto)
+        public async Task<ActionResult<UserInfoDto>> Login([FromBody] LoginDto loginDto)
         {
             var result = await _authService.AuthAsync(loginDto);
             if (result == null)
@@ -31,10 +31,10 @@ namespace SportGroups.Api.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register(RegisterDto registerDto)
+        public async Task<IActionResult> Register([FromBody] RegisterDto registerDto)
         {
             var result = await _authService.RegisterAsync(registerDto);
-            return result ? CreatedAtAction(nameof(UserController.GetMyInfo), "User", new { }, result) : BadRequest();
+            return result ? CreatedAtAction(nameof(UsersController.GetMyInfo), "User", new { }, result) : BadRequest();
         }
 
     }
