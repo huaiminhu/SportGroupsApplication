@@ -9,7 +9,7 @@ namespace SportGroups.Business.Services.IServices
 {
     public interface IMessageService
     {
-        Task<bool> CreateMessageAsync(NewMessageDto newMessageDto);
+        Task<int?> CreateMessageAsync(NewMessageDto newMessageDto);
         Task<MessageInfoDto?> GetMessageByIdAsync(int messageId);
         
         // 取得指定社團所有訊息

@@ -55,7 +55,11 @@ namespace SportGroups.Api.Controllers
         public async Task<IActionResult> CreateArticle([FromBody] NewArticleDto newArticleDto)
         {
             var result = await _articleService.CreateArticleAsync(newArticleDto);
-            return result ? CreatedAtAction(nameof(ArticlesController.GetArticle), "Article", new { }, result) : BadRequest();
+            if(result == null)
+            {
+                return BadRequest();
+            }
+            return CreatedAtAction(nameof(ArticlesController.GetArticle), new { articleId = result }, result);
         }
 
         [Authorize(Roles = "ClubManager")]

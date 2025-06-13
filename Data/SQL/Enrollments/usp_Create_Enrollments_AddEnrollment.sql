@@ -1,3 +1,6 @@
+USE SportGroups;
+GO
+
 CREATE PROCEDURE usp_Create_Enrollments_AddEnrollment
 	@userId     INT, 
 	@eventId    INT, 

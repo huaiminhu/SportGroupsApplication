@@ -21,7 +21,7 @@ namespace SportGroups.Api.Controllers
         public async Task<IActionResult> AttendEvent([FromBody] NewEnrollmentDto newEnrollmentDto)
         {
             var result = await _enrollmentService.AttendEventAsync(newEnrollmentDto);
-            return result ? CreatedAtAction(nameof(EnrollmentsController.GetEnrollment), "Enrollment", new { }, result) : BadRequest();
+            return result ? CreatedAtAction(nameof(EnrollmentsController.GetEnrollment), "Enrollments", new { }, result) : BadRequest();
         }
 
         [HttpGet("event/{eventId}/user/{userId}")]

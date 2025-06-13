@@ -3,7 +3,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SportGroups.Business.Services.IServices;
 using SportGroups.Shared.DTOs.ClubDTOs;
+using SportGroups.Shared.DTOs.ClubMemberDTOs;
 using SportGroups.Shared.Enums;
+using System.Security.Claims;
 
 namespace SportGroups.Api.Controllers
 {
@@ -51,7 +53,7 @@ namespace SportGroups.Api.Controllers
         }
 
         [HttpGet("{clubId}")]
-        public async Task<ActionResult<ClubInfoDto>> GetClubInfo(int clubId)
+        public async Task<ActionResult<ClubInfoDto>> GetClub(int clubId)
         {
             var club = await _clubService.GetClubInfoAsync(clubId);
             if(club == null)
@@ -65,8 +67,18 @@ namespace SportGroups.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateClub([FromBody] NewClubDto newClubDto)
         {
-            var result = await _clubService.CreateClubAsync(newClubDto);
-            return result ? CreatedAtAction(nameof(ClubsController.GetClubInfo), "Club", new {}, result) : BadRequest();
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+            if (userIdClaim == null)
+            {
+                return Unauthorized();
+            }
+            var userId = int.Parse(userIdClaim.Value);
+            var result = await _clubService.CreateClubAsync(userId, newClubDto);
+            if(result == null)
+            {
+                return BadRequest();
+            }
+            return CreatedAtAction(nameof(GetClub), new {clubId = result}, result);
         }
 
         [Authorize(Roles = "ClubManager")]

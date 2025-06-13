@@ -1,3 +1,6 @@
+USE SportGroups;
+GO
+
 CREATE PROCEDURE use_GetAll_ClubEvents_OfUser
 	@userId INT
 AS

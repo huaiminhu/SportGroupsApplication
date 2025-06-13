@@ -1,5 +1,6 @@
 ﻿using SportGroups.Shared.DTOs.ClubDTOs;
 using SportGroups.Shared.DTOs.EnrollmentDTOs;
+using SportGroups.Shared.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -13,8 +14,9 @@ namespace SportGroups.Shared.DTOs.UserDTOs
     {
         public string NickName { get; set; } = string.Empty;
         public string UserName { get; set; } = string.Empty;
-        public List<ClubInfoDto> Clubs { get; set; } = new List<ClubInfoDto>();
-        public List<EnrollmentInfoDto> Enrollments { get; set; } = new List<EnrollmentInfoDto>();
+        public Role Role { get; set; }
+        //public List<ClubInfoDto> Clubs { get; set; } = new List<ClubInfoDto>();
+        //public List<EnrollmentInfoDto> Enrollments { get; set; } = new List<EnrollmentInfoDto>();
         public string Token { get; set; } = string.Empty;
         public string RefreshToken { get; set; } = string.Empty;
     }

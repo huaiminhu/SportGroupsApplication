@@ -1,6 +1,7 @@
 ﻿using SportGroups.Data.Entities;
 using SportGroups.Shared.DTOs;
 using SportGroups.Shared.DTOs.ClubDTOs;
+using SportGroups.Shared.DTOs.ClubMemberDTOs;
 using SportGroups.Shared.Enums;
 using System;
 using System.Collections.Generic;
@@ -23,7 +24,7 @@ namespace SportGroups.Business.Services.IServices
         
         // 取得社團資訊
         Task<ClubInfoDto?> GetClubInfoAsync(int clubId);
-        Task<bool> CreateClubAsync(NewClubDto newClubDto);
+        Task<int?> CreateClubAsync(int userId, NewClubDto newClubDto);
         Task<bool> UpdateClubAsync(int clubId, ClubUpdateDto newClubUpdateDto);
         //Task<bool> ChangeNameAsync(int clubId, string newName);
         //Task<bool> ChangePhoneAsync(int clubId, string newPhoneNum);

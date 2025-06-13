@@ -43,7 +43,7 @@ namespace SportGroups.Data.Repositories
 
             if (condition.ClubId.HasValue)
             {
-                articles = await _context.Articles.Include(a => a.ClubId == condition.ClubId).ToListAsync();
+                articles = await _context.Articles.Where(a => a.ClubId == condition.ClubId).ToListAsync();
             }
             
             if (condition.Sport.HasValue)

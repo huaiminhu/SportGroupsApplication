@@ -14,7 +14,7 @@ namespace SportGroups.Business.Mapping
         public MediaProfile()
         {
             CreateMap<NewMediaDto, Media>().ReverseMap();
-            CreateMap<List<Media>, List<MediaInfoDto>>().ReverseMap();
+            //CreateMap<List<Media>, List<MediaInfoDto>>().ReverseMap();
         }
     }
 }

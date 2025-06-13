@@ -1,3 +1,6 @@
+USE SportGroups;
+GO
+
 CREATE PROCEDURE usp_GetAll_ClubEvents_BySport
 	@sport INT 
 AS 

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using SportGroups.Data.Entities;
 using SportGroups.Shared.DTOs.ArticleDTOs;
+using SportGroups.Shared.DTOs.MediaDTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,9 +17,9 @@ namespace SportGroups.Business.Mapping
         {
             CreateMap<ArticleUpdateDto, Article>()
                 .ForAllMembers(option => option.Condition((source, destination, sourceMember) => sourceMember != null));
-            CreateMap<NewArticleDto, Article>().ReverseMap();
-            CreateMap<Article, ArticleInfoDto>().ReverseMap();
-            CreateMap<List<Article>, List<ArticleInfoDto>>().ReverseMap();
+            CreateMap<NewArticleDto, Article>();
+            CreateMap<Article, ArticleInfoDto>();
+            CreateMap<Media, MediaInfoDto>().ReverseMap();
         }
     }
 }

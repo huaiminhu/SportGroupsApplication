@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SportGroups.Data.Repositories;
+using SportGroups.Shared.DTOs.ClubMemberDTOs;
 
 namespace SportGroups.Business.Services
 {
@@ -54,12 +55,18 @@ namespace SportGroups.Business.Services
         //    return await _unitOfWork.Clubs.UpdatePhoneAsync(clubId, newPhoneNum);
         //}
 
-        public async Task<bool> CreateClubAsync(NewClubDto newClubDto)
+        public async Task<int?> CreateClubAsync(int userId, NewClubDto newClubDto)
         {
             var newClub = _mapper.Map<Club>(newClubDto);
             newClub.establishedDate = DateTime.Now;
+            newClub.Members.Add(new ClubMember
+            {
+                UserId = userId,
+                JoinTime = newClub.establishedDate
+            });
             await _unitOfWork.Clubs.CreateClubAsync(newClub);
-            return await _unitOfWork.SaveChangesAsync() > 0;
+            var result = await _unitOfWork.SaveChangesAsync();
+            return result > 0 ? newClub.ClubId : null;
         }
 
         public async Task<bool> DeleteClubAsync(int clubId)

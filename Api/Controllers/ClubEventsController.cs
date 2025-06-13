@@ -23,11 +23,15 @@ namespace SportGroups.Api.Controllers
         public async Task<IActionResult> CreateEvent([FromBody] NewEventDto newEventDto)
         {
             var result = await _clubEventService.CreateEventAsync(newEventDto);
-            return result ? CreatedAtAction(nameof(ClubEventsController.GetEventInfo), "ClubEvent", new { }, result) : BadRequest();
+            if(result == null)
+            {
+                return BadRequest();
+            }
+            return CreatedAtAction(nameof(ClubEventsController.GetEvent), new { eventId = result }, result);
         }
 
         [HttpGet("{eventId}")]
-        public async Task<ActionResult<EventInfoDto>> GetEventInfo(int eventId)
+        public async Task<ActionResult<EventInfoDto>> GetEvent(int eventId)
         {
             var info = await _clubEventService.GetEventInfoAsync(eventId);
             if(info == null)

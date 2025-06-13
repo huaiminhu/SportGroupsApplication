@@ -20,7 +20,7 @@ namespace SportGroups.Business.Services.IServices
         //// 取得使用指定關鍵字所有文章
         //Task<List<ArticleInfoDto>> GetAllArticlesByKeywordAsync(string keyword);
         Task<ArticleInfoDto?> GetArticleByIdAsync(int articleId);
-        Task<bool> CreateArticleAsync(NewArticleDto newArticleDto);
+        Task<int?> CreateArticleAsync(NewArticleDto newArticleDto);
         Task<bool> UpdateArticleAsync(int articleId, ArticleUpdateDto articleUpdateDto);
         //Task<bool> ChangeTitleAsync(int articleId, string newTitle);
         //Task<bool> ChangeContentAsync(int articleId, string newContent);

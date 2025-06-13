@@ -50,11 +50,12 @@ namespace SportGroups.Business.Services
         //    return await _unitOfWork.ClubEvents.UpdateNameAsync(eventId, newName);
         //}
 
-        public async Task<bool> CreateEventAsync(NewEventDto newEventDto)
+        public async Task<int?> CreateEventAsync(NewEventDto newEventDto)
         {
             var newEvent = _mapper.Map<ClubEvent>(newEventDto);
             await _unitOfWork.ClubEvents.CreateEventAsync(newEvent);
-            return await _unitOfWork.SaveChangesAsync() > 0;
+            var result = await _unitOfWork.SaveChangesAsync();
+            return result > 0 ? newEvent.ClubEventId : null;
         }
 
         public async Task<bool> DeleteEventAsync(int eventId)

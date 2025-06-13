@@ -35,10 +35,9 @@ namespace SportGroups.Business.Services
 
         public async Task<bool> RegisterAsync(RegisterDto registerDto)
         {
-            registerDto.Password = BCrypt.Net.BCrypt.HashPassword(registerDto.Password);
             var newUser = _mapper.Map<User>(registerDto);
+            newUser.PasswordHash = BCrypt.Net.BCrypt.HashPassword(registerDto.Password);
             newUser.RegisterDate = DateTime.Now;
-            await _unitOfWork.Users.CreateUserAsync(newUser);
             return await _unitOfWork.SaveChangesAsync() > 0;
         }
 

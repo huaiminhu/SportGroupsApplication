@@ -11,7 +11,7 @@ namespace SportGroups.Data.Entities
 {
     public class Media   // 文章媒體
     {
-        public int ArticleMediaId { get; set; }
+        public int MediaId { get; set; }
         public string FileName { get; set; } = string.Empty;
         public MediaType MediaType { get; set; }
         public string FileUrl { get; set; } = string.Empty;

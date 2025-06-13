@@ -22,11 +22,13 @@ namespace SportGroups.Business.Services
             _mapper = mapper;
         }
 
-        public async Task<bool> CreateMessageAsync(NewMessageDto newMessageDto)
+        public async Task<int?> CreateMessageAsync(NewMessageDto newMessageDto)
         {
             var newMessage = _mapper.Map<Message>(newMessageDto);
+            newMessage.PostDate = DateTime.Now;
             await _unitOfWork.Messages.CreateMessageAsync(newMessage);
-            return await _unitOfWork.SaveChangesAsync() > 0;
+            var result = await _unitOfWork.SaveChangesAsync();
+            return result > 0 ? newMessage.MessageId : null;
         }
 
         public async Task<bool> DeleteMessageAsync(int messageId)

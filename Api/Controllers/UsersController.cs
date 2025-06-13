@@ -7,7 +7,7 @@ using System.Security.Claims;
 
 namespace SportGroups.Api.Controllers
 {
-    [Authorize(Roles = "GeneralUser")]
+    [Authorize(Roles = "GeneralUser, ClubManager")]
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
@@ -29,7 +29,8 @@ namespace SportGroups.Api.Controllers
             {
                 return Unauthorized();
             }
-            var result = await _userService.GetUserByIdAsync(int.Parse(userIdClaim.Value));
+            var userId = int.Parse(userIdClaim.Value);
+            var result = await _userService.GetUserByIdAsync(userId);
             return Ok(result);
         }
 
@@ -44,14 +45,15 @@ namespace SportGroups.Api.Controllers
         //    return Ok(result);
         //}
 
-        [HttpPut("{userId}")]
-        public async Task<IActionResult> UpdateInfo(int userId, [FromBody] UserUpdateDto userUpdateDto)
+        [HttpPut("update-info")]
+        public async Task<IActionResult> UpdateInfo([FromBody] UserUpdateDto userUpdateDto)
         {
             var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
             if (userIdClaim == null)
             {
                 return Unauthorized();
             }
+            var userId = int.Parse(userIdClaim.Value);
             var result = await _userService.UpdateUserAsync(userId, userUpdateDto);
             return result ? NoContent() : BadRequest();
         }

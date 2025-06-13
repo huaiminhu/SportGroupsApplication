@@ -16,9 +16,9 @@ namespace SportGroups.Business.Mapping
         {
             CreateMap<EventUpdateDto, ClubEvent>()
                 .ForAllMembers(option => option.Condition((source, destination, sourceMember) => sourceMember != null));
-            CreateMap<NewEventDto, ClubEvent>().ReverseMap();
-            CreateMap<ClubEvent, EventInfoDto>().ReverseMap();
-            CreateMap<List<ClubEvent>, List<EventInfoDto>>().ReverseMap();
+            CreateMap<NewEventDto, ClubEvent>();
+            CreateMap<ClubEvent, EventInfoDto>();
+            //CreateMap<List<ClubEvent>, List<EventInfoDto>>().ReverseMap();
         }
     }
 }

@@ -55,7 +55,7 @@ namespace SportGroups.Business.Services
             if (articleUpdateDto.StayMediaIds != null)
             {
                 var toRemove = existing.Medias
-                    .Where(m => !articleUpdateDto.StayMediaIds.Contains(m.ArticleMediaId))
+                    .Where(m => !articleUpdateDto.StayMediaIds.Contains(m.MediaId))
                     .ToList();
 
                 foreach (var media in toRemove)
@@ -105,7 +105,7 @@ namespace SportGroups.Business.Services
             }
 
             existing.EditDate = nowTime;
-            _mapper.Map(articleUpdateDto, existing);
+            //_mapper.Map(articleUpdateDto, existing);
             _unitOfWork.Articles.UpdateArticle(existing);
             return await _unitOfWork.SaveChangesAsync() > 0;
         }
@@ -126,7 +126,7 @@ namespace SportGroups.Business.Services
         //    return await _unitOfWork.Articles.UpdateTitleAsync(articleId, newTitle);
         //}
 
-        public async Task<bool> CreateArticleAsync(NewArticleDto newArticleDto)
+        public async Task<int?> CreateArticleAsync(NewArticleDto newArticleDto)
         {
             var nowTime = DateTime.Now;
             var newArticle = _mapper.Map<Article>(newArticleDto);
@@ -181,7 +181,8 @@ namespace SportGroups.Business.Services
             //}
 
             await _unitOfWork.Articles.CreateArticleAsync(newArticle);
-            return await _unitOfWork.SaveChangesAsync() > 0;
+            var result = await _unitOfWork.SaveChangesAsync();
+            return result > 0 ? newArticle.ArticleId : null;
         }
 
         public async Task<bool> DeleteArticleAsync(int articleId)

@@ -1,3 +1,6 @@
+USE SportGroups;
+GO
+
 CREATE PROCEDURE usp_Create_ClubMembers_AddMember
 	@userId INT, 
 	@clubId INT, 

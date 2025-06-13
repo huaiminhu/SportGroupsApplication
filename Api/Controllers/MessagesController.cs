@@ -21,7 +21,11 @@ namespace SportGroups.Api.Controllers
         public async Task<IActionResult> CreateMessage([FromBody] NewMessageDto newMessageDto)
         {
             var result = await _messageService.CreateMessageAsync(newMessageDto);
-            return result ? CreatedAtAction(nameof(MessagesController), "Message", new { }, result) : BadRequest();
+            if(result == null)
+            {
+                return BadRequest();
+            }
+            return CreatedAtAction(nameof(MessagesController.GetMessage), new { messageId = result }, result);
         }
 
         [HttpGet("{messageId}")]
@@ -55,7 +59,7 @@ namespace SportGroups.Api.Controllers
         }
 
         [Authorize(Roles = "ClubManager")]
-        [HttpDelete("{meassageId}")]
+        [HttpDelete("{messageId}")]
         public async Task<IActionResult> DeleteMessage(int messageId)
         {
             var result = await _messageService.DeleteMessageAsync(messageId);

@@ -31,12 +31,12 @@ namespace SportGroups.Data.Repositories
 
         public async Task<List<Media>> GetAllMediasOfArticleAsync(int articleId)
         {
-            return await _context.Medias.Include(m => m.ArticleId == articleId).ToListAsync();
+            return await _context.Medias.Where(m => m.ArticleId == articleId).ToListAsync();
         }
 
         public async Task<Media?> GetMediaByIdAsync(int mediaId)
         {
-            return await _context.Medias.FirstOrDefaultAsync(m => m.ArticleMediaId == mediaId);
+            return await _context.Medias.FirstOrDefaultAsync(m => m.MediaId == mediaId);
         }
 
         public void UpdateMedia(Media media)

@@ -34,7 +34,7 @@ namespace SportGroups.Api.Controllers
         public async Task<IActionResult> Register([FromBody] RegisterDto registerDto)
         {
             var result = await _authService.RegisterAsync(registerDto);
-            return result ? CreatedAtAction(nameof(UsersController.GetMyInfo), "User", new { }, result) : BadRequest();
+            return result ? Created($"/api/users/myinfo", new { }) : BadRequest(); 
         }
 
     }
