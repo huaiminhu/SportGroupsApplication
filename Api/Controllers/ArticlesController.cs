@@ -52,7 +52,8 @@ namespace SportGroups.Api.Controllers
 
         [Authorize(Roles = "ClubManager")]
         [HttpPost]
-        public async Task<IActionResult> CreateArticle([FromBody] NewArticleDto newArticleDto)
+        [Consumes("multipart/form-data")]
+        public async Task<IActionResult> CreateArticle([FromForm] NewArticleDto newArticleDto)
         {
             var result = await _articleService.CreateArticleAsync(newArticleDto);
             if(result == null)
@@ -64,7 +65,8 @@ namespace SportGroups.Api.Controllers
 
         [Authorize(Roles = "ClubManager")]
         [HttpPut("{articleId}")]
-        public async Task<IActionResult> UpdateArticle(int articleId, [FromBody] ArticleUpdateDto articleUpdateDto)
+        [Consumes("multipart/form-data")]
+        public async Task<IActionResult> UpdateArticle(int articleId, [FromForm] ArticleUpdateDto articleUpdateDto)
         {
             var result = await _articleService.UpdateArticleAsync(articleId, articleUpdateDto);
             return result ? NoContent() : BadRequest();
