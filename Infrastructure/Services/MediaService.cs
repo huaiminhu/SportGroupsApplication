@@ -14,6 +14,11 @@ namespace SportGroups.Infrastructure.Services
 
         public async Task<string> SaveMediaAsync(IFormFile file)
         {
+            if (!Directory.Exists(_rootPath))
+            {
+                Directory.CreateDirectory(_rootPath);
+            }
+
             var fileName = Guid.NewGuid() + Path.GetExtension(file.FileName);
             var fullPath = Path.Combine(_rootPath, fileName);
 

@@ -116,5 +116,5 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
-
+app.UseStaticFiles(); // ¤¹³\¦s¨ú wwwroot
 app.Run();

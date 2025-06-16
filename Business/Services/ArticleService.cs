@@ -51,6 +51,8 @@ namespace SportGroups.Business.Services
                 return false;
             }
 
+            _mapper.Map(articleUpdateDto, existing);
+
             // 刪除未保留的媒體
             if (articleUpdateDto.StayMediaIds != null)
             {
@@ -105,7 +107,6 @@ namespace SportGroups.Business.Services
             }
 
             existing.EditDate = nowTime;
-            //_mapper.Map(articleUpdateDto, existing);
             _unitOfWork.Articles.UpdateArticle(existing);
             return await _unitOfWork.SaveChangesAsync() > 0;
         }

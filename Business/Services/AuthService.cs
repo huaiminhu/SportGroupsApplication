@@ -38,6 +38,7 @@ namespace SportGroups.Business.Services
             var newUser = _mapper.Map<User>(registerDto);
             newUser.PasswordHash = BCrypt.Net.BCrypt.HashPassword(registerDto.Password);
             newUser.RegisterDate = DateTime.Now;
+            await _unitOfWork.Users.CreateUserAsync(newUser);
             return await _unitOfWork.SaveChangesAsync() > 0;
         }
 

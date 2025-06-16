@@ -1,11 +1,58 @@
 {
   "Version": 1,
-  "Hash": "VYX0l4lA6pjeviDd2U3CSXfaVltfg2XLW69lXW4wxlY=",
+  "Hash": "trFj+aG6bBBIZ1T/pl/FyE0Xe74E3rG/l7Hdl+6kueY=",
   "Source": "SportGroups.Api",
   "BasePath": "_content/SportGroups.Api",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": []
+  "DiscoveryPatterns": [
+    {
+      "Name": "SportGroups.Api\\wwwroot",
+      "Source": "SportGroups.Api",
+      "ContentRoot": "C:\\Users\\hankh\\Desktop\\SportGroups\\Api\\wwwroot\\",
+      "BasePath": "_content/SportGroups.Api",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\hankh\\Desktop\\SportGroups\\Api\\wwwroot\\uploads\\.gitkeep",
+      "SourceId": "SportGroups.Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\hankh\\Desktop\\SportGroups\\Api\\wwwroot\\",
+      "BasePath": "_content/SportGroups.Api",
+      "RelativePath": "uploads/.gitkeep",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\.gitkeep"
+    },
+    {
+      "Identity": "C:\\Users\\hankh\\Desktop\\SportGroups\\Api\\wwwroot\\uploads\\4f3c3033-81a8-4882-92ce-59a9db9fecc3.png",
+      "SourceId": "SportGroups.Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\hankh\\Desktop\\SportGroups\\Api\\wwwroot\\",
+      "BasePath": "_content/SportGroups.Api",
+      "RelativePath": "uploads/4f3c3033-81a8-4882-92ce-59a9db9fecc3.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\4f3c3033-81a8-4882-92ce-59a9db9fecc3.png"
+    }
+  ]
 }

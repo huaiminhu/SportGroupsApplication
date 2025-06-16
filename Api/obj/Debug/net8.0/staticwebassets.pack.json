@@ -1,0 +1,29 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\hankh\\Desktop\\SportGroups\\Api\\wwwroot\\uploads\\.gitkeep",
+      "PackagePath": "staticwebassets\\uploads\\.gitkeep"
+    },
+    {
+      "Id": "C:\\Users\\hankh\\Desktop\\SportGroups\\Api\\wwwroot\\uploads\\4f3c3033-81a8-4882-92ce-59a9db9fecc3.png",
+      "PackagePath": "staticwebassets\\uploads\\4f3c3033-81a8-4882-92ce-59a9db9fecc3.png"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.SportGroups.Api.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.SportGroups.Api.props",
+      "PackagePath": "build\\SportGroups.Api.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.SportGroups.Api.props",
+      "PackagePath": "buildMultiTargeting\\SportGroups.Api.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.SportGroups.Api.props",
+      "PackagePath": "buildTransitive\\SportGroups.Api.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

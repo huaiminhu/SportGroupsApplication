@@ -17,7 +17,8 @@ namespace SportGroups.Business.Mapping
         {
             CreateMap<ArticleUpdateDto, Article>()
                 .ForAllMembers(option => option.Condition((source, destination, sourceMember) => sourceMember != null));
-            CreateMap<NewArticleDto, Article>();
+            CreateMap<NewArticleDto, Article>()
+                .ForMember(dest => dest.Medias, opt => opt.Ignore()); // 避免自動轉換 List<IFormFile> -> List<Media>
             CreateMap<Article, ArticleInfoDto>();
             CreateMap<Media, MediaInfoDto>().ReverseMap();
         }

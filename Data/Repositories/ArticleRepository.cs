@@ -29,7 +29,7 @@ namespace SportGroups.Data.Repositories
 
         public async Task<Article?> GetArticleByIdAsync(int articleId)
         {
-            return await _context.Articles.FirstOrDefaultAsync(a => a.ArticleId == articleId);
+            return await _context.Articles.Include(m => m.Medias).FirstOrDefaultAsync(a => a.ArticleId == articleId);
         }
 
         public void DeleteArticle(Article article)
@@ -43,23 +43,31 @@ namespace SportGroups.Data.Repositories
 
             if (condition.ClubId.HasValue)
             {
-                articles = await _context.Articles.Where(a => a.ClubId == condition.ClubId).ToListAsync();
+                return articles = await _context.Articles.Where(a => a.ClubId == condition.ClubId).Include(m => m.Medias).ToListAsync();
             }
             
             if (condition.Sport.HasValue)
             {
-                var sportParam = new SqlParameter("@sport", condition.Sport);
-                articles = await _context.Articles
-                    .FromSqlRaw("EXEC usp_GetAll_Articles_BySport @sport", sportParam)
+                return articles = await _context.Articles
+                    .Where(a => a.Sport == condition.Sport)
+                    .Include(a => a.Medias)
                     .ToListAsync();
+                //var sportParam = new SqlParameter("@sport", condition.Sport);
+                //return articles = await _context.Articles
+                //    .FromSqlRaw("EXEC usp_GetAll_Articles_BySport @sport", sportParam)
+                //    .ToListAsync();
             }
             
             if (!string.IsNullOrWhiteSpace(condition.Keyword))
             {
-                var keywordParam = new SqlParameter("@keyword", condition.Keyword);
-                articles = await _context.Articles
-                    .FromSqlRaw("EXEC usp_GetAll_Articles_ByKeyword @keyword", keywordParam)
+                return articles = await _context.Articles
+                    .Where(a => a.Title.Contains(condition.Keyword))
+                    .Include(a => a.Medias)
                     .ToListAsync();
+                //var keywordParam = new SqlParameter("@keyword", condition.Keyword);
+                //return articles = await _context.Articles
+                //    .FromSqlRaw("EXEC usp_GetAll_Articles_ByKeyword @keyword", keywordParam)
+                //    .ToListAsync();
             }
 
             return articles;

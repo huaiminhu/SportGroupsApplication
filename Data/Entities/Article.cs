@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SportGroups.Shared.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,7 @@ namespace SportGroups.Data.Entities
     public class Article   // 社團文章
     {
         public int ArticleId { get; set; }
+        public Sport Sport { get; set; }
         public string Title { get; set; } = string.Empty;
         public string ArticleContent { get; set; } = string.Empty;
         public DateTime PostDate { get; set; }
