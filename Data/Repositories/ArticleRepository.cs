@@ -51,6 +51,7 @@ namespace SportGroups.Data.Repositories
                 return articles = await _context.Articles
                     .Where(a => a.Sport == condition.Sport)
                     .Include(a => a.Medias)
+                    .OrderByDescending(a => a.EditDate)
                     .ToListAsync();
                 //var sportParam = new SqlParameter("@sport", condition.Sport);
                 //return articles = await _context.Articles
@@ -63,6 +64,7 @@ namespace SportGroups.Data.Repositories
                 return articles = await _context.Articles
                     .Where(a => a.Title.Contains(condition.Keyword))
                     .Include(a => a.Medias)
+                    .OrderByDescending(a => a.EditDate)
                     .ToListAsync();
                 //var keywordParam = new SqlParameter("@keyword", condition.Keyword);
                 //return articles = await _context.Articles

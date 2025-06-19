@@ -33,8 +33,15 @@ namespace SportGroups.Business.Services
             var cId = newMemberDto.ClubId;
             var email = newMemberDto.Email;
             var jd = DateTime.Now;
-            await _unitOfWork.ClubMembers.AddMemberAsync(uId, cId, email, jd);
-            return await _unitOfWork.SaveChangesAsync() > 0;
+            try
+            {
+                await _unitOfWork.ClubMembers.AddMemberAsync(uId, cId, email, jd);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

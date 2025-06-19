@@ -5,8 +5,8 @@ CREATE PROCEDURE usp_GetAll_Clubs_OfUser
 	@userId INT
 AS
 BEGIN
-	SELECT * FROM Clubs
+	SELECT c.ClubId, ClubName, Sport, Phone, c.Email, Description, establishedDate FROM Clubs c
 	RIGHT JOIN ClubMembers 
-	ON ClubMembers.clubId = Clubs.clubId
-	WHERE userId = @userId;
+	ON ClubMembers.clubId = c.clubId
+	WHERE UserId = @userId;
 END;

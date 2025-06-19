@@ -7,5 +7,5 @@ CREATE PROCEDURE usp_Get_Enrollments_ById
 AS 
 BEGIN
 	SELECT * FROM Enrollments
-	WHERE userId = @userId AND clubeventId = @eventId;
+	WHERE UserId = @userId AND ClubEventId = @eventId;
 END;

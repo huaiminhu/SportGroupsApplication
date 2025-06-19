@@ -27,8 +27,15 @@ namespace SportGroups.Business.Services
             var eId = newEnrollmentDto.ClubEventId;
             var phone = newEnrollmentDto.Phone;
             var enrollDate = DateTime.Now;
-            await _unitOfWork.Enrollments.AddEnrollmentAsync(uId, eId, phone, enrollDate);
-            return await _unitOfWork.SaveChangesAsync() > 0;
+            try
+            {
+                await _unitOfWork.Enrollments.AddEnrollmentAsync(uId, eId, phone, enrollDate);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         public async Task<EnrollmentInfoDto?> GetEnrollmentByIdAsync(int userId, int eventId)
