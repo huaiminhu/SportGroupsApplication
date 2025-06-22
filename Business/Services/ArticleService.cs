@@ -4,14 +4,6 @@ using SportGroups.Data.Entities;
 using SportGroups.Data.Repositories.Interfaces;
 using SportGroups.Shared.DTOs.ArticleDTOs;
 using SportGroups.Shared.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SportGroups.Data.Repositories;
-using System.Reflection.Metadata;
-using Microsoft.AspNetCore.Http;
 
 namespace SportGroups.Business.Services
 {
@@ -30,19 +22,6 @@ namespace SportGroups.Business.Services
 
         }
 
-        //public async Task<bool> UpdateArticleAsync(ArticleUpdateDto articleUpdateDto)
-        //{
-        //    var existing = await _unitOfWork.Articles.GetArticleByIdAsync(articleUpdateDto.ArticleId);
-        //    if (existing == null)
-        //    {
-        //        return false;
-        //    }
-        //    _mapper.Map(articleUpdateDto, existing);
-        //    existing.EditDate = DateTime.Now;
-        //    _unitOfWork.Articles.UpdateArticle(existing);
-        //    return await _unitOfWork.SaveChangesAsync() > 0;
-        //}
-
         public async Task<bool> UpdateArticleAsync(int articleId, ArticleUpdateDto articleUpdateDto)
         {
             var existing = await _unitOfWork.Articles.GetArticleByIdAsync(articleId);
@@ -51,6 +30,7 @@ namespace SportGroups.Business.Services
                 return false;
             }
 
+            // 用從前端接收的DTO覆蓋原來的Entity
             _mapper.Map(articleUpdateDto, existing);
 
             // 刪除未保留的媒體
@@ -69,6 +49,7 @@ namespace SportGroups.Business.Services
                 }
             }
 
+            // 定義新增媒體時間
             var nowTime = DateTime.Now;
 
             // 新增新的媒體檔案
@@ -106,29 +87,17 @@ namespace SportGroups.Business.Services
                 }
             }
 
+            // 定義文章更新時間為現在
             existing.EditDate = nowTime;
+
+            // 使用UnitOfWork管理Article Repository更新文章
             _unitOfWork.Articles.UpdateArticle(existing);
             return await _unitOfWork.SaveChangesAsync() > 0;
         }
 
-
-        //public async Task<bool> ChangeContentAsync(int articleId, string newContent)
-        //{
-        //    return await _unitOfWork.Articles.UpdateContentAsync(articleId, newContent);
-        //}
-
-        //public async Task<bool> ChangeDateAsync(int articleId, DateTime latestEdit)
-        //{
-        //    return await _unitOfWork.Articles.UpdateDateAsync(articleId, latestEdit);
-        //}
-
-        //public async Task<bool> ChangeTitleAsync(int articleId, string newTitle)
-        //{
-        //    return await _unitOfWork.Articles.UpdateTitleAsync(articleId, newTitle);
-        //}
-
         public async Task<int?> CreateArticleAsync(NewArticleDto newArticleDto)
         {
+            // 定義文章各欄位(從前端傳來)
             var nowTime = DateTime.Now;
             var newArticle = _mapper.Map<Article>(newArticleDto);
             newArticle.PostDate = nowTime;
@@ -169,20 +138,11 @@ namespace SportGroups.Business.Services
                 }
             }
 
-            //foreach (var file in medias)
-            //{
-            //    var filePath = await _mediaService.SaveMediaAsync(file);
-            //    newArticle.Medias.Add(new Media
-            //    {
-            //        FileName = file.FileName,
-            //        MediaType = file.ContentType.StartsWith("video") ? MediaType.Video : MediaType.Image, 
-            //        FileUrl = filePath,
-            //        AddedDate = nowTime
-            //    });
-            //}
-
+            // UnitOfWork管理Article Repository
             await _unitOfWork.Articles.CreateArticleAsync(newArticle);
             var result = await _unitOfWork.SaveChangesAsync();
+
+            // 若新增成功回傳ID, 失敗回傳null
             return result > 0 ? newArticle.ArticleId : null;
         }
 
@@ -208,17 +168,5 @@ namespace SportGroups.Business.Services
             var articles = await _unitOfWork.Articles.GetArticlesByConditionAsync(condition);
             return _mapper.Map<List<ArticleInfoDto>>(articles);
         }
-
-        //public async Task<List<ArticleInfoDto>> GetAllArticlesByKeywordAsync(string keyword)
-        //{
-        //    var articles = await _unitOfWork.Articles.GetAllArticlesByKeywordAsync(keyword);
-        //    return _mapper.Map<List<ArticleInfoDto>>(articles);
-        //}
-
-        //public async Task<List<ArticleInfoDto>> GetAllArticlesBySportAsync(Sport sport)
-        //{
-        //    var articles = await _unitOfWork.Articles.GetAllArticlesBySportAsync(sport);
-        //    return _mapper.Map<List<ArticleInfoDto>>(articles);
-        //}
     }
 }

@@ -1,14 +1,8 @@
-﻿using SportGroups.Shared.DTOs.EnrollmentDTOs;
-using SportGroups.Shared.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SportGroups.Shared.Enums;
 
 namespace SportGroups.Shared.DTOs.EventDTOs
 {
-    public class NewEventDto
+    public class NewEventDto   // 活動新增DTO
     {
         public EventType EventType { get; set; }
         public string EventName { get; set; } = string.Empty;
@@ -17,6 +11,5 @@ namespace SportGroups.Shared.DTOs.EventDTOs
         public DateTime Starting { get; set; }
         public DateTime Ending { get; set; }
         public int ClubId { get; set; }
-        //public List<NewEnrollmentDto> Enrollments { get; set; } = new List<NewEnrollmentDto>();
     }
 }

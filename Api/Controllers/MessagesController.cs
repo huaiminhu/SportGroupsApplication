@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SportGroups.Business.Services.IServices;
 using SportGroups.Shared.DTOs.MessageDTOs;
@@ -16,6 +15,7 @@ namespace SportGroups.Api.Controllers
             _messageService = messageService;
         }
 
+        // 新增社團訊息
         [Authorize(Roles = "ClubManager")]
         [HttpPost]
         public async Task<IActionResult> CreateMessage([FromBody] NewMessageDto newMessageDto)
@@ -28,6 +28,7 @@ namespace SportGroups.Api.Controllers
             return CreatedAtAction(nameof(MessagesController.GetMessage), new { messageId = result }, result);
         }
 
+        // 讀取社團訊息
         [HttpGet("{messageId}")]
         public async Task<ActionResult<MessageInfoDto?>> GetMessage(int messageId)
         {
@@ -39,6 +40,7 @@ namespace SportGroups.Api.Controllers
             return Ok(message);
         }
 
+        // 讀取社團所有訊息
         [HttpGet("club/{clubId}")]
         public async Task<ActionResult<List<MessageInfoDto>>> GetAllMessagesOfClub(int clubId)
         {
@@ -50,6 +52,7 @@ namespace SportGroups.Api.Controllers
             return Ok(messages);
         }
 
+        // 更新社團訊息
         [Authorize(Roles = "ClubManager")]
         [HttpPut("{messageId}")]
         public async Task<IActionResult> UpdateMessage(int messageId, [FromBody] MessageUpdateDto messageUpdateDto)
@@ -58,6 +61,7 @@ namespace SportGroups.Api.Controllers
             return result ? NoContent() : BadRequest();
         }
 
+        // 刪除社團訊息
         [Authorize(Roles = "ClubManager")]
         [HttpDelete("{messageId}")]
         public async Task<IActionResult> DeleteMessage(int messageId)

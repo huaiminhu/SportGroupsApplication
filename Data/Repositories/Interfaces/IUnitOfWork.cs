@@ -1,10 +1,4 @@
-﻿using SportGroups.Data.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿// 使用 UnitOfWork 統一管理多個 Repository
 namespace SportGroups.Data.Repositories.Interfaces
 {
     public interface IUnitOfWork : IDisposable

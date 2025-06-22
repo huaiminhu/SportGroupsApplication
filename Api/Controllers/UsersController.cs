@@ -7,7 +7,7 @@ using System.Security.Claims;
 
 namespace SportGroups.Api.Controllers
 {
-    [Authorize(Roles = "GeneralUser, ClubManager")]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
@@ -21,7 +21,8 @@ namespace SportGroups.Api.Controllers
             _userService = userService;
         }
 
-        [HttpGet("myinfo")]
+        // 讀取使用者資訊
+        [HttpGet]
         public async Task<ActionResult<UserInfoDto>> GetMyInfo()
         {
             var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
@@ -34,18 +35,8 @@ namespace SportGroups.Api.Controllers
             return Ok(result);
         }
 
-        //[HttpGet]
-        //public async Task<IActionResult> GetUserByUsername(string username)
-        //{
-        //    var result = await _userService.GetUserByUsernameAsync(username);
-        //    if (result == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return Ok(result);
-        //}
-
-        [HttpPut("update-info")]
+        // 更新使用者資訊
+        [HttpPut]
         public async Task<IActionResult> UpdateInfo([FromBody] UserUpdateDto userUpdateDto)
         {
             var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);

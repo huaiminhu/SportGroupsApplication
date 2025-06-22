@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace SportGroups.Shared.DTOs.ClubMemberDTOs
 {
-    public class NewMemberDto
+    public class NewMemberDto   // 社團成員新增DTO
     {
         public int UserId { get; set; }
         public int ClubId { get; set; }

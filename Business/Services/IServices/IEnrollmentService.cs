@@ -1,9 +1,4 @@
 ﻿using SportGroups.Shared.DTOs.EnrollmentDTOs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SportGroups.Business.Services.IServices
 {
@@ -12,6 +7,7 @@ namespace SportGroups.Business.Services.IServices
         // 參加社團活動
         Task<bool> AttendEventAsync(NewEnrollmentDto newEnrollmentDto);
         Task<EnrollmentInfoDto?> GetEnrollmentByIdAsync(int userId, int eventId);
+        // 取得使用者所有報名
         Task<List<EnrollmentInfoDto>> GetAllEnrollmentsOfUserAsync(int userId);
     }
 }

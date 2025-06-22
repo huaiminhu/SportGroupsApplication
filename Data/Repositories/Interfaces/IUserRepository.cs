@@ -1,9 +1,4 @@
 ﻿using SportGroups.Data.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SportGroups.Data.Repositories.Interfaces
 {
@@ -11,12 +6,12 @@ namespace SportGroups.Data.Repositories.Interfaces
     {
         Task CreateUserAsync(User user);
         
-        // 運用使用者名稱取得使用者實體
+        // 以使用者名稱取得使用者
         Task<User?> GetUserByUsernameAsync(string username);
         Task<User?> GetUserByIdAsync(int userId);
         void UpdateUser(User user);
-        Task<User?> GetByRefreshTokenAsync(string refreshToken);
-        //Task<bool> UpdateNickNameAsync(int userId, string newName);
-        //Task<bool> UpdatePasswordAsync(int userId, string newPassword);
+
+        // 以更新Token取得使用者
+        Task<User?> GetUserByRefreshTokenAsync(string refreshToken);
     }
 }

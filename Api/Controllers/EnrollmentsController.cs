@@ -17,13 +17,15 @@ namespace SportGroups.Api.Controllers
             _enrollmentService = enrollmentService;
         }
 
-        [HttpPost("attend")]
+        // 參加活動
+        [HttpPost]
         public async Task<IActionResult> AttendEvent([FromBody] NewEnrollmentDto newEnrollmentDto)
         {
             var result = await _enrollmentService.AttendEventAsync(newEnrollmentDto);
             return result ? Created(string.Empty, new {}) : BadRequest();
         }
 
+        // 讀取報名資訊
         [HttpGet("event/{eventId}/user/{userId}")]
         public async Task<ActionResult<EnrollmentInfoDto?>> GetEnrollment(int eventId, int userId)
         {
@@ -35,6 +37,7 @@ namespace SportGroups.Api.Controllers
             return Ok(enrollment);
         }
 
+        // 讀取使用者所有報名資訊
         [HttpGet("user/{userId}")]
         public async Task<ActionResult<List<EnrollmentInfoDto>>> EnrollmentsOfUser(int userId)
         {

@@ -1,10 +1,5 @@
 ﻿using SportGroups.Data.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SportGroups.Data.Data
 {
@@ -28,6 +23,7 @@ namespace SportGroups.Data.Data
         {
             base.OnModelCreating(modelBuilder);
 
+            // 設定社團成員(ClubMember)的複合主鍵
             modelBuilder.Entity<ClubMember>()
                 .HasKey(cm => new { cm.ClubId, cm.UserId });
 
@@ -41,6 +37,7 @@ namespace SportGroups.Data.Data
                 .WithMany(u => u.Clubs)
                 .HasForeignKey(cm => cm.UserId);
 
+            // 設定報名資訊(Enrollment)的複合主鍵
             modelBuilder.Entity<Enrollment>()
                 .HasKey(e => new { e.ClubEventId, e.UserId });
 

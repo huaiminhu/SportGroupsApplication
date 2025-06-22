@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using SportGroups.Business.Services.IServices;
 using SportGroups.Shared.DTOs.AuthDTOs;
 using SportGroups.Shared.DTOs.UserDTOs;
@@ -19,6 +18,7 @@ namespace SportGroups.Api.Controllers
             _userService = userService;
         }
 
+        // 登入
         [HttpPost("login")]
         public async Task<ActionResult<UserInfoDto>> Login([FromBody] LoginDto loginDto)
         {
@@ -30,6 +30,7 @@ namespace SportGroups.Api.Controllers
             return Ok(result);
         }
 
+        // 註冊
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterDto registerDto)
         {

@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace SportGroups.Shared.DTOs.EnrollmentDTOs
 {
-    public class EnrollmentInfoDto
+    public class EnrollmentInfoDto   // 報名資訊DTO
     {
         public int UserId { get; set; }
         public int ClubEventId { get; set; }

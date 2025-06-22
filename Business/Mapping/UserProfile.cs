@@ -1,11 +1,6 @@
 ﻿using AutoMapper;
 using SportGroups.Shared.DTOs.UserDTOs;
 using SportGroups.Data.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using SportGroups.Shared.DTOs.AuthDTOs;
 
 namespace SportGroups.Business.Mapping
@@ -14,12 +9,11 @@ namespace SportGroups.Business.Mapping
     {
         public UserProfile()
         {
+            // 對非null值進行更新
             CreateMap<UserUpdateDto, User>()
                 .ForAllMembers(option => option.Condition((source, destination, sourceMember) => sourceMember != null));
             CreateMap<User, UserInfoDto>();
-                //.ForMember(destination => destination.Clubs,
-                //       option => option.MapFrom(source => source.Clubs.Select(cmember => cmember.Club)));
-            CreateMap<RegisterDto, User>().ReverseMap();
+            CreateMap<RegisterDto, User>();
         }
     }
 }

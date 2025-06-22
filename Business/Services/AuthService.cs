@@ -1,18 +1,13 @@
 ﻿using AutoMapper;
-using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using SportGroups.Business.Services.IServices;
 using SportGroups.Data.Repositories.Interfaces;
 using SportGroups.Shared.DTOs.AuthDTOs;
 using SportGroups.Shared.DTOs.UserDTOs;
 using SportGroups.Data.Entities;
-using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 using SportGroups.Shared.Configurations;
 using Microsoft.Extensions.Options;
 using System.Security.Cryptography;
@@ -23,7 +18,7 @@ namespace SportGroups.Business.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        private readonly JwtSettings _jwtSettings;
+        private readonly JwtSettings _jwtSettings; // JWT設定
         public AuthService(IUnitOfWork unitOfWork, 
             IMapper mapper, 
             IOptions<JwtSettings> options)
@@ -36,26 +31,38 @@ namespace SportGroups.Business.Services
         public async Task<bool> RegisterAsync(RegisterDto registerDto)
         {
             var newUser = _mapper.Map<User>(registerDto);
+
+            // 對密碼進行雜湊處理
             newUser.PasswordHash = BCrypt.Net.BCrypt.HashPassword(registerDto.Password);
             newUser.RegisterDate = DateTime.Now;
+
+            // 使用UnitOfWork管理的User Repository新增使用者
             await _unitOfWork.Users.CreateUserAsync(newUser);
             return await _unitOfWork.SaveChangesAsync() > 0;
         }
 
         public async Task<UserInfoDto?> AuthAsync(LoginDto loginDto)
         {
+            // 驗證從前端傳來的密碼經雜湊處理後是否與資料庫裡儲存的密碼是否一致
             var user = await _unitOfWork.Users.GetUserByUsernameAsync(loginDto.Username);
             if (user == null || !BCrypt.Net.BCrypt.Verify(loginDto.Password, user.PasswordHash))
             {
                 return null;
             }
 
+            // 生成新Token
             var token = NewToken(user);
 
+            // 生成更新的Token
             user.RefreshToken = GenerateRefreshToken();
+
+            // 設定更新的Token過期時效
             user.RefreshTokenExpiry = DateTime.UtcNow.AddDays(7);
+
+            // 使用UnitOfWork管理的User Repository更新使用者
             _unitOfWork.Users.UpdateUser(user);
 
+            // 經Auto Mapper轉換成DTO後回傳
             var info = _mapper.Map<UserInfoDto>(user);
             info.Token = token;
 
@@ -64,7 +71,7 @@ namespace SportGroups.Business.Services
 
         public async Task<UserInfoDto?> RefreshTokenAsync(string refreshToken)
         {
-            var user = await _unitOfWork.Users.GetByRefreshTokenAsync(refreshToken);
+            var user = await _unitOfWork.Users.GetUserByRefreshTokenAsync(refreshToken);
             if (user == null)
             {
                 return null;
@@ -82,8 +89,10 @@ namespace SportGroups.Business.Services
             return info;
         }
 
+        // 生成新Token
         public string NewToken(User user)
         {
+            // 設定Claim資訊
             var claims = new[]
             {
                 new Claim(JwtRegisteredClaimNames.Sub, user.UserId.ToString()), 
@@ -94,9 +103,13 @@ namespace SportGroups.Business.Services
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
 
+            // 設定對稱安全金鑰
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.SecretKey));
+            
+            // 設定數位簽章
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
+            // 設定Token
             var token = new JwtSecurityToken(
                 issuer: _jwtSettings.Issuer,
                 audience: _jwtSettings.Audience,
@@ -105,9 +118,11 @@ namespace SportGroups.Business.Services
                 signingCredentials: creds
             );
 
+            // 回傳Token字串
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
+        // 生成更新的Token
         public string GenerateRefreshToken()
         {
             return Convert.ToBase64String(RandomNumberGenerator.GetBytes(64));

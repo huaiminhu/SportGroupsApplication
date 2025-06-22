@@ -3,11 +3,6 @@ using SportGroups.Business.Services.IServices;
 using SportGroups.Data.Repositories.Interfaces;
 using SportGroups.Shared.DTOs.ClubDTOs;
 using SportGroups.Shared.DTOs.ClubMemberDTOs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SportGroups.Business.Services
 {
@@ -33,6 +28,9 @@ namespace SportGroups.Business.Services
             var cId = newMemberDto.ClubId;
             var email = newMemberDto.Email;
             var jd = DateTime.Now;
+
+            // 因AddMemberAsync不透過Entity操作資料沒有回傳值
+            // 由此處設置例外處理以回傳Boolean Value
             try
             {
                 await _unitOfWork.ClubMembers.AddMemberAsync(uId, cId, email, jd);

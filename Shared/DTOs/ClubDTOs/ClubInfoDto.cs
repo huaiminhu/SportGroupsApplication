@@ -1,14 +1,8 @@
 ﻿using SportGroups.Shared.Enums;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SportGroups.Shared.DTOs.ClubDTOs
 {
-    public class ClubInfoDto
+    public class ClubInfoDto   // 社團資訊DTO
     {
         public int ClubId { get; set; }
         public string ClubName { get; set; } = string.Empty;

@@ -1,13 +1,8 @@
 ﻿using SportGroups.Shared.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SportGroups.Shared.DTOs.EventDTOs
 {
-    public class EventInfoDto
+    public class EventInfoDto   // 活動資訊DTO
     {
         public int EventId { get; set; }
         public EventType EventType { get; set; }

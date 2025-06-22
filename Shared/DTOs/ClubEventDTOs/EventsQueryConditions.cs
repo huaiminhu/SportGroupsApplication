@@ -1,13 +1,8 @@
 ﻿using SportGroups.Shared.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SportGroups.Shared.DTOs.ClubEventDTOs
 {
-    public class EventsQueryConditions
+    public class EventsQueryConditions   // 活動查詢條件DTO
     {
         public int? ClubId { get; set; }
         public Sport? Sport { get; set; }

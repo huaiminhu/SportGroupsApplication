@@ -1,10 +1,5 @@
 ﻿using SportGroups.Data.Data;
 using SportGroups.Data.Repositories.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SportGroups.Data.Repositories
 {
@@ -44,8 +39,9 @@ namespace SportGroups.Data.Repositories
         {
             return await _context.SaveChangesAsync();
         }
-
-        public void Dispose()
+        
+        // 釋放連線資料庫記憶體資源
+        public void Dispose()  
         {
             _context.Dispose();
         }

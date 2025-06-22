@@ -1,10 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SportGroups.Business.Services.IServices;
 using SportGroups.Shared.DTOs.ClubEventDTOs;
 using SportGroups.Shared.DTOs.EventDTOs;
-using SportGroups.Shared.Enums;
 
 namespace SportGroups.Api.Controllers
 {
@@ -18,6 +16,7 @@ namespace SportGroups.Api.Controllers
             _clubEventService = clubEventService;
         }
 
+        // 辦活動
         [Authorize(Roles = "ClubManager")]
         [HttpPost]
         public async Task<IActionResult> CreateEvent([FromBody] NewEventDto newEventDto)
@@ -30,6 +29,7 @@ namespace SportGroups.Api.Controllers
             return CreatedAtAction(nameof(ClubEventsController.GetEvent), new { eventId = result }, result);
         }
 
+        // 讀取活動資訊
         [HttpGet("{eventId}")]
         public async Task<ActionResult<EventInfoDto>> GetEvent(int eventId)
         {
@@ -41,8 +41,9 @@ namespace SportGroups.Api.Controllers
             return Ok(info);
         }
 
+        // (依條件)查詢活動
         [HttpGet]
-        public async Task<ActionResult<List<EventInfoDto>>> GetEvents([FromQuery] EventsQueryConditions condition)
+        public async Task<ActionResult<List<EventInfoDto>>> SearchEvents([FromQuery] EventsQueryConditions condition)
         {
             var events = await _clubEventService.GetEventsByConditionAsync(condition);
             if(events == null)
@@ -52,28 +53,7 @@ namespace SportGroups.Api.Controllers
             return Ok(events);
         }
 
-        //[HttpPost("getalleventsofclub")]
-        //public async Task<ActionResult<List<EventInfoDto>>> GettAllEventOfClub([FromBody]int clubId)
-        //{
-        //    var clubs = await _clubEventService.GetAllEventsOfClubAsync(clubId);
-        //    if(clubs == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return Ok(clubs);
-        //}
-
-        //[HttpPost("getalleventsbykeyword")]
-        //public async Task<ActionResult<List<EventInfoDto>>> GetAllEventsByKeyword([FromBody]string keyword)
-        //{
-        //    var events = await _clubEventService.GetAllEventByKeywordAsync(keyword);
-        //    if(events == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return Ok(events);
-        //}
-
+        // 更新活動資訊
         [Authorize(Roles = "ClubManager")]
         [HttpPut("{eventId}")]
         public async Task<IActionResult> UpdateEvent(int eventId, [FromBody] EventUpdateDto eventUpdateDto)
@@ -82,6 +62,7 @@ namespace SportGroups.Api.Controllers
             return result ? NoContent() : BadRequest();
         }
 
+        // 刪除活動
         [Authorize(Roles = "ClubManager")]
         [HttpDelete("{eventId}")]
         public async Task<IActionResult> DeleteEvent(int eventId)

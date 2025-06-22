@@ -1,13 +1,7 @@
-﻿using SportGroups.Shared.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace SportGroups.Shared.DTOs.ClubEventDTOs
 {
-    public class EventUpdateDto
+    public class EventUpdateDto   // 活動更新DTO
     {
         public string? EventName { get; set; }
         public string? Description { get; set; }

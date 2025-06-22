@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SportGroups.Business.Services.IServices;
 using SportGroups.Shared.DTOs.ClubDTOs;
@@ -18,13 +17,15 @@ namespace SportGroups.Api.Controllers
             _memberService = memberService;
         }
 
-        [HttpPost("new-member")]
+        // 加入社團
+        [HttpPost]
         public async Task<IActionResult> JoinClub([FromBody] NewMemberDto newMemberDto)
         {
             var result = await _memberService.JoinClubAsync(newMemberDto);
             return result ? Created(string.Empty, result) : BadRequest(result);
         }
 
+        // 讀取使用者參與的所有社團資訊
         [HttpGet("{userId}/clubs")]
         public async Task<ActionResult<List<ClubInfoDto>>> ClubsOfUser(int userId)
         {

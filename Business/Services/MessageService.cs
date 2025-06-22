@@ -1,14 +1,8 @@
 ﻿using AutoMapper;
 using SportGroups.Business.Services.IServices;
-using SportGroups.Data.Repositories;
 using SportGroups.Data.Repositories.Interfaces;
 using SportGroups.Shared.DTOs.MessageDTOs;
 using SportGroups.Data.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SportGroups.Business.Services
 {
@@ -65,14 +59,5 @@ namespace SportGroups.Business.Services
             _unitOfWork.Messages.UpdateMessage(existing);
             return await _unitOfWork.SaveChangesAsync() > 0;
         }
-        //public async Task<bool> UpdateContentAsync(int messageId, string newContent)
-        //{
-        //    return await _unitOfWork.Messages.UpdateContentAsync(messageId, newContent);
-        //}
-
-        //public async Task<bool> UpdateTitleAsync(int messageId, string newTitle)
-        //{
-        //    return await _unitOfWork.Messages.UpdateTitleAsync(messageId, newTitle);
-        //}
     }
 }

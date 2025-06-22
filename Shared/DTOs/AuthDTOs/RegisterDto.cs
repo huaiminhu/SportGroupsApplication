@@ -1,13 +1,8 @@
 ﻿using SportGroups.Shared.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SportGroups.Shared.DTOs.AuthDTOs
 {
-    public class RegisterDto
+    public class RegisterDto   // 註冊資訊DTO
     {
         public string NickName { get; set; } = string.Empty;
         public string UserName { get; set; } = string.Empty;

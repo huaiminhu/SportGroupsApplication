@@ -1,10 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SportGroups.Business.Services.IServices;
 using SportGroups.Shared.DTOs.ClubDTOs;
-using SportGroups.Shared.DTOs.ClubMemberDTOs;
-using SportGroups.Shared.Enums;
 using System.Security.Claims;
 
 namespace SportGroups.Api.Controllers
@@ -19,28 +16,7 @@ namespace SportGroups.Api.Controllers
             _clubService = clubService;
         }
 
-        //[HttpPost("getallclubsbysport")]
-        //public async Task<ActionResult<List<ClubInfoDto>>> GetAllClubsBySport(Sport sport)
-        //{
-        //    var clubs = await _clubService.GetAllClubsBySportAsync(sport);
-        //    if (clubs == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return Ok(clubs);
-        //}
-
-        //[HttpPost("getallclubsbykeyword")]
-        //public async Task<ActionResult<List<ClubInfoDto>>> GetAllClubsByKeyword(string keyword)
-        //{
-        //    var clubs = await _clubService.GetAllClubsByKeywordAsync(keyword);
-        //    if(clubs == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return Ok(clubs);
-        //}
-
+        // (依條件)查詢社團
         [HttpGet]
         public async Task<ActionResult<List<ClubInfoDto>>> GetClubs([FromQuery] ClubsQueryConditions condition)
         {
@@ -52,10 +28,11 @@ namespace SportGroups.Api.Controllers
             return Ok(clubs);
         }
 
+        // 讀取社團資訊
         [HttpGet("{clubId}")]
         public async Task<ActionResult<ClubInfoDto>> GetClub(int clubId)
         {
-            var club = await _clubService.GetClubInfoAsync(clubId);
+            var club = await _clubService.GetClubByIdAsync(clubId);
             if(club == null)
             {
                 return NotFound();
@@ -63,16 +40,20 @@ namespace SportGroups.Api.Controllers
             return Ok(club);
         }
 
+        // 創立社團
         [Authorize(Roles = "ClubManager")]
         [HttpPost]
         public async Task<IActionResult> CreateClub([FromBody] NewClubDto newClubDto)
         {
+            // 讀取使用者ID
             var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
             if (userIdClaim == null)
             {
                 return Unauthorized();
             }
             var userId = int.Parse(userIdClaim.Value);
+            
+            // 新增社團
             var result = await _clubService.CreateClubAsync(userId, newClubDto);
             if(result == null)
             {
@@ -81,6 +62,7 @@ namespace SportGroups.Api.Controllers
             return CreatedAtAction(nameof(GetClub), new {clubId = result}, result);
         }
 
+        // 更新社團資訊
         [Authorize(Roles = "ClubManager")]
         [HttpPut("{clubId}")]
         public async Task<IActionResult> UpdateClub(int clubId, [FromBody] ClubUpdateDto newClubUpdateDto)
@@ -89,6 +71,7 @@ namespace SportGroups.Api.Controllers
             return result ? NoContent() : BadRequest();
         }
 
+        // 刪除社團
         [Authorize(Roles = "ClubManager")]
         [HttpDelete("{clubId}")]
         public async Task<IActionResult> DeleteClub(int clubId)

@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SportGroups.Business.Services.IServices;
 using SportGroups.Shared.DTOs.ArticleDTOs;
-using SportGroups.Shared.Enums;
 
 namespace SportGroups.Api.Controllers
 {
@@ -17,7 +15,8 @@ namespace SportGroups.Api.Controllers
             _articleService = articleService;
         }
 
-        [HttpGet("search")]
+        // (依條件)查詢文章
+        [HttpGet]
         public async Task<ActionResult<List<ArticleInfoDto>>> SearchArticles([FromQuery] ArticlesQueryConditions condition)
         {
             var articles = await _articleService.GetArticlesByConditionAsync(condition);
@@ -28,17 +27,7 @@ namespace SportGroups.Api.Controllers
             return Ok(articles);
         }
 
-        //[HttpGet("articles/search")]
-        //public async Task<ActionResult<List<ArticleInfoDto>>> GetAllArticlesByKeywordAsync([FromBody]string keyword)
-        //{
-        //    var articles = await _articleService.GetAllArticlesByKeywordAsync(keyword);
-        //    if(articles == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return Ok(articles);
-        //}
-
+        // 讀取文章資訊
         [HttpGet("{articleId}")]
         public async Task<ActionResult<ArticleInfoDto?>> GetArticle(int articleId)
         {
@@ -50,6 +39,7 @@ namespace SportGroups.Api.Controllers
             return Ok(article);
         }
 
+        // 新增文章
         [Authorize(Roles = "ClubManager")]
         [HttpPost]
         [Consumes("multipart/form-data")]
@@ -63,6 +53,7 @@ namespace SportGroups.Api.Controllers
             return CreatedAtAction(nameof(ArticlesController.GetArticle), new { articleId = result }, result);
         }
 
+        // 更新文章
         [Authorize(Roles = "ClubManager")]
         [HttpPut("{articleId}")]
         [Consumes("multipart/form-data")]
@@ -72,6 +63,7 @@ namespace SportGroups.Api.Controllers
             return result ? NoContent() : BadRequest();
         }
 
+        // 刪除文章
         [Authorize(Roles = "ClubManager")]
         [HttpDelete("{articleId}")]
         public async Task<IActionResult> DeleteArticle(int articleId)
