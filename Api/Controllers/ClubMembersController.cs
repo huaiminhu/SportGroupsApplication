@@ -22,7 +22,12 @@ namespace SportGroups.Api.Controllers
         public async Task<IActionResult> JoinClub([FromBody] NewMemberDto newMemberDto)
         {
             var result = await _memberService.JoinClubAsync(newMemberDto);
-            return result ? Created(string.Empty, result) : BadRequest(result);
+            if(!result.IsSuccess)
+            {
+                return BadRequest(result.ResponseMessage);
+            }
+            
+            return Created(result.ResponseMessage, result);
         }
 
         // 讀取使用者參與的所有社團資訊

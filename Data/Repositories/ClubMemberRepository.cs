@@ -25,7 +25,7 @@ namespace SportGroups.Data.Repositories
             // 呼叫stored procedure
             await _context.Database
                 .ExecuteSqlRawAsync(
-                "EXEC usp_Create_ClubMembers_AddMember @userId, @clubId, @email, @joinDate", 
+                "EXEC usp_Create_ClubMembers_AddMember @userId, @clubId, @email, @joinDate",
                 uIdParam, cIdParam, emailParam, dateParam);
         }
 
@@ -37,6 +37,12 @@ namespace SportGroups.Data.Repositories
             return await _context.Clubs
                 .FromSqlRaw("EXEC usp_GetAll_Clubs_OfUser @userId", uIdParam)
                 .ToListAsync();
+        }
+
+        public async Task<ClubMember?> GetMemberAsync(int userId, int clubId)
+        {
+            return await _context.ClubMembers
+                .FirstOrDefaultAsync(m => m.UserId == userId && m.ClubId == clubId);
         }
     }
 }

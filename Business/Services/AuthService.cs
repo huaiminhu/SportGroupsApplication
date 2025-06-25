@@ -11,6 +11,7 @@ using System.Text;
 using SportGroups.Shared.Configurations;
 using Microsoft.Extensions.Options;
 using System.Security.Cryptography;
+using SportGroups.Shared.DTOs.ResultDTOs;
 
 namespace SportGroups.Business.Services
 {
@@ -28,8 +29,20 @@ namespace SportGroups.Business.Services
             _jwtSettings = options.Value;
         }
 
-        public async Task<bool> RegisterAsync(RegisterDto registerDto)
+        public async Task<ResultDto<UserInfoDto>> RegisterAsync(RegisterDto registerDto)
         {
+            // 檢查使用者名稱是否已存在於資料庫
+            var existing = await _unitOfWork.Users.GetUserByUsernameAsync(registerDto.UserName);
+            if (existing != null)
+            {
+                return new ResultDto<UserInfoDto> 
+                {
+                    IsSuccess = false, 
+                    ResponseMessage = "這個使用者名稱有人使用了!再換一個~"
+                };
+            }
+            
+            // DTO轉Entity
             var newUser = _mapper.Map<User>(registerDto);
 
             // 對密碼進行雜湊處理
@@ -38,7 +51,16 @@ namespace SportGroups.Business.Services
 
             // 使用UnitOfWork管理的User Repository新增使用者
             await _unitOfWork.Users.CreateUserAsync(newUser);
-            return await _unitOfWork.SaveChangesAsync() > 0;
+            await _unitOfWork.SaveChangesAsync();
+
+            // 給前端的Response
+            var responseData = _mapper.Map<UserInfoDto>(newUser);
+            return new ResultDto<UserInfoDto>
+            {
+                IsSuccess = true,
+                ResponseMessage = "註冊成功!", 
+                ResponseData = responseData
+            };
         }
 
         public async Task<UserInfoDto?> AuthAsync(LoginDto loginDto)

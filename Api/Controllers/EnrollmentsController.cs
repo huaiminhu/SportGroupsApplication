@@ -22,7 +22,12 @@ namespace SportGroups.Api.Controllers
         public async Task<IActionResult> AttendEvent([FromBody] NewEnrollmentDto newEnrollmentDto)
         {
             var result = await _enrollmentService.AttendEventAsync(newEnrollmentDto);
-            return result ? Created(string.Empty, new {}) : BadRequest();
+            if (!result.IsSuccess)
+            {
+                return BadRequest(result.ResponseMessage);
+            }
+
+            return Created(result.ResponseMessage, result);
         }
 
         // 讀取報名資訊

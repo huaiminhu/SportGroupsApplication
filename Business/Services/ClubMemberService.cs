@@ -3,6 +3,7 @@ using SportGroups.Business.Services.IServices;
 using SportGroups.Data.Repositories.Interfaces;
 using SportGroups.Shared.DTOs.ClubDTOs;
 using SportGroups.Shared.DTOs.ClubMemberDTOs;
+using SportGroups.Shared.DTOs.ResultDTOs;
 
 namespace SportGroups.Business.Services
 {
@@ -22,23 +23,43 @@ namespace SportGroups.Business.Services
             return _mapper.Map<List<ClubInfoDto>>(clubs);
         }
 
-        public async Task<bool> JoinClubAsync(NewMemberDto newMemberDto)
+        public async Task<ResultDto<MemberInfoDto>> JoinClubAsync(NewMemberDto newMemberDto)
         {
             var uId = newMemberDto.UserId;
             var cId = newMemberDto.ClubId;
+
+            // 防止會員重複加入
+            var existing = await _unitOfWork.ClubMembers.GetMemberAsync(uId, cId);
+            if (existing != null)
+            {
+                return new ResultDto<MemberInfoDto>
+                {
+                    IsSuccess = false, 
+                    ResponseMessage = "請勿重複加入!"
+                };
+            }
+            
             var email = newMemberDto.Email;
             var jd = DateTime.Now;
 
             // 因AddMemberAsync不透過Entity操作資料沒有回傳值
-            // 由此處設置例外處理以回傳Boolean Value
+            // 由此處設置例外處理以回傳ResultDto
             try
             {
                 await _unitOfWork.ClubMembers.AddMemberAsync(uId, cId, email, jd);
-                return true;
+                return new ResultDto<MemberInfoDto> 
+                {
+                    IsSuccess = true, 
+                    ResponseMessage = "加入成功!"
+                };
             }
             catch
             {
-                return false;
+                return new ResultDto<MemberInfoDto>
+                {
+                    IsSuccess = false,
+                    ResponseMessage = "加入失敗!"
+                };
             }
         }
     }
