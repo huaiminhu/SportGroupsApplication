@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using SportGroups.Api.SwaggerSupport;
 using SportGroups.Business.Mapping;
 using SportGroups.Business.Services;
 using SportGroups.Business.Services.IServices;
@@ -11,12 +12,17 @@ using SportGroups.Data.Repositories.Interfaces;
 using SportGroups.Infrastructure.Configuration;
 using SportGroups.Shared.Configurations;
 using System.Text;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 var config = builder.Configuration;
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()); // 用 enum 名稱顯示
+    }); ;
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
@@ -49,8 +55,12 @@ builder.Services.AddSwaggerGen(c =>
             new string[] {}
         }
     });
+
+    // 讓 enum 在 Swagger UI 顯示字串名稱
+    c.SchemaFilter<EnumSchemaFilter>();
 });
 
+// 依賴項注入
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
@@ -74,9 +84,10 @@ builder.Services.AddInfrastructure(config); // Infrastructure層注入
 builder.Services.AddDbContext<SportGroupsDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("SportGroupsDbContext")));
 
+// 使用Auto Mapper
 builder.Services.AddAutoMapper(typeof(UserProfile));
 
-
+// 註冊JWT設定
 builder.Services.Configure<JwtSettings>(
     builder.Configuration.GetSection("JwtSettings"));
 
