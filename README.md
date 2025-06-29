@@ -21,3 +21,11 @@ Repository Pattern
 Unit of Work  
 N-Tier  
 JWT**  
+
+## 系統架構  
+Web API Controller(.Api)  >>>
+BLL(.Business)  >>>
+DAL(.Data)  >>>
+Database(SQL Server)  
+Shared(.Shared)  
+Infrastructure(.Infrastructure)  
