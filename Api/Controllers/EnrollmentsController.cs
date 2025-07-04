@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SportGroups.Business.Services.IServices;
 using SportGroups.Shared.DTOs.EnrollmentDTOs;
+using System.Security.Claims;
 
 namespace SportGroups.Api.Controllers
 {
@@ -31,25 +32,37 @@ namespace SportGroups.Api.Controllers
         }
 
         // 讀取報名資訊
-        [HttpGet("event/{eventId}/user/{userId}")]
-        public async Task<ActionResult<EnrollmentInfoDto?>> GetEnrollment(int eventId, int userId)
+        [HttpGet("event/{eventId}")]
+        public async Task<ActionResult<EnrollmentInfoDto?>> GetEnrollment(int eventId)
         {
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+            if (userIdClaim == null)
+            {
+                return Unauthorized("您沒有權限!");
+            }
+            var userId = int.Parse(userIdClaim.Value);
             var enrollment = await _enrollmentService.GetEnrollmentByIdAsync(userId, eventId);
             if (enrollment == null)
             {
-                return NotFound();
+                return NotFound("找不到任何報名資訊!");
             }
             return Ok(enrollment);
         }
 
         // 讀取使用者所有報名資訊
-        [HttpGet("user/{userId}")]
-        public async Task<ActionResult<List<EnrollmentInfoDto>>> EnrollmentsOfUser(int userId)
+        [HttpGet("my-enrollments")]
+        public async Task<ActionResult<List<EnrollmentInfoDto>>> EnrollmentsOfUser()
         {
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+            if (userIdClaim == null)
+            {
+                return Unauthorized("您沒有權限!");
+            }
+            var userId = int.Parse(userIdClaim.Value);
             var enrollments = await _enrollmentService.GetAllEnrollmentsOfUserAsync(userId);
             if (enrollments == null)
             {
-                return NotFound();
+                return NotFound("找不到任何報名資訊!");
             }
             return Ok(enrollments);
         }

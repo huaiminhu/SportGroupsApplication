@@ -11,6 +11,7 @@ namespace SportGroups.Shared.DTOs.ArticleDTOs
         public string ArticleContent { get; set; } = string.Empty;
         public DateTime PostDate { get; set; }
         public DateTime EditDate { get; set; }
+        public int ClubId { get; set; }
         public List<MediaInfoDto> Medias { get; set; } = new List<MediaInfoDto>();
     }
 }

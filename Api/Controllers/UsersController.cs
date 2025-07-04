@@ -28,7 +28,7 @@ namespace SportGroups.Api.Controllers
             var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
             if (userIdClaim == null) 
             {
-                return Unauthorized();
+                return Unauthorized("您沒有權限!");
             }
             var userId = int.Parse(userIdClaim.Value);
             var result = await _userService.GetUserByIdAsync(userId);
@@ -42,11 +42,11 @@ namespace SportGroups.Api.Controllers
             var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
             if (userIdClaim == null)
             {
-                return Unauthorized();
+                return Unauthorized("您沒有權限!");
             }
             var userId = int.Parse(userIdClaim.Value);
             var result = await _userService.UpdateUserAsync(userId, userUpdateDto);
-            return result ? NoContent() : BadRequest();
+            return result ? NoContent() : BadRequest("更新失敗!");
         }
     }
 }

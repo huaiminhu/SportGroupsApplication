@@ -4,7 +4,8 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace SportGroups.Api.SwaggerSupport
 {
-    public class EnumSchemaFilter : ISchemaFilter
+    // 讓Enum Data在Swagger UI顯示原始資料
+    public class EnumSchemaFilter : ISchemaFilter   
     {
         public void Apply(OpenApiSchema schema, SchemaFilterContext context)
         {

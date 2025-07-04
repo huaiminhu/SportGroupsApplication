@@ -25,7 +25,7 @@ namespace SportGroups.Api.Controllers
             var result = await _authService.AuthAsync(loginDto);
             if (result == null)
             {
-                return Unauthorized();
+                return Unauthorized("您沒有權限!");
             }
             return Ok(result);
         }

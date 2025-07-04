@@ -10,5 +10,7 @@ namespace SportGroups.Business.Services.IServices
         Task<ResultDto<MemberInfoDto>> JoinClubAsync(NewMemberDto newMemberDto);
         // 取得使用者加入的所有社團
         Task<List<ClubInfoDto>> GetAllClubsOfUserAsync(int userId);
+        // 取得社團成員
+        Task<ResultDto<MemberInfoDto>> GetMemberAsync(int userId, int clubId);
     }
 }

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SportGroups.Business.Services.IServices;
 using SportGroups.Shared.DTOs.ArticleDTOs;
+using System.Security.Claims;
 
 namespace SportGroups.Api.Controllers
 {
@@ -10,9 +11,13 @@ namespace SportGroups.Api.Controllers
     public class ArticlesController : ControllerBase
     {
         private readonly IArticleService _articleService;
-        public ArticlesController(IArticleService articleService)
+        private readonly IClubMemberService _memberService;
+        public ArticlesController(IArticleService articleService, 
+            IClubMemberService memberService)
         {
             _articleService = articleService;
+            _memberService = memberService;
+
         }
 
         // (依條件)查詢文章
@@ -22,7 +27,7 @@ namespace SportGroups.Api.Controllers
             var articles = await _articleService.GetArticlesByConditionAsync(condition);
             if(articles == null)
             {
-                return NotFound();
+                return NotFound("找不到任何文章!");
             }
             return Ok(articles);
         }
@@ -34,7 +39,7 @@ namespace SportGroups.Api.Controllers
             var article = await _articleService.GetArticleByIdAsync(articleId);
             if(article == null)
             {
-                return NotFound();
+                return NotFound("找不到任何文章!");
             }
             return Ok(article);
         }
@@ -45,10 +50,24 @@ namespace SportGroups.Api.Controllers
         [Consumes("multipart/form-data")]
         public async Task<IActionResult> CreateArticle([FromForm] NewArticleDto newArticleDto)
         {
+            // 驗證發布文章的社團管理員是否隸屬該社團
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+            if (userIdClaim == null)
+            {
+                return Unauthorized("您沒有權限!");
+            }
+            var userId = int.Parse(userIdClaim.Value);
+            var authResult = await _memberService.GetMemberAsync(userId, newArticleDto.ClubId);
+            if (!authResult.IsSuccess)
+            {
+                return BadRequest(authResult.ResponseMessage);
+            }
+
+            // 發布文章
             var result = await _articleService.CreateArticleAsync(newArticleDto);
             if(result == null)
             {
-                return BadRequest();
+                return BadRequest("發布失敗!");
             }
             return CreatedAtAction(nameof(ArticlesController.GetArticle), new { articleId = result }, result);
         }
@@ -59,8 +78,27 @@ namespace SportGroups.Api.Controllers
         [Consumes("multipart/form-data")]
         public async Task<IActionResult> UpdateArticle(int articleId, [FromForm] ArticleUpdateDto articleUpdateDto)
         {
+            // 驗證更新文章的社團管理員是否隸屬該社團
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+            if (userIdClaim == null)
+            {
+                return Unauthorized("您沒有權限!");
+            }
+            var userId = int.Parse(userIdClaim.Value);
+            var getArticle = await _articleService.GetArticleByIdAsync(articleId);
+            if (getArticle == null)
+            {
+                return BadRequest("文章不存在!");
+            }
+            var authResult = await _memberService.GetMemberAsync(userId, getArticle.ClubId);
+            if (!authResult.IsSuccess)
+            {
+                return BadRequest(authResult.ResponseMessage);
+            }
+
+            // 更新文章
             var result = await _articleService.UpdateArticleAsync(articleId, articleUpdateDto);
-            return result ? NoContent() : BadRequest();
+            return result ? NoContent() : BadRequest("更新失敗!");
         }
 
         // 刪除文章
@@ -68,8 +106,27 @@ namespace SportGroups.Api.Controllers
         [HttpDelete("{articleId}")]
         public async Task<IActionResult> DeleteArticle(int articleId)
         {
+            // 驗證刪除文章的社團管理員是否隸屬該社團
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+            if (userIdClaim == null)
+            {
+                return Unauthorized("您沒有權限!");
+            }
+            var userId = int.Parse(userIdClaim.Value);
+            var getArticle = await _articleService.GetArticleByIdAsync(articleId);
+            if (getArticle == null)
+            {
+                return BadRequest("文章不存在!");
+            }
+            var authResult = await _memberService.GetMemberAsync(userId, getArticle.ClubId);
+            if (!authResult.IsSuccess)
+            {
+                return BadRequest(authResult.ResponseMessage);
+            }
+
+            // 刪除文章
             var result = await _articleService.DeleteArticleAsync(articleId);
-            return result ? NoContent() : BadRequest();
+            return result ? NoContent() : BadRequest("刪除失敗!");
         }
     }
 }

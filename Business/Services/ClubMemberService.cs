@@ -62,5 +62,22 @@ namespace SportGroups.Business.Services
                 };
             }
         }
+
+        public async Task<ResultDto<MemberInfoDto>> GetMemberAsync(int userId, int clubId)
+        {
+            var existing = await _unitOfWork.ClubMembers.GetMemberAsync(userId, clubId);
+            if(existing == null)
+            {
+                return new ResultDto<MemberInfoDto>
+                {
+                    IsSuccess = false,
+                    ResponseMessage = "您不是本社團成員, 無法使用此操作!"
+                };
+            }
+            return new ResultDto<MemberInfoDto>
+            {
+                IsSuccess = true
+            };
+        }
     }
 }

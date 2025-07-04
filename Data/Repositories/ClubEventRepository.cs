@@ -44,12 +44,15 @@ namespace SportGroups.Data.Repositories
             // 取得指定運動項目的活動
             if (condition.Sport.HasValue)
             {
-                var sportParam = new SqlParameter("@sport", condition.Sport);
-
-                // 呼叫stored procedure
-                events = await _context.ClubEvents
-                    .FromSqlRaw("EXEC usp_GetAll_ClubEvents_BySport @sport", sportParam)
+                return events = await _context.ClubEvents
+                    .Where(e => e.Sport == condition.Sport)
                     .ToListAsync();
+                //var sportParam = new SqlParameter("@sport", condition.Sport);
+
+                //// 呼叫stored procedure
+                //events = await _context.ClubEvents
+                //    .FromSqlRaw("EXEC usp_GetAll_ClubEvents_BySport @sport", sportParam)
+                //    .ToListAsync();
             }
 
             // 取得標題包含指定關鍵字的活動

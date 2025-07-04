@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using SportGroups.Business.Services.IServices;
 using SportGroups.Shared.DTOs.ClubDTOs;
 using SportGroups.Shared.DTOs.ClubMemberDTOs;
+using System.Security.Claims;
 
 namespace SportGroups.Api.Controllers
 {
@@ -31,13 +32,19 @@ namespace SportGroups.Api.Controllers
         }
 
         // 讀取使用者參與的所有社團資訊
-        [HttpGet("{userId}/clubs")]
-        public async Task<ActionResult<List<ClubInfoDto>>> ClubsOfUser(int userId)
+        [HttpGet("my-clubs")]
+        public async Task<ActionResult<List<ClubInfoDto>>> ClubsOfUser()
         {
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+            if (userIdClaim == null)
+            {
+                return Unauthorized("您沒有權限!");
+            }
+            var userId = int.Parse(userIdClaim.Value);
             var clubs = await _memberService.GetAllClubsOfUserAsync(userId);
             if (clubs == null)
             {
-                return NotFound();
+                return NotFound("找不到任何社團資訊!");
             }
             return Ok(clubs);
         }

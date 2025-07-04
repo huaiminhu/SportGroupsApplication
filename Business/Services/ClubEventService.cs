@@ -54,7 +54,7 @@ namespace SportGroups.Business.Services
             return _mapper.Map<List<EventInfoDto>>(events);
         }
 
-        public async Task<EventInfoDto> GetEventInfoAsync(int eventId)
+        public async Task<EventInfoDto?> GetEventInfoAsync(int eventId)
         {
             var info = await _unitOfWork.ClubEvents.GetEventByIdAsync(eventId);
             return _mapper.Map<EventInfoDto>(info);

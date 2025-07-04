@@ -5,6 +5,7 @@ namespace SportGroups.Shared.DTOs.EventDTOs
     public class NewEventDto   // 活動新增DTO
     {
         public EventType EventType { get; set; }
+        public Sport Sport { get; set; }
         public string EventName { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
         public string Address { get; set; } = string.Empty;
