@@ -38,4 +38,14 @@ Infrastructure(.Infrastructure)
 5. 開啟瀏覽器自動導向 Swagger UI，可直接進行註冊與登入測試。  
   
 > 系統預設不含測試帳號，請先於 Swagger UI 註冊帳號後進行操作。  
-> 註冊時, role可以輸入"GeneralUser"(一般使用者)/"ClubManager"(社團管理員)
+> 註冊時, Role可以輸入"GeneralUser"(一般使用者)/"ClubManager"(社團管理員)  
+> 所有使用者權限: 查詢社團, 活動, 文章  
+> 一般使用者權限: 加入社團, 參加活動  
+> 社團管理員權限: 社團, 社團活動, 社團訊息, 文章的創立, 更新, 刪除  
+
+> EventType(社團活動類型): "Course"(課程), "Game"(比賽), "Meeting"(聚會)
+> 
+> Sport(運動類型): "Basketball" , "Soccer" , "Running" , "Swimming" , "Baseball" , "Badminton"(羽毛球) , "Taekwondo"(跆拳道) , "Billiards"(桌球) , "Tennis" , "Karate"(空手道) , "Bicycle" , "CircuitTraining"(循環訓練), "HIIT"(高強度間歇訓練)
+> 
+> MediaType(媒體類型): "Image", "Video", "YouTube"  
+  
