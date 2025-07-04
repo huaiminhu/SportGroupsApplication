@@ -8,13 +8,13 @@ namespace SportGroups.Shared.Enums
         Running, 
         Swimming, 
         Baseball, 
-        Badminton,
-        Taekwondo,
-        Billiards, 
+        Badminton,          // 羽毛球
+        Taekwondo,          // 跆拳道
+        Billiards,          // 桌球
         Tennis,
-        Karate, 
+        Karate,             // 空手道
         Bicycle, 
-        CircuitTraining, 
+        CircuitTraining,    
         HIIT
     }
 }
