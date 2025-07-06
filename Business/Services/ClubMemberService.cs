@@ -2,7 +2,6 @@
 using SportGroups.Business.Services.IServices;
 using SportGroups.Data.Repositories.Interfaces;
 using SportGroups.Shared.DTOs.ClubDTOs;
-using SportGroups.Shared.DTOs.ClubMemberDTOs;
 using SportGroups.Shared.DTOs.ResultDTOs;
 
 namespace SportGroups.Business.Services
@@ -23,61 +22,73 @@ namespace SportGroups.Business.Services
             return _mapper.Map<List<ClubInfoDto>>(clubs);
         }
 
-        public async Task<ResultDto<MemberInfoDto>> JoinClubAsync(NewMemberDto newMemberDto)
+        public async Task<ResultDto> JoinClubAsync(int userId, int clubId)
         {
-            var uId = newMemberDto.UserId;
-            var cId = newMemberDto.ClubId;
-
             // 防止會員重複加入
-            var existing = await _unitOfWork.ClubMembers.GetMemberAsync(uId, cId);
+            var existing = await _unitOfWork.ClubMembers.GetMemberAsync(userId, clubId);
             if (existing != null)
             {
-                return new ResultDto<MemberInfoDto>
+                return new ResultDto
                 {
                     IsSuccess = false, 
                     ResponseMessage = "請勿重複加入!"
                 };
             }
-            
-            var email = newMemberDto.Email;
+
             var jd = DateTime.Now;
 
-            // 因AddMemberAsync不透過Entity操作資料沒有回傳值
-            // 由此處設置例外處理以回傳ResultDto
-            try
+            //// 因AddMemberAsync不透過Entity操作資料沒有回傳值
+            //// 由此處設置例外處理以回傳ResultDto
+            //try
+            //{
+            var result = await _unitOfWork.ClubMembers.AddMemberAsync(userId, clubId, jd);
+            if(result == 0)
             {
-                await _unitOfWork.ClubMembers.AddMemberAsync(uId, cId, email, jd);
-                return new ResultDto<MemberInfoDto> 
-                {
-                    IsSuccess = true, 
-                    ResponseMessage = "加入成功!"
-                };
+
             }
-            catch
-            {
-                return new ResultDto<MemberInfoDto>
-                {
-                    IsSuccess = false,
-                    ResponseMessage = "加入失敗!"
-                };
-            }
+            //    return new ResultDto 
+            //    {
+            //        IsSuccess = true, 
+            //        ResponseMessage = "加入成功!"
+            //    };
+            //}
+            //catch
+            //{
+            //    return new ResultDto
+            //    {
+            //        IsSuccess = false,
+            //        ResponseMessage = "加入失敗!"
+            //    };
+            //}
         }
 
-        public async Task<ResultDto<MemberInfoDto>> GetMemberAsync(int userId, int clubId)
+        public async Task<ResultDto> GetMemberAsync(int userId, int clubId)
         {
             var existing = await _unitOfWork.ClubMembers.GetMemberAsync(userId, clubId);
             if(existing == null)
             {
-                return new ResultDto<MemberInfoDto>
+                return new ResultDto
                 {
                     IsSuccess = false,
                     ResponseMessage = "您不是本社團成員, 無法使用此操作!"
                 };
             }
-            return new ResultDto<MemberInfoDto>
+            return new ResultDto
             {
                 IsSuccess = true
             };
+        }
+
+        public async Task<bool> DeleteMemberAsync(int userId, int clubId)
+        {
+            var existing = await _unitOfWork.ClubMembers
+                .GetMemberAsync(userId, clubId);
+            if(existing == null)
+            {
+                return false;
+            }
+            await _unitOfWork.ClubMembers.DeleteMemberAsync(userId, clubId);
+            return await _unitOfWork.SaveChangesAsync() > 0;
         }
     }
 }

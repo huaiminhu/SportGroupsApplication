@@ -12,7 +12,6 @@ namespace SportGroups.Data.Entities
         public User User { get; set; } = null!;
         public int ClubId { get; set; }
         public Club Club { get; set; } = null!;
-        public string Email { get; set; } = string.Empty;
         public DateTime JoinTime { get; set; }
     }
 }

@@ -7,7 +7,6 @@ using System.Security.Claims;
 
 namespace SportGroups.Api.Controllers
 {
-    [Authorize(Roles = "GeneralUser")]
     [Route("api/[controller]")]
     [ApiController]
     public class ClubMembersController : ControllerBase
@@ -19,19 +18,28 @@ namespace SportGroups.Api.Controllers
         }
 
         // 加入社團
+        [Authorize(Roles = "GeneralUser")]
         [HttpPost]
-        public async Task<IActionResult> JoinClub([FromBody] NewMemberDto newMemberDto)
+        public async Task<IActionResult> JoinClub([FromBody] int clubId)
         {
-            var result = await _memberService.JoinClubAsync(newMemberDto);
-            if(!result.IsSuccess)
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+            if (userIdClaim == null)
+            {
+                return Unauthorized("您沒有權限!");
+            }
+            var userId = int.Parse(userIdClaim.Value);
+
+            var result = await _memberService.JoinClubAsync(userId, clubId);
+            if (!result.IsSuccess)
             {
                 return BadRequest(result.ResponseMessage);
             }
-            
+
             return Created(result.ResponseMessage, result);
         }
 
         // 讀取使用者參與的所有社團資訊
+        [Authorize]
         [HttpGet("my-clubs")]
         public async Task<ActionResult<List<ClubInfoDto>>> ClubsOfUser()
         {
@@ -47,6 +55,22 @@ namespace SportGroups.Api.Controllers
                 return NotFound("找不到任何社團資訊!");
             }
             return Ok(clubs);
+        }
+
+        // 退出社團
+        [Authorize(Roles = "GeneralUser")]
+        [HttpDelete("{clubId}")]
+        public async Task<IActionResult> QuitClub(int clubId)
+        {
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+            if (userIdClaim == null)
+            {
+                return Unauthorized("您沒有權限!");
+            }
+            var userId = int.Parse(userIdClaim.Value);
+            var result = await _memberService.DeleteMemberAsync(
+                userId, clubId);
+            return result ? NoContent() : BadRequest("退出失敗!");
         }
     }
 }

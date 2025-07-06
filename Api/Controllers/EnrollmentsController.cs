@@ -22,7 +22,14 @@ namespace SportGroups.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> AttendEvent([FromBody] NewEnrollmentDto newEnrollmentDto)
         {
-            var result = await _enrollmentService.AttendEventAsync(newEnrollmentDto);
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+            if (userIdClaim == null)
+            {
+                return Unauthorized("您沒有權限!");
+            }
+            var userId = int.Parse(userIdClaim.Value);
+
+            var result = await _enrollmentService.AttendEventAsync(userId, newEnrollmentDto);
             if (!result.IsSuccess)
             {
                 return BadRequest(result.ResponseMessage);
@@ -65,6 +72,43 @@ namespace SportGroups.Api.Controllers
                 return NotFound("找不到任何報名資訊!");
             }
             return Ok(enrollments);
+        }
+
+        // 更新報名資訊
+        [HttpPut("{eventId}")]
+        public async Task<IActionResult> UpdateEnrollment(int eventId, [FromBody] string phone)
+        {
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+            if (userIdClaim == null)
+            {
+                return Unauthorized("您沒有權限!");
+            }
+            var userId = int.Parse(userIdClaim.Value);
+
+            var dto = new EnrollmentUpdateDto
+            {
+                ClubEventId = eventId,
+                Phone = phone
+            };
+            var result = await _enrollmentService
+                .UpdateEnrollmentAsync(userId, dto);
+            return result.IsSuccess ? NoContent() : BadRequest(result.ResponseMessage);
+        }
+
+        // 取消報名
+        [HttpDelete("eventId")]
+        public async Task<IActionResult> DeleteEnrollment(int eventId)
+        {
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+            if (userIdClaim == null)
+            {
+                return Unauthorized("您沒有權限!");
+            }
+            var userId = int.Parse(userIdClaim.Value);
+
+            var result = await _enrollmentService
+                .DeleteEnrollmentAsync(userId, eventId);
+            return result.IsSuccess ? NoContent() : BadRequest(result.ResponseMessage);
         }
     }
 }

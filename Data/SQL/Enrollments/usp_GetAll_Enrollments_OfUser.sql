@@ -1,7 +1,7 @@
 USE SportGroups;
 GO
 
-CREATE PROCEDURE usp_GetAll_Enrollment_OfUser
+CREATE PROCEDURE usp_GetAll_Enrollments_OfUser
 	@userId INT
 AS
 BEGIN

@@ -16,17 +16,16 @@ namespace SportGroups.Business.Services
             _mapper = mapper;
         }
 
-        public async Task<ResultDto<EnrollmentInfoDto>> AttendEventAsync(NewEnrollmentDto newEnrollmentDto)
+        public async Task<ResultDto> AttendEventAsync(int userId, NewEnrollmentDto newEnrollmentDto)
         {
-            var uId = newEnrollmentDto.UserId;
             var eId = newEnrollmentDto.ClubEventId;
 
             // 防止重複報名
             var existing = await _unitOfWork.Enrollments
-                .GetEnrollmentByIdAsync(uId, eId);
+                .GetEnrollmentByIdAsync(userId, eId);
             if (existing != null) 
             {
-                return new ResultDto<EnrollmentInfoDto>
+                return new ResultDto
                 {
                     IsSuccess = false, 
                     ResponseMessage = "請勿重複報名!"
@@ -40,8 +39,8 @@ namespace SportGroups.Business.Services
             // 由此處設置例外處理以回傳ResultDto
             try
             {
-                await _unitOfWork.Enrollments.AddEnrollmentAsync(uId, eId, phone, enrollDate);
-                return new ResultDto<EnrollmentInfoDto> 
+                await _unitOfWork.Enrollments.AddEnrollmentAsync(userId, eId, phone, enrollDate);
+                return new ResultDto 
                 {
                     IsSuccess = true, 
                     ResponseMessage = "報名成功!"
@@ -49,7 +48,7 @@ namespace SportGroups.Business.Services
             }
             catch
             {
-                return new ResultDto<EnrollmentInfoDto>
+                return new ResultDto
                 {
                     IsSuccess = false,
                     ResponseMessage = "報名失敗!"
@@ -67,6 +66,71 @@ namespace SportGroups.Business.Services
         {
             var enrollment = await _unitOfWork.Enrollments.GetAllEnrollmentOfUserAsync(userId);
             return _mapper.Map<List<EnrollmentInfoDto>>(enrollment);
+        }
+
+        public async Task<ResultDto> UpdateEnrollmentAsync(int userId, EnrollmentUpdateDto enrollmentUpdateDto)
+        {
+            var enrollment = await _unitOfWork.Enrollments
+                .GetEnrollmentByIdAsync(userId, enrollmentUpdateDto.ClubEventId);
+            if(enrollment == null)
+            {
+                return new ResultDto
+                {
+                    IsSuccess = false,
+                    ResponseMessage = "找不到報名資訊!"
+                };
+            }
+
+            try
+            {
+                await _unitOfWork.Enrollments.UpdateEnrollmentAsync(userId, enrollmentUpdateDto.ClubEventId, enrollmentUpdateDto.Phone);
+                return new ResultDto
+                {
+                    IsSuccess = true,
+                    ResponseMessage = "更新成功!"
+                };
+            }
+            catch
+            {
+                return new ResultDto
+                {
+                    IsSuccess = false,
+                    ResponseMessage = "更新失敗!"
+                };
+            }
+        }
+
+        public async Task<ResultDto> DeleteEnrollmentAsync(int userId, int eventId)
+        {
+            var enrollment = await _unitOfWork.Enrollments
+                .GetEnrollmentByIdAsync(userId, eventId);
+            if (enrollment == null)
+            {
+                return new ResultDto
+                {
+                    IsSuccess = false,
+                    ResponseMessage = "找不到報名資訊!"
+                };
+            }
+
+            try
+            {
+                await _unitOfWork.Enrollments
+                    .DeleteEnrollmentAsync(userId, eventId);
+                return new ResultDto
+                {
+                    IsSuccess = true,
+                    ResponseMessage = "刪除成功!"
+                };
+            }
+            catch
+            {
+                return new ResultDto
+                {
+                    IsSuccess = false,
+                    ResponseMessage = "刪除失敗!"
+                };
+            }
         }
     }
 }

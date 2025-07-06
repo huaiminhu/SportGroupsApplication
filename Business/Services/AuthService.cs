@@ -29,13 +29,13 @@ namespace SportGroups.Business.Services
             _jwtSettings = options.Value;
         }
 
-        public async Task<ResultDto<UserInfoDto>> RegisterAsync(RegisterDto registerDto)
+        public async Task<ResultDto> RegisterAsync(RegisterDto registerDto)
         {
             // 檢查使用者名稱是否已存在於資料庫
             var existing = await _unitOfWork.Users.GetUserByUsernameAsync(registerDto.UserName);
             if (existing != null)
             {
-                return new ResultDto<UserInfoDto> 
+                return new ResultDto
                 {
                     IsSuccess = false, 
                     ResponseMessage = "這個使用者名稱有人使用了!再換一個~"
@@ -54,12 +54,10 @@ namespace SportGroups.Business.Services
             await _unitOfWork.SaveChangesAsync();
 
             // 給前端的Response
-            var responseData = _mapper.Map<UserInfoDto>(newUser);
-            return new ResultDto<UserInfoDto>
+            return new ResultDto
             {
                 IsSuccess = true,
                 ResponseMessage = "註冊成功!", 
-                ResponseData = responseData
             };
         }
 

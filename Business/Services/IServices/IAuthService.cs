@@ -7,7 +7,7 @@ namespace SportGroups.Business.Services.IServices
     public interface IAuthService
     {
         // 註冊
-        Task<ResultDto<UserInfoDto>> RegisterAsync(RegisterDto registerDto);
+        Task<ResultDto> RegisterAsync(RegisterDto registerDto);
         // 驗證使用者
         Task<UserInfoDto?> AuthAsync(LoginDto loginDto);
         // 定時更新Token讓使用者不必不時重新登入驗證
