@@ -44,8 +44,17 @@ namespace SportGroups.Business.Services
             var result = await _unitOfWork.ClubMembers.AddMemberAsync(userId, clubId, jd);
             if(result == 0)
             {
-
+                return new ResultDto
+                {
+                    IsSuccess = false,
+                    ResponseMessage = "加入失敗!"
+                };
             }
+            return new ResultDto
+            {
+                IsSuccess = true,
+                ResponseMessage = "加入成功!"
+            };
             //    return new ResultDto 
             //    {
             //        IsSuccess = true, 
@@ -79,16 +88,33 @@ namespace SportGroups.Business.Services
             };
         }
 
-        public async Task<bool> DeleteMemberAsync(int userId, int clubId)
+        public async Task<ResultDto> DeleteMemberAsync(int userId, int clubId)
         {
             var existing = await _unitOfWork.ClubMembers
                 .GetMemberAsync(userId, clubId);
             if(existing == null)
             {
-                return false;
+                return new ResultDto
+                {
+                    IsSuccess = false,
+                    ResponseMessage = "找不到指定社團成員資訊!"
+                };
             }
-            await _unitOfWork.ClubMembers.DeleteMemberAsync(userId, clubId);
-            return await _unitOfWork.SaveChangesAsync() > 0;
+            
+            var result = await _unitOfWork.ClubMembers.DeleteMemberAsync(userId, clubId);
+            if (result == 0)
+            {
+                return new ResultDto
+                {
+                    IsSuccess = false,
+                    ResponseMessage = "刪除失敗!"
+                };
+            }
+            return new ResultDto
+            {
+                IsSuccess = true,
+                ResponseMessage = "刪除成功!"
+            };
         }
     }
 }

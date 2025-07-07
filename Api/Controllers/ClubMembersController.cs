@@ -70,7 +70,7 @@ namespace SportGroups.Api.Controllers
             var userId = int.Parse(userIdClaim.Value);
             var result = await _memberService.DeleteMemberAsync(
                 userId, clubId);
-            return result ? NoContent() : BadRequest("退出失敗!");
+            return result.IsSuccess ? NoContent() : BadRequest(result.ResponseMessage);
         }
     }
 }

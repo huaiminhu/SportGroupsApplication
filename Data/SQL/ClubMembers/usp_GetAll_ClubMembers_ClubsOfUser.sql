@@ -1,7 +1,7 @@
 USE SportGroups;
 GO
 
-CREATE PROCEDURE usp_GetAll_Clubs_OfUser
+CREATE PROCEDURE usp_GetAll_ClubMembers_ClubsOfUser
 	@userId INT
 AS
 BEGIN

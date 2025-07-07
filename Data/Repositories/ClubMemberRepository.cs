@@ -15,7 +15,7 @@ namespace SportGroups.Data.Repositories
             _context = context;
         }
 
-        public async Task AddMemberAsync(int userId, int clubId, DateTime joinDate)
+        public async Task<int> AddMemberAsync(int userId, int clubId, DateTime joinDate)
         {
             //var uIdParam = new SqlParameter("@userId", userId);
             //var cIdParam = new SqlParameter("@clubId", clubId);
@@ -26,7 +26,7 @@ namespace SportGroups.Data.Repositories
             //    .ExecuteSqlRawAsync(
             //    "EXEC usp_Create_ClubMembers_AddMember @userId, @clubId, @joinDate",
             //    uIdParam, cIdParam, dateParam);
-            await _context.Database
+            return await _context.Database
                 .ExecuteSqlInterpolatedAsync(
                 $"EXEC usp_Create_ClubMembers_AddMember {userId}, {clubId}, {joinDate}");
         }
@@ -47,9 +47,9 @@ namespace SportGroups.Data.Repositories
                 .FirstOrDefaultAsync(m => m.UserId == userId && m.ClubId == clubId);
         }
 
-        public async Task DeleteMemberAsync(int userId, int clubId)
+        public async Task<int> DeleteMemberAsync(int userId, int clubId)
         {
-            await _context.Database
+            return await _context.Database
                 .ExecuteSqlInterpolatedAsync(
                 $"EXEC usp_Delete_ClubMembers_DeleteMember {userId}, {clubId}");
         }

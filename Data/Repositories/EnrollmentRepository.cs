@@ -15,7 +15,7 @@ namespace SportGroups.Data.Repositories
             _context = context;
         }
 
-        public async Task AddEnrollmentAsync(int userId, int eventId, string phone, DateTime enrollDate)
+        public async Task<int> AddEnrollmentAsync(int userId, int eventId, string phone, DateTime enrollDate)
         {
             //var uIdParam = new SqlParameter("@userId", userId);
             //var eIdParam = new SqlParameter("@eventId", eventId);
@@ -28,7 +28,7 @@ namespace SportGroups.Data.Repositories
             //    "EXEC usp_Create_Enrollments_AddEnrollment @userId, @eventId, @phone, @enrollDate",
             //    uIdParam, eIdParam, phoneParam, dateParam);
 
-            await _context.Database
+            return await _context.Database
                 .ExecuteSqlInterpolatedAsync(
                 $"EXEC usp_Create_Enrollments_AddEnrollment {userId}, {eventId}, {phone}, {enrollDate}"
                 );
@@ -50,17 +50,17 @@ namespace SportGroups.Data.Repositories
                 .ToListAsync();
         }
 
-        public async Task UpdateEnrollmentAsync(int userId, int eventId, string? phone)
+        public async Task<int> UpdateEnrollmentAsync(int userId, int eventId, string? phone)
         {
-            await _context.Database
+            return await _context.Database
                 .ExecuteSqlInterpolatedAsync(
                 $"EXEC usp_Update_Enrollments_UpdateEnrollment {userId}, {eventId}, {phone}"
                 );
         }
 
-        public async Task DeleteEnrollmentAsync(int userId, int eventId)
+        public async Task<int> DeleteEnrollmentAsync(int userId, int eventId)
         {
-            await _context.Database
+            return await _context.Database
                 .ExecuteSqlInterpolatedAsync(
                 $"EXEC usp_Delete_Enrollments_DeleteEnrollment {userId}, {eventId}"
                 );

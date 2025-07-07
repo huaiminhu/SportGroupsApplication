@@ -3,6 +3,8 @@ using SportGroups.Business.Services.IServices;
 using SportGroups.Data.Repositories.Interfaces;
 using SportGroups.Shared.DTOs.EnrollmentDTOs;
 using SportGroups.Shared.DTOs.ResultDTOs;
+using System.Numerics;
+using System.Security.Cryptography;
 
 namespace SportGroups.Business.Services
 {
@@ -35,18 +37,9 @@ namespace SportGroups.Business.Services
             var phone = newEnrollmentDto.Phone;
             var enrollDate = DateTime.Now;
 
-            // 因AddEnrollmentAsync不透過Entity操作資料沒有回傳值
-            // 由此處設置例外處理以回傳ResultDto
-            try
-            {
-                await _unitOfWork.Enrollments.AddEnrollmentAsync(userId, eId, phone, enrollDate);
-                return new ResultDto 
-                {
-                    IsSuccess = true, 
-                    ResponseMessage = "報名成功!"
-                };
-            }
-            catch
+            var result = await _unitOfWork.Enrollments
+                .AddEnrollmentAsync(userId, eId, phone, enrollDate);
+            if(result == 0)
             {
                 return new ResultDto
                 {
@@ -54,6 +47,31 @@ namespace SportGroups.Business.Services
                     ResponseMessage = "報名失敗!"
                 };
             }
+            return new ResultDto
+            {
+                IsSuccess = true,
+                ResponseMessage = "報名成功!"
+            };
+
+            //// 因AddEnrollmentAsync不透過Entity操作資料沒有回傳值
+            //// 由此處設置例外處理以回傳ResultDto
+            //try
+            //{
+            //    await _unitOfWork.Enrollments.AddEnrollmentAsync(userId, eId, phone, enrollDate);
+            //    return new ResultDto 
+            //    {
+            //        IsSuccess = true, 
+            //        ResponseMessage = "報名成功!"
+            //    };
+            //}
+            //catch
+            //{
+            //    return new ResultDto
+            //    {
+            //        IsSuccess = false,
+            //        ResponseMessage = "報名失敗!"
+            //    };
+            //}
         }
 
         public async Task<EnrollmentInfoDto?> GetEnrollmentByIdAsync(int userId, int eventId)
@@ -81,16 +99,9 @@ namespace SportGroups.Business.Services
                 };
             }
 
-            try
-            {
-                await _unitOfWork.Enrollments.UpdateEnrollmentAsync(userId, enrollmentUpdateDto.ClubEventId, enrollmentUpdateDto.Phone);
-                return new ResultDto
-                {
-                    IsSuccess = true,
-                    ResponseMessage = "更新成功!"
-                };
-            }
-            catch
+            var result = await _unitOfWork.Enrollments
+                .UpdateEnrollmentAsync(userId, enrollmentUpdateDto.ClubEventId, enrollmentUpdateDto.Phone);
+            if (result == 0)
             {
                 return new ResultDto
                 {
@@ -98,6 +109,29 @@ namespace SportGroups.Business.Services
                     ResponseMessage = "更新失敗!"
                 };
             }
+            return new ResultDto
+            {
+                IsSuccess = true,
+                ResponseMessage = "更新成功!"
+            };
+
+            //try
+            //{
+            //    await _unitOfWork.Enrollments.UpdateEnrollmentAsync(userId, enrollmentUpdateDto.ClubEventId, enrollmentUpdateDto.Phone);
+            //    return new ResultDto
+            //    {
+            //        IsSuccess = true,
+            //        ResponseMessage = "更新成功!"
+            //    };
+            //}
+            //catch
+            //{
+            //    return new ResultDto
+            //    {
+            //        IsSuccess = false,
+            //        ResponseMessage = "更新失敗!"
+            //    };
+            //}
         }
 
         public async Task<ResultDto> DeleteEnrollmentAsync(int userId, int eventId)
@@ -113,17 +147,9 @@ namespace SportGroups.Business.Services
                 };
             }
 
-            try
-            {
-                await _unitOfWork.Enrollments
+            var result = await _unitOfWork.Enrollments
                     .DeleteEnrollmentAsync(userId, eventId);
-                return new ResultDto
-                {
-                    IsSuccess = true,
-                    ResponseMessage = "刪除成功!"
-                };
-            }
-            catch
+            if (result == 0)
             {
                 return new ResultDto
                 {
@@ -131,6 +157,30 @@ namespace SportGroups.Business.Services
                     ResponseMessage = "刪除失敗!"
                 };
             }
+            return new ResultDto
+            {
+                IsSuccess = true,
+                ResponseMessage = "刪除成功!"
+            };
+
+            //try
+            //{
+            //    await _unitOfWork.Enrollments
+            //        .DeleteEnrollmentAsync(userId, eventId);
+            //    return new ResultDto
+            //    {
+            //        IsSuccess = true,
+            //        ResponseMessage = "刪除成功!"
+            //    };
+            //}
+            //catch
+            //{
+            //    return new ResultDto
+            //    {
+            //        IsSuccess = false,
+            //        ResponseMessage = "刪除失敗!"
+            //    };
+            //}
         }
     }
 }

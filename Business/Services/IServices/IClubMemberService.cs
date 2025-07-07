@@ -12,6 +12,6 @@ namespace SportGroups.Business.Services.IServices
         // 取得社團成員
         Task<ResultDto> GetMemberAsync(int userId, int clubId);
         // 刪除社團成員
-        Task<bool> DeleteMemberAsync(int userId, int clubId);
+        Task<ResultDto> DeleteMemberAsync(int userId, int clubId);
     }
 }
