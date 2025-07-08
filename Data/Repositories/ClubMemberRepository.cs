@@ -26,6 +26,8 @@ namespace SportGroups.Data.Repositories
             //    .ExecuteSqlRawAsync(
             //    "EXEC usp_Create_ClubMembers_AddMember @userId, @clubId, @joinDate",
             //    uIdParam, cIdParam, dateParam);
+
+            // 呼叫stored procedure
             return await _context.Database
                 .ExecuteSqlInterpolatedAsync(
                 $"EXEC usp_Create_ClubMembers_AddMember {userId}, {clubId}, {joinDate}");
@@ -49,6 +51,7 @@ namespace SportGroups.Data.Repositories
 
         public async Task<int> DeleteMemberAsync(int userId, int clubId)
         {
+            // 呼叫stored procedure
             return await _context.Database
                 .ExecuteSqlInterpolatedAsync(
                 $"EXEC usp_Delete_ClubMembers_DeleteMember {userId}, {clubId}");

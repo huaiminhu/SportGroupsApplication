@@ -11,6 +11,7 @@ namespace SportGroups.Business.Services.IServices
         // 取得使用者所有報名
         Task<List<EnrollmentInfoDto>> GetAllEnrollmentsOfUserAsync(int userId);
         Task<ResultDto> UpdateEnrollmentAsync(int userId, EnrollmentUpdateDto enrollmentUpdateDto);
-        Task<ResultDto> DeleteEnrollmentAsync(int userId, int eventId);
+        // 取消報名
+        Task<ResultDto> CancelEnrollmentAsync(int userId, int eventId);
     }
 }

@@ -29,6 +29,7 @@ namespace SportGroups.Api.Controllers
             }
             var userId = int.Parse(userIdClaim.Value);
 
+            // 參加活動
             var result = await _enrollmentService.AttendEventAsync(userId, newEnrollmentDto);
             if (!result.IsSuccess)
             {
@@ -48,6 +49,8 @@ namespace SportGroups.Api.Controllers
                 return Unauthorized("您沒有權限!");
             }
             var userId = int.Parse(userIdClaim.Value);
+
+            // 讀取報名資訊
             var enrollment = await _enrollmentService.GetEnrollmentByIdAsync(userId, eventId);
             if (enrollment == null)
             {
@@ -58,7 +61,7 @@ namespace SportGroups.Api.Controllers
 
         // 讀取使用者所有報名資訊
         [HttpGet("my-enrollments")]
-        public async Task<ActionResult<List<EnrollmentInfoDto>>> EnrollmentsOfUser()
+        public async Task<ActionResult<List<EnrollmentInfoDto>>> GetAllEnrollmentsOfUser()
         {
             var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
             if (userIdClaim == null)
@@ -66,6 +69,8 @@ namespace SportGroups.Api.Controllers
                 return Unauthorized("您沒有權限!");
             }
             var userId = int.Parse(userIdClaim.Value);
+
+            // 讀取使用者報名資訊
             var enrollments = await _enrollmentService.GetAllEnrollmentsOfUserAsync(userId);
             if (enrollments == null)
             {
@@ -90,6 +95,8 @@ namespace SportGroups.Api.Controllers
                 ClubEventId = eventId,
                 Phone = phone
             };
+
+            // 更新報名資訊
             var result = await _enrollmentService
                 .UpdateEnrollmentAsync(userId, dto);
             return result.IsSuccess ? NoContent() : BadRequest(result.ResponseMessage);
@@ -97,7 +104,7 @@ namespace SportGroups.Api.Controllers
 
         // 取消報名
         [HttpDelete("eventId")]
-        public async Task<IActionResult> DeleteEnrollment(int eventId)
+        public async Task<IActionResult> CancelEnrollment(int eventId)
         {
             var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
             if (userIdClaim == null)
@@ -106,8 +113,9 @@ namespace SportGroups.Api.Controllers
             }
             var userId = int.Parse(userIdClaim.Value);
 
+            // 取消報名
             var result = await _enrollmentService
-                .DeleteEnrollmentAsync(userId, eventId);
+                .CancelEnrollmentAsync(userId, eventId);
             return result.IsSuccess ? NoContent() : BadRequest(result.ResponseMessage);
         }
     }

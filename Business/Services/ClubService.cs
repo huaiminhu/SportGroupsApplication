@@ -62,7 +62,7 @@ namespace SportGroups.Business.Services
             return _mapper.Map<ClubInfoDto>(club);
         }
 
-        public async Task<List<ClubInfoDto>> GetClubsByConditionAsync(ClubsQueryConditions condition)
+        public async Task<List<ClubInfoDto>> SearchClubsAsync(ClubsQueryConditions condition)
         {
             var clubs = await _unitOfWork.Clubs.GetClubsByConditionAsync(condition);
             return _mapper.Map<List<ClubInfoDto>>(clubs);

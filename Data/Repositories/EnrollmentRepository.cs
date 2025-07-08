@@ -28,6 +28,7 @@ namespace SportGroups.Data.Repositories
             //    "EXEC usp_Create_Enrollments_AddEnrollment @userId, @eventId, @phone, @enrollDate",
             //    uIdParam, eIdParam, phoneParam, dateParam);
 
+            // 呼叫stored procedure
             return await _context.Database
                 .ExecuteSqlInterpolatedAsync(
                 $"EXEC usp_Create_Enrollments_AddEnrollment {userId}, {eventId}, {phone}, {enrollDate}"
@@ -52,6 +53,7 @@ namespace SportGroups.Data.Repositories
 
         public async Task<int> UpdateEnrollmentAsync(int userId, int eventId, string? phone)
         {
+            // 呼叫stored procedure
             return await _context.Database
                 .ExecuteSqlInterpolatedAsync(
                 $"EXEC usp_Update_Enrollments_UpdateEnrollment {userId}, {eventId}, {phone}"
@@ -60,6 +62,7 @@ namespace SportGroups.Data.Repositories
 
         public async Task<int> DeleteEnrollmentAsync(int userId, int eventId)
         {
+            // 呼叫stored procedure
             return await _context.Database
                 .ExecuteSqlInterpolatedAsync(
                 $"EXEC usp_Delete_Enrollments_DeleteEnrollment {userId}, {eventId}"

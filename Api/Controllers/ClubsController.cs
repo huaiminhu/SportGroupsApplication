@@ -23,9 +23,9 @@ namespace SportGroups.Api.Controllers
 
         // (依條件)查詢社團
         [HttpGet]
-        public async Task<ActionResult<List<ClubInfoDto>>> GetClubs([FromQuery] ClubsQueryConditions condition)
+        public async Task<ActionResult<List<ClubInfoDto>>> SearchClubs([FromQuery] ClubsQueryConditions condition)
         {
-            var clubs = await _clubService.GetClubsByConditionAsync(condition);
+            var clubs = await _clubService.SearchClubsAsync(condition);
             if(clubs == null)
             {
                 return NotFound("找不到任何社團!");

@@ -41,6 +41,8 @@ namespace SportGroups.Business.Services
             //// 由此處設置例外處理以回傳ResultDto
             //try
             //{
+
+            // 加入社團
             var result = await _unitOfWork.ClubMembers.AddMemberAsync(userId, clubId, jd);
             if(result == 0)
             {
@@ -88,7 +90,7 @@ namespace SportGroups.Business.Services
             };
         }
 
-        public async Task<ResultDto> DeleteMemberAsync(int userId, int clubId)
+        public async Task<ResultDto> QuitClubAsync(int userId, int clubId)
         {
             var existing = await _unitOfWork.ClubMembers
                 .GetMemberAsync(userId, clubId);
@@ -101,19 +103,20 @@ namespace SportGroups.Business.Services
                 };
             }
             
+            // 退出社團
             var result = await _unitOfWork.ClubMembers.DeleteMemberAsync(userId, clubId);
             if (result == 0)
             {
                 return new ResultDto
                 {
                     IsSuccess = false,
-                    ResponseMessage = "刪除失敗!"
+                    ResponseMessage = "退出失敗!"
                 };
             }
             return new ResultDto
             {
                 IsSuccess = true,
-                ResponseMessage = "刪除成功!"
+                ResponseMessage = "退出成功!"
             };
         }
     }

@@ -41,7 +41,7 @@ namespace SportGroups.Api.Controllers
                 return BadRequest(result.ResponseMessage);
             }
             
-            return Created($"/api/users/myinfo", result.ResponseData); 
+            return Created($"/api/users/myinfo", new {}); 
         }
 
     }

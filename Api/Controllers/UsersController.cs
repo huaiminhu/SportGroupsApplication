@@ -12,18 +12,15 @@ namespace SportGroups.Api.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly IAuthService _authService;
         private readonly IUserService _userService;
-        public UsersController(IAuthService authService,
-            IUserService userService)
+        public UsersController(IUserService userService)
         {
-            _authService = authService;
             _userService = userService;
         }
 
         // 讀取使用者資訊
         [HttpGet]
-        public async Task<ActionResult<UserInfoDto>> GetMyInfo()
+        public async Task<ActionResult<UserInfoDto>> GetUserInfo()
         {
             var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
             if (userIdClaim == null) 
@@ -31,7 +28,7 @@ namespace SportGroups.Api.Controllers
                 return Unauthorized("您沒有權限!");
             }
             var userId = int.Parse(userIdClaim.Value);
-            var result = await _userService.GetUserByIdAsync(userId);
+            var result = await _userService.GetUserInfoAsync(userId);
             return Ok(result);
         }
 

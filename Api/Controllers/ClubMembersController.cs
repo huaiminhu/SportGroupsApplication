@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using SportGroups.Business.Services.IServices;
 using SportGroups.Shared.DTOs.ClubDTOs;
-using SportGroups.Shared.DTOs.ClubMemberDTOs;
 using System.Security.Claims;
 
 namespace SportGroups.Api.Controllers
@@ -29,6 +28,7 @@ namespace SportGroups.Api.Controllers
             }
             var userId = int.Parse(userIdClaim.Value);
 
+            // 加入社團
             var result = await _memberService.JoinClubAsync(userId, clubId);
             if (!result.IsSuccess)
             {
@@ -41,7 +41,7 @@ namespace SportGroups.Api.Controllers
         // 讀取使用者參與的所有社團資訊
         [Authorize]
         [HttpGet("my-clubs")]
-        public async Task<ActionResult<List<ClubInfoDto>>> ClubsOfUser()
+        public async Task<ActionResult<List<ClubInfoDto>>> GetAllClubsOfUser()
         {
             var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
             if (userIdClaim == null)
@@ -49,6 +49,8 @@ namespace SportGroups.Api.Controllers
                 return Unauthorized("您沒有權限!");
             }
             var userId = int.Parse(userIdClaim.Value);
+            
+            // 讀取使用者社團資訊
             var clubs = await _memberService.GetAllClubsOfUserAsync(userId);
             if (clubs == null)
             {
@@ -68,7 +70,9 @@ namespace SportGroups.Api.Controllers
                 return Unauthorized("您沒有權限!");
             }
             var userId = int.Parse(userIdClaim.Value);
-            var result = await _memberService.DeleteMemberAsync(
+            
+            // 退出社團
+            var result = await _memberService.QuitClubAsync(
                 userId, clubId);
             return result.IsSuccess ? NoContent() : BadRequest(result.ResponseMessage);
         }

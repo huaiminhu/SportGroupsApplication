@@ -24,7 +24,7 @@ namespace SportGroups.Api.Controllers
         [HttpGet]
         public async Task<ActionResult<List<ArticleInfoDto>>> SearchArticles([FromQuery] ArticlesQueryConditions condition)
         {
-            var articles = await _articleService.GetArticlesByConditionAsync(condition);
+            var articles = await _articleService.SearchArticlesAsync(condition);
             if(articles == null)
             {
                 return NotFound("找不到任何文章!");

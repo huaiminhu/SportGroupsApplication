@@ -64,7 +64,7 @@ namespace SportGroups.Api.Controllers
         [HttpGet]
         public async Task<ActionResult<List<EventInfoDto>>> SearchEvents([FromQuery] EventsQueryConditions condition)
         {
-            var events = await _clubEventService.GetEventsByConditionAsync(condition);
+            var events = await _clubEventService.SearchEventsAsync(condition);
             if(events == null)
             {
                 return NotFound("找不到任何活動!");

@@ -37,6 +37,7 @@ namespace SportGroups.Business.Services
             var phone = newEnrollmentDto.Phone;
             var enrollDate = DateTime.Now;
 
+            // 報名
             var result = await _unitOfWork.Enrollments
                 .AddEnrollmentAsync(userId, eId, phone, enrollDate);
             if(result == 0)
@@ -99,6 +100,7 @@ namespace SportGroups.Business.Services
                 };
             }
 
+            // 更新報名資訊
             var result = await _unitOfWork.Enrollments
                 .UpdateEnrollmentAsync(userId, enrollmentUpdateDto.ClubEventId, enrollmentUpdateDto.Phone);
             if (result == 0)
@@ -134,7 +136,7 @@ namespace SportGroups.Business.Services
             //}
         }
 
-        public async Task<ResultDto> DeleteEnrollmentAsync(int userId, int eventId)
+        public async Task<ResultDto> CancelEnrollmentAsync(int userId, int eventId)
         {
             var enrollment = await _unitOfWork.Enrollments
                 .GetEnrollmentByIdAsync(userId, eventId);
@@ -147,6 +149,7 @@ namespace SportGroups.Business.Services
                 };
             }
 
+            // 取消報名
             var result = await _unitOfWork.Enrollments
                     .DeleteEnrollmentAsync(userId, eventId);
             if (result == 0)

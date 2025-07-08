@@ -9,7 +9,7 @@ namespace SportGroups.Business.Services.IServices
         Task<EventInfoDto?> GetEventInfoAsync(int eventId);
 
         // 依指定條件取得活動
-        Task<List<EventInfoDto>> GetEventsByConditionAsync(EventsQueryConditions condition);
+        Task<List<EventInfoDto>> SearchEventsAsync(EventsQueryConditions condition);
         Task<bool> UpdateEventAsync(int eventId, EventUpdateDto eventUpdateDto);
         Task<bool> DeleteEventAsync(int eventId);
     }

@@ -11,7 +11,7 @@ namespace SportGroups.Business.Services.IServices
         Task<List<ClubInfoDto>> GetAllClubsOfUserAsync(int userId);
         // 取得社團成員
         Task<ResultDto> GetMemberAsync(int userId, int clubId);
-        // 刪除社團成員
-        Task<ResultDto> DeleteMemberAsync(int userId, int clubId);
+        // 退出社團
+        Task<ResultDto> QuitClubAsync(int userId, int clubId);
     }
 }

@@ -163,7 +163,7 @@ namespace SportGroups.Business.Services
             return _mapper.Map<ArticleInfoDto?>(article);
         }
 
-        public async Task<List<ArticleInfoDto>> GetArticlesByConditionAsync(ArticlesQueryConditions condition)
+        public async Task<List<ArticleInfoDto>> SearchArticlesAsync(ArticlesQueryConditions condition)
         {
             var articles = await _unitOfWork.Articles.GetArticlesByConditionAsync(condition);
             return _mapper.Map<List<ArticleInfoDto>>(articles);

@@ -34,7 +34,7 @@ namespace SportGroups.Business.Services
             return await _unitOfWork.SaveChangesAsync() > 0;
         }
 
-        public async Task<UserInfoDto?> GetUserByIdAsync(int userId)
+        public async Task<UserInfoDto?> GetUserInfoAsync(int userId)
         {
             var user = await _unitOfWork.Users.GetUserByIdAsync(userId);
             return _mapper.Map<UserInfoDto>(user);

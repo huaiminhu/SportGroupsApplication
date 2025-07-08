@@ -48,7 +48,7 @@ namespace SportGroups.Business.Services
             return await _unitOfWork.SaveChangesAsync() > 0;
         }
 
-        public async Task<List<EventInfoDto>> GetEventsByConditionAsync(EventsQueryConditions condition)
+        public async Task<List<EventInfoDto>> SearchEventsAsync(EventsQueryConditions condition)
         {
             var events = await _unitOfWork.ClubEvents.GetEventsByConditionAsync(condition);
             return _mapper.Map<List<EventInfoDto>>(events);
