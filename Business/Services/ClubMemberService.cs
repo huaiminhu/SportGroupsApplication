@@ -37,11 +37,6 @@ namespace SportGroups.Business.Services
 
             var jd = DateTime.Now;
 
-            //// 因AddMemberAsync不透過Entity操作資料沒有回傳值
-            //// 由此處設置例外處理以回傳ResultDto
-            //try
-            //{
-
             // 加入社團
             var result = await _unitOfWork.ClubMembers.AddMemberAsync(userId, clubId, jd);
             if(result == 0)
@@ -57,20 +52,6 @@ namespace SportGroups.Business.Services
                 IsSuccess = true,
                 ResponseMessage = "加入成功!"
             };
-            //    return new ResultDto 
-            //    {
-            //        IsSuccess = true, 
-            //        ResponseMessage = "加入成功!"
-            //    };
-            //}
-            //catch
-            //{
-            //    return new ResultDto
-            //    {
-            //        IsSuccess = false,
-            //        ResponseMessage = "加入失敗!"
-            //    };
-            //}
         }
 
         public async Task<ResultDto> GetMemberAsync(int userId, int clubId)

@@ -47,12 +47,6 @@ namespace SportGroups.Data.Repositories
                 return events = await _context.ClubEvents
                     .Where(e => e.Sport == condition.Sport)
                     .ToListAsync();
-                //var sportParam = new SqlParameter("@sport", condition.Sport);
-
-                //// 呼叫stored procedure
-                //events = await _context.ClubEvents
-                //    .FromSqlRaw("EXEC usp_GetAll_ClubEvents_BySport @sport", sportParam)
-                //    .ToListAsync();
             }
 
             // 取得標題包含指定關鍵字的活動

@@ -17,17 +17,6 @@ namespace SportGroups.Data.Repositories
 
         public async Task<int> AddEnrollmentAsync(int userId, int eventId, string phone, DateTime enrollDate)
         {
-            //var uIdParam = new SqlParameter("@userId", userId);
-            //var eIdParam = new SqlParameter("@eventId", eventId);
-            //var phoneParam = new SqlParameter("@phone", phone);
-            //var dateParam = new SqlParameter("@enrollDate", enrollDate);
-
-            //// 呼叫stored procedure
-            //await _context.Database
-            //    .ExecuteSqlRawAsync(
-            //    "EXEC usp_Create_Enrollments_AddEnrollment @userId, @eventId, @phone, @enrollDate",
-            //    uIdParam, eIdParam, phoneParam, dateParam);
-
             // 呼叫stored procedure
             return await _context.Database
                 .ExecuteSqlInterpolatedAsync(

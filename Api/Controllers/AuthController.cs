@@ -25,7 +25,7 @@ namespace SportGroups.Api.Controllers
             var result = await _authService.AuthAsync(loginDto);
             if (result == null)
             {
-                return Unauthorized("您沒有權限!");
+                return Unauthorized("使用者名稱或密碼輸入錯誤!");
             }
             return Ok(result);
         }
@@ -41,7 +41,7 @@ namespace SportGroups.Api.Controllers
                 return BadRequest(result.ResponseMessage);
             }
             
-            return Created($"/api/users/myinfo", new {}); 
+            return Created($"/api/users/myinfo", "註冊成功!請登入!"); 
         }
 
     }

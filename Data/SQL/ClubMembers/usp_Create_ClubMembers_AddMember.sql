@@ -3,11 +3,10 @@ GO
 
 CREATE PROCEDURE usp_Create_ClubMembers_AddMember
 	@userId INT, 
-	@clubId INT, 
-	@email NVARCHAR(50), 
+	@clubId INT,
 	@joinTime DATETIME
 AS
 BEGIN
 	INSERT INTO ClubMembers 
-	VALUES (@userId, @clubId, @email, @joinTime);
+	VALUES (@userId, @clubId, @joinTime);
 END;

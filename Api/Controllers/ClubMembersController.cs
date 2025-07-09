@@ -35,7 +35,7 @@ namespace SportGroups.Api.Controllers
                 return BadRequest(result.ResponseMessage);
             }
 
-            return Created(result.ResponseMessage, result);
+            return Ok("加入成功!");
         }
 
         // 讀取使用者參與的所有社團資訊

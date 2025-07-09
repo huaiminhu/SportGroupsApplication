@@ -17,16 +17,6 @@ namespace SportGroups.Data.Repositories
 
         public async Task<int> AddMemberAsync(int userId, int clubId, DateTime joinDate)
         {
-            //var uIdParam = new SqlParameter("@userId", userId);
-            //var cIdParam = new SqlParameter("@clubId", clubId);
-            //var dateParam = new SqlParameter("@joinDate", joinDate);
-
-            //// 呼叫stored procedure
-            //await _context.Database
-            //    .ExecuteSqlRawAsync(
-            //    "EXEC usp_Create_ClubMembers_AddMember @userId, @clubId, @joinDate",
-            //    uIdParam, cIdParam, dateParam);
-
             // 呼叫stored procedure
             return await _context.Database
                 .ExecuteSqlInterpolatedAsync(
@@ -39,7 +29,7 @@ namespace SportGroups.Data.Repositories
 
             // 呼叫stored procedure
             return await _context.Clubs
-                .FromSqlRaw("EXEC usp_GetAll_Clubs_OfUser @userId", uIdParam)
+                .FromSqlRaw("EXEC usp_GetAll_ClubMembers_ClubsOfUser @userId", uIdParam)
                 .ToListAsync();
         }
 

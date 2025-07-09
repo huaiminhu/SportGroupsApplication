@@ -36,7 +36,7 @@ namespace SportGroups.Api.Controllers
                 return BadRequest(result.ResponseMessage);
             }
 
-            return Created(result.ResponseMessage, result);
+            return Ok("報名成功!");
         }
 
         // 讀取報名資訊
