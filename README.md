@@ -52,19 +52,27 @@ Web API 專案 (.Api)
 
 此系統採用正規化關聯設計，核心資料表如下：
 
-- **User**：系統使用者，分為一般使用者與社團管理員
-- **Club**：由社團管理員創立，可被多人加入
-- **ClubMember**：多對多中介表，同時記錄使用者加入社團的時間
-- **ClubEvent**：屬於某個社團的活動，一般使用者可參加
-- **Article**：社團發佈的貼文，支援圖文/影音
-- **Media**：綁定於文章的媒體（圖片/影片/YouTube）
+- **User** : 系統使用者，分為一般使用者與社團管理員
+- **Club** : 社團管理員創立，可被多人加入
+- **ClubMember** : 多對多中介表，同時記錄使用者加入社團的時間
+- **ClubEvent** : 屬於某個社團的活動，一般使用者可參加
+- **Enrollment** : 多對多中介表，記錄使用者活動的報名資訊(如報名時間等)
+- **Article** : 社團發佈的文章，支援圖文/影音
+- **Media** :　綁定於文章的媒體（圖片/影片/YouTube）
+- **Message** : 社團發布的訊息
 
 關聯簡圖如下：
 ```plaintext
-User *───1 ClubMember *───1 Club
+User 1───* ClubMember *───1 Club
 Club 1───* ClubEvent
+Club 1───* Message
 Club 1───* Article 1───* Media
+ClubEvent 1───* Enrollment *───1 User 
 ```
+
+> 此專案中 ClubMember 與 Enrollment 為具紀錄功能的中介表，並非單純關聯  
+> Media 採單獨表設計以支援多格式媒體。
+  
 ## 執行方式(本地開發)
 
 1. 使用 Visual Studio 開啟專案。
