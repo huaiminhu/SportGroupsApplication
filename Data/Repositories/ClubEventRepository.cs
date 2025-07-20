@@ -38,13 +38,17 @@ namespace SportGroups.Data.Repositories
             // 取得指定ClubId的活動
             if (condition.ClubId.HasValue)
             {
-                events = await _context.ClubEvents.Where(e => e.ClubId == condition.ClubId).ToListAsync();
+                events = await _context.ClubEvents
+                    .AsNoTracking()
+                    .Where(e => e.ClubId == condition.ClubId)
+                    .ToListAsync();
             }
 
             // 取得指定運動項目的活動
             if (condition.Sport.HasValue)
             {
                 return events = await _context.ClubEvents
+                    .AsNoTracking()
                     .Where(e => e.Sport == condition.Sport)
                     .ToListAsync();
             }
@@ -57,6 +61,7 @@ namespace SportGroups.Data.Repositories
                 // 呼叫stored procedure
                 events = await _context.ClubEvents
                     .FromSqlRaw("EXEC usp_GetAll_ClubEvents_ByKeyword @keyword", keywordParam)
+                    .AsNoTracking()
                     .ToListAsync();
             }
 

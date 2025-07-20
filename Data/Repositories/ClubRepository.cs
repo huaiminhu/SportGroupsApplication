@@ -38,7 +38,10 @@ namespace SportGroups.Data.Repositories
             // 取得指定運動項目的社團
             if(condition.Sport.HasValue)
             {
-                clubs = await _context.Clubs.Where(c => c.Sport == condition.Sport).ToListAsync();
+                clubs = await _context.Clubs
+                    .AsNoTracking()
+                    .Where(c => c.Sport == condition.Sport)
+                    .ToListAsync();
             }
 
             // 取得名稱包含指定關鍵字的社團
@@ -49,6 +52,7 @@ namespace SportGroups.Data.Repositories
                 // 呼叫stored procedure
                 clubs = await _context.Clubs
                     .FromSqlRaw("EXEC usp_GetAll_Clubs_ByKeyword @keyword", kwParam)
+                    .AsNoTracking()
                     .ToListAsync();
             }
 

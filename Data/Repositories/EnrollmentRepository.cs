@@ -37,6 +37,7 @@ namespace SportGroups.Data.Repositories
             // 呼叫stored procedure
             return await _context.Enrollments
                 .FromSqlRaw("EXEC usp_GetAll_Enrollments_OfUser @userId", uIdParam)
+                .AsNoTracking()
                 .ToListAsync();
         }
 

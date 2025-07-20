@@ -30,6 +30,7 @@ namespace SportGroups.Data.Repositories
             // 呼叫stored procedure
             return await _context.Clubs
                 .FromSqlRaw("EXEC usp_GetAll_ClubMembers_ClubsOfUser @userId", uIdParam)
+                .AsNoTracking()
                 .ToListAsync();
         }
 

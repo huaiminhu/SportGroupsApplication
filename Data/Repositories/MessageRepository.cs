@@ -31,7 +31,10 @@ namespace SportGroups.Data.Repositories
 
         public async Task<List<Message>> GetAllMessagesOfClubAsync(int clubId)
         {
-            return await _context.Messages.Where(m => m.ClubId == clubId).ToListAsync();
+            return await _context.Messages
+                .AsNoTracking()
+                .Where(m => m.ClubId == clubId)
+                .ToListAsync();
         }
 
         public void UpdateMessage(Message message)

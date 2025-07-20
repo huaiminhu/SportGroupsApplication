@@ -37,13 +37,18 @@ namespace SportGroups.Data.Repositories
             // 回傳指定ClubId的文章
             if (condition.ClubId.HasValue)  
             {
-                return articles = await _context.Articles.Where(a => a.ClubId == condition.ClubId).Include(m => m.Medias).ToListAsync();
+                return articles = await _context.Articles
+                    .AsNoTracking()
+                    .Where(a => a.ClubId == condition.ClubId)
+                    .Include(m => m.Medias)
+                    .ToListAsync();
             }
 
             // 回傳指定運動項目的文章
             if (condition.Sport.HasValue)  
             {
                 return articles = await _context.Articles
+                    .AsNoTracking()
                     .Where(a => a.Sport == condition.Sport)
                     .Include(a => a.Medias)
                     .OrderByDescending(a => a.EditDate)
@@ -54,6 +59,7 @@ namespace SportGroups.Data.Repositories
             if (!string.IsNullOrWhiteSpace(condition.Keyword))
             {
                 return articles = await _context.Articles
+                    .AsNoTracking()
                     .Where(a => a.Title.Contains(condition.Keyword))
                     .Include(a => a.Medias)
                     .OrderByDescending(a => a.EditDate)

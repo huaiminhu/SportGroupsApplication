@@ -78,11 +78,6 @@ C:\Users\hankh\Desktop\SportGroups\Client\obj\Debug\net8.0\SportGroups.Client.Ra
 C:\Users\hankh\Desktop\SportGroups\Client\obj\Debug\net8.0\SportGroups.Client.sourcelink.json
 C:\Users\hankh\Desktop\SportGroups\Client\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\hankh\Desktop\SportGroups\Client\obj\Debug\net8.0\staticwebassets.development.json
-C:\Users\hankh\Desktop\SportGroups\Client\obj\Debug\net8.0\staticwebassets\msbuild.SportGroups.Client.Microsoft.AspNetCore.StaticWebAssets.props
-C:\Users\hankh\Desktop\SportGroups\Client\obj\Debug\net8.0\staticwebassets\msbuild.build.SportGroups.Client.props
-C:\Users\hankh\Desktop\SportGroups\Client\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.SportGroups.Client.props
-C:\Users\hankh\Desktop\SportGroups\Client\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.SportGroups.Client.props
-C:\Users\hankh\Desktop\SportGroups\Client\obj\Debug\net8.0\staticwebassets.pack.json
 C:\Users\hankh\Desktop\SportGroups\Client\obj\Debug\net8.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 C:\Users\hankh\Desktop\SportGroups\Client\obj\Debug\net8.0\scopedcss\bundle\SportGroups.Client.styles.css
 C:\Users\hankh\Desktop\SportGroups\Client\obj\Debug\net8.0\scopedcss\projectbundle\SportGroups.Client.bundle.scp.css
@@ -91,3 +86,11 @@ C:\Users\hankh\Desktop\SportGroups\Client\obj\Debug\net8.0\refint\SportGroups.Cl
 C:\Users\hankh\Desktop\SportGroups\Client\obj\Debug\net8.0\SportGroups.Client.pdb
 C:\Users\hankh\Desktop\SportGroups\Client\obj\Debug\net8.0\SportGroups.Client.genruntimeconfig.cache
 C:\Users\hankh\Desktop\SportGroups\Client\obj\Debug\net8.0\ref\SportGroups.Client.dll
+C:\Users\hankh\Desktop\SportGroups\Client\bin\Debug\net8.0\SportGroups.Client.staticwebassets.endpoints.json
+C:\Users\hankh\Desktop\SportGroups\Client\obj\Debug\net8.0\rpswa.dswa.cache.json
+C:\Users\hankh\Desktop\SportGroups\Client\obj\Debug\net8.0\rjimswa.dswa.cache.json
+C:\Users\hankh\Desktop\SportGroups\Client\obj\Debug\net8.0\rjsmrazor.dswa.cache.json
+C:\Users\hankh\Desktop\SportGroups\Client\obj\Debug\net8.0\rjsmcshtml.dswa.cache.json
+C:\Users\hankh\Desktop\SportGroups\Client\obj\Debug\net8.0\staticwebassets.build.json.cache
+C:\Users\hankh\Desktop\SportGroups\Client\obj\Debug\net8.0\staticwebassets.build.endpoints.json
+C:\Users\hankh\Desktop\SportGroups\Client\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

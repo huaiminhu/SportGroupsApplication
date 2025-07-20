@@ -890,14 +890,7 @@
           }
         }
       },
-      "System.Formats.Asn1/8.0.2": {
-        "runtime": {
-          "lib/net8.0/System.Formats.Asn1.dll": {
-            "assemblyVersion": "8.0.0.0",
-            "fileVersion": "8.0.1325.6609"
-          }
-        }
-      },
+      "System.Formats.Asn1/8.0.2": {},
       "System.IdentityModel.Tokens.Jwt/7.1.2": {
         "dependencies": {
           "Microsoft.IdentityModel.JsonWebTokens": "7.1.2",
@@ -1021,7 +1014,10 @@
           "SportGroups.Shared": "1.0.0"
         },
         "runtime": {
-          "SportGroups.Business.dll": {}
+          "SportGroups.Business.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
       "SportGroups.Data/1.0.0": {
@@ -1034,7 +1030,10 @@
           "SportGroups.Shared": "1.0.0"
         },
         "runtime": {
-          "SportGroups.Data.dll": {}
+          "SportGroups.Data.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
       "SportGroups.Infrastructure/1.0.0": {
@@ -1042,7 +1041,10 @@
           "SportGroups.Business": "1.0.0"
         },
         "runtime": {
-          "SportGroups.Infrastructure.dll": {}
+          "SportGroups.Infrastructure.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
       "SportGroups.Shared/1.0.0": {
@@ -1050,7 +1052,10 @@
           "Microsoft.AspNetCore.Http.Abstractions": "2.3.0"
         },
         "runtime": {
-          "SportGroups.Shared.dll": {}
+          "SportGroups.Shared.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       }
     }
