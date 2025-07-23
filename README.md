@@ -10,7 +10,6 @@
 - 活動與文章支援媒體（圖片 / 影片 / YouTube）
 - 權限角色透過 JWT 與 ASP.NET Core 的 `[Authorize]` 控管
 
----
 
 ## 使用技術
 
@@ -25,28 +24,15 @@
 
 此專案採 N-Tier 架構設計，將系統邏輯清楚分層，利於維護與測試。
 
-```plaintext
-Web API 專案 (.Api)
-│   └── Controller：接收請求並回傳結果
-│
-業務邏輯層 (.Business)
-│   └── Service：處理商業邏輯，調用資料存取層
-│
-資料存取層 (.Data)
-│   ├── Repository：實作 EF Core 或 SP 查詢
-│   └── Unit of Work：統一管理資料庫操作
-│
-資料庫（SQL Server）
-│   └── 使用 EF Core Code First 建表，結合部分 Stored Procedures
-│
-共用層 (.Shared)
-│   └── 定義 DTO、Enum等跨層結構
-│
-基礎建設層 (.Infrastructure)
-    └── 實作媒體檔案儲存共通服務
-```  
+ - **Web API 專案** (.Api) － Controller：接收請求並回傳結果  
+ - **業務邏輯層** (.Business) － Service：處理商業邏輯，調用資料存取層  
+ - **資料存取層** (.Data)  
+－ Repository：實作 EF Core 或 SP 查詢  
+－ Unit of Work：統一管理資料庫操作  
+ - **資料庫**（SQL Server）－ 使用 EF Core Code First 建表，結合部分 Stored Procedures  
+ - **共用層** (.Shared) － 定義 DTO、Enum等跨層結構  
+ - **基礎建設層** (.Infrastructure) － 實作媒體檔案儲存共通服務  
   
----
 
 ## 資料表設計與關聯
 
@@ -62,13 +48,13 @@ Web API 專案 (.Api)
 - **Message** : 社團發布的訊息
 
 關聯簡圖如下：
-```plaintext
-User 1───* ClubMember *───1 Club
-Club 1───* ClubEvent
-Club 1───* Message
-Club 1───* Article 1───* Media
-ClubEvent 1───* Enrollment *───1 User 
-```
+  
+**User** 1 ─── * **ClubMember** * ─── 1 **Club**  
+**Club** 1 ─── * **ClubEvent**  
+**Club** 1 ─── * **Message**  
+**Club** 1 ─── * **Article** 1 ─── * **Media**  
+**ClubEvent** 1 ─── * **Enrollment** * ─── 1 **User**  
+  
 
 > 此專案中 ClubMember 與 Enrollment 為具紀錄功能的中介表，並非單純關聯  
 > Media 採單獨表設計以支援多格式媒體。
