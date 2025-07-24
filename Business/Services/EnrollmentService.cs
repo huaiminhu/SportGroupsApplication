@@ -117,13 +117,13 @@ namespace SportGroups.Business.Services
                 return new ResultDto
                 {
                     IsSuccess = false,
-                    ResponseMessage = "刪除失敗!"
+                    ResponseMessage = "取消失敗!"
                 };
             }
             return new ResultDto
             {
                 IsSuccess = true,
-                ResponseMessage = "刪除成功!"
+                ResponseMessage = "取消成功!"
             };
         }
     }
