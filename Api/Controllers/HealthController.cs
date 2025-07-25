@@ -22,11 +22,11 @@ namespace SportGroups.Api.Controllers
             {
                 // 嘗試實際執行 SQL 指令（強制用到連線）
                 await _context.Database.ExecuteSqlRawAsync("SELECT 1");
-                return Ok("✅ DB 連線成功");
+                return Ok("DB 連線成功");
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"❌ 連線失敗：{ex.Message}");
+                return StatusCode(500, $"連線失敗：{ex.Message}");
             }
         }
 
