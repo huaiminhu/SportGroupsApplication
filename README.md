@@ -1,15 +1,20 @@
 # 運動社團 Web 應用程式
 
 ## 專案簡介
-此應用程式為一個多使用者的運動社群平台，具備基本會員系統、社團與活動功能，支援圖片與影片上傳，並具備角色權限控管機制。使用者可透過系統建立社團、舉辦活動、張貼文章與公告，也可加入其他社團並參與活動。
+此應用程式為一個多使用者的運動社群平台，具備基本會員系統、社團與活動功能，支援圖片與影片上傳，並具備角色權限控管機制。使用者可透過系統建立社團、舉辦活動、張貼文章與公告，也可加入其他社團並參與活動。  
+![](https://github.com/huaiminhu/SportGroupsApplication/blob/main/SWAGGER_PICS/UI%E6%A6%82%E8%A7%80.png)  
+  
+![](https://github.com/huaiminhu/SportGroupsApplication/blob/main/SWAGGER_PICS/APIS.png)  
 
+> [!NOTE]
 > 此專案目的是模擬現實生活中「社團管理 + 活動報名」流程，並練習實作多對多資料關聯、JWT 授權、檔案上傳處理等後端核心技術。
 
 - 使用者身份分為「一般使用者」與「社團管理員」
 - 社團活動類型支援：課程、比賽、聚會
 - 活動與文章支援媒體（圖片 / 影片 / YouTube）
 - 權限角色透過 JWT 與 ASP.NET Core 的 `[Authorize]` 控管
-
+  
+![](https://github.com/huaiminhu/SportGroupsApplication/blob/main/SWAGGER_PICS/JWT%E9%A9%97%E8%AD%89%E7%99%BB%E5%85%A5.png)  
 
 ## 使用技術
 
@@ -49,13 +54,15 @@
 
 關聯簡圖如下：
   
-**User** 1 ─── * **ClubMember** * ─── 1 **Club**  
-**Club** 1 ─── * **ClubEvent**  
-**Club** 1 ─── * **Message**  
-**Club** 1 ─── * **Article** 1 ─── * **Media**  
-**ClubEvent** 1 ─── * **Enrollment** * ─── 1 **User**  
+```
+User 1 ─── * ClubMember * ─── 1 Club  
+Club 1 ─── * ClubEvent  
+Club 1 ─── * Message  
+Club 1 ─── * Article 1 ─── * Media  
+ClubEvent 1 ─── * Enrollment * ─── 1 User  
+```
   
-
+> [!NOTE]
 > 此專案中 ClubMember 與 Enrollment 為具紀錄功能的中介表，並非單純關聯  
 > Media 採單獨表設計以支援多格式媒體。
   
@@ -66,6 +73,7 @@
 3. 開啟套件管理器主控台執行 `Update-Database` 建立資料表。
 4. 設定 Web API 為啟動專案並執行，開啟 Swagger UI 進行測試。
 
+> [!TIP]
 > 登入後會獲得 JWT Token，請於 Swagger UI 點擊「Authorize」輸入 Token，即可測試需要驗證的 API。
 
 ### 使用者角色與對應功能權限：
@@ -87,3 +95,22 @@
 - `EventType`(活動類型): `"Course"`(課程), `"Game"`(比賽), `"Meeting"`(聚會)
 - `Sport`(運動項目): `"Basketball"`, `"Soccer"`, `"Running"`, `"Swimming"`, `"Baseball"`, `"Badminton"`(羽毛球), `"Taekwondo"`(跆拳道), `"Billiards"`(桌球), `"Tennis"`, `"Karate"`(空手道), `"Bicycle"`, `"CircuitTraining"`(循環訓練), `"HIIT"`(高強度間歇訓練)
 - `MediaType`(媒體類型): `"Image"`, `"Video"`, `"YouTube"`
+  
+  
+### SWAGGER UI 部分功能預覽: 
+
+> 登入(LOGIN)API
+
+![](https://github.com/huaiminhu/SportGroupsApplication/blob/main/SWAGGER_PICS/LOGIN_API.png)  
+
+> 讀取文章(GET)
+
+![](https://github.com/huaiminhu/SportGroupsApplication/blob/main/SWAGGER_PICS/ARTICLE_GET.png)  
+  
+> 新增文章(POST)
+
+![](https://github.com/huaiminhu/SportGroupsApplication/blob/main/SWAGGER_PICS/ARTICLE_POST.png)  
+  
+> 更新文章(PUT)
+
+![](https://github.com/huaiminhu/SportGroupsApplication/blob/main/SWAGGER_PICS/ARTICLE_PUT.png)  
