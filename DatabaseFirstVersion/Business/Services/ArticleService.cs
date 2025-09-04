@@ -36,14 +36,14 @@ namespace SportGroups.Business.Services
             // 刪除未保留的媒體
             if (articleUpdateDto.StayMediaIds != null)
             {
-                var toRemove = existing.Medias
+                var toRemove = existing.Media
                     .Where(m => !articleUpdateDto.StayMediaIds.Contains(m.MediaId))
                     .ToList();
 
                 foreach (var media in toRemove)
                 {
                     // 只有圖片或影片需要刪除實體檔案
-                    if (media.MediaType != MediaType.YouTube)
+                    if (media.MediaType != (int)MediaType.YouTube)
                         await _mediaService.DeleteMediaAsync(media.FileUrl);
                     _unitOfWork.Medias.DeleteMedia(media);
                 }
@@ -58,10 +58,10 @@ namespace SportGroups.Business.Services
                 foreach (var file in articleUpdateDto.Medias)
                 {
                     var filePath = await _mediaService.SaveMediaAsync(file);
-                    existing.Medias.Add(new Media
+                    existing.Media.Add(new Media
                     {
-                        FileName = file.FileName,
-                        MediaType = file.ContentType.StartsWith("video") ? MediaType.Video : MediaType.Image,
+                        MediaFileName = file.FileName,
+                        MediaType = file.ContentType.StartsWith("video") ? (int)MediaType.Video : (int)MediaType.Image,
                         FileUrl = filePath,
                         AddedDate = nowTime
                     });
@@ -76,10 +76,10 @@ namespace SportGroups.Business.Services
                     if (!string.IsNullOrWhiteSpace(url))
                     {
                         // 儲存為 MediaType = YouTube，不需處理實體檔案
-                        existing.Medias.Add(new Media
+                        existing.Media.Add(new Media
                         {
-                            FileName = "YouTube影片", 
-                            MediaType = MediaType.YouTube,
+                            MediaFileName = "YouTube影片", 
+                            MediaType = (int)MediaType.YouTube,
                             FileUrl = url, 
                             AddedDate = nowTime
                         });
@@ -88,7 +88,7 @@ namespace SportGroups.Business.Services
             }
 
             // 定義文章更新時間為現在
-            existing.EditDate = nowTime;
+            existing.EditedDate = nowTime;
 
             // 使用UnitOfWork管理Article Repository更新文章
             _unitOfWork.Articles.UpdateArticle(existing);
@@ -100,8 +100,8 @@ namespace SportGroups.Business.Services
             // 定義文章各欄位(從前端傳來)
             var nowTime = DateTime.Now;
             var newArticle = _mapper.Map<Article>(newArticleDto);
-            newArticle.PostDate = nowTime;
-            newArticle.EditDate = nowTime;
+            newArticle.PostedDate = nowTime;
+            newArticle.EditedDate = nowTime;
 
             // 新增新的媒體檔案
             if (newArticleDto.Medias != null)
@@ -109,10 +109,10 @@ namespace SportGroups.Business.Services
                 foreach (var file in newArticleDto.Medias)
                 {
                     var filePath = await _mediaService.SaveMediaAsync(file);
-                    newArticle.Medias.Add(new Media
+                    newArticle.Media.Add(new Media
                     {
-                        FileName = file.FileName,
-                        MediaType = file.ContentType.StartsWith("video") ? MediaType.Video : MediaType.Image,
+                        MediaFileName = file.FileName,
+                        MediaType = file.ContentType.StartsWith("video") ? (int)MediaType.Video : (int)MediaType.Image,
                         FileUrl = filePath,
                         AddedDate = nowTime
                     });
@@ -127,10 +127,10 @@ namespace SportGroups.Business.Services
                     if (!string.IsNullOrWhiteSpace(url))
                     {
                         // 儲存為 MediaType = YouTube，不需處理實體檔案
-                        newArticle.Medias.Add(new Media
+                        newArticle.Media.Add(new Media
                         {
-                            FileName = "YouTube影片",
-                            MediaType = MediaType.YouTube,
+                            MediaFileName = "YouTube影片",
+                            MediaType = (int)MediaType.YouTube,
                             FileUrl = url,
                             AddedDate = nowTime
                         });

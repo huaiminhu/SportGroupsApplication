@@ -14,32 +14,32 @@ namespace SportGroups.Data.Repositories
             _context = context;
         }
 
-        public async Task CreateMessageAsync(Message message)
+        public async Task CreateMessageAsync(ClubMessage message)
         {
-            await _context.Messages.AddAsync(message);
+            await _context.ClubMessages.AddAsync(message);
         }
 
-        public async Task<Message?> GetMessageByIdAsync(int messageId)
+        public async Task<ClubMessage?> GetMessageByIdAsync(int messageId)
         {
-            return await _context.Messages.FirstOrDefaultAsync(m => m.MessageId == messageId);
+            return await _context.ClubMessages.FirstOrDefaultAsync(m => m.ClubMessageId == messageId);
         }
 
-        public void DeleteMessage(Message message)
+        public void DeleteMessage(ClubMessage message)
         {
-            _context.Messages.Remove(message);
+            _context.ClubMessages.Remove(message);
         }
 
-        public async Task<List<Message>> GetAllMessagesOfClubAsync(int clubId)
+        public async Task<List<ClubMessage>> GetAllMessagesOfClubAsync(int clubId)
         {
-            return await _context.Messages
+            return await _context.ClubMessages
                 .AsNoTracking()
                 .Where(m => m.ClubId == clubId)
                 .ToListAsync();
         }
 
-        public void UpdateMessage(Message message)
+        public void UpdateMessage(ClubMessage message)
         {
-            _context.Messages.Update(message);
+            _context.ClubMessages.Update(message);
         }
     }
 }

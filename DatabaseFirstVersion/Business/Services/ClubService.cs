@@ -31,13 +31,13 @@ namespace SportGroups.Business.Services
         public async Task<int?> CreateClubAsync(int userId, NewClubDto newClubDto)
         {
             var newClub = _mapper.Map<Club>(newClubDto);
-            newClub.establishedDate = DateTime.Now;
+            newClub.EstablishedDate = DateTime.Now;
 
             // 把社團管理員(創社)加入社團成員
-            newClub.Members.Add(new ClubMember
+            newClub.ClubMembers.Add(new ClubMember
             {
                 UserId = userId,
-                JoinTime = newClub.establishedDate
+                JoinedDate = newClub.EstablishedDate
             });
 
             await _unitOfWork.Clubs.CreateClubAsync(newClub);

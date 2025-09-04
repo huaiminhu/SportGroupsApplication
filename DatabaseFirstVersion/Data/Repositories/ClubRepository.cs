@@ -40,7 +40,7 @@ namespace SportGroups.Data.Repositories
             {
                 clubs = await _context.Clubs
                     .AsNoTracking()
-                    .Where(c => c.Sport == condition.Sport)
+                    .Where(c => c.Sport == (int)condition.Sport)
                     .ToListAsync();
             }
 

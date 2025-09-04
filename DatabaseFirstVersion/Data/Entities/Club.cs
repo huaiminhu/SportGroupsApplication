@@ -29,7 +29,7 @@ public partial class Club
     [StringLength(255)]
     public string ClubDescription { get; set; } = null!;
 
-    public DateTime? EstablishedTime { get; set; }
+    public DateTime? EstablishedDate { get; set; }
 
     [InverseProperty("Club")]
     public virtual ICollection<Article> Articles { get; set; } = new List<Article>();

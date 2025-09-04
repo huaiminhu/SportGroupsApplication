@@ -49,7 +49,7 @@ namespace SportGroups.Data.Repositories
             {
                 return events = await _context.ClubEvents
                     .AsNoTracking()
-                    .Where(e => e.Sport == condition.Sport)
+                    .Where(e => e.Sport == (int)condition.Sport)
                     .ToListAsync();
             }
 

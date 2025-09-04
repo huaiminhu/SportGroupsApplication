@@ -12,6 +12,7 @@ using SportGroups.Shared.Configurations;
 using Microsoft.Extensions.Options;
 using System.Security.Cryptography;
 using SportGroups.Shared.DTOs.ResultDTOs;
+using SportGroups.Shared.Enums;
 
 namespace SportGroups.Business.Services
 {
@@ -119,7 +120,7 @@ namespace SportGroups.Business.Services
                 new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString()),
                 new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName), 
                 new Claim(ClaimTypes.Name, user.UserName), 
-                new Claim(ClaimTypes.Role, user.Role.ToString()),
+                new Claim(ClaimTypes.Role, user.UserRole.ToString()),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
 

@@ -18,11 +18,11 @@ namespace SportGroups.Business.Services
 
         public async Task<int?> CreateMessageAsync(NewMessageDto newMessageDto)
         {
-            var newMessage = _mapper.Map<Message>(newMessageDto);
-            newMessage.PostDate = DateTime.Now;
+            var newMessage = _mapper.Map<ClubMessage>(newMessageDto);
+            newMessage.PostedDate = DateTime.Now;
             await _unitOfWork.Messages.CreateMessageAsync(newMessage);
             var result = await _unitOfWork.SaveChangesAsync();
-            return result > 0 ? newMessage.MessageId : null;
+            return result > 0 ? newMessage.ClubMessageId : null;
         }
 
         public async Task<bool> DeleteMessageAsync(int messageId)

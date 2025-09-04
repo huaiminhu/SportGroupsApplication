@@ -22,7 +22,7 @@ namespace SportGroups.Data.Repositories
 
         public async Task<Article?> GetArticleByIdAsync(int articleId)
         {
-            return await _context.Articles.Include(m => m.Medias).FirstOrDefaultAsync(a => a.ArticleId == articleId);
+            return await _context.Articles.Include(m => m.Media).FirstOrDefaultAsync(a => a.ArticleId == articleId);
         }
 
         public void DeleteArticle(Article article)
@@ -40,7 +40,7 @@ namespace SportGroups.Data.Repositories
                 return articles = await _context.Articles
                     .AsNoTracking()
                     .Where(a => a.ClubId == condition.ClubId)
-                    .Include(m => m.Medias)
+                    .Include(m => m.Media)
                     .ToListAsync();
             }
 
@@ -49,9 +49,9 @@ namespace SportGroups.Data.Repositories
             {
                 return articles = await _context.Articles
                     .AsNoTracking()
-                    .Where(a => a.Sport == condition.Sport)
-                    .Include(a => a.Medias)
-                    .OrderByDescending(a => a.EditDate)
+                    .Where(a => a.Sport == (int)condition.Sport)
+                    .Include(a => a.Media)
+                    .OrderByDescending(a => a.EditedDate)
                     .ToListAsync();
             }
             
@@ -61,8 +61,8 @@ namespace SportGroups.Data.Repositories
                 return articles = await _context.Articles
                     .AsNoTracking()
                     .Where(a => a.Title.Contains(condition.Keyword))
-                    .Include(a => a.Medias)
-                    .OrderByDescending(a => a.EditDate)
+                    .Include(a => a.Media)
+                    .OrderByDescending(a => a.EditedDate)
                     .ToListAsync();
             }
 
