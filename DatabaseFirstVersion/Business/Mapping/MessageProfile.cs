@@ -9,10 +9,10 @@ namespace SportGroups.Business.Mapping
         public MessageProfile()
         {
             // 對非null值進行更新
-            CreateMap<MessageUpdateDto, Message>()
+            CreateMap<MessageUpdateDto, ClubMessage>()
                 .ForAllMembers(option => option.Condition((source, destination, sourceMember) => sourceMember != null));
-            CreateMap<NewMessageDto, Message>();
-            CreateMap<Message, MessageInfoDto>();
+            CreateMap<NewMessageDto, ClubMessage>();
+            CreateMap<ClubMessage, MessageInfoDto>();
         }
     }
 }

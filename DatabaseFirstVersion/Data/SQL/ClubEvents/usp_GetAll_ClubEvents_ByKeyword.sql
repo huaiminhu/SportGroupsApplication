@@ -1,4 +1,4 @@
-USE SportGroups;
+USE SportGroupDB;
 GO
 
 CREATE PROCEDURE usp_GetAll_ClubEvents_ByKeyword
