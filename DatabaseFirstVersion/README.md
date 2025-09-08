@@ -14,7 +14,7 @@
 ## 使用技術
 
 - C#, ASP.NET Core 8 Web API
-- Entity Framework Core (Code First)
+- Entity Framework Core (Database First)
 - SQL Server + Stored Procedures
 - AutoMapper(DTO映射), JWT 驗證授權(支援角色控制)
 - Repository Pattern + Unit of Work + N-Tier 架構
