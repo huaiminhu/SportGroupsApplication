@@ -2,9 +2,9 @@
 
 ## 專案簡介
 此應用程式為一個多使用者的運動社群平台，具備基本會員系統、社團與活動功能，支援圖片與影片上傳，並具備角色權限控管機制。使用者可透過系統建立社團、舉辦活動、張貼文章與公告，也可加入其他社團並參與活動。  
-![](https://github.com/huaiminhu/SportGroupsApplication/blob/main/SWAGGER_PICS/UI%E6%A6%82%E8%A7%80.png)  
+![](./SWAGGER_PICS/UI%E6%A6%82%E8%A7%80.png)  
   
-![](https://github.com/huaiminhu/SportGroupsApplication/blob/main/SWAGGER_PICS/APIS.png)  
+![](./SWAGGER_PICS/APIS.png)  
 
 > [!NOTE]
 > 此專案目的是模擬現實生活中「社團管理 + 活動報名」流程，並練習實作多對多資料關聯、JWT 授權、檔案上傳處理等後端核心技術。
@@ -14,7 +14,7 @@
 - 活動與文章支援媒體（圖片 / 影片 / YouTube）
 - 權限角色透過 JWT 與 ASP.NET Core 的 `[Authorize]` 控管
   
-![](https://github.com/huaiminhu/SportGroupsApplication/blob/main/SWAGGER_PICS/JWT%E9%A9%97%E8%AD%89%E7%99%BB%E5%85%A5.png)  
+![](./SWAGGER_PICS/JWT%E9%A9%97%E8%AD%89%E7%99%BB%E5%85%A5.png)  
 
 ## 使用技術
 
@@ -101,16 +101,16 @@ ClubEvent 1 ─── * Enrollment * ─── 1 User
 
 > 登入(LOGIN)API
 
-![](https://github.com/huaiminhu/SportGroupsApplication/blob/main/SWAGGER_PICS/LOGIN_API.png)  
+![](./SWAGGER_PICS/LOGIN_API.png)  
 
 > 讀取文章(GET)
 
-![](https://github.com/huaiminhu/SportGroupsApplication/blob/main/SWAGGER_PICS/ARTICLE_GET.png)  
+![](./SWAGGER_PICS/ARTICLE_GET.png)  
   
 > 新增文章(POST)
 
-![](https://github.com/huaiminhu/SportGroupsApplication/blob/main/SWAGGER_PICS/ARTICLE_POST.png)  
+![](./SWAGGER_PICS/ARTICLE_POST.png)  
   
 > 更新文章(PUT)
 
-![](https://github.com/huaiminhu/SportGroupsApplication/blob/main/SWAGGER_PICS/ARTICLE_PUT.png)  
+![](./SWAGGER_PICS/ARTICLE_PUT.png)  
