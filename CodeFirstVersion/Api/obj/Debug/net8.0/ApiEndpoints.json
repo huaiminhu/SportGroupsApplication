@@ -719,15 +719,31 @@
   },
   {
     "ContainingType": "SportGroups.Api.Controllers.UsersController",
-    "Method": "UpdateInfo",
-    "RelativePath": "api/Users",
-    "HttpMethod": "PUT",
+    "Method": "UpdateNickName",
+    "RelativePath": "api/Users/NickName",
+    "HttpMethod": "PATCH",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "userUpdateDto",
-        "Type": "SportGroups.Shared.DTOs.UserDTOs.UserUpdateDto",
+        "Name": "nickname",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SportGroups.Api.Controllers.UsersController",
+    "Method": "ChangePassword",
+    "RelativePath": "api/Users/Password",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "password",
+        "Type": "System.String",
         "IsRequired": true
       }
     ],

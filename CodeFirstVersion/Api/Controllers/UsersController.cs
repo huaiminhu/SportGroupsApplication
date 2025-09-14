@@ -23,7 +23,7 @@ namespace SportGroups.Api.Controllers
         public async Task<ActionResult<UserInfoDto>> GetUserInfo()
         {
             var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
-            if (userIdClaim == null) 
+            if (userIdClaim == null)
             {
                 return Unauthorized("您沒有權限!");
             }
@@ -32,9 +32,9 @@ namespace SportGroups.Api.Controllers
             return Ok(result);
         }
 
-        // 更新使用者資訊
-        [HttpPut]
-        public async Task<IActionResult> UpdateInfo([FromBody] UserUpdateDto userUpdateDto)
+        // 變更密碼
+        [HttpPatch("Password")]
+        public async Task<IActionResult> ChangePassword([FromBody] string password)
         {
             var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
             if (userIdClaim == null)
@@ -42,7 +42,21 @@ namespace SportGroups.Api.Controllers
                 return Unauthorized("您沒有權限!");
             }
             var userId = int.Parse(userIdClaim.Value);
-            var result = await _userService.UpdateUserAsync(userId, userUpdateDto);
+            var result = await _userService.ChangePasswordAsync(userId, password);
+            return result ? NoContent() : BadRequest("更新失敗!");
+        }
+
+        // 變更使用者暱稱
+        [HttpPatch("NickName")]
+        public async Task<IActionResult> UpdateNickName([FromBody] string nickname)
+        {
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+            if (userIdClaim == null)
+            {
+                return Unauthorized("您沒有權限!");
+            }
+            var userId = int.Parse(userIdClaim.Value);
+            var result = await _userService.ChangeNickNameAsync(userId, nickname);
             return result ? NoContent() : BadRequest("更新失敗!");
         }
     }

@@ -1,3 +1,6 @@
 wwwroot\uploads\.gitkeep
+wwwroot\uploads\153bf423-fec8-4e43-b3db-d697b631b90c.jpg
 wwwroot\uploads\4f3c3033-81a8-4882-92ce-59a9db9fecc3.png
 wwwroot\uploads\6d67e4c9-0b01-4f00-b273-cfafb49cde32.jpg
+wwwroot\uploads\8e5def66-558d-4d53-9182-d6bad9d6b87a.png
+wwwroot\uploads\ab93aee9-8444-4752-8f14-d3f4c8e77275.png

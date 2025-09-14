@@ -28,7 +28,7 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Sport Groups API", Version = "v1" });
 
-    // 加入 JWT Bearer 認證方式
+    // 於SWAGGER UI 顯示JWT認證視窗
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Name = "Authorization",
@@ -39,7 +39,7 @@ builder.Services.AddSwaggerGen(c =>
         Description = "輸入 JWT Token：Bearer {your token}"
     });
 
-    // 套用到所有需要驗證的 API 上
+    // 套用JWT認證到所有需要驗證的API上
     c.AddSecurityRequirement(new OpenApiSecurityRequirement
     {
         {
@@ -55,7 +55,7 @@ builder.Services.AddSwaggerGen(c =>
         }
     });
 
-    // 讓 enum 在 Swagger UI 顯示字串名稱
+    // 讓enum在Swagger UI 顯示字串名稱
     c.SchemaFilter<EnumSchemaFilter>();
 });
 

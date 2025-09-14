@@ -1,0 +1,11 @@
+[
+  {
+    "Name": "新增設定檔",
+    "Projects": [
+      {
+        "Path": "Api\\SportGroups.Api.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]
