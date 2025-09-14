@@ -1,4 +1,6 @@
 *.vs
+bin/
+obj/
 wwwroot/uploads/*
 !wwwroot/uploads/.gitkeep
 appsettings.Development.json

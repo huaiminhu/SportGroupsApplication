@@ -1,4 +1,6 @@
 *.vs
+bin/
+obj/
 *.slnLaunch.user
 wwwroot/uploads/*
 !wwwroot/uploads/.gitkeep
